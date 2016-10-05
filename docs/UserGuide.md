@@ -20,8 +20,8 @@
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
    * **`list`** : lists all tasks due today
-   * **`add`**` do laundry` : 
-     adds a task named `do laundry` to the Task Manager.
+   * **`add`**` follow up with Jack on sales report` : 
+     adds a task named `follow up with Jack on sales report` to the Task Manager.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -47,8 +47,8 @@ Format: `add TASK_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIM
 > Task name is required, but providing start/end dates are optional.
 
 Examples: 
-* `add do laundry sd/6-10-2016`
-* `add CS2103 project sd/1-10-2016 ed/14-11-2016`
+* `add follow up with Jack on sales report sd/6-10-2016`
+* `add project Highlight sd/1-10-2016 ed/14-11-2016`
 
 #### Set a deadline to a task : `setdeadline`
 Sets the amount of time left or an end date to the specified task from the task manager.<br>
@@ -79,7 +79,7 @@ Examples:
   `setevent 2 complete milestone 1 sd/1-10-2016 st/1400 ed/1-10-2016 et/1600`<br>
   Set an event on 1st October 2016 starting from 1400 - 1600 to the 2nd task in the task manager.
 * `find CS2103`<br> 
-  `setevent 1 event roadshow sd/23-10-2016 ed/23-10-2016`<br>
+  `setevent 1 Highlight roadshow sd/23-10-2016 ed/23-10-2016`<br>
   Set a full day event on 23rd October 2016 to the 1st task in the results of the `find` command.
   
 #### Set task as completed : `setcomplete`
@@ -124,17 +124,17 @@ Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is case sensitive. e.g `complete` will not match `Complete`
-> * The order of the keywords does not matter. e.g. `write essay` will match `essay write`
+> * The order of the keywords does not matter. e.g. `meeting John` will match `John meeting`
 > * Only the name is searched.
-> * Only full words will be matched e.g. `assign` will not match `assignment`
+> * Only full words will be matched e.g. `meet` will not match `meeting`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `write` will match `write essay`
+    e.g. `meeting` will match `meeting with John`
 
 Examples: 
-* `find CS2103`<br>
-  Returns `CS2103` but not `cs2103`
-* `find assignment CS2103 CS2105`<br>
-  Returns any task having names `assignment`, `CS2103`, or `CS2105`
+* `find Highlight`<br>
+  Returns `Highlight` but not `highlight`
+* `find product highlight showcase`<br>
+  Returns any task having names `product`, `highlight`, or `showcase`
 
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
@@ -177,8 +177,8 @@ Format: `store FILE_LOCATION`
 > Stores data of the task manager at the specified `FILE_LOCATION`. 
 
 Examples: 
-* `store C:\Users\Vivian\Google Drive\NUS\Y2S1`<br>
-  Specifies data storage location at 'C:\Users\Vivian\Google Drive\NUS\Y2S1'.
+* `store C:\Users\Jim\Desktop\Work`<br>
+  Specifies data storage location at 'C:\Users\Jim\Desktop\Work'.
 
 #### Exiting the program : `exit`
 Exits the program.<br>

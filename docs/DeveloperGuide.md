@@ -489,9 +489,11 @@ Use case ends.
 **Extensions**
 
 2a. Storage location does not exist
-2b. Storage Location does not have enough space
 
 > 2a1. The user is notified that the the storage location does not exist.
+
+2b. Storage Location does not have enough space
+
 > 2b1. The user is notified that the disk specified is full.
 
 ## Appendix C : Non Functional Requirements
@@ -524,62 +526,63 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
-
 ## Appendix E : Product Survey
 
-Product 1: Google Calendar
+#### Google Calendar ####
 
-Strengths
+**Strength**<br>
+
 1. Able to create subtasks for each task and write details for each task/subtask
 2. Able to create multiple lists to group related tasks together
 3. Has a calendar view that allows user to view events, deadlines and tasks by day, week or month
 
-Weaknesses
-1. Only able to view 1 list at one time, unable to view all tasks at one time
-2. Task GUI is narrow, feels a bit cluttered when there are many tasks in the list
+**Weakness**<br>
 
-Product 2: Any.do
+1. Only able to view one list at a time, unable to view all tasks at once
+2. Task GUI is narrow and feels a bit cluttered when there are many tasks in the list
 
-Strengths
-1. Simple UI for creating tasks--simply swipe down to create a new task
+#### Any.do ####
+
+**Strengths**<br>
+
+1. Simple UI for creating tasks -- simply swipe down to create a new task
 2. Voice dictation for adding tasks
 3. Swipe gestures for marking completed tasks
 4. Allows users to add notes/subtasks to a reminder
 5. Can share and assign tasks/reminders to different friends/emails
 6. Group tasks by different lists
 
-Weaknesses
-1. Such a simple UI for creating task doesn’t allow for time specification of when time is due
-I.e. if I create a task “Remind me to buy groceries” I have to create the task, then manually open it up and edit it to specify a time to be reminded
-2. Basic task like having a repeating tasks is a premium service to pay $2/month
-3. Limiting location based reminders also as a premium service to pay $2/month
+**Weaknesses**<br>
 
-Product 3 - Sunrise Calendar
+1. Simple UI does not allow setting of due date/time when creating tasks
+2. Basic task like having repeating tasks is a premium service to pay for $2/month
+3. Limiting location based reminders is also as a premium service to pay for $2/month
 
-Strengths
+#### Sunrise Calendar ####
+
+**Strengths**<br>
+
 1. Simple user interface
 2. Connects to multiple existing apps such as google calendar and wunderlist
 3. Easy to create a new event
 
-Weaknesses
+**Weaknesses**<br>
+
 1. Not very easy to search for events
 2. Bought by Microsoft so now it costs money
 3. Doesn’t have a way to attach email, pdf or images
 
-Product 4 - Wunderlist
+#### Wunderlist ####
 
-Strengths
+**Strengths**<br>
+
 1. Allows the use of multiple sub-tasks/events for each task/event.
 2. Very easy to use
 3. Can sort tasks alphabetically, by date created, priority etc.
-4. Ability to share tasks with others.
+4. Ability to share tasks with others
 
-Weaknesses
+**Weaknesses**<br>
+
 1. Subtasks are limited to 25
 2. Cannot merge task lists together
-3. UI is not customizable.
-
-
+3. UI is not customizable

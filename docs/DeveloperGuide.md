@@ -525,7 +525,7 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-#### Google Calendar
+### Google Calendar
 
 **Strength**<br>
 
@@ -538,7 +538,7 @@ Use case ends.
 1. Only able to view one list at a time, unable to view all tasks at once
 2. Task GUI is narrow and feels a bit cluttered when there are many tasks in the list
 
-#### Any.do
+### Any.do
 
 **Strengths**<br>
 
@@ -555,7 +555,7 @@ Use case ends.
 2. Basic task like having repeating tasks is a premium service to pay for $2/month
 3. Limiting location based reminders is also as a premium service to pay for $2/month
 
-#### Sunrise Calendar
+### Sunrise Calendar
 
 **Strengths**<br>
 
@@ -569,7 +569,7 @@ Use case ends.
 2. Bought by Microsoft so now it costs money
 3. Doesn’t have a way to attach email, pdf or images
 
-#### Wunderlist
+### Wunderlist
 
 **Strengths**<br>
 

@@ -4,7 +4,8 @@
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).
-* It is a Java application intended for users whose workflow is similar to Jim's.
+* It is a Java application intended for users whose workflow is similar to [Jim's](#jims-workflow).
+
 
 #### Jim's Workflow
 
@@ -16,11 +17,12 @@ Most of Jim’s todo items arrive as emails. This is how Jim processes his email
 2. When Jim is free to do some work, he looks at his calendar and picks up something that he can do at that time. Once the task is done, he marks it as ‘done’. If there is a further follow up action required, he schedules it in the calendar.
 3. Jim periodically reviews the calendar to pick items that could not be completed and need to be rescheduled or discarded as ‘cannot do’.
 4. Todo items not arising from email are dealt similarly by entering them in the calendar.
-  
+
+
 #### Site Map
+
 * [User Guide](docs/UserGuide.md) 
 * [Developer Guide](docs/DeveloperGuide.md) 
-* [Learning Outcomes](docs/LearningOutcomes.md) 
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
 

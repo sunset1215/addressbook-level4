@@ -62,7 +62,7 @@ Examples:
 * `list`<br>
   `setdeadline 2 tl/24`<br>
   Set a deadline with 24 hours left to the 2nd task in the task manager.
-* `find CS2103`<br> 
+* `find report`<br> 
   `setdeadline 1 ed/23-10-2016`<br>
   Set a deadline on 23rd October 2016 to the 1st task in the results of the `find` command.
 
@@ -78,7 +78,7 @@ Examples:
 * `list`<br>
   `setevent 2 complete milestone 1 sd/1-10-2016 st/1400 ed/1-10-2016 et/1600`<br>
   Set an event on 1st October 2016 starting from 1400 - 1600 to the 2nd task in the task manager.
-* `find CS2103`<br> 
+* `find Highlight`<br> 
   `setevent 1 Highlight roadshow sd/23-10-2016 ed/23-10-2016`<br>
   Set a full day event on 23rd October 2016 to the 1st task in the results of the `find` command.
   
@@ -115,7 +115,7 @@ Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd task in the task manager.
-* `find CS2103`<br> 
+* `find report`<br> 
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
   

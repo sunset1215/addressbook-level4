@@ -32,5 +32,6 @@ We are a team based in the [School of Computing, National University of Singapor
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
 
 * [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
+<img src="images/AkshayNarayan.jpg" width="150"><br>
 * [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)
 

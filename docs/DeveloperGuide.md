@@ -291,15 +291,15 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Add Task
 
 **MSS**
 
 1. User requests to add a task
-2. User types “add TASK_NAME [START_TIME] [END_TIME] [TIMELEFT]”
-3. User is notified that the task got added <br>
+2. User types `add TASK_NAME [START_TIME] [END_TIME] [TIMELEFT]`
+3. User is notified that the task got added<br>
 Use case ends.
 
 **Extensions**
@@ -313,7 +313,7 @@ Use case ends.
 **MSS**
 
 1. User requests to set the deadline for a task
-2. User types “setdeadline TASK_INDEX” with optional parameters for date or time left
+2. User types `setdeadline TASK_INDEX` with optional parameters for date or time left
 3. Deadline gets added to the task with the specified index
 4. User is notified that the deadline was added<br>
 Use case ends.
@@ -329,7 +329,7 @@ Use case ends.
 **MSS**
 
 1. User requests to set an event.
-2. User types “set event EVENT_NAME TASK_INDEX” with optional parameters for start and end dates
+2. User types `set event EVENT_NAME TASK_INDEX` with optional parameters for start and end dates
 3. User is notified that the event was set<br>
 Use case ends.
 
@@ -343,8 +343,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to set a task as completed.
-2. User types “setcomplete TASK_INDEX”
+1. User requests to set a task as completed
+2. User types `setcomplete TASK_INDEX`
 3. User is notified that the task was marked as completed<br>
 Use case ends.
 
@@ -361,7 +361,7 @@ Use case ends.
 **MSS**
 
 1. User requests to delete a task.
-2. User types “delete TASK_INDEX”
+2. User types `delete TASK_INDEX`
 3. User is notified that the task was deleted<br>
 Use case ends.
 
@@ -376,7 +376,7 @@ Use case ends.
 **MSS**
 
 1. User requests to find a task.
-2. User types “find KEYWORD [MORE KEYWORDS]”
+2. User types `find KEYWORD [MORE KEYWORDS]`
 3. We display a list of tasks that match given keywords<br>
 Use case ends.
 
@@ -391,7 +391,7 @@ Use case ends.
 **MSS**
 
 1. User requests to edit a task.
-2. User types “edit TASK_INDEX” 
+2. User types `edit TASK_INDEX”`
 3. We display the task with the given TASK_INDEX 
 4. We copy the task in the prompt
 5. The user is allowed to modify it<br>
@@ -408,7 +408,7 @@ Use case ends.
 **MSS**
 
 1. User requests to view a task.
-2. User types “view TASK_INDEX” 
+2. User types `view TASK_INDEX`
 3. We display the task with the given TASK_INDEX <br>
 Use case ends.
 
@@ -423,8 +423,8 @@ Use case ends.
 **MSS**
 
 1. User requests to list a task.
-2. User types “list”
-3. We display the tasks available for today <br>
+2. User types `list`
+3. We display the tasks available for today<br>
 Use case ends.
 
 **Extensions**
@@ -438,9 +438,8 @@ Use case ends.
 **MSS**
 
 1. User requests to list a task.
-2. User types “listall”
-3. We display the tasks available
- <br>
+2. User types `listall`
+3. We display the tasks available<br>
 Use case ends.
 
 **Extensions**
@@ -454,7 +453,7 @@ Use case ends.
 **MSS**
 
 1. User requests to list a task.
-2. User types “undo”
+2. User types `undo`
 3. User is notified that the last command was undone and we display which command was undone<br>
 Use case ends.
 
@@ -469,7 +468,7 @@ Use case ends.
 **MSS**
 
 1. User requests for help.
-2. User types “help”
+2. User types `help`
 3. Helpful information is then displayed <br>
 Use case ends.
 
@@ -482,7 +481,7 @@ Use case ends.
 **MSS**
 
 1. User requests to chnage the storage location.
-2. User types “store FILE_LOCATION”
+2. User types `store FILE_LOCATION`
 3. User is notified of the storage location specified has been set.<br>
 Use case ends.
 
@@ -506,8 +505,6 @@ Use case ends.
 6. Commands such as edit, update, delete should not take longer than 1s to execute. 
 7. The user interface should be simple to use and understand. 
 
-{More to be added}
-
 ## Appendix D : Glossary
 
 #####  Floating Task 
@@ -528,7 +525,7 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-#### Google Calendar ####
+#### Google Calendar
 
 **Strength**<br>
 
@@ -541,7 +538,7 @@ Use case ends.
 1. Only able to view one list at a time, unable to view all tasks at once
 2. Task GUI is narrow and feels a bit cluttered when there are many tasks in the list
 
-#### Any.do ####
+#### Any.do
 
 **Strengths**<br>
 
@@ -558,7 +555,7 @@ Use case ends.
 2. Basic task like having repeating tasks is a premium service to pay for $2/month
 3. Limiting location based reminders is also as a premium service to pay for $2/month
 
-#### Sunrise Calendar ####
+#### Sunrise Calendar
 
 **Strengths**<br>
 
@@ -572,7 +569,7 @@ Use case ends.
 2. Bought by Microsoft so now it costs money
 3. Doesn’t have a way to attach email, pdf or images
 
-#### Wunderlist ####
+#### Wunderlist
 
 **Strengths**<br>
 

@@ -508,6 +508,18 @@ Use case ends.
 
 ## Appendix D : Glossary
 
+#####  Floating Task 
+
+> A task without any time contraints
+
+#####  Event
+
+> An event is a task with a start date/time and an end date/time
+
+#####  Deadline
+
+> A deadline is a time contraint that can be added to a task. It defines an end time/date than a task must be completed by.
+
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X

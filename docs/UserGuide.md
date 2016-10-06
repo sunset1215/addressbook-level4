@@ -32,19 +32,23 @@
 > **Command Format**
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
-> * Items with `...` after them can have multiple instances.
-> * The order of parameters is fixed.
+> * The order of parameters is fixed, with optional parameters being the exception.
+> * Parameters `START_DATE` and `END_DATE` has to be in dd-mm-yyyy format (e.g. 23-10-2016).
+> * Parameters `START_TIME` and `END_TIME` has to be in 24 hour format (e.g. 1215).
+> * Parameter `TIMELEFT` **must be a positive integer**, indicating number of hours left.
 
 #### Viewing help : `help`
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
  
-#### Adding a task: `add`
-Adds a task to the task manager<br>
+#### Adding a task : `add`
+Adds a task to the task manager.<br>
 Format: `add TASK_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]` 
 
-> Task name is required, but providing start/end dates are optional.
+> `TASK_NAME` is required, but the rest of the parameters are optional.<br>
+  User can specify `END_DATE` or `TIME_LEFT` to add a deadline to a task.<br>
+  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to add an event to the task.
 
 Examples: 
 * `add follow up with Jack on sales report sd/6-10-2016`
@@ -54,7 +58,7 @@ Examples:
 Sets the amount of time left or an end date to the specified task from the task manager.<br>
 Format: `setdeadline TASK_INDEX tl/TIMELEFT` or `setdeadline TASK_INDEX ed/END_DATE`
 
-> Sets a deadline to the task at the specified `TASK_INDEX`. 
+> Sets a deadline to the task at the specified `TASK_INDEX`.
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
   
@@ -70,7 +74,7 @@ Examples:
 Sets an event to the specified task from the task manager.<br>
 Format: `setevent TASK_INDEX EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]`
 
-> Sets an event to the task at the specified `TASK_INDEX`. 
+> Sets an event to the task at the specified `TASK_INDEX`.
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
@@ -86,7 +90,7 @@ Examples:
 Sets an event to the specified task from the task manager.<br>
 Format: `setcomplete TASK_INDEX`
 
-> Sets the task at the specified `TASK_INDEX` as complete. 
+> Sets the task at the specified `TASK_INDEX` as complete.
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
   
@@ -99,15 +103,15 @@ Examples:
 Shows a list of all tasks due today in the task manager.<br>
 Format: `list`
 
-#### Listing all tasks : `listall`
-Shows a list of all tasks in the task manager.<br>
-Format: `listall`
+#### Listing all floating tasks : `listfloat`
+Shows a list of all floating tasks in the task manager.<br>
+Format: `listfloat`
 
 #### Deleting a task : `delete`
 Deletes the specified task from the task manager.<br>
 Format: `delete TASK_INDEX`
 
-> Deletes the task at the specified `TASK_INDEX`. 
+> Deletes the task at the specified `TASK_INDEX`.
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
@@ -119,22 +123,28 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
   
-#### Finding all tasks containing any keyword in their name: `find`
+#### Finding all tasks containing any keyword in their name : `find`
 Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `complete` will not match `Complete`
+> * The search is not case sensitive. e.g `complete` will match `Complete`
 > * The order of the keywords does not matter. e.g. `meeting John` will match `John meeting`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `meet` will not match `meeting`
+> * Partial words will be matched e.g. `meet` will match `meeting`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `meeting` will match `meeting with John`
 
 Examples: 
 * `find Highlight`<br>
-  Returns `Highlight` but not `highlight`
+  Returns any tasks having names `Highlight` or `highlight`
 * `find product highlight showcase`<br>
   Returns any task having names `product`, `highlight`, or `showcase`
+
+#### Finding all tasks within a date range : `finddate`
+Finds tasks whose dates fall within the specified range.<br>
+Format: `finddate sd/START_DATE ed/END_DATE`
+
+* `find 23-10-2016 30-10-2016`<br>
+  Returns any task whose dates fall between 23-10-2016 and 30-10-2016
 
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
@@ -143,11 +153,14 @@ Format: `edit TASK_INDEX [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_T
 > Edits the task at the specified `TASK_INDEX`. 
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
+  Specified parameters will overwrite previous data.
+  User can specify `END_DATE` or `TIME_LEFT` to add a deadline to a task.
+  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to add an event to the task.
 
 Examples: 
 * `list`<br>
   `edit 2 ed/23-10-2016`<br>
-  Edits the end date of the 2nd task to 23rd October 2016 in the task manager.
+  Adds a deadline 23rd October 2016 to the 2nd task in the task manager.
   
 #### Viewing a task : `view`
 Views details of the specified task from the task manager.<br>
@@ -164,21 +177,28 @@ Examples:
 
 #### Undoing the last command : `undo`
 Undo the last command executed.<br>
-Format: `undo` 
+Format: `undo`
 
-#### Clearing completed tasks : `undo`
+> Able to undo up to the last 20 commands.
+  Only commands that mutate data is undoable.
+
+#### Clearing completed tasks : `clear`
 Clears all completed tasks from the task manager.<br>
 Format: `clear` 
 
 #### Specifying data storage location : `store`
 Specifies data storage location.<br>
-Format: `store FILE_LOCATION`
+Format: `store [FILE_LOCATION]`
 
-> Stores data of the task manager at the specified `FILE_LOCATION`. 
+> Stores data of the task manager at the specified `FILE_LOCATION`.
+  If `FILE_LOCATION` is not specified, a dialog box will appear and the user can browse for the storage location.
 
 Examples: 
 * `store C:\Users\Jim\Desktop\Work`<br>
   Specifies data storage location at 'C:\Users\Jim\Desktop\Work'.
+  
+* `store`<br>
+  Displays a dialog box for user to browse for the storage location.
 
 #### Exiting the program : `exit`
 Exits the program.<br>
@@ -200,9 +220,10 @@ SetDeadline | `setdeadline TASK_INDEX tl/TIMELEFT` or `setdeadline TASK_INDEX ed
 SetEvent | `setevent TASK_INDEX EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]` | Set an event
 SetComplete | `setcomplete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
-ListAll | `listall` | List all tasks
+ListFloat | `listfloat` | List all  floating tasks
 Delete | `delete TASK_INDEX` | Delete a task
 Find | `find KEYWORD [MORE_KEYWORDS]` | Find all tasks containing any keywords
+FindDate | `finddate sd/START_DATE ed/END_DATE` | Find all tasks within a date range
 Edit | `edit TASK_INDEX [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]` | Edit a task
 View | `view TASK_INDEX` | View details of a task
 Undo | `undo` | Undo last command

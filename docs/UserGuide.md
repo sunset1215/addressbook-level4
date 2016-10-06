@@ -47,8 +47,8 @@ Adds a task to the task manager.<br>
 Format: `add TASK_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]` 
 
 > `TASK_NAME` is required, but the rest of the parameters are optional.<br>
-  User can specify `END_DATE` or `TIME_LEFT` to add a deadline to a task.<br>
-  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to add an event to the task.
+  User can specify `END_DATE` or `TIME_LEFT` to set a deadline to a task.<br>
+  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to set an event to the task.
 
 Examples: 
 * `add follow up with Jack on sales report sd/6-10-2016`
@@ -58,7 +58,7 @@ Examples:
 Sets the amount of time left or an end date to the specified task from the task manager.<br>
 Format: `setdeadline TASK_INDEX tl/TIMELEFT` or `setdeadline TASK_INDEX ed/END_DATE`
 
-> Sets a deadline to the task at the specified `TASK_INDEX`.
+> Sets a deadline to the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
   
@@ -74,7 +74,7 @@ Examples:
 Sets an event to the specified task from the task manager.<br>
 Format: `setevent TASK_INDEX EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]`
 
-> Sets an event to the task at the specified `TASK_INDEX`.
+> Sets an event to the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
@@ -90,7 +90,7 @@ Examples:
 Sets an event to the specified task from the task manager.<br>
 Format: `setcomplete TASK_INDEX`
 
-> Sets the task at the specified `TASK_INDEX` as complete.
+> Sets the task at the specified `TASK_INDEX` as complete.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
   
@@ -111,7 +111,7 @@ Format: `listfloat`
 Deletes the specified task from the task manager.<br>
 Format: `delete TASK_INDEX`
 
-> Deletes the task at the specified `TASK_INDEX`.
+> Deletes the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
@@ -143,30 +143,30 @@ Examples:
 Finds tasks whose dates fall within the specified range.<br>
 Format: `finddate sd/START_DATE ed/END_DATE`
 
-* `find 23-10-2016 30-10-2016`<br>
+* `finddate 23-10-2016 30-10-2016`<br>
   Returns any task whose dates fall between 23-10-2016 and 30-10-2016
 
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
 Format: `edit TASK_INDEX [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]`
 
-> Edits the task at the specified `TASK_INDEX`. 
+> Edits the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-  Specified parameters will overwrite previous data.
-  User can specify `END_DATE` or `TIME_LEFT` to add a deadline to a task.
-  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to add an event to the task.
+  The index **must be a positive integer** 1, 2, 3, ...<br>
+  Specified parameters will overwrite previous data.<br>
+  User can specify `END_DATE` or `TIME_LEFT` to set a deadline to a task.<br>
+  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to set an event to the task.
 
 Examples: 
 * `list`<br>
   `edit 2 ed/23-10-2016`<br>
-  Adds a deadline 23rd October 2016 to the 2nd task in the task manager.
+  Sets a deadline 23rd October 2016 to the 2nd task in the task manager.
   
 #### Viewing a task : `view`
 Views details of the specified task from the task manager.<br>
 Format: `view TASK_INDEX`
 
-> Views details of the task at the specified `TASK_INDEX`. 
+> Views details of the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
@@ -179,8 +179,8 @@ Examples:
 Undo the last command executed.<br>
 Format: `undo`
 
-> Able to undo up to the last 20 commands.
-  Only commands that mutate data is undoable.
+> Able to undo up to the last 20 commands.<br>
+  Only commands that changes data are included (e.g. `add`, `delete`).
 
 #### Clearing completed tasks : `clear`
 Clears all completed tasks from the task manager.<br>
@@ -190,7 +190,7 @@ Format: `clear`
 Specifies data storage location.<br>
 Format: `store [FILE_LOCATION]`
 
-> Stores data of the task manager at the specified `FILE_LOCATION`.
+> Stores data of the task manager at the specified `FILE_LOCATION`.<br>
   If `FILE_LOCATION` is not specified, a dialog box will appear and the user can browse for the storage location.
 
 Examples: 

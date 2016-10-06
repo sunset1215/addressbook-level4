@@ -278,7 +278,6 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a task | get rid of tasks that I no longer care to track. 
 `* * *` | user | edit a task | update the details of that specific task
 `* * *` | user | search my tasks | find an item that I’m looking for in an easier manner
-`* * *` | user | view more information about a particular command | learn how to use various commands
 `* *` | user | undo the last command | go back to the previous state
 `* *` | user | specify storage location | choose where to store the data
 `* *` | user | mark tasks with a status | track completed and pending tasks

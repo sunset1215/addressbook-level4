@@ -31,32 +31,47 @@
 
 > **Command Format**
 > * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * The order of parameters is fixed, with optional parameters being the exception.
-> * Parameters `START_DATE` and `END_DATE` has to be in dd-mm-yyyy format (e.g. 23-10-2016).
-> * Parameters `START_TIME` and `END_TIME` has to be in 24 hour format (e.g. 1215).
-> * Parameter `TIMELEFT` **must be a positive integer**, indicating number of hours left.
+> * Items in `[SQUARE_BRACKETS]` are optional.
+> * The order of parameters is fixed.
 
-#### Viewing help : `help`
+> **Task Structure**<br>
+
+> There are 3 types of tasks.
+> * Floating Task
+> * Deadline
+> * Event<br>
+
+> Every task is either a floating task, deadline or event. It cannot be both or all 3 or none at all.<br>
+> Refer to [Glossary](DeveloperGuide.md#appendix-d--glossary) for definitions of each type of task.
+
+#### Viewing help: `help`
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
  
-#### Adding a task : `add`
-Adds a floating task/deadline/event to the task manager.<br>
-Format: `add TASK_NAME [-d e/END][-e s/START e/END]` 
+#### Adding a task: `add`
+Adds a task to the task manager.<br>
+Format: `add TASK_NAME [-d e/END_DATETIME] [-e s/START_DATETIME e/END_DATETIME]` 
 
-> `TASK_NAME` is required for a floating task. For a deadline, `TASK_NAME`   .<br>
-  User must specify `END` along with `-d` to set a deadline.<br>
-  User must specify `START`, `END` along with `-d` to set an event.
+> To add a floating task, user is required to provide `TASK_NAME` only.<br>
+> To add a deadline, user is required to provide `END_DATETIME` in addition to `TASK_NAME`.<br>
+> To add an event, user is required to provide `START_DATETIME` and `END_DATETIME` in addition to `TASK_NAME`.<br>
+> The optional parameters for this command are mutually exclusive.
+> For example, if `-d` is specified, then the task is a deadline. Thus it is invalid to specify `-e` to make it an event.
 
 Examples: 
-* `add follow up with Jack on sales report -d e/6-10-2016`
-* `add project Highlight -e s/1-10-2016 e/14-11-2016`
+* `add follow up with Jack on sales report`<br>
+  Adds a floating task named `follow up with Jack on sales report`.
+* `add assignment 3 -d e/12 Oct`<br>
+  Adds a deadline named `assignment 3` due on 12th October 2016.
+* `add project Highlight -e s/1-10-2016 e/14-11-2016`<br>
+  Adds an event named `project Highlight` starting on 1st October 2016 to 14th November 2016.
+* `add driving test -d e/16 Nov -e s/10 Oct e/16 Nov`<br>
+  This is an invalid command, as a task cannot be both a deadline and an event.
   
-#### Set task as completed : `setcomplete`
-Sets an event to the specified task from the task manager.<br>
-Format: `setcomplete TASK_INDEX`
+#### Set task as complete: `complete`
+Sets the specified task as complete.<br>
+Format: `complete TASK_INDEX`
 
 > Sets the task at the specified `TASK_INDEX` as complete.<br>
   The index refers to the index number shown in the most recent listing.<br>
@@ -64,16 +79,20 @@ Format: `setcomplete TASK_INDEX`
   
 Examples: 
 * `list`<br>
-  `setcomplete 2`<br>
+  `complete 2`<br>
   Set the 2nd task as complete in the task manager.
 
-#### Listing all tasks due today : `list`
-Shows a list of all tasks due today in the task manager.<br>
-Format: `list`
+#### Listing tasks: `list`
+Shows a list of tasks in the task manager.<br>
+Additional options include: `-all`, `-float`, `-deadline`, `-event`, `-complete`<br>
+Format: `list [-OPTION]`
 
-#### Listing all floating tasks : `listfloat`
-Shows a list of all floating tasks in the task manager.<br>
-Format: `listfloat`
+> The default option shows a list of all tasks due today.
+> * `-all` : Shows a list of all tasks in the task manager.
+> * `-float` : Shows a list of all floating tasks.
+> * `-deadline` : Shows a list of all deadlines.
+> * `-event` : Shows a list of all events.
+> * `-complete` : Shows a list of all completed tasks.
 
 #### Deleting a task : `delete`
 Deletes the specified task from the task manager.<br>

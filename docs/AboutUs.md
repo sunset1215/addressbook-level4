@@ -21,7 +21,7 @@ Role: Integration
 #### [Gabe Ghe](http://github.com/GabrielGhe) ####
 <img src="images/GabeGhe.jpg" width="150"><br>
 
-Role: Testing
+Role: Testing, Angel Investor
 
 -----
 

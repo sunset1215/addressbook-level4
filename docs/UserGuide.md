@@ -215,7 +215,7 @@ There is no need to save manually.
 Command | Format | Description 
 ----------- | ------------------------------- | :--------- 
 Help | `help` | View help on command usage
-Add | `add TASK_NAME [s/START][e/]` | Add a task
+Add | `add TASK_NAME [-d e/END][-e s/START e/END]` | Add a task
 SetDeadline | `setdeadline TASK_INDEX ed/END_DATE`| Set a deadline
 SetEvent | `setevent TASK_INDEX EVENT_NAME [s/START][e/END]` | Set an event
 SetComplete | `setcomplete TASK_INDEX` | Set task as complete

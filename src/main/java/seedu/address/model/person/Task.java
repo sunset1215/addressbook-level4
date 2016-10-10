@@ -57,7 +57,7 @@ public class Task implements ReadOnlyTask {
 
 	@Override
 	public Name getName() {
-		return null;
+		return name;
 	}
 
 	@Override

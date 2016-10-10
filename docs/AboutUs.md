@@ -7,28 +7,28 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Sean Zhang](http://github.com/puzzledsean) ####
 <img src="images/SeanZhang.jpg" width="150"><br>
 
-Role: Team Lead
+Role: Model
 
 -----
 
 #### [William Sean Hawken](http://github.com/torasian) ####
 <img src="images/WilliamHawken.jpg" width="150"><br>
 
-Role: Integration
+Role: UI
 
 -----
 
 #### [Gabe Ghe](http://github.com/GabrielGhe) ####
 <img src="images/GabeGhe.jpg" width="150"><br>
 
-Role: Testing, Angel Investor
+Role: Logic
 
 -----
 
 #### [Vivian Low](http://github.com/sunset1215) ####
 <img src="images/VivianLow.jpg" width="150"><br>
 
-Role: Code Quality
+Role: Storage
 
 ## Project Mentor ##
 

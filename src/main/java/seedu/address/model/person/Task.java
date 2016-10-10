@@ -9,12 +9,9 @@ import java.util.Objects;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Task implements ReadOnlyPerson {
+public class Task implements ReadOnlyTask {
 
     private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
 
     private UniqueTagList tags;
 
@@ -22,40 +19,15 @@ public class Task implements ReadOnlyPerson {
      * Every field must be present and not null.
      */
     public Task(Name name) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+        assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
     }
 
     /**
      * Copy constructor.
      */
-    public Task(ReadOnlyPerson source) {
+    public Task(ReadOnlyTask source) {
         this(source.getName());
-    }
-
-    @Override
-    public Name getName() {
-        return name;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email;
-    }
-
-    @Override
-    public Address getAddress() {
-        return address;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
     }
 
     /**
@@ -68,19 +40,30 @@ public class Task implements ReadOnlyPerson {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                || (other instanceof ReadOnlyTask // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyTask) other));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, tags);
     }
 
     @Override
     public String toString() {
         return getAsText();
     }
+
+	@Override
+	public Name getName() {
+		return null;
+	}
+
+	@Override
+	public UniqueTagList getTags() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

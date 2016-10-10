@@ -44,20 +44,21 @@
 > Every task is either a floating task, deadline or event. It cannot be both or all 3 or none at all.<br>
 > Refer to [Glossary](DeveloperGuide.md#appendix-d--glossary) for definitions of each type of task.
 
-#### Viewing help: `help`
+#### Viewing help : `help`
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
  
-#### Adding a task: `add`
+#### Adding a task : `add`
 Adds a task to the task manager.<br>
 Format: `add TASK_NAME [-d e/END_DATETIME] [-e s/START_DATETIME e/END_DATETIME]` 
 
 > To add a floating task, user is required to provide `TASK_NAME` only.<br>
-> To add a deadline, user is required to provide `END_DATETIME` in addition to `TASK_NAME`.<br>
-> To add an event, user is required to provide `START_DATETIME` and `END_DATETIME` in addition to `TASK_NAME`.<br>
-> The optional parameters for this command are mutually exclusive.
-> For example, if `-d` is specified, then the task is a deadline. Thus it is invalid to specify `-e` to make it an event.
+  To add a deadline, user is required to provide `END_DATETIME` in addition to `TASK_NAME`.<br>
+  To add an event, user is required to provide `START_DATETIME` and `END_DATETIME` in addition to `TASK_NAME`.<br>
+  The optional parameters for this command are mutually exclusive.
+  For example, if `-d` is specified, then the task is a deadline. Thus it is invalid to specify `-e` to make it an event.<br>
+  Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
 
 Examples: 
 * `add follow up with Jack on sales report`<br>
@@ -69,7 +70,7 @@ Examples:
 * `add driving test -d e/16 Nov -e s/10 Oct e/16 Nov`<br>
   This is an invalid command, as a task cannot be both a deadline and an event.
   
-#### Set task as complete: `complete`
+#### Set task as complete : `complete`
 Sets the specified task as complete.<br>
 Format: `complete TASK_INDEX`
 
@@ -82,7 +83,7 @@ Examples:
   `complete 2`<br>
   Set the 2nd task as complete in the task manager.
 
-#### Listing tasks: `list`
+#### Listing tasks : `list`
 Shows a list of tasks in the task manager.<br>
 Additional options include: `-all`, `-float`, `-deadline`, `-event`, `-complete`<br>
 Format: `list [-OPTION]`
@@ -112,42 +113,41 @@ Examples:
   
 #### Finding all tasks containing any keyword in their name : `find`
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]`
 
 > * The search is not case sensitive. e.g `complete` will match `Complete`
 > * The order of the keywords does not matter. e.g. `meeting John` will match `John meeting`
 > * Partial words will be matched e.g. `meet` will match `meeting`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `meeting` will match `meeting with John`
+> * Specifying `s/` or `e/` will search for tasks containing either specified dates.
+> * Specifying both `s/` and `e/` will search for tasks whose dates fall between the specified range.
+> * Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
 
 Examples: 
 * `find Highlight`<br>
   Returns any tasks having names `Highlight` or `highlight`
 * `find product highlight showcase`<br>
   Returns any task having names `product`, `highlight`, or `showcase`
-
-#### Finding all tasks within a date range : `finddate`
-Finds tasks whose dates fall within the specified range.<br>
-Format: `finddate sd/START_DATE ed/END_DATE`
-
-* `finddate 23-10-2016 30-10-2016`<br>
-  Returns any task whose dates fall between 23-10-2016 and 30-10-2016
-
+* `find s/23-10-2016 e/30-10-2016`<br>
+  Returns any task whose dates fall between 23-10-2016 and 30-10-2016  
+  
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
-Format: `edit TASK_INDEX [-d e/END][-e [s/START] e/END][-e s/START [e/END]]`
+Format: `edit TASK_INDEX [-d e/END_DATETIME] [-e [s/START_DATETIME] e/END_DATETIME] [-e s/START_DATETIME [e/END_DATETIME]]`
 
 > Edits the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...<br>
   Specified parameters will overwrite previous data.<br>
-  User can specify `END` along with `-d` to set a deadline to a task.<br>
-  User can specify `START` or/both `END` to set an event to the task. This can also be used to turn a deadline into an event.
+  User can specify `END_DATETIME` along with `-d` to turn the task into a deadline.<br>
+  User can specify `START_DATETIME` or/both `END_DATETIME` to turn the task into an event.<br>
+  Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
 
 Examples: 
 * `list`<br>
-  `edit 2 ed/23-10-2016`<br>
-  Sets a deadline 23rd October 2016 to the 2nd task in the task manager.
+  `edit 2 -d e/23-10-2016`<br>
+  Edit the 2nd task in the task manager into a deadline 23rd October 2016.
   
 #### Viewing a task : `view`
 Views details of the specified task from the task manager.<br>
@@ -166,8 +166,8 @@ Examples:
 Undo the last command executed.<br>
 Format: `undo`
 
-> Able to undo up to the last 20 commands.<br>
-  Only commands that changes data are included (e.g. `add`, `delete`).
+> Able to undo up to the last 100 commands.<br>
+  Only commands that changes data are included (`add`, `delete`, `clear`, `edit`, `complete`).
 
 #### Clearing completed tasks : `clear`
 Clears all completed tasks from the task manager.<br>
@@ -202,14 +202,12 @@ There is no need to save manually.
 Command | Format | Description 
 ----------- | ------------------------------- | :--------- 
 Help | `help` | View help on command usage
-Add | `add TASK_NAME [-d e/END][-e s/START e/END]` | Add a task
-SetComplete | `setcomplete TASK_INDEX` | Set task as complete
+Add | `add TASK_NAME [-d e/END_DATETIME] [-e s/START_DATETIME e/END_DATETIME]` | Add a task
+SetComplete | `complete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
-ListFloat | `listfloat` | List all  floating tasks
 Delete | `delete TASK_INDEX` | Delete a task
-Find | `find KEYWORD [MORE_KEYWORDS]` | Find all tasks containing any keywords
-FindDate | `finddate s/START e/END` | Find all tasks within a date range
-Edit | `edit TASK_INDEX [-d e/END][-e [s/START] e/END][-e s/START [e/END]]` | Edit a task
+Find | `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]` | Find all tasks containing any keywords
+Edit | `edit TASK_INDEX [-d e/END_DATETIME] [-e [s/START_DATETIME] e/END_DATETIME] [-e s/START_DATETIME [e/END_DATETIME]]` | Edit a task
 View | `view TASK_INDEX` | View details of a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks

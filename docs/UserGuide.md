@@ -203,7 +203,7 @@ Command | Format | Description
 ----------- | ------------------------------- | :--------- 
 Help | `help` | View help on command usage
 Add | `add TASK_NAME [-d e/END_DATETIME] [-e s/START_DATETIME e/END_DATETIME]` | Add a task
-SetComplete | `complete TASK_INDEX` | Set task as complete
+Complete | `complete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
 Delete | `delete TASK_INDEX` | Delete a task
 Find | `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]` | Find all tasks containing any keywords

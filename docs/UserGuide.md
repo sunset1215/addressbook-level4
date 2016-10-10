@@ -53,35 +53,6 @@ Format: `add TASK_NAME [-d e/END][-e s/START e/END]`
 Examples: 
 * `add follow up with Jack on sales report -d e/6-10-2016`
 * `add project Highlight -e s/1-10-2016 e/14-11-2016`
-
-#### Set a deadline to a task : `setdeadline`
-Sets the amount of time left or an end date to the specified task from the task manager.<br>
-Format:  `setdeadline TASK_INDEX e/END`
-
-> Sets a deadline to the task at the specified `TASK_INDEX`.<br>
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-  
-Examples: 
-* `find report`<br> 
-  `setdeadline 1 e/23-10-2016`<br>
-  Set a deadline on 23rd October 2016 to the 1st task in the results of the `find` command.
-
-#### Set an event to a task : `setevent`
-Sets an event to the specified task from the task manager.<br>
-Format: `setevent TASK_INDEX EVENT_NAME [s/START][e/END]`
-
-> Sets an event to the task at the specified `TASK_INDEX`.<br>
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-
-Examples: 
-* `list`<br>
-  `setevent 2 complete milestone 1 s/1-10-2016 2pm e/1-10-2016 4pm`<br>
-  Set an event on 1st October 2016 starting from 2pm - 4pm to the 2nd task in the task manager.
-* `find Highlight`<br> 
-  `setevent 1 Highlight roadshow s/23-10-2016 e/23-10-2016`<br>
-  Set a full day event on 23rd October 2016 to the 1st task in the results of the `find` command.
   
 #### Set task as completed : `setcomplete`
 Sets an event to the specified task from the task manager.<br>
@@ -145,14 +116,14 @@ Format: `finddate sd/START_DATE ed/END_DATE`
 
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
-Format: `edit TASK_INDEX [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]`
+Format: `edit TASK_INDEX [-d e/END][-e [s/START] e/END][-e s/START [e/END]]`
 
 > Edits the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...<br>
   Specified parameters will overwrite previous data.<br>
-  User can specify `END_DATE` or `TIME_LEFT` to set a deadline to a task.<br>
-  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to set an event to the task.
+  User can specify `END` along with `-d` to set a deadline to a task.<br>
+  User can specify `START` or/both `END` to set an event to the task. This can also be used to turn a deadline into an event.
 
 Examples: 
 * `list`<br>
@@ -213,15 +184,13 @@ Command | Format | Description
 ----------- | ------------------------------- | :--------- 
 Help | `help` | View help on command usage
 Add | `add TASK_NAME [-d e/END][-e s/START e/END]` | Add a task
-SetDeadline | `setdeadline TASK_INDEX ed/END_DATE`| Set a deadline
-SetEvent | `setevent TASK_INDEX EVENT_NAME [s/START][e/END]` | Set an event
 SetComplete | `setcomplete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
 ListFloat | `listfloat` | List all  floating tasks
 Delete | `delete TASK_INDEX` | Delete a task
 Find | `find KEYWORD [MORE_KEYWORDS]` | Find all tasks containing any keywords
 FindDate | `finddate s/START e/END` | Find all tasks within a date range
-Edit | `edit TASK_INDEX [s/START][e/END] [et/END_TIME]` | Edit a task
+Edit | `edit TASK_INDEX [-d e/END][-e [s/START] e/END][-e s/START [e/END]]` | Edit a task
 View | `view TASK_INDEX` | View details of a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks

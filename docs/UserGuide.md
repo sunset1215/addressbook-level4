@@ -43,36 +43,33 @@ Format: `help`
 > Help is also shown if you enter an incorrect command e.g. `abcd`
  
 #### Adding a task : `add`
-Adds a task to the task manager.<br>
-Format: `add TASK_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]` 
+Adds a floating task/deadline/event to the task manager.<br>
+Format: `add TASK_NAME [-d e/END][-e s/START e/END]` 
 
-> `TASK_NAME` is required, but the rest of the parameters are optional.<br>
-  User can specify `END_DATE` or `TIME_LEFT` to set a deadline to a task.<br>
-  User can specify `START_DATE`, `START_TIME`, `END_DATE` and `END_TIME` to set an event to the task.
+> `TASK_NAME` is required for a floating task. For a deadline, `TASK_NAME`   .<br>
+  User must specify `END` along with `-d` to set a deadline.<br>
+  User must specify `START`, `END` along with `-d` to set an event.
 
 Examples: 
-* `add follow up with Jack on sales report sd/6-10-2016`
-* `add project Highlight sd/1-10-2016 ed/14-11-2016`
+* `add follow up with Jack on sales report -d e/6-10-2016`
+* `add project Highlight -e s/1-10-2016 e/14-11-2016`
 
 #### Set a deadline to a task : `setdeadline`
 Sets the amount of time left or an end date to the specified task from the task manager.<br>
-Format: `setdeadline TASK_INDEX tl/TIMELEFT` or `setdeadline TASK_INDEX ed/END_DATE`
+Format:  `setdeadline TASK_INDEX e/END`
 
 > Sets a deadline to the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
   
 Examples: 
-* `list`<br>
-  `setdeadline 2 tl/24`<br>
-  Set a deadline with 24 hours left to the 2nd task in the task manager.
 * `find report`<br> 
-  `setdeadline 1 ed/23-10-2016`<br>
+  `setdeadline 1 e/23-10-2016`<br>
   Set a deadline on 23rd October 2016 to the 1st task in the results of the `find` command.
 
 #### Set an event to a task : `setevent`
 Sets an event to the specified task from the task manager.<br>
-Format: `setevent TASK_INDEX EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]`
+Format: `setevent TASK_INDEX EVENT_NAME [s/START][e/END]`
 
 > Sets an event to the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
@@ -80,10 +77,10 @@ Format: `setevent TASK_INDEX EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_
 
 Examples: 
 * `list`<br>
-  `setevent 2 complete milestone 1 sd/1-10-2016 st/1400 ed/1-10-2016 et/1600`<br>
-  Set an event on 1st October 2016 starting from 1400 - 1600 to the 2nd task in the task manager.
+  `setevent 2 complete milestone 1 s/1-10-2016 2pm e/1-10-2016 4pm`<br>
+  Set an event on 1st October 2016 starting from 2pm - 4pm to the 2nd task in the task manager.
 * `find Highlight`<br> 
-  `setevent 1 Highlight roadshow sd/23-10-2016 ed/23-10-2016`<br>
+  `setevent 1 Highlight roadshow s/23-10-2016 e/23-10-2016`<br>
   Set a full day event on 23rd October 2016 to the 1st task in the results of the `find` command.
   
 #### Set task as completed : `setcomplete`

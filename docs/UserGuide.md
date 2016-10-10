@@ -215,16 +215,16 @@ There is no need to save manually.
 Command | Format | Description 
 ----------- | ------------------------------- | :--------- 
 Help | `help` | View help on command usage
-Add | `add TASK_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]` | Add a task
-SetDeadline | `setdeadline TASK_INDEX tl/TIMELEFT` or `setdeadline TASK_INDEX ed/END_DATE`| Set a deadline
-SetEvent | `setevent TASK_INDEX EVENT_NAME [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME]` | Set an event
+Add | `add TASK_NAME [s/START][e/]` | Add a task
+SetDeadline | `setdeadline TASK_INDEX ed/END_DATE`| Set a deadline
+SetEvent | `setevent TASK_INDEX EVENT_NAME [s/START][e/END]` | Set an event
 SetComplete | `setcomplete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
 ListFloat | `listfloat` | List all  floating tasks
 Delete | `delete TASK_INDEX` | Delete a task
 Find | `find KEYWORD [MORE_KEYWORDS]` | Find all tasks containing any keywords
-FindDate | `finddate sd/START_DATE ed/END_DATE` | Find all tasks within a date range
-Edit | `edit TASK_INDEX [sd/START_DATE] [st/START_TIME] [ed/END_DATE] [et/END_TIME] [tl/TIMELEFT]` | Edit a task
+FindDate | `finddate s/START e/END` | Find all tasks within a date range
+Edit | `edit TASK_INDEX [s/START][e/END] [et/END_TIME]` | Edit a task
 View | `view TASK_INDEX` | View details of a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks

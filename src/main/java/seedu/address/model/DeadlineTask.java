@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import java.util.Date;
-
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.TaskDate;

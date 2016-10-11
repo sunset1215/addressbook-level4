@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.DeadlineTask;
+import seedu.address.model.EventTask;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +28,35 @@ public class AddCommand extends Command {
     private final Task toAdd;
 
     /**
-     * Convenience constructor using raw values.
+     * Constructor for adding an event task
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public AddCommand(String taskName, Date startDate, Date endDate)
+            throws IllegalValueException {
+        
+        this.toAdd = new EventTask(
+                new Name(taskName),
+                new TaskDate(startDate),
+                new TaskDate(endDate)
+        );
+    }
+    
+    /**
+     * Constructor for adding a deadline task
+     * 
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public AddCommand(String taskName, Date endDate)
+            throws IllegalValueException {
+        
+        this.toAdd = new DeadlineTask(
+                new Name(taskName),
+                new TaskDate(endDate)
+        );
+    }
+    
+    /**
+     * Constructor for adding a floating task
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */

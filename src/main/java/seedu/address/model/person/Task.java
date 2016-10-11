@@ -6,21 +6,18 @@ import seedu.address.model.tag.UniqueTagList;
 import java.util.Objects;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated.
+ * Represents a parent class, Task, in the Task List.
  */
-public class Task implements ReadOnlyTask {
-
-    private Name name;
-
+public class Task implements ReadOnlyTask{
+    private Name taskName;
     private UniqueTagList tags;
 
     /**
-     * Every field must be present and not null.
+     * A task must be present and not null.
      */
     public Task(Name name) {
         assert !CollectionUtil.isAnyNull(name, tags);
-        this.name = name;
+        this.taskName = name;
     }
 
     /**
@@ -36,6 +33,13 @@ public class Task implements ReadOnlyTask {
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
     }
+    
+    /*
+     * Replaces this task name with new task name
+     */
+    public void setName(Name newTaskName){
+    	this.taskName = newTaskName;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -47,7 +51,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags);
+        return Objects.hash(taskName, tags);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class Task implements ReadOnlyTask {
 
 	@Override
 	public Name getName() {
-		return name;
+		return taskName;
 	}
 
 	@Override

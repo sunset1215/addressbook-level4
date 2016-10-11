@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -24,6 +27,12 @@ public class TaskDate {
     public TaskDate(Date taskDate) throws IllegalValueException {
         assert taskDate != null;
         this.taskDate = taskDate;
+    }
+    
+    public TaskDate(String taskDate) throws ParseException {
+        assert taskDate != null;
+        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+        this.taskDate = df.parse(taskDate);
     }
 
     @Override

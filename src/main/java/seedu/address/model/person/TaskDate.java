@@ -2,8 +2,6 @@ package seedu.address.model.person;
 
 import java.util.Date;
 
-import com.sun.glass.ui.monocle.linux.LinuxInputProcessor.Logger;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -27,15 +25,6 @@ public class TaskDate {
         assert taskDate != null;
         this.taskDate = taskDate;
     }
-
-    /**
-     * Returns true if a given string is a valid person task.
-     */
-    public static boolean isValidDate(String test) {
-    	System.out.println("this valid date does not work yet, not sure how to do regex----------------------");
-        return test.matches(DATE_VALIDATION_REGEX);
-    }
-
 
     @Override
     public String toString() {

@@ -14,6 +14,9 @@ public class PersonCard extends UiPart{
     private HBox cardPane;
     @FXML
     private Label name;
+    @FXML
+    private Label id;
+
 
     private ReadOnlyTask person;
     private int displayedIndex;
@@ -32,6 +35,9 @@ public class PersonCard extends UiPart{
     @FXML
     public void initialize() {
         name.setText(person.getName().fullName);
+        id.setText(displayedIndex + ". ");
+
+ 
     }
 
     public HBox getLayout() {

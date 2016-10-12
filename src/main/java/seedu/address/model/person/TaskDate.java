@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,17 +21,16 @@ public class TaskDate {
 
     /**
      * Validates given Date.
-     *
-     * @throws IllegalValueException if given name string is invalid.
      */
-    public TaskDate(Date taskDate) throws IllegalValueException {
+    public TaskDate(Date taskDate) {
         assert taskDate != null;
         this.taskDate = taskDate;
     }
-
+    
     @Override
     public String toString() {
-        return taskDate.toString();
+        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+        return df.format(taskDate);
     }
 
     @Override

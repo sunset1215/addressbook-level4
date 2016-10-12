@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.*;
+import seedu.address.model.person.TaskDate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.IllegalValueException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,6 +59,9 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
+            
+        case EditCommand.COMMAND_WORD:
+            return prepareEdit(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -74,6 +81,73 @@ public class Parser {
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    /**
+     * Parses arguments in the context of the edit task command.
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+        final String DEADLINE_FLAG = "-d";
+        final String EVENT_FLAG = "-e";
+        String[] argsArray = args.trim().split(" ");
+        
+        // check if # of args is correct
+        if (!(argsArray.length == 3 || argsArray.length == 4)) {
+            System.out.println("wrong # of args");
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+        
+        // parse index
+        String argIndex = argsArray[0];
+        Optional<Integer> index = parseIndex(argIndex);
+        if(!index.isPresent()){
+            System.out.println("invalid index");
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+        
+        // parse deadline/event flag
+        String taskFlag = argsArray[1];
+        
+        try {
+            if (taskFlag.equals(DEADLINE_FLAG) && argsArray.length == 3) {
+                // handle deadline args
+                String endDateTime = argsArray[2];
+                Date endDate = parseStringToDate(endDateTime);
+                return new EditCommand(index.get(), new TaskDate(endDate));
+            }
+            else if (taskFlag.equals(EVENT_FLAG) && argsArray.length == 4) {
+                // handle event args
+                String startDateTime = argsArray[2];
+                String endDateTime = argsArray[3];
+                Date startDate = parseStringToDate(startDateTime);
+                Date endDate = parseStringToDate(endDateTime);
+                return new EditCommand(index.get(), new TaskDate(startDate), new TaskDate(endDate));
+            }
+            else {
+                // unable to parse
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+        } catch (ParseException e) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+    }
+    
+    /**
+     * Parses a String into a Date
+     * 
+     * @throws ParseException
+     */
+    private Date parseStringToDate(String strDate) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+        Date date = df.parse(strDate);
+        return date;
     }
 
     /**

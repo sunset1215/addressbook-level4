@@ -36,5 +36,16 @@ public class EventTask extends Task{
 	public void setEndDate(TaskDate newEndDate){
 		this.endDate = newEndDate;
 	}
+	
+	@Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getName().toString());
+        sb.append(" start from ");
+        sb.append(startDate.toString());
+        sb.append(" to ");
+        sb.append(endDate.toString());
+        return sb.toString();
+    }
 
 }

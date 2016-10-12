@@ -83,6 +83,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the edit task command.
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareEdit(String args) {
         final String DEADLINE_FLAG = "-d";
         final String EVENT_FLAG = "-e";
@@ -134,6 +139,11 @@ public class Parser {
 
     }
     
+    /**
+     * Parses a String into a Date
+     * 
+     * @throws ParseException
+     */
     private Date parseStringToDate(String strDate) throws ParseException {
         DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
         Date date = df.parse(strDate);

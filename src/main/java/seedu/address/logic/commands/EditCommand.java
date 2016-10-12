@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.model.DeadlineTask;
@@ -10,7 +9,7 @@ import seedu.address.model.person.Task;
 import seedu.address.model.person.TaskDate;
 
 /**
- * Deletes a task identified using it's last displayed index from the task list.
+ * Edits a task identified using it's last displayed index from the task list.
  */
 public class EditCommand extends Command {
 
@@ -32,16 +31,27 @@ public class EditCommand extends Command {
     private TaskDate startDateTime;
     private int editCase;
 
+    /**
+     * Constructor for editing specified task to a deadline
+     * @param targetIndex specified task
+     * @param endDateTime deadline end date/time
+     */
     public EditCommand(int targetIndex, TaskDate endDateTime) {
         this.targetIndex = targetIndex;
         this.endDateTime = endDateTime;
         editCase = EDIT_CASE_DEADLINE;
     }
     
-    public EditCommand(int targetIndex, TaskDate endDateTime, TaskDate startDateTime) {
+    /**
+     * Constructor for editing specified task to an event
+     * @param targetIndex specified task
+     * @param endDateTime event start date/time
+     * @param startDateTime event end date/time
+     */
+    public EditCommand(int targetIndex, TaskDate startDateTime, TaskDate endDateTime) {
         this.targetIndex = targetIndex;
-        this.endDateTime = endDateTime;
         this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
         editCase = EDIT_CASE_EVENT;
     }
 

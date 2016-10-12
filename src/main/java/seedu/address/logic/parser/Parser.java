@@ -113,13 +113,13 @@ public class Parser {
         String taskFlag = argsArray[1];
         
         try {
-            if (taskFlag.equals(DEADLINE_FLAG)) {
+            if (taskFlag.equals(DEADLINE_FLAG) && argsArray.length == 3) {
                 // handle deadline args
                 String endDateTime = argsArray[2];
                 Date endDate = parseStringToDate(endDateTime);
                 return new EditCommand(index.get(), new TaskDate(endDate));
             }
-            else if (taskFlag.equals(EVENT_FLAG)) {
+            else if (taskFlag.equals(EVENT_FLAG) && argsArray.length == 4) {
                 // handle event args
                 String startDateTime = argsArray[2];
                 String endDateTime = argsArray[3];

@@ -88,8 +88,25 @@ public class UniqueTaskList implements Iterable<Task> {
         return personFoundAndDeleted;
     }
     
+    /*
+     * Returns the task at the given index.
+     */
+    public Task getTaskFromIndex(int index) {
+        return internalList.get(index);
+    }
+    
+    /*
+     * Returns the index of the given task.
+     */
     public int getIndex(ReadOnlyTask target) throws TaskNotFoundException{
     	return internalList.indexOf(target);
+    }
+    
+    /*
+     * Returns the size of the list.
+     */
+    public int size() {
+        return internalList.size();
     }
 
     public ObservableList<Task> getInternalList() {

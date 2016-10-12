@@ -76,7 +76,7 @@ public class TaskList implements ReadOnlyTaskList {
      *
      * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         tasks.add(p);
     }
     
@@ -87,7 +87,7 @@ public class TaskList implements ReadOnlyTaskList {
      *
      * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(int taskIndex, Task p) throws UniqueTaskList.DuplicateTaskException {
+    public void addTask(int taskIndex, Task p) throws UniqueTaskList.DuplicateTaskException {
         tasks.add(taskIndex, p);
     }
 

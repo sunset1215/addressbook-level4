@@ -5,7 +5,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.address.model.Model;
 import seedu.address.model.TaskList;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TaskListBuilder;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

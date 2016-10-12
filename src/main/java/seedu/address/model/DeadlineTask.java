@@ -28,5 +28,14 @@ public class DeadlineTask extends Task{
 	public void setEndDate(TaskDate newEndDate){
 		this.endDate = newEndDate;
 	}
+	
+	@Override
+    public String toString() {
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(this.getName().toString());
+	    sb.append(" due ");
+	    sb.append(endDate.toString());
+        return sb.toString();
+    }
 
 }

@@ -47,5 +47,15 @@ public class EventTask extends Task{
         sb.append(endDate.toString());
         return sb.toString();
     }
+	
+	@Override
+	public TaskDate getStart() {
+		return startDate;
+	}
+	
+	@Override
+	public TaskDate getEnd() {
+		return endDate;
+	}
 
 }

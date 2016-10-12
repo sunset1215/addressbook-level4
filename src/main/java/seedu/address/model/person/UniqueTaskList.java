@@ -61,6 +61,20 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Adds a task to the list at the given index.
+     * Used for preserving order when editing
+     *
+     * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
+     */
+    public void add(int taskIndex, Task toAdd) throws DuplicateTaskException {
+        assert toAdd != null;
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(taskIndex, toAdd);
+    }
+    
+    /**
      * Removes the equivalent person from the list.
      *
      * @throws PersonNotFoundException if no such person could be found in the list.
@@ -72,6 +86,10 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
         return personFoundAndDeleted;
+    }
+    
+    public int getIndex(ReadOnlyTask target) throws TaskNotFoundException{
+    	return internalList.indexOf(target);
     }
 
     public ObservableList<Task> getInternalList() {

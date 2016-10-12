@@ -79,6 +79,17 @@ public class TaskList implements ReadOnlyTaskList {
     public void addPerson(Task p) throws UniqueTaskList.DuplicateTaskException {
         tasks.add(p);
     }
+    
+    /**
+     * Adds a task to the task list at a given index.
+     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     *
+     * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
+     */
+    public void addPerson(int taskIndex, Task p) throws UniqueTaskList.DuplicateTaskException {
+        tasks.add(taskIndex, p);
+    }
 
     /**
      * Ensures that every tag in this task:
@@ -109,6 +120,10 @@ public class TaskList implements ReadOnlyTaskList {
         } else {
             throw new UniqueTaskList.TaskNotFoundException();
         }
+    }
+    
+    public int getIndex(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException{
+    	return tasks.getIndex(key);
     }
 
 //// tag-level operations

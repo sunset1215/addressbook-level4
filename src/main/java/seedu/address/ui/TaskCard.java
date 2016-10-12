@@ -16,28 +16,51 @@ public class TaskCard extends UiPart{
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label startDate;
+    @FXML
+    private Label endDate;
 
-
-    private ReadOnlyTask person;
+    private ReadOnlyTask task;
     private int displayedIndex;
+    private String taskStartDate;
+    private String taskEndDate;
 
     public TaskCard(){
 
     }
 
-    public static TaskCard load(ReadOnlyTask person, int displayedIndex){
+    public static TaskCard load(ReadOnlyTask task, int displayedIndex){
         TaskCard card = new TaskCard();
-        card.person = person;
+        card.task = task;
         card.displayedIndex = displayedIndex;
+        if(task.getStart() != null){
+        	card.taskStartDate = task.getStart().toString();
+        }
+        if(task.getEnd() != null){
+        	card.taskEndDate = task.getEnd().toString();
+        }
         return UiPartLoader.loadUiPart(card);
     }
 
     @FXML
     public void initialize() {
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
 
- 
+        if(task.getStart() != null){
+            startDate.setText("Start date: " + taskStartDate);
+        }
+        else{
+        	startDate.setText("");
+        }
+        
+        if(task.getEnd() != null){
+            endDate.setText("End date: " + taskEndDate);
+        }
+        else{
+        	endDate.setText("");
+        }
     }
 
     public HBox getLayout() {

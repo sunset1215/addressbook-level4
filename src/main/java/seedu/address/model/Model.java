@@ -22,6 +22,12 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task t) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Adds the given task at a given index */
+    void addTask(int index, Task t) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Get index of given task*/
+    int getIndex(ReadOnlyTask t) throws UniqueTaskList.TaskNotFoundException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

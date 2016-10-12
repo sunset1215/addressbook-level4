@@ -37,5 +37,10 @@ public class DeadlineTask extends Task{
 	    sb.append(endDate.toString());
         return sb.toString();
     }
+	
+	@Override
+	public TaskDate getEnd() {
+		return endDate;
+	}
 
 }

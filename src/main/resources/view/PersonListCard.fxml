@@ -27,9 +27,11 @@
                                 <HBox>
                                     <Label fx:id="id" styleClass="cell_big_label"></Label>
                                     <Label fx:id="name" text="\$tagname" styleClass="cell_big_label"/>
-                                </HBox>
+                                </HBox>                                
                             </children>
                         </HBox>
+                        <Label fx:id="startDate" text="\$startDate" styleClass="cell_small_label"/>
+                        <Label fx:id="endDate" text="\$endDate" styleClass="cell_small_label"/>
                     </children>
                 </VBox>
             </children>

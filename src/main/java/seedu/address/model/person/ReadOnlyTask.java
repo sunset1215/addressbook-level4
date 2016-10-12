@@ -9,6 +9,8 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Name getName();
+    TaskDate getStart();
+    TaskDate getEnd();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

@@ -5,7 +5,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserManager;
 import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.storage.Storage;
@@ -19,11 +19,11 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
-    private final Parser parser;
+    private final ParserManager parser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
-        this.parser = new Parser();
+        this.parser = new ParserManager();
     }
 
     @Override

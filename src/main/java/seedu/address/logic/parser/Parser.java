@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.*;
+import seedu.address.model.person.TaskDate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.IllegalValueException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,24 +81,98 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the add person command.
+     * Parses arguments in the context of the add task command.
      *
      * @param args full command args string
      * @return the prepared command
      */
     private Command prepareAdd(String args){
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
+        
+        final String DEADLINE_FLAG = "-d";
+        final String EVENT_FLAG = "-e";
+        String[] argsArray = splitAddArguments(args.trim());
+        
         try {
-            return new AddCommand(
-                    matcher.group("name")
-            );
+            // when only task name is present in parameter
+            if (argsArray.length == 1) {
+                return new AddCommand(argsArray[0]);
+            }
+            
+            // check if # of args is correct
+            if (!(argsArray.length == 3 || argsArray.length == 4)) {
+                System.out.println("wrong # of args");
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+            
+            String taskName = argsArray[0];
+            // parse deadline/event flag
+            String taskFlag = argsArray[1];
+            
+            try {
+                if (taskFlag.equals(DEADLINE_FLAG) && argsArray.length == 3) {
+                    // handle deadline args
+                    String endDateTime = argsArray[2];
+                    Date endDate = parseStringToDate(endDateTime);
+                    return new AddCommand(taskName, endDate);
+                }
+                else if (taskFlag.equals(EVENT_FLAG) && argsArray.length == 4) {
+                    // handle event args
+                    String startDateTime = argsArray[2];
+                    String endDateTime = argsArray[3];
+                    Date startDate = parseStringToDate(startDateTime);
+                    Date endDate = parseStringToDate(endDateTime);
+                    return new AddCommand(taskName, startDate, endDate);
+                }
+                else {
+                    // unable to parse
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                }
+            } catch (ParseException e) {
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+    }
+
+    /**
+     * Splits arguments of the add command
+     * @param args
+     * @return string array containing the split arguments
+     */
+    private String[] splitAddArguments(String args) {
+        int indexFlag = args.indexOf('-');
+        // args only contain task name
+        if (indexFlag == -1) {
+            String[] argsArray = new String[1];
+            argsArray[0] = args;
+            return argsArray;
+        }
+        // extract task name
+        String taskName = args.substring(0, args.indexOf('-')).trim();
+        String remainingArgs = args.substring(args.indexOf('-'), args.length());
+        String[] remainingArgsArray = remainingArgs.split(" ");
+        String[] argsArray = new String[remainingArgsArray.length + 1];
+        argsArray[0] = taskName;
+        for (int i = 0; i < remainingArgsArray.length; i++) {
+            argsArray[i + 1] = remainingArgsArray[i];
+        }
+        
+        return argsArray;
+    }
+    
+    /**
+     * Parses a String into a Date
+     * 
+     * @throws ParseException
+     */
+    private Date parseStringToDate(String strDate) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+        Date date = df.parse(strDate);
+        return date;
     }
 
     /**

@@ -7,6 +7,8 @@ import seedu.address.model.EventTask;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.TaskDate;
+import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.person.UniqueTaskList.TaskNotFoundException;
 
 /**
  * Edits a task identified using it's last displayed index from the task list.
@@ -66,20 +68,32 @@ public class EditCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Task taskToEdit = (Task) lastShownList.get(targetIndex - 1);
-
-        Task resultTask;
-        switch (editCase) {
-        case EDIT_CASE_DEADLINE:
-            resultTask = new DeadlineTask(taskToEdit.getName(), endDateTime);
-            break;
-        case EDIT_CASE_EVENT:
-            resultTask = new EventTask(taskToEdit.getName(), startDateTime, endDateTime);
-            break;
-        default:
-            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
-        }
-        taskToEdit = resultTask;
+        ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
+        int taskIndex;
+        try {
+			taskIndex = model.getIndex(taskToEdit);
+			model.deleteTask(taskToEdit);
+		
+	        Task resultTask;
+	        switch (editCase) {
+	        case EDIT_CASE_DEADLINE:
+	            resultTask = new DeadlineTask(taskToEdit.getName(), endDateTime);
+	            break;
+	        case EDIT_CASE_EVENT:
+	            resultTask = new EventTask(taskToEdit.getName(), startDateTime, endDateTime);
+	            break;
+	        default:
+	            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+	        }
+	        
+	        try {
+				model.addTask(taskIndex, resultTask);
+			} catch (DuplicateTaskException e) {
+				e.printStackTrace();
+			}
+        } catch (TaskNotFoundException e) {
+			e.printStackTrace();
+		}
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
     }

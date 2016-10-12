@@ -76,6 +76,18 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskListChanged();
     }
+    
+    @Override
+    public synchronized void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskList.addPerson(taskIndex, task);
+        updateFilteredListToShowAll();
+        indicateTaskListChanged();
+    }
+
+	@Override
+	public int getIndex(ReadOnlyTask t) throws TaskNotFoundException {
+		return taskList.getIndex(t);
+	}
 
     //=========== Filtered Person List Accessors ===============================================================
 
@@ -149,5 +161,6 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
 
 }

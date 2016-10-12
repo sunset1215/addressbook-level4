@@ -70,4 +70,14 @@ public class Task implements ReadOnlyTask{
 		return null;
 	}
 
+	@Override
+	public TaskDate getStart() {
+		return null;
+	}
+
+	@Override
+	public TaskDate getEnd() {
+		return null;
+	}
+
 }

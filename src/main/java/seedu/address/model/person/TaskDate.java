@@ -21,23 +21,16 @@ public class TaskDate {
 
     /**
      * Validates given Date.
-     *
-     * @throws IllegalValueException if given name string is invalid.
      */
-    public TaskDate(Date taskDate) throws IllegalValueException {
+    public TaskDate(Date taskDate) {
         assert taskDate != null;
         this.taskDate = taskDate;
     }
     
-    public TaskDate(String taskDate) throws ParseException {
-        assert taskDate != null;
-        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
-        this.taskDate = df.parse(taskDate);
-    }
-
     @Override
     public String toString() {
-        return taskDate.toString();
+        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+        return df.format(taskDate);
     }
 
     @Override

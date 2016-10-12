@@ -70,11 +70,12 @@ public class EditCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
         int taskIndex;
+        Task resultTask = null;
+        
         try {
 			taskIndex = model.getIndex(taskToEdit);
 			model.deleteTask(taskToEdit);
 		
-	        Task resultTask;
 	        switch (editCase) {
 	        case EDIT_CASE_DEADLINE:
 	            resultTask = new DeadlineTask(taskToEdit.getName(), endDateTime);
@@ -91,11 +92,12 @@ public class EditCommand extends Command {
 			} catch (DuplicateTaskException e) {
 				e.printStackTrace();
 			}
+	        
         } catch (TaskNotFoundException e) {
 			e.printStackTrace();
 		}
 
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, resultTask));
     }
 
 }

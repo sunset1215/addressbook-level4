@@ -11,6 +11,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 
+/**
+ * Parser class used to parse a find command
+ */
 public class FindParser extends Parser {
 	
 	/**

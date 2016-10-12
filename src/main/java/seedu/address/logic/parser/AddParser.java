@@ -11,6 +11,9 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
 
+/**
+ * Parser class used to parse a add command
+ */
 public class AddParser extends Parser {
 	
 	@Override

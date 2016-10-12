@@ -6,6 +6,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 
+/**
+ * Parser class used to parse a delete command
+ */
 public class DeleteParser extends Parser {
 
 	/**

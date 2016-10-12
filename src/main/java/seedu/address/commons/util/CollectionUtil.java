@@ -2,10 +2,7 @@ package seedu.address.commons.util;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Utility methods related to Collections

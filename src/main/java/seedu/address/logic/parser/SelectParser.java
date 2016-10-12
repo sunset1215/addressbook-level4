@@ -8,6 +8,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.logic.commands.SelectCommand;
 
+/**
+ * Parser class used to parse a select command
+ */
 public class SelectParser extends Parser {
 	
 	/**

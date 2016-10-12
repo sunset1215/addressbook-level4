@@ -6,13 +6,15 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Optional;
 
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.IncorrectCommand;
 import seedu.address.model.person.TaskDate;
 
+/**
+ * Parser class used to parse an edit command
+ */
 public class EditParser extends Parser{
 
 	/**

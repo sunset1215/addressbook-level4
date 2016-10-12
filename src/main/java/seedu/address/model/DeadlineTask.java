@@ -33,7 +33,7 @@ public class DeadlineTask extends Task{
     public String toString() {
 	    StringBuilder sb = new StringBuilder();
 	    sb.append(this.getName().toString());
-	    sb.append(" Due: ");
+	    sb.append(" due ");
 	    sb.append(endDate.toString());
         return sb.toString();
     }

@@ -41,9 +41,9 @@ public class EventTask extends Task{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getName().toString());
-        sb.append(" Start: ");
+        sb.append(" start from ");
         sb.append(startDate.toString());
-        sb.append(" End: ");
+        sb.append(" to ");
         sb.append(endDate.toString());
         return sb.toString();
     }

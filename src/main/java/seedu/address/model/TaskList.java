@@ -40,7 +40,7 @@ public class TaskList implements ReadOnlyTaskList {
         resetData(tasks.getInternalList(), tags.getInternalList());
     }
 
-    public static ReadOnlyTaskList getEmptyAddressBook() {
+    public static ReadOnlyTaskList getEmptyTaskList() {
         return new TaskList();
     }
 

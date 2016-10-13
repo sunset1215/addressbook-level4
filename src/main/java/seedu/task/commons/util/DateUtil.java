@@ -7,6 +7,11 @@ import java.util.Date;
 
 import seedu.task.model.task.TaskDate;
 
+/**
+ * A class for handling Dates
+ * @author Vivian
+ *
+ */
 public class DateUtil {
 	
 	/**

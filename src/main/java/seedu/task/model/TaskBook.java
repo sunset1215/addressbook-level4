@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskList implements ReadOnlyTaskBook {
+public class TaskBook implements ReadOnlyTaskBook {
 
     private UniqueTaskList tasks;
     private UniqueTagList tags;
@@ -26,19 +26,19 @@ public class TaskList implements ReadOnlyTaskBook {
         tags = new UniqueTagList();
     }
 
-    public TaskList() {}
+    public TaskBook() {}
 
     /**
      * Persons and Tags are copied into this task list
      */
-    public TaskList(ReadOnlyTaskBook toBeCopied) {
+    public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
     }
 
     /**
      * Persons and Tags are copied into this task list
      */
-    public TaskList(UniqueTaskList tasks, UniqueTagList tags) {
+    public TaskBook(UniqueTaskList tasks, UniqueTagList tags) {
         this.tasks = copyUniqueTaskList(tasks);
         this.tags = copyUniqueTagList(tags);
         // the line of code below is the original code
@@ -50,7 +50,7 @@ public class TaskList implements ReadOnlyTaskBook {
     }
 
     public static ReadOnlyTaskBook getEmptyTaskList() {
-        return new TaskList();
+        return new TaskBook();
     }
 
 //// list overwrite operations
@@ -204,9 +204,9 @@ public class TaskList implements ReadOnlyTaskBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskList // instanceof handles nulls
-                && this.tasks.equals(((TaskList) other).tasks)
-                && this.tags.equals(((TaskList) other).tags));
+                || (other instanceof TaskBook // instanceof handles nulls
+                && this.tasks.equals(((TaskBook) other).tasks)
+                && this.tags.equals(((TaskBook) other).tags));
     }
 
     @Override

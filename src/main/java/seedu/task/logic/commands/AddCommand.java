@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Adds a task to our task list
+ * Adds a task to our task book
  */
 public class AddCommand extends Command {
 

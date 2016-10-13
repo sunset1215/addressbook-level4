@@ -21,8 +21,6 @@ public class CollectionUtil {
         return false;
     }
 
-
-
     /**
      * Throws an assertion error if the collection or any item in it is null.
      */

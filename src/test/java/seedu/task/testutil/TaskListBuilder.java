@@ -1,7 +1,7 @@
 package seedu.task.testutil;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.TaskList;
+import seedu.task.model.TaskBook;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -14,9 +14,9 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
  */
 public class TaskListBuilder {
 
-    private TaskList addressBook;
+    private TaskBook addressBook;
 
-    public TaskListBuilder(TaskList addressBook){
+    public TaskListBuilder(TaskBook addressBook){
         this.addressBook = addressBook;
     }
 
@@ -30,7 +30,7 @@ public class TaskListBuilder {
         return this;
     }
 
-    public TaskList build(){
+    public TaskBook build(){
         return addressBook;
     }
 }

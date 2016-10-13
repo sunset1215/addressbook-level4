@@ -11,7 +11,7 @@ import org.testfx.api.FxToolkit;
 
 import seedu.task.TestApp;
 import seedu.task.commons.core.EventsCenter;
-import seedu.task.model.TaskList;
+import seedu.task.model.TaskBook;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.testutil.TestUtil;
 import seedu.task.testutil.TypicalTestTasks;
@@ -76,8 +76,8 @@ public abstract class AddressBookGuiTest {
      * Override this in child classes to set the initial local data.
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
-    protected TaskList getInitialData() {
-        TaskList ab = TestUtil.generateEmptyAddressBook();
+    protected TaskBook getInitialData() {
+        TaskBook ab = TestUtil.generateEmptyAddressBook();
         TypicalTestTasks.loadAddressBookWithSampleData(ab);
         return ab;
     }

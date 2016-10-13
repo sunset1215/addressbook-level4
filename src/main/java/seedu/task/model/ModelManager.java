@@ -21,30 +21,30 @@ import java.util.logging.Logger;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskList taskList;
+    private final TaskBook taskList;
     private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given AddressBook
      * AddressBook and its variables should not be null
      */
-    public ModelManager(TaskList src, UserPrefs userPrefs) {
+    public ModelManager(TaskBook src, UserPrefs userPrefs) {
         super();
         assert src != null;
         assert userPrefs != null;
 
         logger.fine("Initializing with address book: " + src + " and user prefs " + userPrefs);
 
-        taskList = new TaskList(src);
+        taskList = new TaskBook(src);
         filteredTasks = new FilteredList<>(taskList.getTasks());
     }
 
     public ModelManager() {
-        this(new TaskList(), new UserPrefs());
+        this(new TaskBook(), new UserPrefs());
     }
 
     public ModelManager(ReadOnlyTaskBook initialData, UserPrefs userPrefs) {
-        taskList = new TaskList(initialData);
+        taskList = new TaskBook(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
     }
 

@@ -1,9 +1,9 @@
 package seedu.task.logic.commands;
 
-import seedu.task.model.TaskList;
+import seedu.task.model.TaskBook;
 
 /**
- * Clears the address book.
+ * Clears the task book.
  */
 public class ClearCommand extends Command {
 
@@ -16,7 +16,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        model.resetData(TaskList.getEmptyTaskList());
+        model.resetData(TaskBook.getEmptyTaskList());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

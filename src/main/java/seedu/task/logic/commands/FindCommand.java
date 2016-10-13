@@ -4,7 +4,7 @@ import java.util.Set;
 
 /**
  * Finds and lists all tasks in task list whose name contains any of the argument keywords.
- * Keyword matching is case sensitive.
+ * Keyword matching is not case sensitive.
  */
 public class FindCommand extends Command {
 

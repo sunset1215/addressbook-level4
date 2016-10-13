@@ -1,7 +1,7 @@
 package seedu.task.testutil;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.TaskList;
+import seedu.task.model.TaskBook;
 import seedu.task.model.task.*;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -33,7 +33,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskList ab) {
+    public static void loadAddressBookWithSampleData(TaskBook ab) {
 
         try {
             ab.addTask(new Task(assignment));
@@ -52,8 +52,8 @@ public class TypicalTestTasks {
         return new TestTask[]{assignment, benson, carl, daniel, elle, fiona, george};
     }
 
-    public TaskList getTypicalAddressBook(){
-        TaskList ab = new TaskList();
+    public TaskBook getTypicalAddressBook(){
+        TaskBook ab = new TaskBook();
         loadAddressBookWithSampleData(ab);
         return ab;
     }

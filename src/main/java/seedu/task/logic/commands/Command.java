@@ -4,7 +4,7 @@ import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.task.model.Model;
-import seedu.task.model.TaskList;
+import seedu.task.model.TaskBook;
 import seedu.task.testutil.TaskListBuilder;
 
 /**
@@ -14,10 +14,10 @@ public abstract class Command {
     protected Model model;
 
     /**
-     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
+     * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
      *
      * @param displaySize used to generate summary
-     * @return summary message for persons displayed
+     * @return summary message for tasks displayed
      */
     public static String getMessageForTaskListShownSummary(int displaySize) {
         return String.format(Messages.MESSAGE_TASK_LISTED_OVERVIEW, displaySize);

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Represents a storage for {@link seedu.task.model.TaskList}.
+ * Represents a storage for {@link seedu.task.model.TaskBook}.
  */
 public interface TaskListStorage {
 

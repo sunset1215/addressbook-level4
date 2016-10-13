@@ -9,7 +9,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.model.ReadOnlyTaskBook;
-import seedu.task.model.TaskList;
+import seedu.task.model.TaskBook;
 import seedu.task.model.UserPrefs;
 import seedu.task.storage.JsonUserPrefsStorage;
 import seedu.task.storage.Storage;
@@ -60,10 +60,10 @@ public class StorageManagerTest {
 
     @Test
     public void addressBookReadSave() throws Exception {
-        TaskList original = new TypicalTestTasks().getTypicalAddressBook();
+        TaskBook original = new TypicalTestTasks().getTypicalAddressBook();
         storageManager.saveTaskList(original);
         ReadOnlyTaskBook retrieved = storageManager.readTaskList().get();
-        assertEquals(original, new TaskList(retrieved));
+        assertEquals(original, new TaskBook(retrieved));
         //More extensive testing of AddressBook saving/reading is done in XmlAddressBookStorageTest
     }
 
@@ -77,7 +77,7 @@ public class StorageManagerTest {
         //Create a StorageManager while injecting a stub that throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlTaskListStorageExceptionThrowingStub("dummy"), new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
-        storage.handleTaskListChangedEvent(new TaskBookChangedEvent(new TaskList()));
+        storage.handleTaskListChangedEvent(new TaskBookChangedEvent(new TaskBook()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
     }
 

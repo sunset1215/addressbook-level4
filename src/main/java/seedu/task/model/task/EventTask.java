@@ -1,10 +1,7 @@
-package seedu.task.model;
-import seedu.task.model.task.Name;
-import seedu.task.model.task.Task;
-import seedu.task.model.task.TaskDate;
+package seedu.task.model.task;
 
 /*
- * Represents a task as an event, i.e. it will have a start and end time
+ * Represents a task as an event, i.e. it will have a start and end date/time
  */
 public class EventTask extends Task{
 	private TaskDate startDate, endDate;
@@ -20,7 +17,7 @@ public class EventTask extends Task{
 	}
 	
 	/*
-	 * Replaces this task's end date with the new end date
+	 * Replaces this task's start date with the new start date
 	 */
 	public void setStartDate(TaskDate startDate){
 		this.startDate = startDate;

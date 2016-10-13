@@ -1,8 +1,4 @@
-package seedu.task.model;
-
-import seedu.task.model.task.Name;
-import seedu.task.model.task.Task;
-import seedu.task.model.task.TaskDate;
+package seedu.task.model.task;
 
 /*
  * Represents a task with a deadline

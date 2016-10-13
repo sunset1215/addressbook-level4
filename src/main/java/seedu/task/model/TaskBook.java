@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task-book level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class TaskBook implements ReadOnlyTaskBook {
@@ -49,7 +49,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         //resetData(tasks.getInternalList(), tags.getInternalList());
     }
 
-    public static ReadOnlyTaskBook getEmptyTaskList() {
+    public static ReadOnlyTaskBook getEmptyTaskBook() {
         return new TaskBook();
     }
 
@@ -60,7 +60,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      */
     private UniqueTagList copyUniqueTagList(UniqueTagList tags) {
         UniqueTagList newList = new UniqueTagList();
-        for (int i=0; i<tags.size(); i++) {
+        for (int i = 0; i < tags.size(); i++) {
             try {
                 newList.add(tags.getTagFromIndex(i));
             } catch (DuplicateTagException e) {
@@ -75,7 +75,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      */
     private UniqueTaskList copyUniqueTaskList(UniqueTaskList tasks) {
         UniqueTaskList newList = new UniqueTaskList();
-        for (int i=0; i<tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             try {
                 newList.add(tasks.getTaskFromIndex(i));
             } catch (DuplicateTaskException e) {
@@ -98,8 +98,8 @@ public class TaskBook implements ReadOnlyTaskBook {
     }
 
     
-    public void resetData(Collection<? extends ReadOnlyTask> newPersons, Collection<Tag> newTags) {
-        setTasks(newPersons.stream().map(Task::new).collect(Collectors.toList()));
+    public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
+        setTasks(newTasks.stream().map(Task::new).collect(Collectors.toList()));
         setTags(newTags);
     }
 
@@ -107,17 +107,17 @@ public class TaskBook implements ReadOnlyTaskBook {
         resetData(newData.getTaskList(), newData.getTagList());
     }
 
-//// person-level operations
+//// task-level operations
 
     /**
      * Adds a task to the task list.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
-     * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicatePersonException if an equivalent task already exists.
      */
-    public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
-        tasks.add(p);
+    public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        tasks.add(task);
     }
     
     /**
@@ -125,10 +125,10 @@ public class TaskBook implements ReadOnlyTaskBook {
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
-     * @throws UniqueTaskList.DuplicatePersonException if an equivalent person already exists.
+     * @throws UniqueTaskList.DuplicatePersonException if an equivalent task already exists.
      */
-    public void addTask(int taskIndex, Task p) throws UniqueTaskList.DuplicateTaskException {
-        tasks.add(taskIndex, p);
+    public void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
+        tasks.add(taskIndex, task);
     }
 
     /**
@@ -176,7 +176,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 
     @Override
     public String toString() {
-        return tasks.getInternalList().size() + " persons, " + tags.getInternalList().size() +  " tags";
+        return tasks.getInternalList().size() + " tasks, " + tags.getInternalList().size() +  " tags";
         // TODO: refine later
     }
 

@@ -15,28 +15,28 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task book data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TaskBook taskList;
+    private final TaskBook taskBook;
     private final FilteredList<Task> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given AddressBook
-     * AddressBook and its variables should not be null
+     * Initializes a ModelManager with the given TaskBook
+     * TaskBook and its variables should not be null
      */
     public ModelManager(TaskBook src, UserPrefs userPrefs) {
         super();
         assert src != null;
         assert userPrefs != null;
 
-        logger.fine("Initializing with address book: " + src + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task book: " + src + " and user prefs " + userPrefs);
 
-        taskList = new TaskBook(src);
-        filteredTasks = new FilteredList<>(taskList.getTasks());
+        taskBook = new TaskBook(src);
+        filteredTasks = new FilteredList<>(taskBook.getTasks());
     }
 
     public ModelManager() {
@@ -44,49 +44,49 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager(ReadOnlyTaskBook initialData, UserPrefs userPrefs) {
-        taskList = new TaskBook(initialData);
-        filteredTasks = new FilteredList<>(taskList.getTasks());
+        taskBook = new TaskBook(initialData);
+        filteredTasks = new FilteredList<>(taskBook.getTasks());
     }
 
     @Override
     public void resetData(ReadOnlyTaskBook newData) {
-        taskList.resetData(newData);
-        indicateTaskListChanged();
+        taskBook.resetData(newData);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public ReadOnlyTaskBook getTaskList() {
-        return taskList;
+    public ReadOnlyTaskBook getTaskBook() {
+        return taskBook;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateTaskListChanged() {
-        raise(new TaskBookChangedEvent(taskList));
+    private void indicateTaskBookChanged() {
+        raise(new TaskBookChangedEvent(taskBook));
     }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskList.removeTask(target);
-        indicateTaskListChanged();
+        taskBook.removeTask(target);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public synchronized void addTask(Task person) throws UniqueTaskList.DuplicateTaskException {
-        taskList.addTask(person);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskBook.addTask(task);
         updateFilteredListToShowAll();
-        indicateTaskListChanged();
+        indicateTaskBookChanged();
     }
     
     @Override
     public synchronized void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskList.addTask(taskIndex, task);
+        taskBook.addTask(taskIndex, task);
         updateFilteredListToShowAll();
-        indicateTaskListChanged();
+        indicateTaskBookChanged();
     }
 
 	@Override
-	public int getIndex(ReadOnlyTask t) throws TaskNotFoundException {
-		return taskList.getIndex(t);
+	public int getIndex(ReadOnlyTask target) throws TaskNotFoundException {
+		return taskBook.getIndex(target);
 	}
 
     //=========== Filtered Person List Accessors ===============================================================
@@ -113,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyTask person);
+        boolean satisfies(ReadOnlyTask task);
         String toString();
     }
 
@@ -126,8 +126,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyTask person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -137,7 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyTask person);
+        boolean run(ReadOnlyTask task);
         String toString();
     }
 
@@ -149,9 +149,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyTask person) {
+        public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(person.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
         }

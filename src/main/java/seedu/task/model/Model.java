@@ -14,20 +14,20 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyTaskBook newData);
 
-    /** Returns the TaskList */
-    ReadOnlyTaskBook getTaskList();
+    /** Returns the TaskBook */
+    ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task t) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
     
     /** Adds the given task at a given index */
-    void addTask(int index, Task t) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(int index, Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
     
     /** Get index of given task*/
-    int getIndex(ReadOnlyTask t) throws UniqueTaskList.TaskNotFoundException;
+    int getIndex(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

@@ -13,7 +13,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 public class DeleteParser extends Parser {
 
 	/**
-     * Parses arguments in the context of the delete person command.
+     * Parses arguments in the context of the delete task command.
      *
      * @param args full command args string
      * @return the prepared command

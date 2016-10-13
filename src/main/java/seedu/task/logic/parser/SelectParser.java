@@ -14,7 +14,7 @@ import seedu.task.logic.commands.SelectCommand;
 public class SelectParser extends Parser {
 	
 	/**
-     * Parses arguments in the context of the select person command.
+     * Parses arguments in the context of the select task command.
      *
      * @param args full command args string
      * @return the prepared command

@@ -17,7 +17,7 @@ import seedu.task.logic.commands.IncorrectCommand;
 public class FindParser extends Parser {
 	
 	/**
-     * Parses arguments in the context of the find person command.
+     * Parses arguments in the context of the find task command.
      *
      * @param args full command args string
      * @return the prepared command

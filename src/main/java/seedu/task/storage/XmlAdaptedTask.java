@@ -2,8 +2,6 @@ package seedu.task.storage;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.DateUtil;
-import seedu.task.model.DeadlineTask;
-import seedu.task.model.EventTask;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.*;

@@ -9,7 +9,7 @@ import java.util.Objects;
  * Represents a parent class, Task, in the Task List.
  */
 public class Task implements ReadOnlyTask{
-    private Name taskName;
+    private Name name;
     private UniqueTagList tags;
 
     /**
@@ -17,7 +17,7 @@ public class Task implements ReadOnlyTask{
      */
     public Task(Name name) {
         assert !CollectionUtil.isAnyNull(name);
-        this.taskName = name;
+        this.name = name;
     }
 
     /**
@@ -37,8 +37,8 @@ public class Task implements ReadOnlyTask{
     /*
      * Replaces this task name with new task name
      */
-    public void setName(Name newTaskName){
-    	this.taskName = newTaskName;
+    public void setName(Name newName){
+    	this.name = newName;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Task implements ReadOnlyTask{
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(taskName, tags);
+        return Objects.hash(name, tags);
     }
 
     @Override
@@ -61,13 +61,12 @@ public class Task implements ReadOnlyTask{
 
 	@Override
 	public Name getName() {
-		return taskName;
+		return name;
 	}
 
 	@Override
 	public UniqueTagList getTags() {
-		// TODO Auto-generated method stub
-		return null;
+		return tags;
 	}
 
 	@Override

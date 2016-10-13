@@ -1,11 +1,8 @@
 package seedu.task.model.task;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import seedu.task.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task name in the Task List.

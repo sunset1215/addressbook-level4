@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.task.commons.core.EventsCenter;
-import seedu.task.commons.events.model.TaskListChangedEvent;
+import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.logic.Logic;
@@ -16,7 +16,7 @@ import seedu.task.logic.LogicManager;
 import seedu.task.logic.commands.*;
 import seedu.task.model.Model;
 import seedu.task.model.ModelManager;
-import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.TaskList;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
@@ -44,12 +44,12 @@ public class LogicManagerTest {
     private Logic logic;
 
     //These are for checking the correctness of the events raised
-    private ReadOnlyTaskList latestSavedTaskList;
+    private ReadOnlyTaskBook latestSavedTaskList;
     private boolean helpShown;
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskListChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TaskBookChangedEvent abce) {
         latestSavedTaskList = new TaskList(abce.data);
     }
 
@@ -105,7 +105,7 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(String inputCommand, String expectedMessage,
-                                       ReadOnlyTaskList expectedTaskList,
+                                       ReadOnlyTaskBook expectedTaskList,
                                        List<? extends ReadOnlyTask> expectedShownList) throws Exception {
 
         //Execute the command
@@ -242,7 +242,7 @@ public class LogicManagerTest {
      * @param commandWord to test assuming it targets a single person in the last shown list based on visible index.
      */
     private void assertIndexNotFoundBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        String expectedMessage = MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
         TestDataHelper helper = new TestDataHelper();
         List<Task> personList = helper.generateListOfTasks(2);
 

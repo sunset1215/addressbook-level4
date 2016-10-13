@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class TaskList implements ReadOnlyTaskList {
+public class TaskList implements ReadOnlyTaskBook {
 
     private UniqueTaskList tasks;
     private UniqueTagList tags;
@@ -31,7 +31,7 @@ public class TaskList implements ReadOnlyTaskList {
     /**
      * Persons and Tags are copied into this task list
      */
-    public TaskList(ReadOnlyTaskList toBeCopied) {
+    public TaskList(ReadOnlyTaskBook toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
     }
 
@@ -49,7 +49,7 @@ public class TaskList implements ReadOnlyTaskList {
         //resetData(tasks.getInternalList(), tags.getInternalList());
     }
 
-    public static ReadOnlyTaskList getEmptyTaskList() {
+    public static ReadOnlyTaskBook getEmptyTaskList() {
         return new TaskList();
     }
 
@@ -103,7 +103,7 @@ public class TaskList implements ReadOnlyTaskList {
         setTags(newTags);
     }
 
-    public void resetData(ReadOnlyTaskList newData) {
+    public void resetData(ReadOnlyTaskBook newData) {
         resetData(newData.getTaskList(), newData.getTagList());
     }
 

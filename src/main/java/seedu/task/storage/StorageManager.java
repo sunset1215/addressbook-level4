@@ -4,10 +4,10 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.events.model.TaskListChangedEvent;
+import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.UserPrefs;
 
 import java.io.FileNotFoundException;
@@ -56,23 +56,23 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException {
         return readTaskList(taskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskBook> readTaskList(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return taskListStorage.readTaskList(filePath);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList taskList) throws IOException {
+    public void saveTaskList(ReadOnlyTaskBook taskList) throws IOException {
         saveTaskList(taskList, taskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskBook taskList, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         taskListStorage.saveTaskList(taskList, filePath);
     }
@@ -80,7 +80,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleTaskListChangedEvent(TaskListChangedEvent event) {
+    public void handleTaskListChangedEvent(TaskBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveTaskList(event.data);

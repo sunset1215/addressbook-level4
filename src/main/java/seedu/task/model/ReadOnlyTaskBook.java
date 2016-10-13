@@ -11,7 +11,7 @@ import seedu.task.model.task.UniqueTaskList;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyTaskList {
+public interface ReadOnlyTaskBook {
 
     UniqueTagList getUniqueTagList();
 

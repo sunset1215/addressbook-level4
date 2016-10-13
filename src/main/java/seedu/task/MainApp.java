@@ -20,7 +20,6 @@ import seedu.task.storage.StorageManager;
 import seedu.task.ui.Ui;
 import seedu.task.ui.UiManager;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -70,19 +69,19 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskList> taskListOptional;
-        ReadOnlyTaskList initialData;
+        Optional<ReadOnlyTaskBook> taskListOptional;
+        ReadOnlyTaskBook initialData;
         try {
             taskListOptional = storage.readTaskList();
             if(!taskListOptional.isPresent()){
-                logger.info("Data file not found. Will be starting with an empty AddressBook");
+                logger.info("Data file not found. Will be starting with an empty TaskBook");
             }
             initialData = taskListOptional.orElse(new TaskList());
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
             initialData = new TaskList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. . Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. . Will be starting with an empty TaskBook");
             initialData = new TaskList();
         }
 
@@ -139,7 +138,7 @@ public class MainApp extends Application {
                     "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. . Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. . Will be starting with an empty TaskBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -159,13 +158,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TaskBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Task Book ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

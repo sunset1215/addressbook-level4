@@ -1,9 +1,9 @@
 package seedu.task.storage;
 
-import seedu.task.commons.events.model.TaskListChangedEvent;
+import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.exceptions.DataConversionException;
-import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.UserPrefs;
 
 import java.io.FileNotFoundException;
@@ -25,15 +25,15 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
     String getTaskListFilePath();
 
     @Override
-    Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException;
 
     @Override
-    void saveTaskList(ReadOnlyTaskList taskList) throws IOException;
+    void saveTaskList(ReadOnlyTaskBook taskList) throws IOException;
 
     /**
      * Saves the current version of the Task List to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleTaskListChangedEvent(TaskListChangedEvent abce);
+    void handleTaskListChangedEvent(TaskBookChangedEvent abce);
 }

@@ -1,7 +1,7 @@
 package seedu.task.storage;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * An Immutable AddressBook that is serializable to XML format
  */
 @XmlRootElement(name = "tasklist")
-public class XmlSerializableTaskList implements ReadOnlyTaskList {
+public class XmlSerializableTaskList implements ReadOnlyTaskBook {
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -38,7 +38,7 @@ public class XmlSerializableTaskList implements ReadOnlyTaskList {
     /**
      * Conversion
      */
-    public XmlSerializableTaskList(ReadOnlyTaskList src) {
+    public XmlSerializableTaskList(ReadOnlyTaskBook src) {
         tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags = src.getTagList();
     }

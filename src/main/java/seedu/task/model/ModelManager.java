@@ -4,7 +4,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.model.TaskListChangedEvent;
+import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -43,25 +43,25 @@ public class ModelManager extends ComponentManager implements Model {
         this(new TaskList(), new UserPrefs());
     }
 
-    public ModelManager(ReadOnlyTaskList initialData, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskBook initialData, UserPrefs userPrefs) {
         taskList = new TaskList(initialData);
         filteredTasks = new FilteredList<>(taskList.getTasks());
     }
 
     @Override
-    public void resetData(ReadOnlyTaskList newData) {
+    public void resetData(ReadOnlyTaskBook newData) {
         taskList.resetData(newData);
         indicateTaskListChanged();
     }
 
     @Override
-    public ReadOnlyTaskList getTaskList() {
+    public ReadOnlyTaskBook getTaskList() {
         return taskList;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateTaskListChanged() {
-        raise(new TaskListChangedEvent(taskList));
+        raise(new TaskBookChangedEvent(taskList));
     }
 
     @Override

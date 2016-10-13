@@ -3,7 +3,7 @@ package seedu.task.storage;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.FileUtil;
-import seedu.task.model.ReadOnlyTaskList;
+import seedu.task.model.ReadOnlyTaskBook;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +33,7 @@ public class XmlTaskListStorage implements TaskListStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyTaskList> readTaskList(String filePath) throws DataConversionException, FileNotFoundException {
+    public Optional<ReadOnlyTaskBook> readTaskList(String filePath) throws DataConversionException, FileNotFoundException {
         assert filePath != null;
 
         File taskListFile = new File(filePath);
@@ -43,16 +43,16 @@ public class XmlTaskListStorage implements TaskListStorage {
             return Optional.empty();
         }
 
-        ReadOnlyTaskList taskListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        ReadOnlyTaskBook taskListOptional = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
 
         return Optional.of(taskListOptional);
     }
 
     /**
-     * Similar to {@link #saveTaskList(ReadOnlyTaskList)}
+     * Similar to {@link #saveTaskList(ReadOnlyTaskBook)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTaskList(ReadOnlyTaskList taskList, String filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskBook taskList, String filePath) throws IOException {
         assert taskList != null;
         assert filePath != null;
 
@@ -62,12 +62,12 @@ public class XmlTaskListStorage implements TaskListStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException {
         return readTaskList(filePath);
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList addressBook) throws IOException {
+    public void saveTaskList(ReadOnlyTaskBook addressBook) throws IOException {
     	saveTaskList(addressBook, filePath);
     }
 }

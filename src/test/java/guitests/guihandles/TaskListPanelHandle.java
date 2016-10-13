@@ -107,13 +107,13 @@ public class TaskListPanelHandle extends GuiHandle {
             throw new IllegalStateException("Name not found: " + name);
         }
 
-        return navigateToPerson(task.get());
+        return navigateToTask(task.get());
     }
 
     /**
      * Navigates the listview to display and select the task.
      */
-    public TaskListHandle navigateToPerson(ReadOnlyTask task) {
+    public TaskListHandle navigateToTask(ReadOnlyTask task) {
         int index = getTaskIndex(task);
 
         guiRobot.interact(() -> {

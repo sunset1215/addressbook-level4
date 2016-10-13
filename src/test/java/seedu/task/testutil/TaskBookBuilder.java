@@ -20,7 +20,7 @@ public class TaskBookBuilder {
         this.taskBook = taskBook;
     }
 
-    public TaskBookBuilder withPerson(Task task) throws DuplicateTaskException {
+    public TaskBookBuilder withTask(Task task) throws DuplicateTaskException {
         taskBook.addTask(task);
         return this;
     }

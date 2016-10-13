@@ -65,30 +65,30 @@ public class XmlTaskBookStorageTest {
         String filePath = testFolder.getRoot().getPath() + "TempTaskBook.xml";
         TypicalTestTasks td = new TypicalTestTasks();
         TaskBook original = td.getTypicalTaskBook();
-        XmlTaskBookStorage xmlAddressBookStorage = new XmlTaskBookStorage(filePath);
+        XmlTaskBookStorage xmlTaskBookStorage = new XmlTaskBookStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveTaskBook(original, filePath);
-        ReadOnlyTaskBook readBack = xmlAddressBookStorage.readTaskBook(filePath).get();
+        xmlTaskBookStorage.saveTaskBook(original, filePath);
+        ReadOnlyTaskBook readBack = xmlTaskBookStorage.readTaskBook(filePath).get();
         assertEquals(original, new TaskBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addTask(new Task(TypicalTestTasks.hoon));
         original.removeTask(new Task(TypicalTestTasks.assignment));
-        xmlAddressBookStorage.saveTaskBook(original, filePath);
-        readBack = xmlAddressBookStorage.readTaskBook(filePath).get();
+        xmlTaskBookStorage.saveTaskBook(original, filePath);
+        readBack = xmlTaskBookStorage.readTaskBook(filePath).get();
         assertEquals(original, new TaskBook(readBack));
 
         //Save and read without specifying file path
         original.addTask(new Task(TypicalTestTasks.ida));
-        xmlAddressBookStorage.saveTaskBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readTaskBook().get(); //file path not specified
+        xmlTaskBookStorage.saveTaskBook(original); //file path not specified
+        readBack = xmlTaskBookStorage.readTaskBook().get(); //file path not specified
         assertEquals(original, new TaskBook(readBack));
 
     }
 
     @Test
-    public void saveTaskBook_nullAddressBook_assertionFailure() throws IOException {
+    public void saveTaskBook_nullTaskBook_assertionFailure() throws IOException {
         thrown.expect(AssertionError.class);
         saveTaskBook(null, "SomeFile.xml");
     }

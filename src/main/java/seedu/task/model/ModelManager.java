@@ -89,7 +89,7 @@ public class ModelManager extends ComponentManager implements Model {
 		return taskBook.getIndex(target);
 	}
 
-    //=========== Filtered Person List Accessors ===============================================================
+    //=========== Filtered Task List Accessors ===============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {

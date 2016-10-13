@@ -29,14 +29,14 @@ public class TaskBook implements ReadOnlyTaskBook {
     public TaskBook() {}
 
     /**
-     * Persons and Tags are copied into this task list
+     * Tasks and Tags are copied into this task list
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
     }
 
     /**
-     * Persons and Tags are copied into this task list
+     * Tasks and Tags are copied into this task list
      */
     public TaskBook(UniqueTaskList tasks, UniqueTagList tags) {
         this.tasks = copyUniqueTaskList(tasks);
@@ -114,7 +114,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
-     * @throws UniqueTaskList.DuplicatePersonException if an equivalent task already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         tasks.add(task);
@@ -125,7 +125,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
-     * @throws UniqueTaskList.DuplicatePersonException if an equivalent task already exists.
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
      */
     public void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
         tasks.add(taskIndex, task);

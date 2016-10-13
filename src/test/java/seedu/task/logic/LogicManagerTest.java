@@ -159,7 +159,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_invalidPersonData() throws Exception {
+    public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
                 "add []\\[;] -d 13-10-2016", Name.MESSAGE_NAME_CONSTRAINTS);
 //        assertCommandBehavior(
@@ -295,14 +295,14 @@ public class LogicManagerTest {
     @Test
     public void execute_delete_removesCorrectTask() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        List<Task> threePersons = helper.generateTaskList(3);
+        List<Task> threeTasks = helper.generateTaskList(3);
 
-        TaskBook expectedAB = helper.generateTaskBook(threePersons);
-        expectedAB.removeTask(threePersons.get(1));
-        helper.addToModel(model, threePersons);
+        TaskBook expectedAB = helper.generateTaskBook(threeTasks);
+        expectedAB.removeTask(threeTasks.get(1));
+        helper.addToModel(model, threeTasks);
 
         assertCommandBehavior("delete 2",
-                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threePersons.get(1)),
+                String.format(DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS, threeTasks.get(1)),
                 expectedAB,
                 expectedAB.getTaskList());
     }
@@ -322,10 +322,10 @@ public class LogicManagerTest {
         Task p1 = helper.generateTaskWithName("KE Y");
         Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
-        List<Task> fourPersons = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
-        TaskBook expectedAB = helper.generateTaskBook(fourPersons);
+        List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
+        TaskBook expectedAB = helper.generateTaskBook(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2);
-        helper.addToModel(model, fourPersons);
+        helper.addToModel(model, fourTasks);
 
         assertCommandBehavior("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
@@ -341,10 +341,10 @@ public class LogicManagerTest {
         Task p3 = helper.generateTaskWithName("key key");
         Task p4 = helper.generateTaskWithName("KEy sduauo");
 
-        List<Task> fourPersons = helper.generateTaskList(p3, p1, p4, p2);
-        TaskBook expectedAB = helper.generateTaskBook(fourPersons);
-        List<Task> expectedList = fourPersons;
-        helper.addToModel(model, fourPersons);
+        List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
+        TaskBook expectedAB = helper.generateTaskBook(fourTasks);
+        List<Task> expectedList = fourTasks;
+        helper.addToModel(model, fourTasks);
 
         assertCommandBehavior("find KEY",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
@@ -360,10 +360,10 @@ public class LogicManagerTest {
         Task pTarget3 = helper.generateTaskWithName("key key");
         Task p1 = helper.generateTaskWithName("sduauo");
 
-        List<Task> fourPersons = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
-        TaskBook expectedAB = helper.generateTaskBook(fourPersons);
+        List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
+        TaskBook expectedAB = helper.generateTaskBook(fourTasks);
         List<Task> expectedList = helper.generateTaskList(pTarget1, pTarget2, pTarget3);
-        helper.addToModel(model, fourPersons);
+        helper.addToModel(model, fourTasks);
 
         assertCommandBehavior("find key rAnDoM",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskbook>
+    <tasks>
+        <name>test</name>
+        <startDate></startDate>
+        <endDate></endDate>
+    </tasks>
+    <tasks>
+        <name>exam</name>
+        <startDate></startDate>
+        <endDate></endDate>
+    </tasks>
+    <tasks>
+        <name>assignment</name>
+        <startDate></startDate>
+        <endDate>12-10-2016</endDate>
+    </tasks>
+    <tasks>
+        <name>do laundry</name>
+        <startDate></startDate>
+        <endDate>12-10-2016</endDate>
+    </tasks>
+    <tasks>
+        <name>meeting</name>
+        <startDate>13-10-2016</startDate>
+        <endDate>14-10-2016</endDate>
+    </tasks>
+    <tasks>
+        <name>gamestart event</name>
+        <startDate>8-10-2016</startDate>
+        <endDate>10-10-2016</endDate>
+    </tasks>
+</taskbook>

@@ -69,14 +69,14 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskBook> taskListOptional;
+        Optional<ReadOnlyTaskBook> taskBookOptional;
         ReadOnlyTaskBook initialData;
         try {
-            taskListOptional = storage.readTaskBook();
-            if(!taskListOptional.isPresent()){
+            taskBookOptional = storage.readTaskBook();
+            if(!taskBookOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty TaskBook");
             }
-            initialData = taskListOptional.orElse(new TaskBook());
+            initialData = taskBookOptional.orElse(new TaskBook());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
             initialData = new TaskBook();

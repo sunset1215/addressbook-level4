@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * An Immutable TaskBook that is serializable to XML format
  */
-@XmlRootElement(name = "tasklist")
+@XmlRootElement(name = "taskbook")
 public class XmlSerializableTaskBook implements ReadOnlyTaskBook {
 
     @XmlElement

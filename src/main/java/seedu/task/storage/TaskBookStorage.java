@@ -9,36 +9,36 @@ import java.util.Optional;
 /**
  * Represents a storage for {@link seedu.task.model.TaskBook}.
  */
-public interface TaskListStorage {
+public interface TaskBookStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    String getTaskListFilePath();
+    String getTaskBookFilePath();
 
     /**
-     * Returns TaskList data as a {@link ReadOnlyTaskBook}.
+     * Returns TaskBook data as a {@link ReadOnlyTaskBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException;
 
     /**
      * @see #getTaskBookFilePath()
      */
-    Optional<ReadOnlyTaskBook> readTaskList(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskBook(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTaskBook} to the storage.
-     * @param taskList cannot be null.
+     * @param taskBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskList(ReadOnlyTaskBook taskList) throws IOException;
+    void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
 
     /**
-     * @see #saveTaskList(ReadOnlyTaskBook)
+     * @see #saveTaskBook(ReadOnlyTaskBook)
      */
-    void saveTaskList(ReadOnlyTaskBook taskList, String filePath) throws IOException;
+    void saveTaskBook(ReadOnlyTaskBook taskBook, String filePath) throws IOException;
 
 }

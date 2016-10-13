@@ -8,28 +8,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * Stores tasklist data in an XML file
+ * Stores taskbook data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given tasklist data to the specified file.
+     * Saves the given taskbook data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableTaskList taskList)
+    public static void saveDataToFile(File file, XmlSerializableTaskBook taskBook)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, taskList);
+            XmlUtil.saveDataToFile(file, taskBook);
         } catch (JAXBException e) {
             assert false : "Unexpected exception " + e.getMessage();
         }
     }
 
     /**
-     * Returns task list in the file or an empty task list
+     * Returns task book in the file or an empty task book
      */
-    public static XmlSerializableTaskList loadDataFromSaveFile(File file) throws DataConversionException,
+    public static XmlSerializableTaskBook loadDataFromSaveFile(File file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableTaskList.class);
+            return XmlUtil.getDataFromFile(file, XmlSerializableTaskBook.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

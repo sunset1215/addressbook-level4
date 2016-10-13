@@ -72,7 +72,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyTaskBook> taskListOptional;
         ReadOnlyTaskBook initialData;
         try {
-            taskListOptional = storage.readTaskList();
+            taskListOptional = storage.readTaskBook();
             if(!taskListOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty TaskBook");
             }

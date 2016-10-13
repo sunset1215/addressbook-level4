@@ -6,14 +6,13 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.UserPrefs;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends TaskListStorage, UserPrefsStorage {
+public interface Storage extends TaskBookStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -22,18 +21,18 @@ public interface Storage extends TaskListStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    String getTaskListFilePath();
+    String getTaskBookFilePath();
 
     @Override
-    Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException;
 
     @Override
-    void saveTaskList(ReadOnlyTaskBook taskList) throws IOException;
+    void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
 
     /**
-     * Saves the current version of the Task List to the hard disk.
+     * Saves the current version of the Task Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleTaskListChangedEvent(TaskBookChangedEvent abce);
+    void handleTaskBookChangedEvent(TaskBookChangedEvent abce);
 }

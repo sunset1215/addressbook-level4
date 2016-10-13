@@ -16,7 +16,7 @@ public class Task implements ReadOnlyTask{
      * A task must be present and not null.
      */
     public Task(Name name) {
-        assert !CollectionUtil.isAnyNull(name, tags);
+        assert !CollectionUtil.isAnyNull(name);
         this.taskName = name;
     }
 

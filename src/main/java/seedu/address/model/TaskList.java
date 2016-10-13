@@ -4,8 +4,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.ReadOnlyTask;
 import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.person.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.UniqueTagList.DuplicateTagException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,8 +18,8 @@ import java.util.stream.Collectors;
  */
 public class TaskList implements ReadOnlyTaskList {
 
-    private final UniqueTaskList tasks;
-    private final UniqueTagList tags;
+    private UniqueTaskList tasks;
+    private UniqueTagList tags;
 
     {
         tasks = new UniqueTaskList();
@@ -37,7 +39,14 @@ public class TaskList implements ReadOnlyTaskList {
      * Persons and Tags are copied into this task list
      */
     public TaskList(UniqueTaskList tasks, UniqueTagList tags) {
-        resetData(tasks.getInternalList(), tags.getInternalList());
+        this.tasks = copyUniqueTaskList(tasks);
+        this.tags = copyUniqueTagList(tags);
+        // the line of code below is the original code
+        // I used the above method to copy the lists
+        // because the original code changes all the tasks that is read from
+        // the storage into tasks, instead of keeping them as eventtask or
+        // deadline task or task.
+        //resetData(tasks.getInternalList(), tags.getInternalList());
     }
 
     public static ReadOnlyTaskList getEmptyTaskList() {
@@ -45,6 +54,36 @@ public class TaskList implements ReadOnlyTaskList {
     }
 
 //// list overwrite operations
+    
+    /*
+     * Returns a copy of the given unique tag list
+     */
+    private UniqueTagList copyUniqueTagList(UniqueTagList tags) {
+        UniqueTagList newList = new UniqueTagList();
+        for (int i=0; i<tags.size(); i++) {
+            try {
+                newList.add(tags.getTagFromIndex(i));
+            } catch (DuplicateTagException e) {
+                // this should not happen since we're just copying items over to a new list
+            }
+        }
+        return newList;
+    }
+
+    /*
+     * Returns a copy of the given unique task list
+     */
+    private UniqueTaskList copyUniqueTaskList(UniqueTaskList tasks) {
+        UniqueTaskList newList = new UniqueTaskList();
+        for (int i=0; i<tasks.size(); i++) {
+            try {
+                newList.add(tasks.getTaskFromIndex(i));
+            } catch (DuplicateTaskException e) {
+                // this should not happen since we're just copying items over to a new list
+            }
+        }
+        return newList;
+    }
 
     public ObservableList<Task> getTasks() {
         return tasks.getInternalList();
@@ -58,6 +97,7 @@ public class TaskList implements ReadOnlyTaskList {
         this.tags.getInternalList().setAll(tags);
     }
 
+    
     public void resetData(Collection<? extends ReadOnlyTask> newPersons, Collection<Tag> newTags) {
         setTasks(newPersons.stream().map(Task::new).collect(Collectors.toList()));
         setTags(newTags);

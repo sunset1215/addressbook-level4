@@ -140,4 +140,19 @@ public class UniqueTagList implements Iterable<Tag> {
     public int hashCode() {
         return internalList.hashCode();
     }
+
+    /**
+     * Returns the size of the list.
+     * @return
+     */
+    public int size() {
+        return internalList.size();
+    }
+
+    /*
+     * Returns the tag at the given index from the list.
+     */
+    public Tag getTagFromIndex(int index) {
+        return internalList.get(index);
+    }
 }

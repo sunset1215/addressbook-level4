@@ -59,23 +59,23 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
-        TaskBook original = new TypicalTestTasks().getTypicalAddressBook();
+    public void taskBookReadSave() throws Exception {
+        TaskBook original = new TypicalTestTasks().getTypicalTaskBook();
         storageManager.saveTaskBook(original);
         ReadOnlyTaskBook retrieved = storageManager.readTaskBook().get();
         assertEquals(original, new TaskBook(retrieved));
-        //More extensive testing of AddressBook saving/reading is done in XmlAddressBookStorageTest
+        //More extensive testing of TaskBook saving/reading is done in XmlTaskBookStorageTest
     }
 
     @Test
-    public void getAddressBookFilePath(){
+    public void getTaskBookFilePath(){
         assertNotNull(storageManager.getTaskBookFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
+    public void handleTaskBookChangedEvent_exceptionThrown_eventRaised() throws IOException {
         //Create a StorageManager while injecting a stub that throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlTaskListStorageExceptionThrowingStub("dummy"), new JsonUserPrefsStorage("dummy"));
+        Storage storage = new StorageManager(new XmlTaskBookStorageExceptionThrowingStub("dummy"), new JsonUserPrefsStorage("dummy"));
         EventsCollector eventCollector = new EventsCollector();
         storage.handleTaskBookChangedEvent(new TaskBookChangedEvent(new TaskBook()));
         assertTrue(eventCollector.get(0) instanceof DataSavingExceptionEvent);
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlTaskListStorageExceptionThrowingStub extends XmlTaskBookStorage{
+    class XmlTaskBookStorageExceptionThrowingStub extends XmlTaskBookStorage{
 
-        public XmlTaskListStorageExceptionThrowingStub(String filePath) {
+        public XmlTaskBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveTaskBook(ReadOnlyTaskBook taskList, String filePath) throws IOException {
+        public void saveTaskBook(ReadOnlyTaskBook taskBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

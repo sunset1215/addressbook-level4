@@ -88,6 +88,11 @@ public class ModelManager extends ComponentManager implements Model {
 	public int getIndex(ReadOnlyTask target) throws TaskNotFoundException {
 		return taskBook.getIndex(target);
 	}
+	
+	@Override
+    public void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskBook.completeTask(target);
+    }
 
     //=========== Filtered Task List Accessors ===============================================================
 
@@ -161,6 +166,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+
+    
 
 
 }

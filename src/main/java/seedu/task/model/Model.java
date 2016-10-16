@@ -28,6 +28,9 @@ public interface Model {
     
     /** Get index of given task*/
     int getIndex(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    
+    /** Completes the given task */
+    void completeTask(ReadOnlyTask taskToComplete) throws UniqueTaskList.TaskNotFoundException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

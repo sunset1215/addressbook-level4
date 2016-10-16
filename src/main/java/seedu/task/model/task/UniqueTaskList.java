@@ -108,7 +108,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public int size() {
         return internalList.size();
     }
-
+    
     public ObservableList<Task> getInternalList() {
         return internalList;
     }
@@ -130,4 +130,6 @@ public class UniqueTaskList implements Iterable<Task> {
     public int hashCode() {
         return internalList.hashCode();
     }
+
+    
 }

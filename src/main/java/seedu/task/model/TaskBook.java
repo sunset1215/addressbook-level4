@@ -8,6 +8,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -165,6 +166,11 @@ public class TaskBook implements ReadOnlyTaskBook {
     public int getIndex(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException{
     	return tasks.getIndex(key);
     }
+    
+    public void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
+        int targetIndex = tasks.getIndex(target);
+        tasks.getTaskFromIndex(targetIndex).setComplete();
+    }
 
 //// tag-level operations
 
@@ -214,4 +220,6 @@ public class TaskBook implements ReadOnlyTaskBook {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
+    
 }

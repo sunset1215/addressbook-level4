@@ -37,9 +37,13 @@ public class Status {
     
     @Override
     public String toString() {
-        if (status) {
+        if (status == STATUS_COMPLETE) {
             return STATUS_COMPLETE_STRING;
         }
         return STATUS_PENDING_STRING;
+    }
+    
+    public boolean isComplete() {
+        return status;
     }
 }

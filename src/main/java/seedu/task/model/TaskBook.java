@@ -169,7 +169,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
         int targetIndex = tasks.getIndex(target);
-        tasks.getTaskFromIndex(targetIndex).setComplete();
+        tasks.getTaskFromIndex(targetIndex).getStatus().setComplete();
     }
 
 //// tag-level operations

@@ -30,6 +30,12 @@ public class Task implements ReadOnlyTask{
         status = new Status(Status.STATUS_PENDING);
     }
 
+    public Task(Name name, Status status) {
+        assert !CollectionUtil.isAnyNull(name, status);
+        this.name = name;
+        this.status = status;
+    }
+
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
@@ -87,8 +93,4 @@ public class Task implements ReadOnlyTask{
         return status;
     }
     
-    public void setComplete() {
-        status.setComplete();
-    }
-
 }

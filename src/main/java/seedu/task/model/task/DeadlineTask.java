@@ -14,7 +14,12 @@ public class DeadlineTask extends Task{
 		this.endDate = endDate;
 	}
 	
-	public TaskDate getEndDate(){
+	public DeadlineTask(Name name, TaskDate taskEndDate, Status taskStatus) {
+	    super(name, taskStatus);
+	    endDate = taskEndDate;
+    }
+
+    public TaskDate getEndDate(){
 		return endDate;
 	}
 	

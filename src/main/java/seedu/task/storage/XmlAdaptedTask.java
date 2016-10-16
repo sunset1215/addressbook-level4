@@ -70,7 +70,7 @@ public class XmlAdaptedTask {
 		final TaskDate taskEndDate = DateUtil.convertJaxbStringToDate(endDate);
 		final Status status = new Status(this.status);
 		final UniqueTagList tags = new UniqueTagList(taskTags);
-		return createTaskFromGivenArgs(name, taskStartDate, taskEndDate);
+		return createTaskFromGivenArgs(name, taskStartDate, taskEndDate, status);
 	}
 
 	/**
@@ -78,15 +78,16 @@ public class XmlAdaptedTask {
 	 * Returns an EventTask if both start and end date are given.
 	 * Returns a DeadlineTask if only end date is given.
 	 * Returns a Task if only name is given.
+	 * @param taskStatus 
 	 */
-	private Task createTaskFromGivenArgs(Name name, TaskDate taskStartDate, TaskDate taskEndDate) {
+	private Task createTaskFromGivenArgs(Name name, TaskDate taskStartDate, TaskDate taskEndDate, Status taskStatus) {
 	    if (isEventTask(taskStartDate, taskEndDate)) {
-	        return new EventTask(name, taskStartDate, taskEndDate);
+	        return new EventTask(name, taskStartDate, taskEndDate, taskStatus);
 	    }
 	    if (isDeadline(taskEndDate)) {
-	        return new DeadlineTask(name, taskEndDate);
+	        return new DeadlineTask(name, taskEndDate, taskStatus);
 	    }
-	    return new Task(name);
+	    return new Task(name, taskStatus);
 	}
 	
 	/*

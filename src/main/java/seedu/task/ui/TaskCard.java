@@ -43,9 +43,7 @@ public class TaskCard extends UiPart{
         if(task.getEnd() != null){
         	card.taskEndDate = task.getEnd().toString();
         }
-        System.out.println("2");
         card.taskStatus = task.getStatus().toString();
-        System.out.println("3");
         return UiPartLoader.loadUiPart(card);
     }
 
@@ -67,9 +65,7 @@ public class TaskCard extends UiPart{
         else{
         	endDate.setText("");
         }
-        System.out.println("1");
         status.setText("Status: " + taskStatus);
-        System.out.println("4");
     }
 
     public HBox getLayout() {

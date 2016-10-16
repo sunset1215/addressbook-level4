@@ -16,17 +16,17 @@ public class AddCommandTest extends TaskBookGuiTest {
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.hoon;
+        TestTask taskToAdd = td.report;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
-        taskToAdd = td.ida;
+        taskToAdd = td.powerpoint;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.report.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 

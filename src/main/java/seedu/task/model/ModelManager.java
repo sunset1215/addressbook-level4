@@ -5,6 +5,7 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -63,6 +64,11 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBookChanged() {
         raise(new TaskBookChangedEvent(taskBook));
     }
+    
+    /** Raises an event to indicate the task list panel data has changed */
+    private void indicateTaskListPanelDataChanged() {
+        raise(new TaskPanelDataChangedEvent());
+    }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -93,6 +99,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskBook.completeTask(target);
         indicateTaskBookChanged();
+        indicateTaskListPanelDataChanged();
     }
 
     //=========== Filtered Task List Accessors ===============================================================

@@ -92,6 +92,7 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskBook.completeTask(target);
+        indicateTaskBookChanged();
     }
 
     //=========== Filtered Task List Accessors ===============================================================

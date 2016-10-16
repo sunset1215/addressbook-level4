@@ -52,4 +52,10 @@ public class TestTask implements ReadOnlyTask {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public boolean isComplete() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

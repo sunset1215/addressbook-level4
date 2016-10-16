@@ -20,11 +20,14 @@ public class TaskCard extends UiPart{
     private Label startDate;
     @FXML
     private Label endDate;
+    @FXML
+    private Label isComplete;
 
     private ReadOnlyTask task;
     private int displayedIndex;
     private String taskStartDate;
     private String taskEndDate;
+    private boolean isTaskComplete;
 
     public TaskCard(){
 
@@ -40,6 +43,9 @@ public class TaskCard extends UiPart{
         if(task.getEnd() != null){
         	card.taskEndDate = task.getEnd().toString();
         }
+        System.out.println("2");
+        card.isTaskComplete = task.isComplete();
+        System.out.println("3");
         return UiPartLoader.loadUiPart(card);
     }
 
@@ -61,6 +67,9 @@ public class TaskCard extends UiPart{
         else{
         	endDate.setText("");
         }
+        System.out.println("1");
+        isComplete.setText("Status: " + isTaskComplete);
+        System.out.println("4");
     }
 
     public HBox getLayout() {

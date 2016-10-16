@@ -93,4 +93,12 @@ public class Task implements ReadOnlyTask{
         return status;
     }
     
+    public boolean isComplete() {
+        return status.isComplete();
+    }
+    
+    public void setComplete() {
+        status.setComplete();
+    }
+    
 }

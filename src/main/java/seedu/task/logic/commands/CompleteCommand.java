@@ -3,6 +3,7 @@ package seedu.task.logic.commands;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -18,6 +19,7 @@ public class CompleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COMPLETE_TASK_SUCCESS = "Completed task: %1$s";
+    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "This task is already completed!";
 
     public final int targetIndex;
 
@@ -40,6 +42,8 @@ public class CompleteCommand extends Command {
             model.completeTask(taskToComplete);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
+        } catch (TaskAlreadyCompletedException tace) {
+            return new CommandResult(MESSAGE_TASK_ALREADY_COMPLETED);
         }
         
         return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));

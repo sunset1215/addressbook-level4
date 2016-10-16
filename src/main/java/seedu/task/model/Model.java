@@ -4,6 +4,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 
 import java.util.Set;
 
@@ -26,11 +27,11 @@ public interface Model {
     /** Adds the given task at a given index */
     void addTask(int index, Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
     
-    /** Get index of given task*/
+    /** Get index of given task */
     int getIndex(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     
     /** Completes the given task */
-    void completeTask(ReadOnlyTask taskToComplete) throws UniqueTaskList.TaskNotFoundException;
+    void completeTask(ReadOnlyTask taskToComplete) throws UniqueTaskList.TaskNotFoundException, TaskAlreadyCompletedException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();

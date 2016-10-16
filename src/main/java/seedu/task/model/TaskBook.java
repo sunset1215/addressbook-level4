@@ -8,6 +8,7 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.*;
@@ -155,21 +156,25 @@ public class TaskBook implements ReadOnlyTaskBook {
         task.setTags(new UniqueTagList(commonTagReferences));
     }
 
-    public boolean removeTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
+    public boolean removeTask(ReadOnlyTask key) throws TaskNotFoundException {
         if (tasks.remove(key)) {
             return true;
         } else {
-            throw new UniqueTaskList.TaskNotFoundException();
+            throw new TaskNotFoundException();
         }
     }
     
-    public int getIndex(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException{
+    public int getIndex(ReadOnlyTask key) throws TaskNotFoundException{
     	return tasks.getIndex(key);
     }
     
-    public void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
         int targetIndex = tasks.getIndex(target);
-        tasks.getTaskFromIndex(targetIndex).getStatus().setComplete();
+        Task taskToComplete = tasks.getTaskFromIndex(targetIndex);
+        if (taskToComplete.isComplete()) {
+            throw new TaskAlreadyCompletedException();
+        }
+        taskToComplete.setComplete();
     }
 
 //// tag-level operations

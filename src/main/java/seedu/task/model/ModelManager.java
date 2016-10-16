@@ -10,6 +10,7 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
@@ -96,7 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 	
 	@Override
-    public void completeTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
         taskBook.completeTask(target);
         indicateTaskBookChanged();
         indicateTaskListPanelDataChanged();

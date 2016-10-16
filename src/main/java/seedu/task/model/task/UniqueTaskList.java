@@ -31,6 +31,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * there is no such matching task in the list.
      */
     public static class TaskNotFoundException extends Exception {}
+    
+    /**
+     * Signals that an operation marking a task as complete in the list would fail because
+     * it is already marked as complete.
+     */
+    public static class TaskAlreadyCompletedException extends Exception {}
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 

@@ -11,6 +11,7 @@ public interface ReadOnlyTask {
     Name getName();
     TaskDate getStart();
     TaskDate getEnd();
+    boolean isComplete();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,

@@ -22,6 +22,8 @@ public class XmlAdaptedTask {
     private String startDate;
 	@XmlElement(required = true)
     private String endDate;
+	@XmlElement(required = true)
+    private boolean isComplete;
 
 	@XmlElement
 	private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -43,6 +45,7 @@ public class XmlAdaptedTask {
 		name = source.getName().fullName;
 		startDate = DateUtil.convertDateToJaxbString(source.getStart());
 		endDate = DateUtil.convertDateToJaxbString(source.getEnd());
+		isComplete = source.isComplete();
 		tagged = new ArrayList<>();
 //		for (Tag tag : source.getTags()) {
 //		    tagged.add(new XmlAdaptedTag(tag));
@@ -65,6 +68,7 @@ public class XmlAdaptedTask {
 		final Name name = new Name(this.name);
 		final TaskDate taskStartDate = DateUtil.convertJaxbStringToDate(startDate);
 		final TaskDate taskEndDate = DateUtil.convertJaxbStringToDate(endDate);
+		final boolean isComplete = this.isComplete;
 		final UniqueTagList tags = new UniqueTagList(taskTags);
 		return createTaskFromGivenArgs(name, taskStartDate, taskEndDate);
 	}

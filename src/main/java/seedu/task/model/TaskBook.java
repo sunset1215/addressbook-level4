@@ -164,8 +164,9 @@ public class TaskBook implements ReadOnlyTaskBook {
         }
     }
     
-    public int getIndex(ReadOnlyTask key) throws TaskNotFoundException{
-    	return tasks.getIndex(key);
+    public void editTask(ReadOnlyTask target, Task taskEditedTo) throws TaskNotFoundException {
+        int targetIndex = tasks.getIndex(target);
+        tasks.replace(targetIndex, taskEditedTo);
     }
     
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
@@ -211,7 +212,6 @@ public class TaskBook implements ReadOnlyTaskBook {
         return this.tags;
     }
 
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -225,6 +225,5 @@ public class TaskBook implements ReadOnlyTaskBook {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
-
     
 }

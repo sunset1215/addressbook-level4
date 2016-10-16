@@ -92,9 +92,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 	@Override
-	public int getIndex(ReadOnlyTask target) throws TaskNotFoundException {
-		return taskBook.getIndex(target);
-	}
+    public void editTask(ReadOnlyTask target, Task taskEditedTo) throws TaskNotFoundException {
+	    taskBook.editTask(target, taskEditedTo);
+        indicateTaskBookChanged();
+    }
 	
 	@Override
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
@@ -175,8 +176,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
-    
-
 
 }

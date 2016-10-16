@@ -108,6 +108,10 @@ public class UniqueTaskList implements Iterable<Task> {
     	return internalList.indexOf(target);
     }
     
+    public void replace(int targetIndex, Task taskEditedTo) {
+        internalList.set(targetIndex, taskEditedTo);
+    }
+    
     /*
      * Returns the size of the list.
      */
@@ -137,5 +141,4 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.hashCode();
     }
 
-    
 }

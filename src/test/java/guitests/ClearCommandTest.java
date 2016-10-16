@@ -14,8 +14,8 @@ public class ClearCommandTest extends TaskBookGuiTest {
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(taskListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.report.getAddCommand());
+        assertTrue(taskListPanel.isListMatching(td.report));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 

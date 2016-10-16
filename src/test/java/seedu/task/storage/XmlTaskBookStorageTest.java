@@ -73,14 +73,14 @@ public class XmlTaskBookStorageTest {
         assertEquals(original, new TaskBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addTask(new Task(TypicalTestTasks.hoon));
+        original.addTask(new Task(TypicalTestTasks.report));
         original.removeTask(new Task(TypicalTestTasks.assignment));
         xmlTaskBookStorage.saveTaskBook(original, filePath);
         readBack = xmlTaskBookStorage.readTaskBook(filePath).get();
         assertEquals(original, new TaskBook(readBack));
 
         //Save and read without specifying file path
-        original.addTask(new Task(TypicalTestTasks.ida));
+        original.addTask(new Task(TypicalTestTasks.powerpoint));
         xmlTaskBookStorage.saveTaskBook(original); //file path not specified
         readBack = xmlTaskBookStorage.readTaskBook().get(); //file path not specified
         assertEquals(original, new TaskBook(readBack));

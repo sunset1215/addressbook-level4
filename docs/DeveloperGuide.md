@@ -273,14 +273,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a task by specifying a task description only | record tasks that need to be done ‘some day’
-`* * *` | user | find upcoming tasks | remove entries that I no longer need | decide what needs to be done soon
+`* * *` | user | add a task by specifying a task description only | record tasks that needs to be done ‘some day’
+`* * *` | user | add a task by specifying a task description and date | record tasks that needs to be done by the specified date
+`* * *` | user | add a task by specifying a task description, start date and end date | record tasks that spans the specified dates
 `* * *` | user | delete a task | get rid of tasks that I no longer care to track. 
 `* * *` | user | edit a task | update the details of that specific task
 `* * *` | user | search my tasks | find an item that I’m looking for in an easier manner
+`* *` | user | list tasks | see what tasks I have to complete or have already completed
 `* *` | user | undo the last command | go back to the previous state
 `* *` | user | specify storage location | choose where to store the data
-`* *` | user | mark tasks with a status | track completed and pending tasks
+`* *` | user | mark tasks as complete | track tasks that have already been done
 `* *` | user | use shorter versions of a command | type a command faster
 `*` | user | tag my tasks based on priority | prioritize my goals
 `*` | user | assign my tasks to a project or category | organize my tasks in an orderly manner
@@ -306,37 +308,6 @@ Use case ends.
 2a. Task already exists
 
 > 2a1. The user is notified that the task already exists
-
-#### Use case: SetDeadline
-
-**MSS**
-
-1. User requests to set the deadline for a task
-2. User types `setdeadline TASK_INDEX` with optional parameters for date or time left
-3. Deadline gets added to the task with the specified index
-4. User is notified that the deadline was added<br>
-Use case ends.
-
-**Extensions**
-
-2a. Deadline parameters are invalid
-
-> 2a1. The user is notified that the deadline parameters are invalid
-
-#### Use case: SetEvent
-
-**MSS**
-
-1. User requests to set an event.
-2. User types `set event EVENT_NAME TASK_INDEX` with optional parameters for start and end dates
-3. User is notified that the event was set<br>
-Use case ends.
-
-**Extensions**
-
-2a. Event name for that specific Index already exists
-
-> 2a1. User is notified that the event was not added
 
 #### Use case: SetComplete
 
@@ -431,21 +402,6 @@ Use case ends.
 2a. There are no tasks for today
 
 > 2a1. The user is notified that there are no available tasks for today
-
-#### Use case: ListAll
-
-**MSS**
-
-1. User requests to list a task.
-2. User types `listall`
-3. We display the tasks available<br>
-Use case ends.
-
-**Extensions**
-
-2a. There are no tasks 
-
-> 2a1. The user is notified that there are no available tasks
 
 #### Use case: Undo
 

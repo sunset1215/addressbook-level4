@@ -92,4 +92,16 @@ public class FileUtil {
             throws IOException {
         return JsonUtil.fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
+    
+    /**
+     * Returns a formatted string depending on whether it is a relative or absolute path
+     */
+    public static String getFormattedPath(String filePath) {
+        File file = new File(filePath);
+        if (file.isAbsolute()) {
+            return filePath;
+        } else {
+            return "./" + filePath;
+        }
+    }
 }

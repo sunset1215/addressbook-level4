@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.task.commons.core.Config;
-import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.commons.util.ConfigUtil;
-import seedu.task.commons.core.ComponentManager;
 
 public class StoreCommand extends Command{
 	

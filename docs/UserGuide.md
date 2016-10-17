@@ -85,15 +85,13 @@ Examples:
 
 #### Listing tasks : `list`
 Shows a list of tasks in the task manager.<br>
-Additional options include: `-all`, `-float`, `-deadline`, `-event`, `-complete`<br>
-Format: `list [-OPTION]`
+Additional options include: `/a`, `/c`, `/p`<br>
+Format: `list [OPTION]`
 
-> The default option shows a list of all tasks due today.
-> * `-all` : Shows a list of all tasks in the task manager.
-> * `-float` : Shows a list of all floating tasks.
-> * `-deadline` : Shows a list of all deadlines.
-> * `-event` : Shows a list of all events.
-> * `-complete` : Shows a list of all completed tasks.
+> The default option shows a list of tasks due today.
+> * `/a` : Shows a list of all tasks in the task manager.
+> * `/c` : Shows a list of completed tasks.
+> * `/p` : Shows a list of pending tasks.
 
 #### Deleting a task : `delete`
 Deletes the specified task from the task manager.<br>
@@ -169,9 +167,13 @@ Format: `undo`
 > Able to undo up to the last 100 commands.<br>
   Only commands that changes data are included (`add`, `delete`, `clear`, `edit`, `complete`).
 
-#### Clearing completed tasks : `clear`
-Clears all completed tasks from the task manager.<br>
-Format: `clear` 
+#### Clearing tasks : `clear`
+Clears tasks from the task manager.<br>
+Additional options include: `/a`<br>
+Format: `clear [OPTION]`
+
+> The default option clears completed tasks from the task manager.
+> * `/a` : clears all tasks from the task manager.
 
 #### Specifying data storage location : `store`
 Specifies data storage location.<br>

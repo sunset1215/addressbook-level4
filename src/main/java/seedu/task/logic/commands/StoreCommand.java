@@ -1,6 +1,13 @@
 package seedu.task.logic.commands;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import seedu.task.commons.core.Config;
+import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
+import seedu.task.commons.exceptions.DataConversionException;
+import seedu.task.commons.util.ConfigUtil;
+import seedu.task.commons.core.ComponentManager;
 
 public class StoreCommand extends Command{
 	
@@ -18,15 +25,28 @@ public class StoreCommand extends Command{
 	}
 	
 	public StoreCommand(String fileLocation) {
-		this.config.setTaskBookFilePath(fileLocation);
+		Optional<Config> oldConfig = null;
+		try {
+			oldConfig = ConfigUtil.readConfig(Config.DEFAULT_CONFIG_FILE);
+		} catch (DataConversionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		config = new Config(oldConfig.get(), fileLocation);
 	}
 	
 	
 
 	@Override
 	public CommandResult execute() {
-		
-		return null;
+		try {
+			ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
+			raise(new StorageFilePathChangedEvent(config.getTaskBookFilePath()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new CommandResult("It works!!!!!");
 	}
 
 }

@@ -6,6 +6,7 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.UserPrefs;
@@ -88,5 +89,17 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+    
+    @Subscribe
+    public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Filepath changed"));
+        setTaskBookFilePath(event.filePath);
+    }
+
+	@Override
+	public void setTaskBookFilePath(String filePath) {
+        taskBookStorage.setTaskBookFilePath(filePath);
+
+	}
 
 }

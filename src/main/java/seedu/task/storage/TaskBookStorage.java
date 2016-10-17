@@ -10,6 +10,8 @@ import java.util.Optional;
  * Represents a storage for {@link seedu.task.model.TaskBook}.
  */
 public interface TaskBookStorage {
+	
+	void setTaskBookFilePath(String filePath);
 
     /**
      * Returns the file path of the data file.

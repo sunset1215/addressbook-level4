@@ -22,7 +22,7 @@ public interface Storage extends TaskBookStorage, UserPrefsStorage {
 
     @Override
     String getTaskBookFilePath();
-
+    
     @Override
     Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException;
 

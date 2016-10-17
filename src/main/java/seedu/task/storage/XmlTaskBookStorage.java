@@ -27,6 +27,10 @@ public class XmlTaskBookStorage implements TaskBookStorage {
     public String getTaskBookFilePath(){
         return filePath;
     }
+    
+    public void setTaskBookFilePath(String filePath){
+    	this.filePath = filePath;
+    }
 
     /**
      * Similar to {@link #readTaskBook()}

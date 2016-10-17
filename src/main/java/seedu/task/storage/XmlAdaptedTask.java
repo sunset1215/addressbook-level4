@@ -22,6 +22,8 @@ public class XmlAdaptedTask {
     private String startDate;
 	@XmlElement(required = true)
     private String endDate;
+	@XmlElement(required = true)
+    private String status;
 
 	@XmlElement
 	private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -43,6 +45,7 @@ public class XmlAdaptedTask {
 		name = source.getName().fullName;
 		startDate = DateUtil.convertDateToJaxbString(source.getStart());
 		endDate = DateUtil.convertDateToJaxbString(source.getEnd());
+		status = source.getStatus().toString();
 		tagged = new ArrayList<>();
 //		for (Tag tag : source.getTags()) {
 //		    tagged.add(new XmlAdaptedTag(tag));
@@ -65,8 +68,9 @@ public class XmlAdaptedTask {
 		final Name name = new Name(this.name);
 		final TaskDate taskStartDate = DateUtil.convertJaxbStringToDate(startDate);
 		final TaskDate taskEndDate = DateUtil.convertJaxbStringToDate(endDate);
+		final Status status = new Status(this.status);
 		final UniqueTagList tags = new UniqueTagList(taskTags);
-		return createTaskFromGivenArgs(name, taskStartDate, taskEndDate);
+		return createTaskFromGivenArgs(name, taskStartDate, taskEndDate, status);
 	}
 
 	/**
@@ -74,15 +78,16 @@ public class XmlAdaptedTask {
 	 * Returns an EventTask if both start and end date are given.
 	 * Returns a DeadlineTask if only end date is given.
 	 * Returns a Task if only name is given.
+	 * @param taskStatus 
 	 */
-	private Task createTaskFromGivenArgs(Name name, TaskDate taskStartDate, TaskDate taskEndDate) {
+	private Task createTaskFromGivenArgs(Name name, TaskDate taskStartDate, TaskDate taskEndDate, Status taskStatus) {
 	    if (isEventTask(taskStartDate, taskEndDate)) {
-	        return new EventTask(name, taskStartDate, taskEndDate);
+	        return new EventTask(name, taskStartDate, taskEndDate, taskStatus);
 	    }
 	    if (isDeadline(taskEndDate)) {
-	        return new DeadlineTask(name, taskEndDate);
+	        return new DeadlineTask(name, taskEndDate, taskStatus);
 	    }
-	    return new Task(name);
+	    return new Task(name, taskStatus);
 	}
 	
 	/*

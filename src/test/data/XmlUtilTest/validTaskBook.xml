@@ -4,30 +4,36 @@
         <name>test</name>
         <startDate></startDate>
         <endDate></endDate>
+        <status>Pending</status>
     </tasks>
     <tasks>
         <name>exam</name>
         <startDate></startDate>
         <endDate></endDate>
+        <status>Pending</status>
     </tasks>
     <tasks>
         <name>assignment</name>
         <startDate></startDate>
         <endDate>12-10-2016</endDate>
+        <status>Pending</status>
     </tasks>
     <tasks>
         <name>do laundry</name>
         <startDate></startDate>
         <endDate>12-10-2016</endDate>
+        <status>Pending</status>
     </tasks>
     <tasks>
         <name>meeting</name>
         <startDate>13-10-2016</startDate>
         <endDate>14-10-2016</endDate>
+        <status>Pending</status>
     </tasks>
     <tasks>
         <name>gamestart event</name>
         <startDate>8-10-2016</startDate>
         <endDate>10-10-2016</endDate>
+        <status>Complete</status>
     </tasks>
 </taskbook>

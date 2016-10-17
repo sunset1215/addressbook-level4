@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Task implements ReadOnlyTask{
     private Name name;
     private UniqueTagList tags;
+    private Status status;
 
     /**
      * A task must be present and not null.
@@ -18,6 +19,7 @@ public class Task implements ReadOnlyTask{
     public Task(Name name) {
         assert !CollectionUtil.isAnyNull(name);
         this.name = name;
+        status = new Status(Status.STATUS_PENDING);
     }
 
     /**
@@ -25,6 +27,13 @@ public class Task implements ReadOnlyTask{
      */
     public Task(ReadOnlyTask source) {
         this(source.getName());
+        status = new Status(Status.STATUS_PENDING);
+    }
+
+    public Task(Name name, Status status) {
+        assert !CollectionUtil.isAnyNull(name, status);
+        this.name = name;
+        this.status = status;
     }
 
     /**
@@ -79,4 +88,23 @@ public class Task implements ReadOnlyTask{
 		return null;
 	}
 
+    @Override
+    public Status getStatus() {
+        return status;
+    }
+    
+    /**
+     * Returns true if task is already completed.
+     */
+    public boolean isComplete() {
+        return status.isComplete();
+    }
+    
+    /**
+     * Set the task as completed.
+     */
+    public void setComplete() {
+        status.setComplete();
+    }
+    
 }

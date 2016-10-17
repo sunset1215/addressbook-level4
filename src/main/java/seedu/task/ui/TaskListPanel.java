@@ -86,6 +86,13 @@ public class TaskListPanel extends UiPart {
             taskListView.getSelectionModel().clearAndSelect(index);
         });
     }
+    
+    /**
+     * Refresh task list view to update changes in the underlying data
+     */
+    public void refresh() {
+        taskListView.refresh();
+    }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {
 

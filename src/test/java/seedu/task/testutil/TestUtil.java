@@ -306,6 +306,17 @@ public class TestUtil {
         tasks[index] = task;
         return tasks;
     }
+    
+    /**
+     * Completes tasks[targetIndexInOneIndexedFormat-1].
+     * @param tasks The array of tasks.
+     * @param targetIndexInOneIndexedFormat e.g. if the first element to be removed, 1 should be given as index.
+     * @return
+     */
+    public static TestTask[] completeTaskFromList(TestTask[] tasks, int targetIndexInOneIndexedFormat) {
+        tasks[targetIndexInOneIndexedFormat-1].setComplete();
+        return tasks;
+    }
 
     /**
      * Appends tasks to the array of tasks.

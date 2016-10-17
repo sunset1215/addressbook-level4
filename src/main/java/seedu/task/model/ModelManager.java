@@ -65,8 +65,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        taskBook.removeTask(target);
+    public synchronized void deleteTask(ReadOnlyTask target, String callingCommand) throws TaskNotFoundException {
+        taskBook.removeTask(target, callingCommand);
         indicateTaskBookChanged();
     }
 
@@ -106,6 +106,15 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    @Override
+    public void undo(){
+    	taskBook.undoTask();
+    }
+    
+    public String getUndoInformation(){
+    	return taskBook.getUndoInformation();
+    }
+    
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }

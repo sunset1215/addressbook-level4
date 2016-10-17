@@ -5,7 +5,10 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 
+import java.util.EmptyStackException;
 import java.util.Set;
+
+import com.google.common.base.Throwables;
 
 /**
  * The API of the Model component.
@@ -18,7 +21,7 @@ public interface Model {
     ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyTask target, String callingCommand) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
@@ -37,5 +40,10 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
-
+    
+    /** Undo the most recent task*/
+    void undo() throws EmptyStackException;
+    
+    /**Provide undo information to user**/
+    String getUndoInformation();
 }

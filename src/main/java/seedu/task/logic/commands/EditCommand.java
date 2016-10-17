@@ -74,7 +74,7 @@ public class EditCommand extends Command {
         
         try {
 			taskIndex = model.getIndex(taskToEdit);
-			model.deleteTask(taskToEdit);
+			model.deleteTask(taskToEdit, "edit");
 		
 	        switch (editCase) {
 	        case EDIT_CASE_DEADLINE:

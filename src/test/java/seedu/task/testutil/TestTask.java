@@ -9,6 +9,7 @@ import seedu.task.model.task.*;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private Status status;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -17,6 +18,7 @@ public class TestTask implements ReadOnlyTask {
 
     public void setName(Name name) {
         this.name = name;
+        this.status = new Status(Status.STATUS_PENDING);
     }
 
     @Override
@@ -55,7 +57,15 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public Status getStatus() {
-        // TODO Auto-generated method stub
-        return null;
+        return status;
     }
+    
+    public void setComplete() {
+        status.setComplete();
+    }
+    
+    public boolean isComplete() {
+        return status.isComplete();
+    }
+    
 }

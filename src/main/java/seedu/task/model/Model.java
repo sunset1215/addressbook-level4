@@ -3,7 +3,9 @@ package seedu.task.model;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
-import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
 
@@ -18,16 +20,16 @@ public interface Model {
     ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    void deleteTask(ReadOnlyTask target) throws TaskNotFoundException;
 
     /** Adds the given task */
-    void addTask(Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(Task taskToAdd) throws DuplicateTaskException;
     
-    /** Adds the given task at a given index */
-    void addTask(int index, Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
+    /** Edits the given task */
+    void editTask(ReadOnlyTask taskToEdit, Task taskEditedTo) throws TaskNotFoundException, DuplicateTaskException;
     
-    /** Get index of given task*/
-    int getIndex(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    /** Completes the given task */
+    void completeTask(ReadOnlyTask taskToComplete) throws TaskNotFoundException, TaskAlreadyCompletedException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
@@ -37,5 +39,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
+
+    
 
 }

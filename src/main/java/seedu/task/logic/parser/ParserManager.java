@@ -55,6 +55,9 @@ public class ParserManager {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteParser().parseCommand(arguments);
             
+        case CompleteCommand.COMMAND_WORD:
+            return new CompleteParser().parseCommand(arguments);
+            
         case EditCommand.COMMAND_WORD:
             return new EditParser().parseCommand(arguments);
 

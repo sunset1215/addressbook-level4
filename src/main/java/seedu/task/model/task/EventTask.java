@@ -12,7 +12,13 @@ public class EventTask extends Task{
 		this.endDate = endDate;
 	}
 	
-	public TaskDate getStartDate(){
+	public EventTask(Name name, TaskDate taskStartDate, TaskDate taskEndDate, Status taskStatus) {
+	    super(name, taskStatus);
+        this.startDate = taskStartDate;
+        this.endDate = taskEndDate;
+    }
+
+    public TaskDate getStartDate(){
 		return startDate;
 	}
 	

@@ -32,6 +32,7 @@
                         </HBox>
                         <Label fx:id="startDate" text="\$startDate" styleClass="cell_small_label"/>
                         <Label fx:id="endDate" text="\$endDate" styleClass="cell_small_label"/>
+                        <Label fx:id="status" text="\$status" styleClass="cell_small_label"/>
                     </children>
                 </VBox>
             </children>

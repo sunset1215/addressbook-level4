@@ -5,10 +5,13 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
@@ -63,6 +66,11 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBookChanged() {
         raise(new TaskBookChangedEvent(taskBook));
     }
+    
+    /** Raises an event to indicate the task list panel data has changed */
+    private void indicateTaskListPanelDataChanged() {
+        raise(new TaskPanelDataChangedEvent());
+    }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -76,18 +84,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskBookChanged();
     }
-    
-    @Override
-    public synchronized void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskBook.addTask(taskIndex, task);
-        updateFilteredListToShowAll();
-        indicateTaskBookChanged();
-    }
 
 	@Override
-	public int getIndex(ReadOnlyTask target) throws TaskNotFoundException {
-		return taskBook.getIndex(target);
-	}
+    public void editTask(ReadOnlyTask target, Task taskEditedTo) throws TaskNotFoundException, DuplicateTaskException {
+	    taskBook.editTask(target, taskEditedTo);
+        indicateTaskBookChanged();
+    }
+	
+	@Override
+    public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
+        taskBook.completeTask(target);
+        indicateTaskBookChanged();
+        indicateTaskListPanelDataChanged();
+    }
 
     //=========== Filtered Task List Accessors ===============================================================
 
@@ -161,6 +170,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
-
 
 }

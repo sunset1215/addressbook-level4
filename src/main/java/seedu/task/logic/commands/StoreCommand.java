@@ -18,7 +18,7 @@ public class StoreCommand extends Command{
 	
 	public static final String MESSAGE_SUCCESS = "Storage Location Updated: %1$s";
 	
-	private Config config;
+	private Config newConfig;
 	
 	public StoreCommand() {
 		
@@ -32,7 +32,7 @@ public class StoreCommand extends Command{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		config = new Config(oldConfig.get(), fileLocation);
+		newConfig = new Config(oldConfig.get(), fileLocation);
 	}
 	
 	
@@ -40,13 +40,13 @@ public class StoreCommand extends Command{
 	@Override
 	public CommandResult execute() {
 		try {
-			ConfigUtil.saveConfig(config, Config.DEFAULT_CONFIG_FILE);
-			raise(new StorageFilePathChangedEvent(config.getTaskBookFilePath()));
+			ConfigUtil.saveConfig(newConfig, Config.USER_CONFIG_FILE);
+			model.indicateStorageFilePathChanged(newConfig.getTaskBookFilePath());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new CommandResult("It works!!!!!");
+		return new CommandResult(String.format(MESSAGE_SUCCESS, newConfig.getTaskBookFilePath()));
 	}
 
 }

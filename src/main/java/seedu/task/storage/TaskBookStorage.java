@@ -11,8 +11,6 @@ import java.util.Optional;
  */
 public interface TaskBookStorage {
 	
-	void setTaskBookFilePath(String filePath);
-
     /**
      * Returns the file path of the data file.
      */

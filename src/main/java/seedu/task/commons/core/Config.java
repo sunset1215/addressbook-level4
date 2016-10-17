@@ -1,15 +1,7 @@
 package seedu.task.commons.core;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  * Config values used by the app
@@ -17,6 +9,7 @@ import org.json.simple.parser.ParseException;
 public class Config {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";
+    public static final String USER_CONFIG_FILE = "userConfig.json";
 
     // Config values customizable through config file
     private String appTitle = "Super Tasker";
@@ -25,59 +18,18 @@ public class Config {
     private String taskBookFilePath = "data/taskbook.xml";
     private String taskBookName = "MyTaskBook";
 
-
-    public Config(Config oldConfig,String filePath){
-    	appTitle = oldConfig.appTitle;
-    	logLevel = oldConfig.logLevel;
-    	userPrefsFilePath = oldConfig.userPrefsFilePath;
-    	taskBookFilePath = filePath;
-    	taskBookName = oldConfig.taskBookName;
-    }
-   
     public Config() {
-    	
+
     }
     
-    
-    public void readFromJSON(){
-    	JSONParser parser = new JSONParser();
-    	try{
-    		Object obj = parser.parse(new FileReader(DEFAULT_CONFIG_FILE));
-    		JSONObject jsonObject = (JSONObject) obj;
-    		appTitle = (String) jsonObject.get("appTitle");
-    		logLevel = (Level) jsonObject.get("logLevel");
-    		userPrefsFilePath = (String) jsonObject.get("userPrefsFilePath");
-    		taskBookFilePath = (String) jsonObject.get("taskBookFilePath");
-    		taskBookName = (String) jsonObject.get("taskBookName");
-    	} catch (FileNotFoundException e) {
-    		e.printStackTrace();
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	} catch (ParseException e) {
-    		e.printStackTrace();
-    	}
+    public Config(Config oldConfig, String filePath) {
+        appTitle = oldConfig.appTitle;
+        logLevel = oldConfig.logLevel;
+        userPrefsFilePath = oldConfig.userPrefsFilePath;
+        taskBookFilePath = filePath;
+        taskBookName = oldConfig.taskBookName;
     }
     
-    public void writeJSON(){
-    	JSONObject obj = new JSONObject();
-    	obj.put("appTitle", appTitle);
-    	obj.put("logLevel", logLevel);
-    	obj.put("userPrefsFilePath", userPrefsFilePath);
-    	obj.put("taskBookFilePath", taskBookFilePath);
-    	obj.put("taskBookName", taskBookName);
-    	
-    	try {
-
-    		FileWriter file = new FileWriter(DEFAULT_CONFIG_FILE);
-    		file.write(obj.toJSONString());
-    		file.flush();
-    		file.close();
-
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
-    }
-
     public String getAppTitle() {
         return appTitle;
     }
@@ -117,7 +69,6 @@ public class Config {
     public void setTaskBookName(String taskBookName) {
         this.taskBookName = taskBookName;
     }
-
 
     @Override
     public boolean equals(Object other) {

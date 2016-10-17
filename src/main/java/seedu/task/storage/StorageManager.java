@@ -11,7 +11,6 @@ import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.UserPrefs;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -93,13 +92,13 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Filepath changed"));
-        setTaskBookFilePath(event.filePath);
+        TaskBookStorage newTaskBookStorage = new XmlTaskBookStorage(event.filePath);
+        try {
+            newTaskBookStorage.saveTaskBook(event.taskBook);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+        taskBookStorage = newTaskBookStorage;
     }
-
-	@Override
-	public void setTaskBookFilePath(String filePath) {
-        taskBookStorage.setTaskBookFilePath(filePath);
-
-	}
 
 }

@@ -5,6 +5,7 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
@@ -97,6 +98,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBookChanged();
         indicateTaskListPanelDataChanged();
     }
+	
+	@Override
+	public void indicateStorageFilePathChanged(String newFilePath) {
+	    raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
+	}
 
     //=========== Filtered Task List Accessors ===============================================================
 

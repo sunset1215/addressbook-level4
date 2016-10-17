@@ -1,6 +1,7 @@
 package seedu.task.model;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -40,6 +41,7 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords);
 
-    
+    /** Indicates storage file path changed */
+    void indicateStorageFilePathChanged(String newFilePath);
 
 }

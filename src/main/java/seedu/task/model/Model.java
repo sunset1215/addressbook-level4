@@ -25,11 +25,8 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task taskToAdd) throws DuplicateTaskException;
     
-    /** Adds the given task at a given index */
-    void addTask(int index, Task taskToAdd) throws DuplicateTaskException;
-    
     /** Edits the given task */
-    void editTask(ReadOnlyTask taskToEdit, Task taskEditedTo) throws TaskNotFoundException;
+    void editTask(ReadOnlyTask taskToEdit, Task taskEditedTo) throws TaskNotFoundException, DuplicateTaskException;
     
     /** Completes the given task */
     void completeTask(ReadOnlyTask taskToComplete) throws TaskNotFoundException, TaskAlreadyCompletedException;

@@ -67,20 +67,6 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a task to the list at the given index.
-     * Used for preserving order when editing
-     *
-     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
-     */
-    public void add(int taskIndex, Task toAdd) throws DuplicateTaskException {
-        assert toAdd != null;
-        if (contains(toAdd)) {
-            throw new DuplicateTaskException();
-        }
-        internalList.add(taskIndex, toAdd);
-    }
-    
-    /**
      * Removes the equivalent task from the list.
      *
      * @throws TaskNotFoundException if no such task could be found in the list.
@@ -94,25 +80,34 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskFoundAndDeleted;
     }
     
-    /*
+    /**
      * Returns the task at the given index.
      */
     public Task getTaskFromIndex(int index) {
         return internalList.get(index);
     }
     
-    /*
+    /**
      * Returns the index of the given task.
      */
     public int getIndex(ReadOnlyTask target) throws TaskNotFoundException{
     	return internalList.indexOf(target);
     }
     
-    public void replace(int targetIndex, Task taskEditedTo) {
-        internalList.set(targetIndex, taskEditedTo);
+    /**
+     * Replaces the task in the list at the given index
+     * 
+     * @throws DuplicateTaskException if task to replace to already exists
+     */
+    public void replace(int index, Task editTo) throws DuplicateTaskException {
+        assert editTo != null;
+        if (contains(editTo)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.set(index, editTo);
     }
     
-    /*
+    /**
      * Returns the size of the list.
      */
     public int size() {

@@ -31,14 +31,14 @@ public class TaskBook implements ReadOnlyTaskBook {
     public TaskBook() {}
 
     /**
-     * Tasks and Tags are copied into this task list
+     * Tasks and Tags are copied into this task book
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
     }
 
     /**
-     * Tasks and Tags are copied into this task list
+     * Tasks and Tags are copied into this task book
      */
     public TaskBook(UniqueTaskList tasks, UniqueTagList tags) {
         this.tasks = copyUniqueTaskList(tasks);
@@ -46,7 +46,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         // the line of code below is the original code
         // I used the above method to copy the lists
         // because the original code changes all the tasks that is read from
-        // the storage into tasks, instead of keeping them as eventtask or
+        // the storage into tasks, instead of keeping them as event task or
         // deadline task or task.
         //resetData(tasks.getInternalList(), tags.getInternalList());
     }
@@ -112,7 +112,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 //// task-level operations
 
     /**
-     * Adds a task to the task list.
+     * Adds a task to the task book.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
@@ -122,17 +122,6 @@ public class TaskBook implements ReadOnlyTaskBook {
         tasks.add(task);
     }
     
-    /**
-     * Adds a task to the task list at a given index.
-     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the task to point to those in {@link #tags}.
-     *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
-     */
-    public void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-        tasks.add(taskIndex, task);
-    }
-
     /**
      * Ensures that every tag in this task:
      *  - exists in the master list {@link #tags}
@@ -164,11 +153,26 @@ public class TaskBook implements ReadOnlyTaskBook {
         }
     }
     
-    public void editTask(ReadOnlyTask target, Task taskEditedTo) throws TaskNotFoundException {
+    /**
+     * Edits a task in the task book.
+     * 
+     * @param target task to be edited
+     * @param editTo task to edit into
+     * @throws DuplicateTaskException if task is edited into an existing task
+     * @throws TaskNotFoundException if task to be edited cannot be found
+     */
+    public void editTask(ReadOnlyTask target, Task editTo) throws TaskNotFoundException, DuplicateTaskException {
         int targetIndex = tasks.getIndex(target);
-        tasks.replace(targetIndex, taskEditedTo);
+        tasks.replace(targetIndex, editTo);
     }
     
+    /**
+     * Completes a task in the task book.
+     * 
+     * @param target task to be completed
+     * @throws TaskNotFoundException if target task cannot be found
+     * @throws TaskAlreadyCompletedException if target task is already marked as complete
+     */
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
         int targetIndex = tasks.getIndex(target);
         Task taskToComplete = tasks.getTaskFromIndex(targetIndex);

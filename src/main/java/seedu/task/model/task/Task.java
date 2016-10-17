@@ -93,10 +93,16 @@ public class Task implements ReadOnlyTask{
         return status;
     }
     
+    /**
+     * Returns true if task is already completed.
+     */
     public boolean isComplete() {
         return status.isComplete();
     }
     
+    /**
+     * Set the task as completed.
+     */
     public void setComplete() {
         status.setComplete();
     }

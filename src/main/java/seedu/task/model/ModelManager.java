@@ -10,6 +10,7 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -83,16 +84,9 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskBookChanged();
     }
-    
-    @Override
-    public synchronized void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskBook.addTask(taskIndex, task);
-        updateFilteredListToShowAll();
-        indicateTaskBookChanged();
-    }
 
 	@Override
-    public void editTask(ReadOnlyTask target, Task taskEditedTo) throws TaskNotFoundException {
+    public void editTask(ReadOnlyTask target, Task taskEditedTo) throws TaskNotFoundException, DuplicateTaskException {
 	    taskBook.editTask(target, taskEditedTo);
         indicateTaskBookChanged();
     }

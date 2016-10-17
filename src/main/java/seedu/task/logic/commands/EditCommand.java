@@ -8,6 +8,7 @@ import seedu.task.model.task.EventTask;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.TaskDate;
+import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -24,6 +25,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1" + " -d 12-10-2016";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_FAIL = "This task already exists in the task list";
     
     private static final int EDIT_CASE_DEADLINE = 0;
     private static final int EDIT_CASE_EVENT = 1;
@@ -34,7 +36,7 @@ public class EditCommand extends Command {
     private int editCase;
 
     /**
-     * Constructor for editing specified task to a deadline
+     * Constructor for editing specified task into a deadline
      */
     public EditCommand(int targetIndex, TaskDate endDateTime) {
         assert !CollectionUtil.isAnyNull(endDateTime);
@@ -44,7 +46,7 @@ public class EditCommand extends Command {
     }
     
     /**
-     * Constructor for editing specified task to an event
+     * Constructor for editing specified task into an event
      */
     public EditCommand(int targetIndex, TaskDate startDateTime, TaskDate endDateTime) {
         assert !CollectionUtil.isAnyNull(startDateTime, endDateTime);
@@ -53,7 +55,6 @@ public class EditCommand extends Command {
         this.endDateTime = endDateTime;
         editCase = EDIT_CASE_EVENT;
     }
-
 
     @Override
     public CommandResult execute() {
@@ -72,6 +73,8 @@ public class EditCommand extends Command {
             model.editTask(taskToEdit, taskEditedTo);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
+        } catch (DuplicateTaskException dte) {
+            return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
         }
         
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskEditedTo));
@@ -90,7 +93,7 @@ public class EditCommand extends Command {
             taskEditedTo = new EventTask(taskToEdit.getName(), startDateTime, endDateTime, taskToEdit.getStatus());
             break;
         default:
-            assert false : "The task to edit to must be either a deadline or an event";
+            assert false : "The task to edit to must either be a deadline or an event";
         }
         return taskEditedTo;
     }

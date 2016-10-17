@@ -140,7 +140,6 @@ Format: `edit TASK_INDEX [-d e/END_DATETIME] [-e [s/START_DATETIME] e/END_DATETI
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...<br>
   Specified parameters will overwrite previous data.<br>
-  User can specify `NEW_NAME` along with `-n` to change the name of the task<br>
   User can specify `END_DATETIME` along with `-d` to turn the task into a deadline.<br>
   User can specify `START_DATETIME` or/both `END_DATETIME` to turn the task into an event.<br>
   Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
@@ -208,7 +207,7 @@ Complete | `complete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
 Delete | `delete TASK_INDEX` | Delete a task
 Find | `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]` | Find all tasks containing any keywords
-Edit | `edit TASK_INDEX [-n NEW_NAME] [-d e/END_DATETIME] [-e [s/START_DATETIME] e/END_DATETIME] [-e s/START_DATETIME [e/END_DATETIME]]` | Edit a task
+Edit | `edit TASK_INDEX [-d e/END_DATETIME] [-e [s/START_DATETIME] e/END_DATETIME] [-e s/START_DATETIME [e/END_DATETIME]]` | Edit a task
 View | `view TASK_INDEX` | View details of a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks

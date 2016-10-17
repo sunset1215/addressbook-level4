@@ -1,6 +1,6 @@
-package seedu.address.logic.commands;
+package seedu.task.logic.commands;
 
-import seedu.address.commons.core.Config;
+import seedu.task.commons.core.Config;
 
 public class StoreCommand extends Command{
 	
@@ -18,7 +18,7 @@ public class StoreCommand extends Command{
 	}
 	
 	public StoreCommand(String fileLocation) {
-		this.config.setAddressBookFilePath(fileLocation);
+		this.config.setTaskBookFilePath(fileLocation);
 	}
 	
 	

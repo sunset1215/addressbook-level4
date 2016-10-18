@@ -27,10 +27,6 @@ public class XmlTaskBookStorage implements TaskBookStorage {
     public String getTaskBookFilePath(){
         return filePath;
     }
-    
-    public void setTaskBookFilePath(String filePath){
-    	this.filePath = filePath;
-    }
 
     /**
      * Similar to {@link #readTaskBook()}
@@ -62,7 +58,6 @@ public class XmlTaskBookStorage implements TaskBookStorage {
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        System.out.println("save taskbook");
         XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskBook(taskBook));
     }
 

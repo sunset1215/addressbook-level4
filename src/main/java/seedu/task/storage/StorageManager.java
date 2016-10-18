@@ -47,7 +47,6 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ TaskBook methods ==============================
 
     @Override
@@ -77,7 +76,6 @@ public class StorageManager extends ComponentManager implements Storage {
         taskBookStorage.saveTaskBook(taskBook, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleTaskBookChangedEvent(TaskBookChangedEvent event) {
@@ -88,13 +86,14 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-    
+
+    @Override
     @Subscribe
     public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Filepath changed"));
-        TaskBookStorage newTaskBookStorage = new XmlTaskBookStorage(event.filePath);
+        TaskBookStorage newTaskBookStorage = new XmlTaskBookStorage(event.getNewFilePath());
         try {
-            newTaskBookStorage.saveTaskBook(event.taskBook);
+            newTaskBookStorage.saveTaskBook(event.getCurrentTaskBook());
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

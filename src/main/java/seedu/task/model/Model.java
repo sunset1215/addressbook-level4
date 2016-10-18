@@ -1,7 +1,6 @@
 package seedu.task.model;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;

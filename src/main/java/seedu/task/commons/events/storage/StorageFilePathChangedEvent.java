@@ -3,14 +3,25 @@ package seedu.task.commons.events.storage;
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.ReadOnlyTaskBook;
 
+/**
+ * Represents a storage file path change
+ */
 public class StorageFilePathChangedEvent extends BaseEvent{
 	
-	public String filePath;
-	public ReadOnlyTaskBook taskBook;
+	private final String newFilePath;
+	private final ReadOnlyTaskBook currentTaskBook;
 	
-	public StorageFilePathChangedEvent(String filePath, ReadOnlyTaskBook taskBook) {
-		this.filePath = filePath;
-		this.taskBook = taskBook;
+	public StorageFilePathChangedEvent(String newFilePath, ReadOnlyTaskBook currentTaskBook) {
+		this.newFilePath = newFilePath;
+		this.currentTaskBook = currentTaskBook;
+	}
+	
+	public String getNewFilePath() {
+	    return newFilePath;
+	}
+	
+	public ReadOnlyTaskBook getCurrentTaskBook() {
+	    return currentTaskBook;
 	}
 
 	@Override

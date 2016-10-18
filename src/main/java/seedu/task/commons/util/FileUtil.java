@@ -94,7 +94,7 @@ public class FileUtil {
     }
     
     /**
-     * Returns a formatted string depending on whether it is a relative or absolute path
+     * Formats the given file path to display on the UI
      */
     public static String getFormattedPath(String filePath) {
         File file = new File(filePath);

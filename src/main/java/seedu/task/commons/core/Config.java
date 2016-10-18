@@ -19,15 +19,13 @@ public class Config {
     private String taskBookName = "MyTaskBook";
 
     public Config() {
-
     }
     
-    public Config(Config oldConfig, String filePath) {
-        appTitle = oldConfig.appTitle;
-        logLevel = oldConfig.logLevel;
-        userPrefsFilePath = oldConfig.userPrefsFilePath;
-        taskBookFilePath = filePath;
-        taskBookName = oldConfig.taskBookName;
+    /**
+     * Constructs a Config with a specified file path
+     */
+    public Config(String newFilePath) {
+        taskBookFilePath = newFilePath;
     }
     
     public String getAppTitle() {

@@ -99,10 +99,14 @@ public class StatusBarFooter extends UiPart {
         setSyncStatus("Last Updated: " + lastUpdated);
     }
     
+    /**
+     * Set new save location for display
+     */
     @Subscribe
     public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting storage file path to " + event.filePath));
-        setSaveLocation(event.filePath);
+        String newSaveLocation = event.getNewFilePath();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting save location to " + newSaveLocation));
+        setSaveLocation(newSaveLocation);
     }
     
 }

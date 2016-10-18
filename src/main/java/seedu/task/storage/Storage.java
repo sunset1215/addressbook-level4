@@ -2,6 +2,7 @@ package seedu.task.storage;
 
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.UserPrefs;
@@ -22,7 +23,7 @@ public interface Storage extends TaskBookStorage, UserPrefsStorage {
 
     @Override
     String getTaskBookFilePath();
-    
+
     @Override
     Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException;
 
@@ -35,4 +36,10 @@ public interface Storage extends TaskBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleTaskBookChangedEvent(TaskBookChangedEvent abce);
+    
+    /**
+     * Saves the current version of the Task Book to a new location.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event);
 }

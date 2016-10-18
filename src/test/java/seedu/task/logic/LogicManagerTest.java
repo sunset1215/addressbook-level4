@@ -137,13 +137,39 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_clear() throws Exception {
+    public void execute_clear_optionAll() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         model.addTask(helper.generateTask(1));
         model.addTask(helper.generateTask(2));
         model.addTask(helper.generateTask(3));
 
-        assertCommandBehavior("clear", ClearCommand.MESSAGE_SUCCESS, new TaskBook(), Collections.emptyList());
+        assertCommandBehavior("clear /a", ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS, new TaskBook(), Collections.emptyList());
+    }
+    
+    @Test
+    public void execute_clear_optionComplete_successful() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        TaskBook expectedAB = new TaskBook();
+        expectedAB.addTask(helper.generateTaskWithName("task 1"));
+        expectedAB.addTask(helper.generateTaskWithName("task 2"));
+        expectedAB.addTask(helper.generateTaskWithName("task 3"));
+        
+        model.addTask(helper.generateTaskWithName("task 1"));
+        model.addTask(helper.generateTaskWithName("task 2"));
+        model.addTask(helper.generateTaskWithName("task 3"));
+        model.addTask(helper.generateCompletedTaskWithName("task 4"));
+        model.addTask(helper.generateCompletedTaskWithName("task 5"));
+        model.addTask(helper.generateCompletedTaskWithName("task 6"));
+
+        assertCommandBehavior("clear", ClearCommand.MESSAGE_CLEAR_COMPLETED_SUCCESS, expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_clear_optionComplete_fail() throws Exception {
+        // model only contains completed tasks from previous unit test
+        assertCommandBehavior("clear", ClearCommand.MESSAGE_CLEAR_COMPLETED_FAIL);
     }
 
 
@@ -485,6 +511,15 @@ public class LogicManagerTest {
             return new Task(
                     new Name(name)
             );
+        }
+        
+        /**
+         * Generates a Task object with given name and set status to complete.
+         */
+        Task generateCompletedTaskWithName(String name) throws Exception {
+            Task task = new Task(new Name(name));
+            task.setComplete();
+            return task;
         }
     }
 }

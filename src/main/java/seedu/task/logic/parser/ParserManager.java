@@ -62,7 +62,7 @@ public class ParserManager {
             return new EditParser().parseCommand(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearParser().parseCommand(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindParser().parseCommand(arguments);

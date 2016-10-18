@@ -300,7 +300,6 @@ public class TestUtil {
      * @param tasks The array of tasks.
      * @param task The replacement task
      * @param index The index of the task to be replaced.
-     * @return
      */
     public static TestTask[] replaceTaskFromList(TestTask[] tasks, TestTask task, int index) {
         tasks[index] = task;
@@ -311,11 +310,24 @@ public class TestUtil {
      * Completes tasks[targetIndexInOneIndexedFormat-1].
      * @param tasks The array of tasks.
      * @param targetIndexInOneIndexedFormat e.g. if the first element to be removed, 1 should be given as index.
-     * @return
      */
     public static TestTask[] completeTaskFromList(TestTask[] tasks, int targetIndexInOneIndexedFormat) {
         tasks[targetIndexInOneIndexedFormat-1].setComplete();
         return tasks;
+    }
+    
+    /**
+     * Returns a copy of the list with completed tasks removed.
+     * @param tasks The array of tasks
+     */
+    public static TestTask[] clearCompletedTasksFromList(TestTask[] tasks) {
+        List<TestTask> listOfTasks = new ArrayList<TestTask>();
+        for (int i = 0; i < tasks.length; i++) {
+            if (!tasks[i].isComplete()) {
+                listOfTasks.add(tasks[i]);
+            }
+        }
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
 
     /**

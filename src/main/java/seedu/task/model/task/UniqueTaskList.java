@@ -37,6 +37,12 @@ public class UniqueTaskList implements Iterable<Task> {
      * it is already marked as complete.
      */
     public static class TaskAlreadyCompletedException extends Exception {}
+    
+    /**
+     * Signals that the operation clearing completed tasks from the task book has not deleted
+     * any task because there were no completed tasks to be found.
+     */
+    public static class NoCompletedTasksFoundException extends Exception {}
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 

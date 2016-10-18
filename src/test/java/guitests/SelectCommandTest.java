@@ -29,7 +29,7 @@ public class SelectCommandTest extends TaskBookGuiTest {
 
     @Test
     public void selectTask_emptyList(){
-        commandBox.runCommand("clear");
+        commandBox.runCommand("clear /a");
         assertListSize(0);
         assertSelectionInvalid(1); //invalid index
     }

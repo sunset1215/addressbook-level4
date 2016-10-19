@@ -33,10 +33,10 @@ public class EditParser extends Parser{
 		boolean hasException = false;
 		
 		try {
-			if (isDeadlineCommand(args)) {
-				toReturn = createDeadlineTask(args);
-			} else if (isEventCommand(args)) {
+			if (isEventCommand(args)) {
 				toReturn = createEventTask(args);
+			} if (isDeadlineCommand(args)) {
+				toReturn = createDeadlineTask(args);
 			} else if (isFloatingCommand(args)) {
 				toReturn = createFloatingTask(args);
 			} else {
@@ -93,7 +93,7 @@ public class EditParser extends Parser{
 	}
 	
 	/**
-	 * Creates a DeadlineTask given a list of arguments expects args to have the form
+	 * Creates a EditCommand for a DeadlineTask given a list of arguments expects args to have the form
 	 * "[INDEX] 00-00-0000"
 	 * 
 	 * @throws ParseException 
@@ -115,7 +115,7 @@ public class EditParser extends Parser{
 	}
 	
 	/**
-	 * Creates an EventTask given a string argument that has the form
+	 * Creates an EditCommand for an EventTask given a string argument that has the form
 	 * "[INDEX] 00-00-0000 00-00-0000"
 	 * 
 	 * @throws ParseException
@@ -139,7 +139,7 @@ public class EditParser extends Parser{
 	}
 	
 	/**
-	 * Creates a Task given an index and a name
+	 * Creates an EditCommand for a Task given an index and a name
 	 * "[INDEX] thisisanewname"
 	 * 
 	 * @throws ParseException 

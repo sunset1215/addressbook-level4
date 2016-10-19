@@ -4,94 +4,139 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.DateUtil;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
+import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.task.TaskDate;
 
 /**
  * Parser class used to parse a add command
  */
 public class AddParser extends Parser {
+	private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*");
+	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*");
+	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*");
 	
 	@Override
-	public Command parseCommand(String args){
-        
-        final String DEADLINE_FLAG = "-d";
-        final String EVENT_FLAG = "-e";
-        String[] argsArray = splitAddArguments(args.trim());
-        
-        try {
-            // when only task name is present in parameter
-            if (argsArray.length == 1) {
-                return new AddCommand(argsArray[0]);
-            }
-            
-            // check if # of args is correct
-            if (!(argsArray.length == 3 || argsArray.length == 4)) {
-                System.out.println("wrong # of args");
-                return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
-            
-            String taskName = argsArray[0];
-            // parse deadline/event flag
-            String taskFlag = argsArray[1];
-            
-            try {
-                if (taskFlag.equals(DEADLINE_FLAG) && argsArray.length == 3) {
-                    // handle deadline args
-                    String endDateTime = argsArray[2];
-                    Date endDate = DateUtil.parseStringToDate(endDateTime);
-                    return new AddCommand(taskName, endDate);
-                }
-                else if (taskFlag.equals(EVENT_FLAG) && argsArray.length == 4) {
-                    // handle event args
-                    String startDateTime = argsArray[2];
-                    String endDateTime = argsArray[3];
-                    Date startDate = DateUtil.parseStringToDate(startDateTime);
-                    Date endDate = DateUtil.parseStringToDate(endDateTime);
-                    return new AddCommand(taskName, startDate, endDate);
-                }
-                else {
-                    // unable to parse
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-                }
-            } catch (ParseException e) {
-                return new IncorrectCommand(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
+	public Command parseCommand(String args) {
+		Command toReturn = null;
+		boolean hasException = false;
+		
+		try {
+			if (isEventCommand(args)) {
+				toReturn = createEventTask(args);
+			} else if (isDeadlineCommand(args)) {
+				toReturn = createDeadlineTask(args);
+			} else if (isFloatingCommand(args)) {
+				toReturn = createFloatingTask(args);
+			} else {
+				throw new IllegalArgumentException();
+			}
+		} catch (NullPointerException e) {
+        	hasException = true;
+        } catch (ParseException e) {
+        	hasException = true;
+        } catch (IndexOutOfBoundsException e) {
+        	hasException = true;
+        } catch (IllegalArgumentException e) {
+        	hasException = true;
+        } catch (IllegalValueException e) {
+        	hasException = true;
         }
-    }
+		
+		if (hasException) {
+        	toReturn = new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                    		AddCommand.MESSAGE_USAGE));
+        }
+		
+		return toReturn;
+	}
+	
+	private boolean isDeadlineCommand(String args) throws NullPointerException {
+		final Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args);
+		return matcher.matches();
+	}
+	
+	private boolean isEventCommand(String args) throws NullPointerException {
+		final Matcher matcher = EVENT_ARGS_FORMAT.matcher(args);
+		return matcher.matches();
+	}
+	
+	private boolean isFloatingCommand(String args) throws NullPointerException {
+		final Matcher matcher = FLOATING_ARGS_FORMAT.matcher(args);
+		return matcher.matches();
+	}
 	
 	/**
-     * Splits arguments of the add command
-     * @param args
-     * @return string array containing the split arguments
-     */
-    private String[] splitAddArguments(String args) {
-        int indexFlag = args.indexOf('-');
-        // args only contain task name
-        if (indexFlag == -1) {
-            String[] argsArray = new String[1];
-            argsArray[0] = args;
-            return argsArray;
-        }
-        // extract task name
-        String taskName = args.substring(0, args.indexOf('-')).trim();
-        String remainingArgs = args.substring(args.indexOf('-'), args.length());
-        String[] remainingArgsArray = remainingArgs.split(" ");
-        String[] argsArray = new String[remainingArgsArray.length + 1];
-        argsArray[0] = taskName;
-        for (int i = 0; i < remainingArgsArray.length; i++) {
-            argsArray[i + 1] = remainingArgsArray[i];
-        }
-        
-        return argsArray;
-    }
+	 * Creates a EditCommand for a DeadlineTask given a list of arguments expects args to have the form
+	 * "[NAME] 00-00-0000"
+	 * 
+	 * @throws ParseException 
+	 * @throws IllegalArgumentException
+	 * @throws IllegalValueException 
+	 */
+	private Command createDeadlineTask(String args) throws IllegalArgumentException, ParseException, IllegalValueException {
+		Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args);
+		
+		if (!matcher.matches()) {
+			throw new IllegalArgumentException();
+		}
+		
+		String name = matcher.group("name").trim();
+		String endDateString = matcher.group("endDate").trim();
+		
+        Date endDate = DateUtil.parseStringToDate(endDateString);
+        return new AddCommand(name, endDate);
+	}
+	
+	/**
+	 * Creates an EditCommand for an EventTask given a string argument that has the form
+	 * "[NAME] 00-00-0000 00-00-0000"
+	 * 
+	 * @throws ParseException
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalValueException 
+	 */
+	private Command createEventTask(String args) throws ParseException, IllegalArgumentException, IllegalValueException {
+		Matcher matcher = EVENT_ARGS_FORMAT.matcher(args);
+		
+		if (!matcher.matches()) {
+			throw new IllegalArgumentException();
+		}
+		
+		String name = matcher.group("name").trim();
+		String startDateString = matcher.group("startDate").trim();
+		String endDateString = matcher.group("endDate").trim();
+		
+		Date startDate = DateUtil.parseStringToDate(startDateString);
+        Date endDate = DateUtil.parseStringToDate(endDateString);
+        return new AddCommand(name, startDate, endDate);
+	}
+	
+	/**
+	 * Creates an AddCommand for a Task given an index and a name
+	 * "[INDEX] thisisanewname"
+	 * 
+	 * @throws ParseException 
+	 * @throws IllegalArgumentException
+	 * @throws IllegalValueException 
+	 */
+	private Command createFloatingTask(String args) throws IllegalArgumentException, ParseException, IllegalValueException {
+		Matcher matcher = FLOATING_ARGS_FORMAT.matcher(args);
+		
+		if (!matcher.matches()) {
+			throw new IllegalArgumentException();
+		}
+		
+		String name = matcher.group("name").trim();
+		
+        return new AddCommand(name);
+	}
 }

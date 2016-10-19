@@ -17,8 +17,8 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. " 
-    + "\nParameters: TASK_NAME [-d e/END_DATETIME] [-e s/START_DATETIME e/END_DATETIME] " 
-    + "\nExample: " + COMMAND_WORD + " Dave's Birthday Party -e s/12-01-2016 14:00 e/12-02-2016 16:00";;
+    + "\nParameters: TASK_NAME [END_DATETIME] [START_DATETIME END_DATETIME] " 
+    + "\nExample: " + COMMAND_WORD + " Dave's Birthday Party 12-01-2016 14:00 12-02-2016 16:00";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";

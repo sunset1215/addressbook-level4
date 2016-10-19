@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import seedu.task.commons.exceptions.DuplicateDataException;
 import seedu.task.commons.util.CollectionUtil;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -70,6 +71,20 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+    }
+    
+    /**
+     * Adds a task to the list at given index.
+     *
+     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     */
+    public void add(int taskIndex, Task toAdd) throws DuplicateTaskException {
+        assert toAdd != null;
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(taskIndex, toAdd);
+        System.out.println(internalList);
     }
 
     /**

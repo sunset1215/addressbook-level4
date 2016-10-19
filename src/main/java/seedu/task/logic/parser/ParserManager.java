@@ -73,6 +73,9 @@ public class ParserManager {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
             
+        case UndoCommand.COMMAND_WORD:
+        	return new UndoCommand();
+        	
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

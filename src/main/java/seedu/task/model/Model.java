@@ -1,7 +1,7 @@
 package seedu.task.model;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
-
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.DirectoryChooserOperationCancelledException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -10,11 +10,10 @@ import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.io.IOException;
 import java.util.EmptyStackException;
 import java.time.LocalDate;
 import java.util.Set;
-
-import com.google.common.base.Throwables;
 
 /**
  * The API of the Model component.
@@ -49,8 +48,11 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
+
+    /** Changes storage file path */
+    String changeStorageFilePath(String newFilePath) throws DirectoryChooserOperationCancelledException, IOException;
     
-    /** Undo the most recent task*/
+    /** Undo the most recent task */
     void undo() throws EmptyStackException;
     
     /**Provide undo information to user**/

@@ -1,17 +1,11 @@
 package seedu.task.logic.parser;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.commons.util.CollectionUtil;
-import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.commands.*;
-import seedu.task.model.task.TaskDate;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,8 +19,6 @@ public class ParserManager {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"); // variable number of tags
 
     public ParserManager() {}
 
@@ -70,6 +62,9 @@ public class ParserManager {
         case ListCommand.COMMAND_WORD:
             return new ListParser().parseCommand(arguments);
 
+        case StoreCommand.COMMAND_WORD:
+        	return new StoreParser().parseCommand(arguments);
+            
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

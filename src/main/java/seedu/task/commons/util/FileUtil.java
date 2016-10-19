@@ -62,6 +62,7 @@ public class FileUtil {
      * Assumes file exists
      */
     public static String readFromFile(File file) throws IOException {
+        assert file.exists() == true;
         return new String(Files.readAllBytes(file.toPath()), CHARSET);
     }
 
@@ -92,4 +93,25 @@ public class FileUtil {
             throws IOException {
         return JsonUtil.fromJsonString(FileUtil.readFromFile(jsonFile), classOfObjectToDeserialize);
     }
+    
+    /**
+     * Formats the given file path to display on the UI
+     */
+    public static String getFormattedPath(String filePath) {
+        File file = new File(filePath);
+        if (file.isAbsolute()) {
+            return filePath;
+        } else {
+            return "./" + filePath;
+        }
+    }
+    
+    /**
+     * Returns true if given file path exists and is a directory
+     */
+    public static boolean isDirectory(String filePath) {
+        File file = new File(filePath);
+        return file.exists() && file.isDirectory();
+    }
+    
 }

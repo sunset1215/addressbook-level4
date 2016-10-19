@@ -5,12 +5,14 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import seedu.task.MainApp;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
@@ -19,6 +21,7 @@ import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 /**
@@ -128,6 +131,18 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleTaskPanelDataChangedEvent(TaskPanelDataChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().refresh();
+    }
+    
+    @Subscribe
+    private void handleDisplayDirectoryChooserRequestEvent(DisplayDirectoryChooserRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
+        final File selectedDirectory = directoryChooser.showDialog(mainWindow.getPrimaryStage());
+        if (selectedDirectory != null) {
+        	event.setSelectedFilePath(selectedDirectory.getAbsolutePath());
+        } else {
+        	event.setSelectedFilePath("");
+        }
     }
 
 }

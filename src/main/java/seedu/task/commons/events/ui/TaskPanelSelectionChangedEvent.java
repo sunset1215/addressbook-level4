@@ -8,7 +8,6 @@ import seedu.task.model.task.ReadOnlyTask;
  */
 public class TaskPanelSelectionChangedEvent extends BaseEvent {
 
-
     private final ReadOnlyTask newSelection;
 
     public TaskPanelSelectionChangedEvent(ReadOnlyTask newSelection){

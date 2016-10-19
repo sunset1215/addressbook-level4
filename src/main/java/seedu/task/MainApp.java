@@ -47,7 +47,7 @@ public class MainApp extends Application {
         logger.info("=============================[ Initializing TaskBook ]===========================");
         super.init();
 
-        config = initConfig(getApplicationParameter("config"));
+        config = initConfig(Config.USER_CONFIG_FILE);
         storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);

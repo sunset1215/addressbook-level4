@@ -9,6 +9,7 @@ import java.util.logging.Level;
 public class Config {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";
+    public static final String USER_CONFIG_FILE = "userConfig.json";
 
     // Config values customizable through config file
     private String appTitle = "Super Tasker";
@@ -17,10 +18,16 @@ public class Config {
     private String taskBookFilePath = "data/taskbook.xml";
     private String taskBookName = "MyTaskBook";
 
-
     public Config() {
     }
-
+    
+    /**
+     * Constructs a Config with a specified file path
+     */
+    public Config(String newFilePath) {
+        taskBookFilePath = newFilePath;
+    }
+    
     public String getAppTitle() {
         return appTitle;
     }
@@ -60,7 +67,6 @@ public class Config {
     public void setTaskBookName(String taskBookName) {
         this.taskBookName = taskBookName;
     }
-
 
     @Override
     public boolean equals(Object other) {

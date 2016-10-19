@@ -2,21 +2,26 @@ package seedu.task.model;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.DirectoryChooserOperationCancelledException;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
+import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.DateUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Status;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
-import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -101,6 +106,31 @@ public class ModelManager extends ComponentManager implements Model {
         taskBook.completeTask(target);
         indicateTaskBookChanged();
         indicateTaskListPanelDataChanged();
+    }
+	
+	@Override
+	public String changeStorageFilePath(String newFilePath) throws DirectoryChooserOperationCancelledException, IOException {
+		if(newFilePath.isEmpty()) {
+			newFilePath = getNewFilePathFromDirectoryChooser();
+		}
+		newFilePath += "\\taskbook.xml";
+		raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
+		ConfigUtil.saveConfig(new Config(newFilePath), Config.USER_CONFIG_FILE);
+		return newFilePath;
+	}
+
+	/**
+	 * Returns the file path user has selected with the directory chooser
+	 * @throws DirectoryChooserOperationCancelledException if user cancels the operation
+	 */
+    private String getNewFilePathFromDirectoryChooser() throws DirectoryChooserOperationCancelledException {
+        DisplayDirectoryChooserRequestEvent event = new DisplayDirectoryChooserRequestEvent();
+        raise(event);
+        String newFilePath = event.getSelectedFilePath();
+        if(newFilePath.isEmpty()) {
+        	throw new DirectoryChooserOperationCancelledException();
+        }
+        return newFilePath;
     }
 	
 	@Override

@@ -1,9 +1,6 @@
 package seedu.task.model;
 
 import javafx.collections.ObservableList;
-import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.DeleteCommand;
-import seedu.task.logic.commands.EditCommand;
 import seedu.task.model.tag.Tag;
 import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
@@ -15,7 +12,6 @@ import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
-import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 
 import java.util.*;

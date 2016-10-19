@@ -6,11 +6,11 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.exceptions.DataConversionException;
 import seedu.task.model.ReadOnlyTaskBook;
 import seedu.task.model.UserPrefs;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -47,7 +47,6 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ TaskBook methods ==============================
 
     @Override
@@ -77,7 +76,6 @@ public class StorageManager extends ComponentManager implements Storage {
         taskBookStorage.saveTaskBook(taskBook, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleTaskBookChangedEvent(TaskBookChangedEvent event) {
@@ -87,6 +85,19 @@ public class StorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
+    }
+
+    @Override
+    @Subscribe
+    public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Storage file path changed"));
+        TaskBookStorage newTaskBookStorage = new XmlTaskBookStorage(event.getNewFilePath());
+        try {
+            newTaskBookStorage.saveTaskBook(event.getCurrentTaskBook());
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+        taskBookStorage = newTaskBookStorage;
     }
 
 }

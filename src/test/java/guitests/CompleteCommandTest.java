@@ -17,16 +17,17 @@ public class CompleteCommandTest extends TaskBookGuiTest {
         //complete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
         assertCompleteSuccess(targetIndex, currentList);
 
         //complete the last in the list
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length;
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
         assertCompleteSuccess(targetIndex, currentList);
 
         //complete from the middle of the list
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
         targetIndex = currentList.length/2;
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
         assertCompleteSuccess(targetIndex, currentList);
 
         //invalid index
@@ -49,8 +50,8 @@ public class CompleteCommandTest extends TaskBookGuiTest {
 
         commandBox.runCommand("complete " + targetIndexOneIndexed);
 
-        //confirm the completed task at target index is complete
-        assertTrue(taskListPanel.getTask(targetIndexOneIndexed-1).getStatus().isComplete());
+        //confirm the task at target list index has the same status as the task to complete and is completed
+        assertTrue(taskListPanel.getTask(targetIndexOneIndexed-1).getStatus().isComplete() == taskToComplete.isComplete());
 
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));

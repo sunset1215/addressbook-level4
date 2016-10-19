@@ -2,11 +2,15 @@ package seedu.task.model;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.task.commons.core.ComponentManager;
+import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.SelectedFilePathEmptyException;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
+import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
@@ -15,6 +19,7 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.io.IOException;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -102,6 +107,25 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public void indicateStorageFilePathChanged(String newFilePath) {
 	    raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
+	}
+	
+	@Override
+	public String changeStorageFilePath(String newFilePath) throws SelectedFilePathEmptyException, IOException {
+		if(newFilePath.isEmpty()) {
+			DisplayDirectoryChooserRequestEvent event = new DisplayDirectoryChooserRequestEvent();
+			raise(event);
+			newFilePath = event.getChosenFilePath();
+			if(newFilePath.isEmpty()) {
+				throw new SelectedFilePathEmptyException();
+			} else {
+				newFilePath += "/taskbook.xml";
+				raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
+			}
+		} else {
+			raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
+		}
+		ConfigUtil.saveConfig(new Config(newFilePath), Config.USER_CONFIG_FILE);
+		return newFilePath;
 	}
 
     //=========== Filtered Task List Accessors ===============================================================

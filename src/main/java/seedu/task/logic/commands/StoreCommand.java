@@ -1,9 +1,13 @@
 package seedu.task.logic.commands;
 
+import java.io.File;
 import java.io.IOException;
 
+import javafx.stage.DirectoryChooser;
 import seedu.task.commons.core.Config;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.SelectedFilePathEmptyException;
 import seedu.task.commons.util.ConfigUtil;
+import javafx.stage.Stage;
 
 /**
  * Stores current task book in the specified location.
@@ -21,6 +25,7 @@ public class StoreCommand extends Command{
 	private String newSaveLocation;
 	
 	public StoreCommand() {
+			
 		
 	}
 	
@@ -31,10 +36,11 @@ public class StoreCommand extends Command{
 	@Override
 	public CommandResult execute() {
 		try {
-			ConfigUtil.saveConfig(new Config(newSaveLocation), Config.USER_CONFIG_FILE);
-			model.indicateStorageFilePathChanged(newSaveLocation);
+			newSaveLocation = model.changeStorageFilePath(newSaveLocation);
+		} catch (SelectedFilePathEmptyException e) {
+			return new CommandResult(MESSAGE_FAIL);
 		} catch (IOException e) {
-		    return new CommandResult(MESSAGE_FAIL);
+			return new CommandResult(MESSAGE_FAIL);
 		}
 		return new CommandResult(String.format(MESSAGE_SUCCESS, newSaveLocation));
 	}

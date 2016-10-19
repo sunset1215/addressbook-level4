@@ -78,7 +78,7 @@ public class ParserManager {
             
         case StoreCommand.COMMAND_WORD:
             // TODO: implement parser for store command, to read valid file path
-        	return new StoreCommand("C:\\Users\\Vivian\\Desktop\\taskbook.xml");
+        	return new StoreCommand("");
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);

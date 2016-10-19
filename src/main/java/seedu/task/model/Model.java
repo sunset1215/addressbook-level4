@@ -1,12 +1,14 @@
 package seedu.task.model;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.SelectedFilePathEmptyException;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -42,5 +44,7 @@ public interface Model {
 
     /** Indicates storage file path changed */
     void indicateStorageFilePathChanged(String newFilePath);
+    
+    String changeStorageFilePath(String newFilePath) throws SelectedFilePathEmptyException, IOException;
 
 }

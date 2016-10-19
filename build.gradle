@@ -166,10 +166,10 @@ allTests.mustRunAfter headless
 
 defaultTasks 'clean', 'headless', 'allTests', 'coverage'
 
-version = '1.0'
+version = '0.3'
 task makeSuperTasker(type: Jar) {
 	manifest {
-        attributes 'Implementation-Title': 'Gradle Jar File Example',
+        attributes 'Implementation-Title': 'The Alpha Release',
         	'Implementation-Version': version,
         	'Main-Class': 'seedu.task.MainApp'
     }

@@ -77,7 +77,10 @@ allprojects {
         archiveName = "supertasker.jar"
 
         manifest {
-            attributes "Main-Class": "seedu.task.MainApp"
+            attributes 
+            "Implementation-Title": "The Alpha Release",
+        	"Implementation-Version": "0.3",
+        	"Main-Class": "seedu.task.MainApp"
         }
 
         destinationDir = file("${buildDir}/jar/")

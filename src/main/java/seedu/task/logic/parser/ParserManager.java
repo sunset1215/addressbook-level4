@@ -70,12 +70,15 @@ public class ParserManager {
         case ListCommand.COMMAND_WORD:
             return new ListParser().parseCommand(arguments);
 
+        case StoreCommand.COMMAND_WORD:
+        	return new StoreParser().parseCommand(arguments);
+            
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
+            
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

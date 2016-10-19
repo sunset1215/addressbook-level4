@@ -186,11 +186,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
-                "add []\\[;] -d 13-10-2016", Name.MESSAGE_NAME_CONSTRAINTS);
-//        assertCommandBehavior(
-//                "add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
-
+                "add []\\[;] 13-10-2016", expectedMessage);
     }
 
     @Test

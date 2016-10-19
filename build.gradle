@@ -165,3 +165,16 @@ guiTests.mustRunAfter headless
 allTests.mustRunAfter headless
 
 defaultTasks 'clean', 'headless', 'allTests', 'coverage'
+
+version = '1.0'
+task makeSuperTasker(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+        	'Implementation-Version': version,
+        	'Main-Class': 'seedu.task.MainApp'
+    }
+    baseName = 'SuperTasker'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+

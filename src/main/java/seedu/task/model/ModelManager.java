@@ -114,7 +114,6 @@ public class ModelManager extends ComponentManager implements Model {
 			newFilePath = getNewFilePathFromDirectoryChooser();
 		}
 		newFilePath += "\\taskbook.xml";
-		System.out.println(newFilePath);
 		raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
 		ConfigUtil.saveConfig(new Config(newFilePath), Config.USER_CONFIG_FILE);
 		return newFilePath;

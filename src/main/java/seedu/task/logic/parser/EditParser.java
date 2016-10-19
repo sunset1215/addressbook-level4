@@ -37,7 +37,7 @@ public class EditParser extends Parser{
 		try {
 			if (isEventCommand(args)) {
 				toReturn = createEventTask(args);
-			} if (isDeadlineCommand(args)) {
+			} else if (isDeadlineCommand(args)) {
 				toReturn = createDeadlineTask(args);
 			} else if (isFloatingCommand(args)) {
 				toReturn = createFloatingTask(args);
@@ -74,7 +74,6 @@ public class EditParser extends Parser{
 	private int tryParseIndex(String argIndex) throws NullPointerException, IllegalArgumentException {
         Optional<Integer> index = parseIndex(argIndex);
         if(!index.isPresent()){
-            System.out.println("invalid index");
             throw new IllegalArgumentException();
         }
         

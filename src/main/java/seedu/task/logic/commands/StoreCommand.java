@@ -28,7 +28,6 @@ public class StoreCommand extends Command{
 	@Override
 	public CommandResult execute() {
 		try {
-		    System.out.println(newSaveLocation);
 			newSaveLocation = model.changeStorageFilePath(newSaveLocation);
 		} catch (DirectoryChooserOperationCancelledException e) {
 			return new CommandResult(MESSAGE_CANCEL_STORE_OPERATION);

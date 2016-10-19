@@ -75,7 +75,6 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() {
-
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (lastShownList.size() < targetIndex) {
@@ -84,41 +83,39 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-        
+        int taskIndex;
+        Task resultTask = null;
         try {
-        	Task taskEditedTo = createTaskEditedTo(taskToEdit);
-            model.editTask(taskToEdit, taskEditedTo);
-            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskEditedTo));
-            
+			taskIndex = model.getIndex(taskToEdit);
+		
+	        switch (editCase) {
+	        case EDIT_CASE_DEADLINE:
+	            resultTask = new DeadlineTask(taskToEdit.getName(), endDateTime);
+	            break;
+	        case EDIT_CASE_EVENT:
+	            resultTask = new EventTask(taskToEdit.getName(), startDateTime, endDateTime);
+	            break;
+	        case EDIT_CASE_FLOATING:
+	        	resultTask = new Task(new Name(newName));
+	        	break;
+	        default:
+	            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+	        }
+	        
+	        try {
+				model.deleteTask(taskToEdit, "edit");
+				model.addTask(taskIndex, resultTask);
+				System.out.println("add task");
+			} catch (DuplicateTaskException e) {
+				e.printStackTrace();
+			}
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         	return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
-        } catch (DuplicateTaskException dte) {
-            return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
-        } catch (IllegalValueException e) {
-        	return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
+        } catch (IllegalValueException e1) {
+            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
 		}
-    }
-
-    /**
-     * Returns a new task based on the task to be edited and the parameters of the edit command
-     * @throws IllegalValueException 
-     */
-    private Task createTaskEditedTo(ReadOnlyTask taskToEdit) throws IllegalValueException {
-        Task taskEditedTo = null;
-        switch (editCase) {
-        case EDIT_CASE_DEADLINE:
-            taskEditedTo = new DeadlineTask(taskToEdit.getName(), endDateTime, taskToEdit.getStatus());
-            break;
-        case EDIT_CASE_EVENT:
-            taskEditedTo = new EventTask(taskToEdit.getName(), startDateTime, endDateTime, taskToEdit.getStatus());
-            break;
-        case EDIT_CASE_FLOATING:
-        	taskEditedTo = new Task(new Name(newName), taskToEdit.getStatus());
-        	break;
-        default:
-            assert false : "The task to edit to must either be a deadline or an event";
-        }
-        return taskEditedTo;
+        
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, resultTask));
     }
 }

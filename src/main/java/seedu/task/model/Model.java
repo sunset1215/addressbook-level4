@@ -1,15 +1,20 @@
 package seedu.task.model;
 
 import seedu.task.commons.core.UnmodifiableObservableList;
+
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
+import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.util.EmptyStackException;
 import java.time.LocalDate;
 import java.util.Set;
+
+import com.google.common.base.Throwables;
 
 /**
  * The API of the Model component.
@@ -22,13 +27,16 @@ public interface Model {
     ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws TaskNotFoundException;
+    void deleteTask(ReadOnlyTask target, String callingCommand) throws UniqueTaskList.TaskNotFoundException;
 
     /** Adds the given task */
     void addTask(Task taskToAdd) throws DuplicateTaskException;
     
-    /** Edits the given task */
-    void editTask(ReadOnlyTask taskToEdit, Task taskEditedTo) throws TaskNotFoundException, DuplicateTaskException;
+    /** Adds the given task at a given index */
+    void addTask(int index, Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Get index of given task*/
+    int getIndex(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     
     /** Completes the given task */
     void completeTask(ReadOnlyTask taskToComplete) throws TaskNotFoundException, TaskAlreadyCompletedException;
@@ -42,6 +50,12 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
     
+    /** Undo the most recent task*/
+    void undo() throws EmptyStackException;
+    
+    /**Provide undo information to user**/
+    String getUndoInformation();
+
     /** 
      * Updates the filter of the filtered task list to filter tasks by status
      * @param status true = completed tasks, false = pending tasks 

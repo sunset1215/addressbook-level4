@@ -322,7 +322,7 @@ public class LogicManagerTest {
         List<Task> threeTasks = helper.generateTaskList(3);
 
         TaskBook expectedAB = helper.generateTaskBook(threeTasks);
-        expectedAB.removeTask(threeTasks.get(1));
+        expectedAB.removeTask(threeTasks.get(1), "delete");
         helper.addToModel(model, threeTasks);
 
         assertCommandBehavior("delete 2",

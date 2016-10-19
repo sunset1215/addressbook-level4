@@ -68,7 +68,7 @@ public class ParserManager {
             return new FindParser().parseCommand(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListParser().parseCommand(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

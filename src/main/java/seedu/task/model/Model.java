@@ -8,6 +8,7 @@ import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -38,8 +39,19 @@ public interface Model {
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
+    /** Updates the filter of the filtered task list to filter by the given keywords */
     void updateFilteredTaskList(Set<String> keywords);
+    
+    /** 
+     * Updates the filter of the filtered task list to filter tasks by status
+     * @param status true = completed tasks, false = pending tasks 
+     */
+    void updateFilteredListByStatus(boolean status);
+    
+    /** 
+     * Updates the filter of the filtered task list to filter tasks by task end date
+     */
+    void updateFilteredListByDate(LocalDate date);
 
     /** Clears completed tasks from the task book */
     void clearCompletedTasks() throws NoCompletedTasksFoundException;

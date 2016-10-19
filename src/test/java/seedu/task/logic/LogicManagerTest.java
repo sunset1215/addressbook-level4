@@ -229,7 +229,6 @@ public class LogicManagerTest {
 
     }
 
-
     @Test
     public void execute_list_showsAllTasks() throws Exception {
         // prepare expectations
@@ -240,12 +239,11 @@ public class LogicManagerTest {
         // prepare task book state
         helper.addToModel(model, 2);
 
-        assertCommandBehavior("list",
-                ListCommand.MESSAGE_SUCCESS,
+        assertCommandBehavior("list /a",
+                ListCommand.MESSAGE_LIST_ALL_SUCCESS,
                 expectedAB,
                 expectedList);
     }
-
 
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command

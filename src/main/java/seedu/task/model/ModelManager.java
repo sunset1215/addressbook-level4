@@ -6,8 +6,10 @@ import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
+import seedu.task.commons.util.DateUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Status;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
@@ -15,6 +17,7 @@ import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -121,6 +124,16 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
+    
+    @Override
+    public void updateFilteredListByStatus(boolean status) {
+        updateFilteredTaskList(new PredicateExpression(new StatusQualifier(status)));
+    }
+    
+    @Override
+    public void updateFilteredListByDate(LocalDate date) {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
+    }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -177,4 +190,55 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", nameKeyWords);
         }
     }
+    
+    /**
+     * Class used to filter tasks by status
+     */
+    private class StatusQualifier implements Qualifier {
+        
+        private boolean status;
+        
+        StatusQualifier(boolean status) {
+            this.status = status;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return task.getStatus().isComplete() == status;
+        }
+
+        @Override
+        public String toString() {
+            String taskStatus;
+            if (status) {
+                taskStatus = Status.STATUS_COMPLETE_STRING;
+            } else {
+                taskStatus = Status.STATUS_PENDING_STRING;
+            }
+            return "status=" + taskStatus;
+        }
+    }
+    
+    /**
+     * Class used to filter tasks by end date
+     */
+    private class DateQualifier implements Qualifier {
+        
+        private LocalDate date;
+        
+        DateQualifier(LocalDate date) {
+            this.date = date;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return DateUtil.isEqual(task.getEnd(), date);
+        }
+
+        @Override
+        public String toString() {
+            return "endDate=" + DateUtil.formatLocalDateToString(date);
+        }
+    }
+
 }

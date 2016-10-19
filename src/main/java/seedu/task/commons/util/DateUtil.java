@@ -3,6 +3,8 @@ package seedu.task.commons.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import seedu.task.model.task.TaskDate;
@@ -13,16 +15,30 @@ import seedu.task.model.task.TaskDate;
  *
  */
 public class DateUtil {
+    
+    private static DateFormat dateFormatter = new SimpleDateFormat("dd-mm-yyyy");
+    private static DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	/**
      * Parses a String into a Date
-     * 
      * @throws ParseException
      */
     public static Date parseStringToDate(String strDate) throws ParseException {
-        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
-        Date date = df.parse(strDate);
-        return date;
+        return dateFormatter.parse(strDate);
+    }
+    
+    /**
+     * Formats a Date into a string
+     */
+    public static String formatDateToString(Date date) {
+        return dateFormatter.format(date);
+    }
+    
+    /**
+     * Formats a LocalDate into a string
+     */
+    public static String formatLocalDateToString(LocalDate date) {
+        return date.format(localDateFormatter);
     }
     
     /**
@@ -45,5 +61,17 @@ public class DateUtil {
         } catch (ParseException e) {
             return null;
         }
+    }
+    
+    /**
+     * Returns true if both dates fall on the same day.
+     */
+    public static boolean isEqual(TaskDate taskDate, LocalDate date) {
+        if (taskDate == null) {
+            return false;
+        }
+        String date1 = taskDate.toString();
+        String date2 = date.format(localDateFormatter);
+        return date1.equals(date2);
     }
 }

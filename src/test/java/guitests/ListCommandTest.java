@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.task.logic.commands.ListCommand;
+import seedu.task.model.task.Status;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
@@ -29,12 +30,11 @@ public class ListCommandTest extends TaskBookGuiTest {
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
 
         //list completed tasks
-        final boolean isComplete = true;
-        TestTask[] completedList = TestUtil.getTasksFromListByStatus(currentList, isComplete);
+        TestTask[] completedList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_COMPLETE);
         assertListSuccess(completedList, "list /c", ListCommand.MESSAGE_LIST_COMPLETE_SUCCESS);
         
         //list pending tasks
-        TestTask[] pendingList = TestUtil.getTasksFromListByStatus(currentList, !isComplete);
+        TestTask[] pendingList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
         assertListSuccess(pendingList, "list /p", ListCommand.MESSAGE_LIST_PENDING_SUCCESS);
         
         //list all tasks

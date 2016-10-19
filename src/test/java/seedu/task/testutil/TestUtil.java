@@ -317,20 +317,6 @@ public class TestUtil {
     }
     
     /**
-     * Returns a copy of the list with completed tasks removed.
-     * @param tasks The array of tasks
-     */
-    public static TestTask[] clearCompletedTasksFromList(TestTask[] tasks) {
-        List<TestTask> listOfTasks = new ArrayList<TestTask>();
-        for (int i = 0; i < tasks.length; i++) {
-            if (!tasks[i].isComplete()) {
-                listOfTasks.add(tasks[i]);
-            }
-        }
-        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
-    }
-    
-    /**
      * Returns a copy of the list with completed or pending tasks removed, depending on argument status
      * @param tasks The array of tasks
      * @param status completed = true, pending = false

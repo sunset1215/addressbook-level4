@@ -3,6 +3,7 @@ package guitests;
 import org.junit.Test;
 
 import seedu.task.logic.commands.ClearCommand;
+import seedu.task.model.task.Status;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
@@ -41,7 +42,7 @@ public class ClearCommandTest extends TaskBookGuiTest {
         targetIndex = currentList.length/2;
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
         commandBox.runCommand("complete " + targetIndex);
-        currentList = TestUtil.clearCompletedTasksFromList(currentList);
+        currentList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
         
         //verify clear command can clear completed tasks
         commandBox.runCommand("clear");

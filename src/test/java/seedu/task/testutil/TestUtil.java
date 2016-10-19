@@ -329,6 +329,21 @@ public class TestUtil {
         }
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
+    
+    /**
+     * Returns a copy of the list with completed or pending tasks removed, depending on argument status
+     * @param tasks The array of tasks
+     * @param status completed = true, pending = false
+     */
+    public static TestTask[] getTasksFromListByStatus(TestTask[] tasks, boolean status) {
+        List<TestTask> listOfTasks = new ArrayList<TestTask>();
+        for (int i = 0; i < tasks.length; i++) {
+            if (tasks[i].isComplete() == status) {
+                listOfTasks.add(tasks[i]);
+            }
+        }
+        return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
+    }
 
     /**
      * Appends tasks to the array of tasks.

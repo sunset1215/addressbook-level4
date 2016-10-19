@@ -11,9 +11,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.DateUtil;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
-import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.IncorrectCommand;
-import seedu.task.model.task.TaskDate;
 
 /**
  * Parser class used to parse a add command

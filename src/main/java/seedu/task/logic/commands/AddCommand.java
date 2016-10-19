@@ -1,13 +1,9 @@
 package seedu.task.logic.commands;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.*;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Adds a task to our task book

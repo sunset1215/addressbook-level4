@@ -116,21 +116,28 @@ public class ModelManager extends ComponentManager implements Model {
 	@Override
 	public String changeStorageFilePath(String newFilePath) throws SelectedFilePathEmptyException, IOException {
 		if(newFilePath.isEmpty()) {
-			DisplayDirectoryChooserRequestEvent event = new DisplayDirectoryChooserRequestEvent();
-			raise(event);
-			newFilePath = event.getChosenFilePath();
-			if(newFilePath.isEmpty()) {
-				throw new SelectedFilePathEmptyException();
-			} else {
-				newFilePath += "/taskbook.xml";
-				raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
-			}
-		} else {
-			raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
+			newFilePath = getNewFilePathFromDirectoryChooser();
 		}
+		raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
 		ConfigUtil.saveConfig(new Config(newFilePath), Config.USER_CONFIG_FILE);
 		return newFilePath;
 	}
+
+	/**
+	 * Returns the file path user has selected with the directory chooser
+	 * @throws SelectedFilePathEmptyException if user cancels the operation
+	 */
+    private String getNewFilePathFromDirectoryChooser() throws SelectedFilePathEmptyException {
+        DisplayDirectoryChooserRequestEvent event = new DisplayDirectoryChooserRequestEvent();
+        raise(event);
+        String newFilePath = event.getChosenFilePath();
+        if(newFilePath.isEmpty()) {
+        	throw new SelectedFilePathEmptyException();
+        } else {
+        	newFilePath += "\taskbook.xml";
+        }
+        return newFilePath;
+    }
 	
 	@Override
     public void clearCompletedTasks() throws NoCompletedTasksFoundException {

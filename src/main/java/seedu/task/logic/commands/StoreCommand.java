@@ -1,13 +1,8 @@
 package seedu.task.logic.commands;
 
-import java.io.File;
 import java.io.IOException;
 
-import javafx.stage.DirectoryChooser;
-import seedu.task.commons.core.Config;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.SelectedFilePathEmptyException;
-import seedu.task.commons.util.ConfigUtil;
-import javafx.stage.Stage;
 
 /**
  * Stores current task book in the specified location.
@@ -20,14 +15,10 @@ public class StoreCommand extends Command{
 		    + "\nExample: " + COMMAND_WORD + " C:\\Users\\Jim\\Desktop";
 	
 	public static final String MESSAGE_SUCCESS = "Storage Location Updated: %1$s";
-	public static final String MESSAGE_FAIL = "Unable to save new location into config";
+	public static final String MESSAGE_SAVE_CONFIG_FAIL = "Unable to save new location into config";
+	public static final String MESSAGE_CANCEL_STORE_OPERATION = "No file location specified!";
 	
 	private String newSaveLocation;
-	
-	public StoreCommand() {
-			
-		
-	}
 	
 	public StoreCommand(String fileLocation) {
 		newSaveLocation = fileLocation;
@@ -38,9 +29,9 @@ public class StoreCommand extends Command{
 		try {
 			newSaveLocation = model.changeStorageFilePath(newSaveLocation);
 		} catch (SelectedFilePathEmptyException e) {
-			return new CommandResult(MESSAGE_FAIL);
+			return new CommandResult(MESSAGE_CANCEL_STORE_OPERATION);
 		} catch (IOException e) {
-			return new CommandResult(MESSAGE_FAIL);
+			return new CommandResult(MESSAGE_SAVE_CONFIG_FAIL);
 		}
 		return new CommandResult(String.format(MESSAGE_SUCCESS, newSaveLocation));
 	}

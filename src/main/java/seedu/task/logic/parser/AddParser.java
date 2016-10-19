@@ -69,7 +69,6 @@ public class AddParser extends Parser {
         }
     }
 	
-	
 	/**
      * Splits arguments of the add command
      * @param args

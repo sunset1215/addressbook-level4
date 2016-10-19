@@ -1,17 +1,11 @@
 package seedu.task.logic.parser;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.commons.util.CollectionUtil;
-import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.commands.*;
-import seedu.task.model.task.TaskDate;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.task.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,24 +56,23 @@ public class ParserManager {
             return new EditParser().parseCommand(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearParser().parseCommand(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindParser().parseCommand(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListParser().parseCommand(arguments);
 
+        case StoreCommand.COMMAND_WORD:
+        	return new StoreParser().parseCommand(arguments);
+            
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
             
-        case StoreCommand.COMMAND_WORD:
-            // TODO: implement parser for store command, to read valid file path
-        	return new StoreCommand("");
-
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }

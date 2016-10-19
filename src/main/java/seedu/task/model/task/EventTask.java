@@ -1,5 +1,7 @@
 package seedu.task.model.task;
 
+import java.util.Objects;
+
 /*
  * Represents a task as an event, i.e. it will have a start and end date/time
  */
@@ -61,4 +63,18 @@ public class EventTask extends Task{
 		return endDate;
 	}
 
+	@Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeadlineTask // instanceof handles nulls
+                && this.hashCode() == other.hashCode());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(getName(),
+        		"startDate:" + startDate.toString(),
+        		"endDate:" + endDate.toString());
+    }
 }

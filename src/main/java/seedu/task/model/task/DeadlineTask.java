@@ -1,5 +1,7 @@
 package seedu.task.model.task;
 
+import java.util.Objects;
+
 /*
  * Represents a task with a deadline
  */
@@ -43,5 +45,17 @@ public class DeadlineTask extends Task{
 	public TaskDate getEnd() {
 		return endDate;
 	}
+	
+	@Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeadlineTask // instanceof handles nulls
+                && this.hashCode() == other.hashCode());
+    }
 
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(getName(), "endDate:" + endDate.toString());
+    }
 }

@@ -1,8 +1,8 @@
 package seedu.task.model.task;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import seedu.task.commons.util.DateUtil;
 
 /**
  * Represents a Task name in the Task List.
@@ -26,8 +26,7 @@ public class TaskDate {
     
     @Override
     public String toString() {
-        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
-        return df.format(taskDate);
+        return DateUtil.formatDateToString(taskDate);
     }
 
     @Override

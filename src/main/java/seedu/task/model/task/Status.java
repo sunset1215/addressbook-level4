@@ -10,8 +10,8 @@ public class Status {
     public static final boolean STATUS_COMPLETE = true;
     public static final boolean STATUS_PENDING = false;
     
-    private static final String STATUS_COMPLETE_STRING = "Complete";
-    private static final String STATUS_PENDING_STRING = "Pending";
+    public static final String STATUS_COMPLETE_STRING = "Complete";
+    public static final String STATUS_PENDING_STRING = "Pending";
     
     public static final String MESSAGE_STATUS_CONSTRAINTS = "Task status should be 'Complete' or 'Pending' only";
     

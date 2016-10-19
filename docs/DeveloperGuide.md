@@ -51,7 +51,7 @@
   
 **Problem: Eclipse reports some required libraries missing**
 * Reason: Required libraries may not have been downloaded during the project import. 
-* Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
+* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
  
 
 ## Design
@@ -62,7 +62,7 @@
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connect them up with each other.
 * At shut down: Shuts down the components and invoke cleanup method where necessary.
 
@@ -91,7 +91,7 @@ command `delete 3`.
 
 <img src="images\SDforDeletePerson.png" width="800">
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskBookChangedEvent` when the SuperTasker data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -108,15 +108,15 @@ The sections below give more details of each component.
 
 <img src="images/UiClassDiagram.png" width="800"><br>
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 and they can be loaded using the `UiPartLoader`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -128,11 +128,11 @@ The `UI` component,
 
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -143,28 +143,28 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
 
 The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the SuperTasker data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 ### Storage component
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
+<img src="images/StorageComponentDiagram.png" width="800"><br>
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the SuperTasker data in xml format and read it back.
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.task.commons` package.
 
 ## Implementation
 
@@ -213,13 +213,13 @@ We have two types of tests:
   
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.UrlUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units 
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as 
       how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      e.g. `seedu.task.logic.LogicManagerTest`
   
 **Headless GUI Testing** :
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -258,7 +258,7 @@ Here are the steps to create a new release.
    
 ### Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, SuperTasker depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -268,7 +268,6 @@ b. Require developers to download those libraries manually (this creates extra w
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
-
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
@@ -294,166 +293,155 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add Task
+#### Use case: Add task
 
 **MSS**
 
-1. User requests to add a task
-2. User types `add TASK_NAME [START_TIME] [END_TIME] [TIMELEFT]`
-3. User is notified that the task got added<br>
+1. User requests to add a task.
+2. System notifies user that the task is added successfully and displays the newly added task.<br>
 Use case ends.
 
 **Extensions**
 
 2a. Task already exists
 
-> 2a1. The user is notified that the task already exists
+> 2a1. System displays feedback that the task already exists.
 
-#### Use case: SetComplete
+2b. Invalid command format entered
+
+> 2b1. System notifies user that the command entered is invalid and correct usage of the command.
+
+#### Use case: Complete task
 
 **MSS**
 
-1. User requests to set a task as completed
-2. User types `setcomplete TASK_INDEX`
-3. User is notified that the task was marked as completed<br>
+1. User requests to list tasks or find tasks.
+2. System displays list of tasks.
+3. User requests to set a task in the list as complete.
+4. System notifies user that the task is set as complete successfully.
 Use case ends.
 
 **Extensions**
 
-2a. The task was already completed
-2b. The task doesn't exist
+3a. Task was already set as complete.
 
-> 2a1.The user is notified that the task was already completed
-> 2b1.The user is notified that the task was not found
+> 3a1. System notifies user that the task was already set as complete.
 
-#### Use case: Delete
+3b. Specified task index is invalid
+
+> 3b1. System notifies user that the task index provided is invalid.
+
+#### Use case: Delete task
 
 **MSS**
 
-1. User requests to delete a task.
-2. User types `delete TASK_INDEX`
-3. User is notified that the task was deleted<br>
+1. User requests to list tasks or find tasks.
+2. System displays list of tasks.
+3. User requests to delete a task in the list.
+4. System notifies user that the task was deleted.<br>
 Use case ends.
 
 **Extensions**
 
-2a. The task doesn't exist
+3a. Task does not exist
 
-> 2a1.The user is notified that the task was not found
+> 3a1. System notifies user that the task was not found.
 
-#### Use case: Find
+3b. Specified task index is invalid
+
+> 3b1. System notifies user that the task index provided is invalid.
+
+#### Use case: Find tasks
 
 **MSS**
 
 1. User requests to find a task.
-2. User types `find KEYWORD [MORE KEYWORDS]`
-3. We display a list of tasks that match given keywords<br>
+2. System displays a list of tasks that match given keywords.<br>
 Use case ends.
 
 **Extensions**
 
-2a. No match found
+1a. No match found
 
-> 2a1. We notify the user that there was no match found
+> 1a1. System displays an empty list.
 
-#### Use case: Edit
+#### Use case: Edit task
 
 **MSS**
 
-1. User requests to edit a task.
-2. User types `edit TASK_INDEX”`
-3. We display the task with the given TASK_INDEX 
-4. We copy the task in the prompt
-5. The user is allowed to modify it<br>
+1. User requests to list tasks or find tasks.
+2. System displays list of tasks.
+3. User requests to edit a task in the list.
+4. System updates the displayed list.<br>
 Use case ends.
 
 **Extensions**
 
-2a. The task doesn’t exist
+3a. Task does not exist
 
-> 2a1. The user is notified that the task was not found
+> 3a1. System notifies user that the task was not found.
 
-#### Use case: View
+3b. Specified task index is invalid
+
+> 3b1. System notifies user that the task index provided is invalid.
+
+#### Use case: List tasks
 
 **MSS**
 
-1. User requests to view a task.
-2. User types `view TASK_INDEX`
-3. We display the task with the given TASK_INDEX <br>
+1. User requests to list tasks due today.
+2. System displays list of tasks due today.<br>
 Use case ends.
 
-**Extensions**
+1a. User requests to list all tasks.
 
-2a. The task doesn’t exist
+> 1a1. System displays list of all tasks.
 
-> 2a1. The user is notified that the task was not found
+1b. User requests to list completed tasks.
 
-#### Use case: List
+> 1b1. System displays list of completed tasks.
+
+1c. User requests to list pending tasks.
+
+> 1c1. System displays list of pending tasks.
+
+2a. No tasks found
+
+> 2a1. System displays an empty list.
+
+#### Use case: Undo previous commands
 
 **MSS**
 
-1. User requests to list a task.
-2. User types `list`
-3. We display the tasks available for today<br>
+1. User requests to undo the previous command.
+2. System notifies user that the command was undone.<br>
 Use case ends.
 
 **Extensions**
 
-2a. There are no tasks for today
+1a. There is no command to undo
 
-> 2a1. The user is notified that there are no available tasks for today
+> 1a1. The user is notified that there is no command to undo
 
-#### Use case: Undo
+#### Use case: Change storage location
 
 **MSS**
 
-1. User requests to list a task.
-2. User types `undo`
-3. User is notified that the last command was undone and we display which command was undone<br>
+1. User requests to change the storage location.
+2. System notifies user that the storage location has been changed.<br>
 Use case ends.
 
 **Extensions**
 
-2a. There is no command to undo
+1a. Storage location does not exist
 
-> 2a1. The user is notified that there is no command to undo
+> 1a1. System notifies user that the the storage location does not exist.
 
-#### Use case: Help
-
-**MSS**
-
-1. User requests for help.
-2. User types `help`
-3. Helpful information is then displayed <br>
-Use case ends.
-
-**Extensions**
-
-Use case ends.
-
-#### Use case: Store
-
-**MSS**
-
-1. User requests to chnage the storage location.
-2. User types `store FILE_LOCATION`
-3. User is notified of the storage location specified has been set.<br>
-Use case ends.
-
-**Extensions**
-
-2a. Storage location does not exist
-
-> 2a1. The user is notified that the the storage location does not exist.
-
-2b. Storage Location does not have enough space
-
-> 2b1. The user is notified that the disk specified is full.
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons.
+2. Should be able to hold up to 1000 tasks.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands. 
 5. Should be able to retrieve a given event/deadline in 1s when searching. 
@@ -464,7 +452,7 @@ Use case ends.
 
 #####  Floating Task 
 
-> A task without any time contraints
+> A task without any time constraints
 
 #####  Event
 
@@ -472,7 +460,7 @@ Use case ends.
 
 #####  Deadline
 
-> A deadline is a time contraint that can be added to a task. It defines an end time/date than a task must be completed by.
+> A deadline is a time constraint that can be added to a task. It defines an end time/date than a task must be completed by.
 
 ##### Mainstream OS
 

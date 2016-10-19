@@ -51,24 +51,20 @@ Format: `help`
  
 #### Adding a task : `add`
 Adds a task to the task manager.<br>
-Format: `add TASK_NAME [-d e/END_DATETIME] [-e s/START_DATETIME e/END_DATETIME]` 
+Format: `add TASK_NAME [s/START_DATETIME] [e/END_DATETIME]` 
 
 > To add a floating task, user is required to provide `TASK_NAME` only.<br>
   To add a deadline, user is required to provide `END_DATETIME` in addition to `TASK_NAME`.<br>
   To add an event, user is required to provide `START_DATETIME` and `END_DATETIME` in addition to `TASK_NAME`.<br>
-  The optional parameters for this command are mutually exclusive.
-  For example, if `-d` is specified, then the task is a deadline. Thus it is invalid to specify `-e` to make it an event.<br>
   Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
 
 Examples: 
 * `add follow up with Jack on sales report`<br>
   Adds a floating task named `follow up with Jack on sales report`.
-* `add assignment 3 -d e/12 Oct`<br>
+* `add assignment 3 e/12 Oct`<br>
   Adds a deadline named `assignment 3` due on 12th October 2016.
-* `add project Highlight -e s/1-10-2016 e/14-11-2016`<br>
+* `add project Highlight s/1-10-2016 e/14-11-2016`<br>
   Adds an event named `project Highlight` starting on 1st October 2016 to 14th November 2016.
-* `add driving test -d e/16 Nov -e s/10 Oct e/16 Nov`<br>
-  This is an invalid command, as a task cannot be both a deadline and an event.
   
 #### Set task as complete : `complete`
 Sets the specified task as complete.<br>
@@ -132,34 +128,22 @@ Examples:
   
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
-Format: `edit TASK_INDEX [-d e/END_DATETIME] [-e [s/START_DATETIME] e/END_DATETIME] [-e s/START_DATETIME [e/END_DATETIME]]`
+Format: `edit TASK_INDEX [s/START_DATETIME] [e/END_DATETIME] [NEW_NAME]`
 
 > Edits the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...<br>
   Specified parameters will overwrite previous data.<br>
-  User can specify `END_DATETIME` along with `-d` to turn the task into a deadline.<br>
-  User can specify `START_DATETIME` or/both `END_DATETIME` to turn the task into an event.<br>
+  User can specify `END_DATETIME` along with to turn the task into a deadline.<br>
+  User can specifies both `START_DATETIME` and `END_DATETIME` to turn the task into an event.<br>
+  User can specify a new task name to turn current task into a floating task.<br>
   Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
 
 Examples: 
 * `list`<br>
-  `edit 2 -d e/23-10-2016`<br>
+  `edit 2 e/23-10-2016`<br>
   Edit the 2nd task in the task manager into a deadline 23rd October 2016.
   
-#### Viewing a task : `view`
-Views details of the specified task from the task manager.<br>
-Format: `view TASK_INDEX`
-
-> Views details of the task at the specified `TASK_INDEX`.<br>
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-
-Examples: 
-* `list`<br>
-  `view 2`<br>
-  Displays details of the 2nd task in the task manager.
-
 #### Undoing the last command : `undo`
 Undo the last command executed.<br>
 Format: `undo`
@@ -204,12 +188,12 @@ There is no need to save manually.
 Command | Format | Description 
 ----------- | ------------------------------- | :--------- 
 Help | `help` | View help on command usage
-Add | `add TASK_NAME [-d e/END_DATETIME] [-e s/START_DATETIME e/END_DATETIME]` | Add a task
+Add | `add TASK_NAME [s/START_DATETIME] [e/END_DATETIME]` | Add a task
 Complete | `complete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
 Delete | `delete TASK_INDEX` | Delete a task
 Find | `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]` | Find all tasks containing any keywords
-Edit | `edit TASK_INDEX [-d e/END_DATETIME] [-e [s/START_DATETIME] e/END_DATETIME] [-e s/START_DATETIME [e/END_DATETIME]]` | Edit a task
+Edit | `edit TASK_INDEX [s/START_DATETIME] [e/END_DATETIME] [NEW_NAME]` | Edit a task
 View | `view TASK_INDEX` | View details of a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks

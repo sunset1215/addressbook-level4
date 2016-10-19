@@ -90,7 +90,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleStorageFilePathChangedEvent(StorageFilePathChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Filepath changed"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Storage file path changed"));
         TaskBookStorage newTaskBookStorage = new XmlTaskBookStorage(event.getNewFilePath());
         try {
             newTaskBookStorage.saveTaskBook(event.getCurrentTaskBook());

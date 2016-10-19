@@ -4,16 +4,16 @@ import seedu.task.commons.events.BaseEvent;
 
 public class DisplayDirectoryChooserRequestEvent extends BaseEvent {
 	
-	public static class SelectedFilePathEmptyException extends Exception {}
+	public static class DirectoryChooserOperationCancelledException extends Exception {}
 	
-	private String chosenFilePath;
+	private String selectedFilePath;
 	
-	public void setChosenFilePath(String selectedFilePath) {
-		chosenFilePath = selectedFilePath;
+	public void setSelectedFilePath(String selectedFilePath) {
+		this.selectedFilePath = selectedFilePath;
 	}
 	
-	public String getChosenFilePath() {
-		return chosenFilePath;
+	public String getSelectedFilePath() {
+		return selectedFilePath;
 	}
 
 	@Override

@@ -137,14 +137,11 @@ public class UiManager extends ComponentManager implements Ui {
     private void handleDisplayDirectoryChooserRequestEvent(DisplayDirectoryChooserRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         final DirectoryChooser directoryChooser = new DirectoryChooser();
-        final File selectedDirectory =
-        		directoryChooser.showDialog(mainWindow.getPrimaryStage());
+        final File selectedDirectory = directoryChooser.showDialog(mainWindow.getPrimaryStage());
         if (selectedDirectory != null) {
-        	event.setChosenFilePath(selectedDirectory.getAbsolutePath());
-        	System.out.println(selectedDirectory.getAbsolutePath());
+        	event.setSelectedFilePath(selectedDirectory.getAbsolutePath());
         } else {
-        	event.setChosenFilePath("");
-        	System.out.println("didn't select");
+        	event.setSelectedFilePath("");
         }
     }
 

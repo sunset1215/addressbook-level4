@@ -8,7 +8,7 @@ import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
-import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.SelectedFilePathEmptyException;
+import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.DirectoryChooserOperationCancelledException;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
 import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.DateUtil;
@@ -17,7 +17,6 @@ import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Status;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
-import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
@@ -110,15 +109,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 	
 	@Override
-	public void indicateStorageFilePathChanged(String newFilePath) {
-	    raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
-	}
-	
-	@Override
-	public String changeStorageFilePath(String newFilePath) throws SelectedFilePathEmptyException, IOException {
+	public String changeStorageFilePath(String newFilePath) throws DirectoryChooserOperationCancelledException, IOException {
 		if(newFilePath.isEmpty()) {
 			newFilePath = getNewFilePathFromDirectoryChooser();
 		}
+		newFilePath += "\\taskbook.xml";
+		System.out.println(newFilePath);
 		raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
 		ConfigUtil.saveConfig(new Config(newFilePath), Config.USER_CONFIG_FILE);
 		return newFilePath;
@@ -126,16 +122,14 @@ public class ModelManager extends ComponentManager implements Model {
 
 	/**
 	 * Returns the file path user has selected with the directory chooser
-	 * @throws SelectedFilePathEmptyException if user cancels the operation
+	 * @throws DirectoryChooserOperationCancelledException if user cancels the operation
 	 */
-    private String getNewFilePathFromDirectoryChooser() throws SelectedFilePathEmptyException {
+    private String getNewFilePathFromDirectoryChooser() throws DirectoryChooserOperationCancelledException {
         DisplayDirectoryChooserRequestEvent event = new DisplayDirectoryChooserRequestEvent();
         raise(event);
-        String newFilePath = event.getChosenFilePath();
+        String newFilePath = event.getSelectedFilePath();
         if(newFilePath.isEmpty()) {
-        	throw new SelectedFilePathEmptyException();
-        } else {
-        	newFilePath += "\taskbook.xml";
+        	throw new DirectoryChooserOperationCancelledException();
         }
         return newFilePath;
     }

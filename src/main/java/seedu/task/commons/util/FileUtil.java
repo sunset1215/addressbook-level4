@@ -62,6 +62,7 @@ public class FileUtil {
      * Assumes file exists
      */
     public static String readFromFile(File file) throws IOException {
+        assert file.exists() == true;
         return new String(Files.readAllBytes(file.toPath()), CHARSET);
     }
 
@@ -104,4 +105,13 @@ public class FileUtil {
             return "./" + filePath;
         }
     }
+    
+    /**
+     * Returns true if given file path exists and is a directory
+     */
+    public static boolean isDirectory(String filePath) {
+        File file = new File(filePath);
+        return file.exists() && file.isDirectory();
+    }
+    
 }

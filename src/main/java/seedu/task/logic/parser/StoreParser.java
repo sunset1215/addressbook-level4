@@ -28,11 +28,17 @@ public class StoreParser extends Parser {
 		return f.exists() && f.isDirectory();
 	}
 	
+	/**
+	 * returns an incorrect StoreCommand
+	 */
 	private Command getIncorrectCommand() {
 		return new IncorrectCommand(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, StoreCommand.MESSAGE_USAGE));
 	}
 	
+	/**
+	 * Returns a valid store command given the following arguments
+	 */
 	private Command getStoreCommand(String args) {
 		Path path = Paths.get(args).toAbsolutePath();
 		return new StoreCommand(path.toString());

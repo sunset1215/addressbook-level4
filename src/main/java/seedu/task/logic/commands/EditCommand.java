@@ -2,7 +2,6 @@ package seedu.task.logic.commands;
 
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
-import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.CollectionUtil;
 import seedu.task.model.task.DeadlineTask;
 import seedu.task.model.task.EventTask;
@@ -34,7 +33,7 @@ public class EditCommand extends Command {
     private static final int EDIT_CASE_FLOATING = 2;
 
     public final int targetIndex;
-    private String newName;
+    private Name newName;
     private TaskDate endDateTime;
     private TaskDate startDateTime;
     private int editCase;
@@ -42,11 +41,10 @@ public class EditCommand extends Command {
     /**
      * Constructor for editing specified task into a floating task
      */
-    public EditCommand(int targetIndex, String name) {
+    public EditCommand(int targetIndex, Name name) {
     	if (name == null) {
     		throw new IllegalArgumentException();
     	}
-        assert !CollectionUtil.isAnyNull(endDateTime);
         this.targetIndex = targetIndex;
         this.newName = name;
         editCase = EDIT_CASE_FLOATING;
@@ -96,25 +94,22 @@ public class EditCommand extends Command {
 	            resultTask = new EventTask(taskToEdit.getName(), startDateTime, endDateTime);
 	            break;
 	        case EDIT_CASE_FLOATING:
-	        	resultTask = new Task(new Name(newName));
+	        	resultTask = new Task(newName);
 	        	break;
 	        default:
-	            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+	            assert false : "All cases should have been handled by EditParser.";
 	        }
 	        
 	        try {
 				model.deleteTask(taskToEdit, "edit");
 				model.addTask(taskIndex, resultTask);
-				System.out.println("add task");
 			} catch (DuplicateTaskException e) {
 				e.printStackTrace();
 			}
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         	return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
-        } catch (IllegalValueException e1) {
-            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
-		}
+        }
         
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, resultTask));
     }

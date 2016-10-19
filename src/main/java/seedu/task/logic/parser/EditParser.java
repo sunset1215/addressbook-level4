@@ -8,10 +8,12 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.DateUtil;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.EditCommand;
 import seedu.task.logic.commands.IncorrectCommand;
+import seedu.task.model.task.Name;
 import seedu.task.model.task.TaskDate;
 
 /**
@@ -50,6 +52,8 @@ public class EditParser extends Parser{
         	hasException = true;
         } catch (IllegalArgumentException e) {
         	hasException = true;
+        } catch (IllegalValueException e) {
+            hasException = true;
         }
 		
 		if (hasException) {
@@ -144,8 +148,9 @@ public class EditParser extends Parser{
 	 * 
 	 * @throws ParseException 
 	 * @throws IllegalArgumentException
+	 * @throws IllegalValueException 
 	 */
-	private Command createFloatingTask(String args) throws IllegalArgumentException, ParseException {
+	private Command createFloatingTask(String args) throws IllegalArgumentException, ParseException, IllegalValueException {
 		Matcher matcher = FLOATING_ARGS_FORMAT.matcher(args);
 		
 		if (!matcher.matches()) {
@@ -156,6 +161,6 @@ public class EditParser extends Parser{
 		String name = matcher.group("name").trim();
 		
 		int index = tryParseIndex(indexString);
-        return new EditCommand(index, name);
+        return new EditCommand(index, new Name(name));
 	}
 }

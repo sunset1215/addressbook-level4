@@ -25,14 +25,18 @@ public class TaskBook implements ReadOnlyTaskBook {
 
 	private UniqueTaskList tasks;
 	private UniqueTagList tags;
+	
+	private UndoTaskStack undoTaskStack;
+    private static final String UNDO_ADD_COMMAND = "add";
+    private static final String UNDO_DELETE_COMMAND = "delete";
+    private static final String UNDO_EDIT_COMMAND = "edit";
+    private static final String UNDO_COMPLETE_COMMAND = "complete";
 
-	private Stack<String[]> previousActions = new Stack();
-	private Stack<Task> previousTask = new Stack();
-	private String previousActionUndoString;
-
+	
 	{
 		tasks = new UniqueTaskList();
 		tags = new UniqueTagList();
+		undoTaskStack = new UndoTaskStack();
 	}
 
 	public TaskBook() {
@@ -130,9 +134,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 	 */
 	public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
 		tasks.add(task);
-		String[] action = new String[] { "add", "-1" };
-		previousActions.push(action);
-		previousTask.push(task);
+		undoTaskStack.pushAddToUndoStack(UNDO_ADD_COMMAND, task);
 	}
 
 	/**
@@ -170,9 +172,10 @@ public class TaskBook implements ReadOnlyTaskBook {
 	}
 
 	public boolean removeTask(ReadOnlyTask key, String callingCommand) throws UniqueTaskList.TaskNotFoundException {
-		pushDeleteToUndoStack(key, callingCommand);
+		int targetIndex = tasks.getIndex(key);
 
 		if (tasks.remove(key)) {
+			undoTaskStack.pushDeleteToUndoStack(key, callingCommand, targetIndex);
 			return true;
 		} else {
 			throw new TaskNotFoundException();
@@ -196,53 +199,10 @@ public class TaskBook implements ReadOnlyTaskBook {
 			throw new TaskAlreadyCompletedException();
 		}
 		taskToComplete.setComplete();
+		
+		undoTaskStack.pushCompleteToUndoStack(taskToComplete, UNDO_COMPLETE_COMMAND, targetIndex);
 	}
 
-	/**
-	 * Pushes delete action and deleted task to a stack in the case of an undo
-	 * command. Keeps track of whether this delete action was a straight delete
-	 * command or a delete action of an edit.
-	 * 
-	 * @throws UniqueTaskList.TaskNotFoundException
-	 *             if the task does not exist.
-	 **/
-	private void pushDeleteToUndoStack(ReadOnlyTask key, String callingCommand) throws TaskNotFoundException {
-		String targetIndex = Integer.toString(tasks.getIndex(key));
-
-		String[] action = new String[] { callingCommand, targetIndex };
-		previousActions.push(action);
-
-		Class<? extends ReadOnlyTask> deletedTask = key.getClass();
-
-		if (deletedTask.equals(DeadlineTask.class)) {
-			DeadlineTask deleted = new DeadlineTask(key.getName(), key.getEnd());
-			previousTask.push(deleted);
-		} else if (deletedTask.equals(EventTask.class)) {
-			EventTask deleted = new EventTask(key.getName(), key.getStart(), key.getEnd());
-			previousTask.push(deleted);
-		} else {
-			// deleted task must be a floating task
-			Task deleted = new Task(key.getName());
-			previousTask.push(deleted);
-		}
-	}
-
-	/*
-	 * Separate actions for undo add and undo delete
-	 */
-	public boolean undoRemoveTask(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
-		if (tasks.remove(key)) {
-			return true;
-		} else {
-			throw new UniqueTaskList.TaskNotFoundException();
-		}
-	}
-
-	public void undoAddTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-		tasks.add(taskIndex, task);
-	}
-
-	// --------------------------------------------------------------------------------
 	public int getIndex(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
 		return tasks.getIndex(key);
 	}
@@ -270,53 +230,11 @@ public class TaskBook implements ReadOnlyTaskBook {
 	}
 
 	public void undoTask() {
-		if (!previousActions.isEmpty()) {
-			String[] userActionSet = previousActions.pop();
-			Task userTask = previousTask.pop();
-
-			String userAction = userActionSet[0];
-			int taskIndex = Integer.parseInt(userActionSet[1]);
-
-			switch (userAction) {
-			// previous action was an add; delete the added task
-			case "add":
-				try {
-					undoRemoveTask(userTask);
-					previousActionUndoString = userAction + " " + userTask.toString();
-				} catch (TaskNotFoundException e) {
-					e.printStackTrace();
-				}
-				break;
-			// previous action was a delete; add back the deleted task
-			case "delete":
-				try {
-					undoAddTask(taskIndex, userTask);
-					previousActionUndoString = userAction + " " + (taskIndex + 1);
-				} catch (DuplicateTaskException e) {
-					e.printStackTrace();
-				}
-				break;
-			// previous action was an edit; delete edited task and add back old
-			// task
-			case "edit":
-				try {
-					previousActionUndoString = userAction + " " + (taskIndex + 1);
-					undoRemoveTask(userTask);
-					undoAddTask(taskIndex, userTask);
-				} catch (DuplicateTaskException | TaskNotFoundException e) {
-					e.printStackTrace();
-				}
-				break;
-			default:
-				System.out.println("Error occurred in undo stack");
-			}
-		} else {
-			throw new EmptyStackException();
-		}
+		undoTaskStack.undo(tasks);
 	}
 
 	public String getUndoInformation() {
-		return previousActionUndoString;
+		return undoTaskStack.getUndoInformation();
 	}
 
 	//// tag-level operations

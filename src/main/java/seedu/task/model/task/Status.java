@@ -35,6 +35,10 @@ public class Status {
         status = STATUS_COMPLETE;
     }
     
+    public void setPending() {
+        status = STATUS_PENDING;
+    }
+    
     @Override
     public String toString() {
         if (status == STATUS_COMPLETE) {

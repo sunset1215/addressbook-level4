@@ -8,6 +8,7 @@ import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.parser.ParserManager;
 import seedu.task.model.Model;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Status;
 import seedu.task.storage.Storage;
 
 import java.util.logging.Logger;
@@ -37,5 +38,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {
         return model.getFilteredTaskList();
+    }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getPendingTaskList() {
+        model.updateFilteredListByStatus(Status.STATUS_PENDING);
+        return getFilteredTaskList();
     }
 }

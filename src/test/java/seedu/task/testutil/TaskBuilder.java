@@ -19,6 +19,11 @@ public class TaskBuilder {
         this.task.setName(new Name(name));
         return this;
     }
+    
+    public TaskBuilder withEndDate(TaskDate date) {
+        this.task.setEndDate(date);
+        return this;
+    }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         for (String tag: tags) {

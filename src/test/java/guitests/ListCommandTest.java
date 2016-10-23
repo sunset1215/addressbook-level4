@@ -1,10 +1,20 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.junit.Test;
 
+import seedu.task.commons.exceptions.IllegalValueException;
+import seedu.task.commons.util.DateUtil;
 import seedu.task.logic.commands.ListCommand;
 import seedu.task.model.task.Status;
+import seedu.task.model.task.TaskDate;
+import seedu.task.testutil.TaskBuilder;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
@@ -37,6 +47,35 @@ public class ListCommandTest extends TaskBookGuiTest {
         assertListSuccess(pendingList, "list /p", ListCommand.MESSAGE_LIST_PENDING_SUCCESS);
         
         //TODO: list tasks due today
+        //build simple list with some tasks due today
+        TestTask test, exam, assignment;
+        TestTask[] todayList = new TestTask[0];
+        LocalDate localToday = DateUtil.getToday();
+        Date today = null;
+        try {
+            today = DateUtil.parseStringToDate(DateUtil.formatLocalDateToString(localToday));
+        } catch (ParseException e1) {
+            assert false : "not possible";
+        }
+        
+        try {
+            test = new TaskBuilder().withName("test").withEndDate(new TaskDate(today)).build();
+            exam = new TaskBuilder().withName("exam").withEndDate(new TaskDate(today)).build();
+            assignment = new TaskBuilder().withName("assignment").withEndDate(new TaskDate(today)).build();
+            todayList = TestUtil.addTasksToList(new TestTask[0], test, exam, assignment);
+        } catch (IllegalValueException e) {
+            assert false : "not possible";
+        }
+        
+        //setup expectations
+        commandBox.runCommand("clear /a");
+        commandBox.runCommand("add test " + DateUtil.formatDateToString(today));
+        commandBox.runCommand("add exam " + DateUtil.formatDateToString(today));
+        commandBox.runCommand("add assignment " + DateUtil.formatDateToString(today));
+        commandBox.runCommand("list /c");
+        
+        //list tasks due today
+        assertListSuccess(todayList, "list", ListCommand.MESSAGE_LIST_TODAY_SUCCESS);
 
     }
     

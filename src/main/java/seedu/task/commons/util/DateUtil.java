@@ -74,4 +74,12 @@ public class DateUtil {
         String date2 = date.format(localDateFormatter);
         return date1.equals(date2);
     }
+    
+    /**
+     * Returns today's date
+     */
+    public static LocalDate getToday() {
+        LocalDate today = LocalDate.now();
+        return today;
+    }
 }

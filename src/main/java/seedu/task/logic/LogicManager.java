@@ -3,6 +3,7 @@ package seedu.task.logic;
 import javafx.collections.ObservableList;
 import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.util.DateUtil;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.CommandResult;
 import seedu.task.logic.parser.ParserManager;
@@ -43,6 +44,12 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<ReadOnlyTask> getPendingTaskList() {
         model.updateFilteredListByStatus(Status.STATUS_PENDING);
+        return getFilteredTaskList();
+    }
+
+    @Override
+    public ObservableList<ReadOnlyTask> getTodayTaskList() {
+        model.updateFilteredListByDate(DateUtil.getToday());
         return getFilteredTaskList();
     }
 }

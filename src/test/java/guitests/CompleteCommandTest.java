@@ -16,7 +16,7 @@ public class CompleteCommandTest extends TaskBookGuiTest {
 
         //complete the first in the list
         TestTask[] currentList = td.getTypicalTasks();
-        //list all tasks as default is to list tasks due today
+        //list all tasks as default on launch is to list tasks due today
         commandBox.runCommand("list /a");
         int targetIndex = 1;
         TestTask taskToComplete = currentList[targetIndex-1]; //-1 because array uses zero indexing

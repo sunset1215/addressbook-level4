@@ -12,22 +12,21 @@ public class ListCommandTest extends TaskBookGuiTest {
 
     @Test
     public void list() {
-
-        //complete the first in the list
+        
         TestTask[] currentList = td.getTypicalTasks();
+
+        //list all tasks
+        assertListSuccess(currentList, "list /a", ListCommand.MESSAGE_LIST_ALL_SUCCESS);
+
+        //complete the first 3 tasks in the list
         int targetIndex = 1;
-        commandBox.runCommand("complete " + targetIndex);
+        String completeCommand = "complete 1";
+        commandBox.runCommand(completeCommand);
+        commandBox.runCommand(completeCommand);
+        commandBox.runCommand(completeCommand);
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
-
-        //complete the last in the list
-        targetIndex = currentList.length;
-        commandBox.runCommand("complete " + targetIndex);
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
-
-        //complete from the middle of the list
-        targetIndex = currentList.length/2;
-        commandBox.runCommand("complete " + targetIndex);
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+1);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+2);
 
         //list completed tasks
         TestTask[] completedList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_COMPLETE);
@@ -36,9 +35,6 @@ public class ListCommandTest extends TaskBookGuiTest {
         //list pending tasks
         TestTask[] pendingList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
         assertListSuccess(pendingList, "list /p", ListCommand.MESSAGE_LIST_PENDING_SUCCESS);
-        
-        //list all tasks
-        assertListSuccess(currentList, "list /a", ListCommand.MESSAGE_LIST_ALL_SUCCESS);
         
         //TODO: list tasks due today
 

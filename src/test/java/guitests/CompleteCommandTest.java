@@ -21,18 +21,21 @@ public class CompleteCommandTest extends TaskBookGuiTest {
         int targetIndex = 1;
         TestTask taskToComplete = currentList[targetIndex-1]; //-1 because array uses zero indexing
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         assertCompleteSuccess(targetIndex, taskToComplete, currentList);
 
         //complete the last in the list
         targetIndex = currentList.length;
         taskToComplete = currentList[targetIndex-1];
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         assertCompleteSuccess(targetIndex, taskToComplete, currentList);
 
         //complete from the middle of the list
         targetIndex = currentList.length/2;
         taskToComplete = currentList[targetIndex-1];
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
+        currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         assertCompleteSuccess(targetIndex, taskToComplete, currentList);
 
         //invalid index

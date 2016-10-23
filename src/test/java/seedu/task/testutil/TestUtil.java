@@ -313,7 +313,7 @@ public class TestUtil {
      */
     public static TestTask[] completeTaskFromList(TestTask[] tasks, int targetIndexInOneIndexedFormat) {
         tasks[targetIndexInOneIndexedFormat-1].setComplete();
-        return removeTaskFromList(tasks, targetIndexInOneIndexedFormat);
+        return tasks;
     }
     
     /**

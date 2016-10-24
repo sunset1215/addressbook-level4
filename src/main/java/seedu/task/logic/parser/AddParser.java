@@ -3,7 +3,7 @@ package seedu.task.logic.parser;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.text.ParseException;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -90,7 +90,7 @@ public class AddParser extends Parser {
 		String name = matcher.group("name").trim();
 		String endDateString = matcher.group("endDate").trim();
 		
-        Date endDate = DateUtil.parseStringToDate(endDateString);
+		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);
         return new AddCommand(name, endDate);
 	}
 	
@@ -113,8 +113,8 @@ public class AddParser extends Parser {
 		String startDateString = matcher.group("startDate").trim();
 		String endDateString = matcher.group("endDate").trim();
 		
-		Date startDate = DateUtil.parseStringToDate(startDateString);
-        Date endDate = DateUtil.parseStringToDate(endDateString);
+		LocalDateTime startDate = DateUtil.parseStringToLocalDateTime(startDateString);
+		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);
         return new AddCommand(name, startDate, endDate);
 	}
 	

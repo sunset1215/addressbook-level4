@@ -43,8 +43,8 @@ public class XmlAdaptedTask {
 	 */
 	public XmlAdaptedTask(ReadOnlyTask source) {
 		name = source.getName().fullName;
-		startDate = DateUtil.convertDateToJaxbString(source.getStart());
-		endDate = DateUtil.convertDateToJaxbString(source.getEnd());
+		startDate = DateUtil.convertTaskDateToJaxbString(source.getStart());
+		endDate = DateUtil.convertTaskDateToJaxbString(source.getEnd());
 		status = source.getStatus().toString();
 		tagged = new ArrayList<>();
 //		for (Tag tag : source.getTags()) {
@@ -61,15 +61,15 @@ public class XmlAdaptedTask {
 	 *             task
 	 */
 	public Task toModelType() throws IllegalValueException {
-		final List<Tag> taskTags = new ArrayList<>();
-		for (XmlAdaptedTag tag : tagged) {
-			taskTags.add(tag.toModelType());
-		}
+//		final List<Tag> taskTags = new ArrayList<>();
+//		for (XmlAdaptedTag tag : tagged) {
+//			taskTags.add(tag.toModelType());
+//		}
 		final Name name = new Name(this.name);
-		final TaskDate taskStartDate = DateUtil.convertJaxbStringToDate(startDate);
-		final TaskDate taskEndDate = DateUtil.convertJaxbStringToDate(endDate);
+		final TaskDate taskStartDate = DateUtil.convertJaxbStringToTaskDate(this.startDate);
+		final TaskDate taskEndDate = DateUtil.convertJaxbStringToTaskDate(this.endDate);
 		final Status status = new Status(this.status);
-		final UniqueTagList tags = new UniqueTagList(taskTags);
+//		final UniqueTagList tags = new UniqueTagList(taskTags);
 		return createTaskFromGivenArgs(name, taskStartDate, taskEndDate, status);
 	}
 
@@ -103,6 +103,10 @@ public class XmlAdaptedTask {
     private boolean isEventTask(TaskDate taskStartDate, TaskDate taskEndDate) {
         return taskStartDate != null && taskEndDate != null;
     }
-
+    
+    @Override
+    public String toString() {
+        return "name="+name+",startDate="+startDate+",endDate="+endDate+",status="+status;
+    }
     
 }

@@ -6,7 +6,7 @@ import seedu.task.commons.exceptions.IllegalValueException;
  * Represents a Task name in the Task List.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should be spaces or alphanumeric characters";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum} ]+";
@@ -50,6 +50,11 @@ public class Name {
     @Override
     public int hashCode() {
         return fullName.hashCode();
+    }
+
+    @Override
+    public int compareTo(Name n1) {
+        return fullName.compareTo(n1.fullName);
     }
 
 }

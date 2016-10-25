@@ -319,6 +319,11 @@ public class TaskBook implements ReadOnlyTaskBook {
 		return previousActionUndoString;
 	}
 
+	/** Sorts the task book order by end date, then name */
+	public void sort() {
+	    tasks.sort();
+	}
+
 	//// tag-level operations
 
 	public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

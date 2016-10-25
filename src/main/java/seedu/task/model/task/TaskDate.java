@@ -9,7 +9,7 @@ import seedu.task.commons.util.DateUtil;
  * Represents a Task date in the Task List.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class TaskDate {
+public class TaskDate implements Comparable<TaskDate> {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Task date should be specified in following format"
     		+ " 06-10-2016 14:00";
@@ -62,6 +62,17 @@ public class TaskDate {
     @Override
     public int hashCode() {
         return taskDate.hashCode();
+    }
+
+    @Override
+    public int compareTo(TaskDate td1) {
+        if (this.taskDate.isAfter(td1.taskDate)) {
+            return 1;
+        } else if (this.taskDate.isEqual(td1.taskDate)) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
 
 }

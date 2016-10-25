@@ -22,7 +22,7 @@ public enum TaskComparator implements Comparator<Task> {
                 int endDateResult = t1.getEnd().compareTo(t2.getEnd());
                 return endDateResult;
             }
-            return 0;
+            return 1;
         }
     },
 
@@ -33,19 +33,8 @@ public enum TaskComparator implements Comparator<Task> {
                 int startDateResult = t1.getStart().compareTo(t2.getStart());
                 return startDateResult;
             }
-            return 0;
-        }
-    },
-    
-    TYPE {
-        @Override
-        public int compare(Task t1, Task t2) {
-            if (!CollectionUtil.isAnyNull(t1.getStart(), t2.getStart())) {
-                int startDateResult = t1.getStart().compareTo(t2.getStart());
-                return startDateResult;
-            }
-            return 0;
+            return 1;
         }
     }
-
+    
 }

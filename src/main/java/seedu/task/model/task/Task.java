@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Represents a parent class, Task, in the Task List.
  */
-public class Task implements ReadOnlyTask, Comparable<Task> {
+public class Task implements ReadOnlyTask {
     private Name name;
     private UniqueTagList tags;
     private Status status;
@@ -107,12 +107,4 @@ public class Task implements ReadOnlyTask, Comparable<Task> {
         status.setComplete();
     }
 
-    @Override
-    public int compareTo(Task t) {
-        if (this.getEnd() == t.getEnd()) {
-            return 0;
-        }
-        return 0;
-    }
-    
 }

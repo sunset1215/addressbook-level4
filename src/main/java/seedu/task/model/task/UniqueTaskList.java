@@ -136,9 +136,9 @@ public class UniqueTaskList implements Iterable<Task> {
     public void sort() {
         // TODO Auto-generated method stub
         FXCollections.sort(internalList, TaskComparator.NAME);
-        FXCollections.sort(internalList, TaskComparator.END_DATE);
-        FXCollections.sort(internalList, TaskComparator.START_DATE);
         
+        FXCollections.sort(internalList, TaskComparator.START_DATE);
+        FXCollections.sort(internalList, TaskComparator.END_DATE);
     }
     
     public ObservableList<Task> getInternalList() {

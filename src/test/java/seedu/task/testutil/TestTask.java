@@ -9,18 +9,24 @@ import seedu.task.model.task.*;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
+    private TaskDate endDate;
+    private TaskDate startDate;
     private Status status;
     private UniqueTagList tags;
 
     public TestTask() {
         tags = new UniqueTagList();
-    }
-
-    public void setName(Name name) {
-        this.name = name;
         this.status = new Status(Status.STATUS_PENDING);
     }
-
+    
+    public void setName(Name name) {
+        this.name = name;
+    }
+    
+    public void setEndDate(TaskDate date) {
+        this.endDate = date;
+    }
+    
     @Override
     public Name getName() {
         return name;
@@ -45,14 +51,12 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public TaskDate getStart() {
-        // TODO Auto-generated method stub
-        return null;
+        return startDate;
     }
 
     @Override
     public TaskDate getEnd() {
-        // TODO Auto-generated method stub
-        return null;
+        return endDate;
     }
 
     @Override

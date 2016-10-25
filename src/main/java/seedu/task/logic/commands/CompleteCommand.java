@@ -3,6 +3,7 @@ package seedu.task.logic.commands;
 import seedu.task.commons.core.Messages;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Status;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -40,6 +41,7 @@ public class CompleteCommand extends Command {
         ReadOnlyTask taskToComplete = lastShownList.get(targetIndex - 1);
         try {
             model.completeTask(taskToComplete);
+            model.updateFilteredListByStatus(Status.STATUS_PENDING);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         } catch (TaskAlreadyCompletedException tace) {

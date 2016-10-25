@@ -282,6 +282,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | undo the last command | go back to the previous state
 `* *` | user | specify storage location | choose where to store the data
 `* *` | user | mark tasks as complete | track tasks that have already been done
+`* *` | user | sort my tasks | organize my tasks in some way
 `* *` | user | use shorter versions of a command | type a command faster
 `*` | user | tag my tasks based on priority | prioritize my goals
 `*` | user | assign my tasks to a project or category | organize my tasks in an orderly manner

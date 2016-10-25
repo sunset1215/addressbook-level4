@@ -31,6 +31,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     private static final String UNDO_DELETE_COMMAND = "delete";
     private static final String UNDO_EDIT_COMMAND = "edit";
     private static final String UNDO_COMPLETE_COMMAND = "complete";
+    private static final String UNDO_CLEAR_COMMAND = "clear";
 
 	
 	{
@@ -215,9 +216,38 @@ public class TaskBook implements ReadOnlyTaskBook {
 	 */
 	public void clearCompletedTasks() throws NoCompletedTasksFoundException {
 		UniqueTaskList copyTasks = copyUniqueTaskList(tasks);
+		List<Task> clearedTasks = new ArrayList<Task>();
+		List<Integer> clearedTasksIndices = new ArrayList<Integer>();
+		
+		//compile set of tasks and indices being cleared to prepare for undo stack
 		for (Task readTask : copyTasks) {
 			if (readTask.isComplete()) {
 				try {
+					clearedTasksIndices.add(tasks.getIndex(readTask));
+					
+					Class<? extends ReadOnlyTask> clearedTask = readTask.getClass();
+
+					if (clearedTask.equals(DeadlineTask.class)) {
+						DeadlineTask cleared = new DeadlineTask(readTask.getName(), readTask.getEnd());
+						clearedTasks.add(cleared);
+					} else if (clearedTask.equals(EventTask.class)) {
+						EventTask cleared = new EventTask(readTask.getName(), readTask.getStart(), readTask.getEnd());
+						clearedTasks.add(cleared);
+					} else {
+						// cleared task must be a floating task
+						Task cleared = new Task(readTask.getName());
+						clearedTasks.add(cleared);
+					}
+				} catch (TaskNotFoundException e) {
+					assert false : "The target task cannot be missing";
+				}
+			}
+		}
+		
+		//actually remove the completed tasks
+		for (Task readTask : copyTasks) {
+			if (readTask.isComplete()) {
+				try {			
 					tasks.remove(readTask);
 				} catch (TaskNotFoundException e) {
 					assert false : "The target task cannot be missing";
@@ -227,6 +257,8 @@ public class TaskBook implements ReadOnlyTaskBook {
 		if (copyTasks.size() == tasks.size()) {
 			throw new NoCompletedTasksFoundException();
 		}
+		
+		undoTaskStack.pushClearToUndoStack(clearedTasks, clearedTasksIndices, UNDO_CLEAR_COMMAND);
 	}
 
 	public void undoTask() {

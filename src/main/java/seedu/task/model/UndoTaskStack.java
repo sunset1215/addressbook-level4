@@ -1,10 +1,13 @@
 package seedu.task.model;
 
 import java.util.EmptyStackException;
+import java.util.List;
 import java.util.Stack;
 
+import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.DeadlineTask;
 import seedu.task.model.task.EventTask;
+import seedu.task.model.task.Name;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList;
@@ -12,9 +15,13 @@ import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 public class UndoTaskStack {
-	private Stack<String> previousActionType = new Stack();
-	private Stack<Task> previousTask = new Stack();
+	private Stack<String> previousActionType = new Stack<>();
+	private Stack<Task> previousTask = new Stack<>();
 	private Stack<Integer> previousActionIndex = new Stack<>(); 
+	
+	private Stack<List<Task>> previousClearedTasks = new Stack<>();
+	private Stack<List<Integer>> previousClearedIndices = new Stack<>();
+	
 	private String previousActionUndoString;
 
 	public UndoTaskStack(){
@@ -27,7 +34,8 @@ public class UndoTaskStack {
 	 * 
 	 * callingCommand will be "add"
 	 * addedTask is the task added
-	 * actionIndex will be -1; there is no index specified when adding a task
+	 * actionIndex will be -1; there is no index specified when adding a task,
+	 * 			just pushing to keep the stacks balanced
 	 **/
 	public void pushAddToUndoStack(String callingCommand, Task addedTask){
 		previousActionType.push(callingCommand);
@@ -78,16 +86,43 @@ public class UndoTaskStack {
 		previousTask.push(taskToComplete);
 	}
 	
+	
+	/**
+	 * Pushes the clear command to the undo stack.
+	 * 
+	 * @params clearedTasks, clearedTasksIndices, callingCommand
+	 * 
+	 * clearedTasks is the set of tasks that were cleared
+	 * clearedTasksIndices is the set of indices corresponding to the tasks cleared
+	 * callingCommand is the command passed in (it'll always be "clear")
+	 * 
+	 * actionIndex will be -1; there is no index specified when clearing a set of tasks, 
+	 * 			just pushing to keep the stacks balanced
+	 **/
+	public void pushClearToUndoStack(List<Task> clearedTasks, List<Integer> clearedTaskIndices, String callingCommand) {
+		previousActionType.push(callingCommand);
+		previousActionIndex.push(-1);
+		
+		previousClearedTasks.push(clearedTasks);
+		previousClearedIndices.push(clearedTaskIndices);
+		try {
+			previousTask.push(new Task(new Name("filler")));
+		} catch (IllegalValueException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/**
 	 * Undo the previous action by popping off the stack
 	 **/
 	public void undo(UniqueTaskList tasks){
-		if (!previousTask.isEmpty()) {
+		if (!previousTask.isEmpty()) {			
 			Task userTask = previousTask.pop();
-
 			String userAction = previousActionType.pop();
 			int taskIndex = previousActionIndex.pop();
 
+			
 			switch (userAction) {
 			// previous action was an add; delete the added task
 			case "add":
@@ -120,7 +155,25 @@ public class UndoTaskStack {
 			//previous action was a complete; set the task back to pending
 			case "complete":
 				previousActionUndoString = userAction + " " + (taskIndex + 1);
+				userTask = tasks.getTaskFromIndex(taskIndex);
 				userTask.setPending();
+				break;
+			//previous action was a clear; add back the tasks that were completed
+			case "clear":
+				previousActionUndoString = userAction;
+				List<Task> lastCleared = previousClearedTasks.pop();
+				List<Integer> lastClearedIndices = previousClearedIndices.pop();
+				
+				for(int i = 0; i < lastCleared.size(); i++){
+					int indexToUnclear = lastClearedIndices.get(i);
+					Task taskToUnclear = lastCleared.get(i);
+					taskToUnclear.setComplete();
+					try {
+						tasks.add(indexToUnclear, taskToUnclear);
+					} catch (DuplicateTaskException e) {
+						e.printStackTrace();
+					}
+				}
 				break;
 			default:
 				System.out.println("Error occurred in undo stack");

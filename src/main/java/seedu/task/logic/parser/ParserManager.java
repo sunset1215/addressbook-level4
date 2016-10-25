@@ -64,6 +64,9 @@ public class ParserManager extends Parser {
 
         case StoreCommand.COMMAND_WORD:
         	return new StoreParser().parseCommand(arguments);
+        	
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
             
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

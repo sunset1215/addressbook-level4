@@ -87,16 +87,16 @@ interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 3`.
+command `add write report`.
 
-<img src="images\SDforDeletePerson.png" width="800">
+<img src="images\SDforAddTask.png" width="800">
 
 >Note how the `Model` simply raises a `TaskBookChangedEvent` when the SuperTasker data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800">
+<img src="images\SDforAddTaskEventHandling.png" width="800">
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct 
@@ -135,9 +135,9 @@ The `UI` component,
 3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("add write report")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/AddTaskSdForLogic.png" width="800"><br>
 
 ### Model component
 
@@ -154,7 +154,7 @@ The `Model`,
 
 ### Storage component
 
-<img src="images/StorageComponentDiagram.png" width="800"><br>
+<img src="images/StorageClassDiagram.png" width="800"><br>
 
 **API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
@@ -213,7 +213,7 @@ We have two types of tests:
   
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.task.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.FileUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units 
      (those code units are assumed to be working).<br>
       e.g. `seedu.task.storage.StorageManagerTest`

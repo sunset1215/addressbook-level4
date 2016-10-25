@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * Parses user input.
  */
-public class ParserManager {
+public class ParserManager extends Parser {
 
     /**
      * Used for initial separation of command word and args.

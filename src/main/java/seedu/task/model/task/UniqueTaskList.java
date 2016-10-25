@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import seedu.task.commons.exceptions.DuplicateDataException;
 import seedu.task.commons.util.CollectionUtil;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -136,7 +135,9 @@ public class UniqueTaskList implements Iterable<Task> {
     
     public void sort() {
         // TODO Auto-generated method stub
-        FXCollections.sort(internalList, null);;
+        FXCollections.sort(internalList, TaskComparator.NAME);
+        FXCollections.sort(internalList, TaskComparator.END_DATE);
+        FXCollections.sort(internalList, TaskComparator.START_DATE);
         
     }
     

@@ -138,8 +138,8 @@ public class ModelManager extends ComponentManager implements Model {
         taskBook.sort();
         indicateTaskBookChanged();
     }
-	
-	@Override
+
+    @Override
     public void clearCompletedTasks() throws NoCompletedTasksFoundException {
 	    taskBook.clearCompletedTasks();
         indicateTaskBookChanged();

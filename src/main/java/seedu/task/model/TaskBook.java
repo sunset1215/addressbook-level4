@@ -318,13 +318,11 @@ public class TaskBook implements ReadOnlyTaskBook {
 	public String getUndoInformation() {
 		return previousActionUndoString;
 	}
-	
-	/**
-	 * Sorts the task book order by end date, then name
-	 */
+
+	/** Sorts the task book order by end date, then name */
 	public void sort() {
-        tasks.sort();
-    }
+	    tasks.sort();
+	}
 
 	//// tag-level operations
 

@@ -56,6 +56,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Clear tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#clearing-tasks--clear)
    * [List tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#listing-tasks--list)
    * [Complete tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#set-task-as-complete--complete)
+   * [Sort tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#sorting-tasks--sort)
 * Code written: [[functional code](A0138704E.md)][[test code](A0138704E.md)][[docs](A0138704E.md)]
 * Other major contributions:
   * 

@@ -10,7 +10,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD 
-            + ": sorts task book by end date, start date, then alphabetical order.\n"
+            + ": Sorts task book and order by end date then name.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SORT_SUCCESS = "Task book has been sorted!";

@@ -172,6 +172,10 @@ Examples:
   
 * `store`<br>
   Displays a dialog box for user to browse for the storage location.
+  
+#### Sorting tasks : `sort`
+Sorts data in the task book by order end date then name.<br>
+Format: `sort`
 
 #### Exiting the program : `exit`
 Exits the program.<br>
@@ -198,4 +202,5 @@ View | `view TASK_INDEX` | View details of a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks
 Store | `store FILE_LOCATION` | Specify storage location
+Sort | `sort` | Sorts data in the task book by order end date then name
 Exit | `exit` | Exit program

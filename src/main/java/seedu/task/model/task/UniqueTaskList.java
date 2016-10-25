@@ -134,6 +134,12 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.size();
     }
     
+    public void sort() {
+        // TODO Auto-generated method stub
+        FXCollections.sort(internalList, null);;
+        
+    }
+    
     public ObservableList<Task> getInternalList() {
         return internalList;
     }

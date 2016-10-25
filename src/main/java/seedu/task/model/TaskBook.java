@@ -318,6 +318,11 @@ public class TaskBook implements ReadOnlyTaskBook {
 	public String getUndoInformation() {
 		return previousActionUndoString;
 	}
+	
+	public void sort() {
+        // TODO Auto-generated method stub
+        tasks.sort();
+    }
 
 	//// tag-level operations
 

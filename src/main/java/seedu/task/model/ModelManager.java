@@ -135,8 +135,8 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void sort() {
-        // TODO Auto-generated method stub
-        
+        taskBook.sort();
+        indicateTaskBookChanged();
     }
 	
 	@Override

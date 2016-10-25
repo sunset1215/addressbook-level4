@@ -1,7 +1,5 @@
 package seedu.task.logic.commands;
 
-import java.time.LocalDate;
-
 import seedu.task.commons.util.DateUtil;
 import seedu.task.model.task.Status;
 

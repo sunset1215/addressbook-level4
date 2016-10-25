@@ -133,11 +133,11 @@ public class UniqueTaskList implements Iterable<Task> {
         return internalList.size();
     }
     
+    /**
+     * Sorts the task book order by end date then name.
+     */
     public void sort() {
-        // TODO Auto-generated method stub
         FXCollections.sort(internalList, TaskComparator.NAME);
-        
-        FXCollections.sort(internalList, TaskComparator.START_DATE);
         FXCollections.sort(internalList, TaskComparator.END_DATE);
     }
     

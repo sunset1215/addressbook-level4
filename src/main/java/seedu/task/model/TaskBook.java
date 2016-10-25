@@ -319,8 +319,10 @@ public class TaskBook implements ReadOnlyTaskBook {
 		return previousActionUndoString;
 	}
 	
+	/**
+	 * Sorts the task book order by end date, then name
+	 */
 	public void sort() {
-        // TODO Auto-generated method stub
         tasks.sort();
     }
 

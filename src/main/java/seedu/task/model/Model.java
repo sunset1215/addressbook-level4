@@ -73,7 +73,7 @@ public interface Model {
     void clearCompletedTasks() throws NoCompletedTasksFoundException;
 
     /**
-     * Sorts the task book.
+     * Sorts the task book, order by end date then name.
      */
     void sort();
 

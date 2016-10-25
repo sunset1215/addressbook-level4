@@ -3,7 +3,7 @@ package seedu.task.logic.parser;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.text.ParseException;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,8 +18,8 @@ import seedu.task.logic.commands.IncorrectCommand;
  */
 public class AddParser extends Parser {
 	private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*");
-	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*");
-	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*");
+	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*");
+	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*");
 	
 	@Override
 	public Command parseCommand(String args) {
@@ -90,7 +90,7 @@ public class AddParser extends Parser {
 		String name = matcher.group("name").trim();
 		String endDateString = matcher.group("endDate").trim();
 		
-        Date endDate = DateUtil.parseStringToDate(endDateString);
+		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);
         return new AddCommand(name, endDate);
 	}
 	
@@ -113,8 +113,8 @@ public class AddParser extends Parser {
 		String startDateString = matcher.group("startDate").trim();
 		String endDateString = matcher.group("endDate").trim();
 		
-		Date startDate = DateUtil.parseStringToDate(startDateString);
-        Date endDate = DateUtil.parseStringToDate(endDateString);
+		LocalDateTime startDate = DateUtil.parseStringToLocalDateTime(startDateString);
+		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);
         return new AddCommand(name, startDate, endDate);
 	}
 	

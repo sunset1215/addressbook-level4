@@ -5,7 +5,7 @@ import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Adds a task to our task book
@@ -27,7 +27,7 @@ public class AddCommand extends Command {
      * Constructor for adding an event task
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String taskName, Date startDate, Date endDate)
+    public AddCommand(String taskName, LocalDateTime startDate, LocalDateTime endDate)
             throws IllegalValueException {
     	
         this.toAdd = new EventTask(
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
      * 
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String taskName, Date endDate)
+    public AddCommand(String taskName, LocalDateTime endDate)
             throws IllegalValueException {
         
         this.toAdd = new DeadlineTask(

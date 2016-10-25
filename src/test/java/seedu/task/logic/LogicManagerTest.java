@@ -177,18 +177,16 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
-                "add Valid Name -d invalidDate", expectedMessage);
+                "add Valid Name 13/10/2016", expectedMessage);
         assertCommandBehavior(
-                "add Valid Name -d 13-10-2016 14-10-2016", expectedMessage);
-        assertCommandBehavior(
-                "add Valid Name -e 13-10-2016", expectedMessage);
+                "add Valid Name 13-10-16", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
-                "add []\\[;] 13-10-2016", expectedMessage);
+                "add []\\[;] 13-10-2016 08:00", expectedMessage);
     }
 
     @Test

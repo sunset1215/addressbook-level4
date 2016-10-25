@@ -106,5 +106,5 @@ public class Task implements ReadOnlyTask {
     public void setComplete() {
         status.setComplete();
     }
-    
+
 }

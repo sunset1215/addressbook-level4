@@ -132,6 +132,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return newFilePath;
     }
+    
+    @Override
+    public void sort() {
+        // TODO Auto-generated method stub
+        
+    }
 	
 	@Override
     public void clearCompletedTasks() throws NoCompletedTasksFoundException {

@@ -49,7 +49,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public ObservableList<ReadOnlyTask> getTodayTaskList() {
-        model.updateFilteredListByDate(DateUtil.getToday());
+        model.updateFilteredListByDate(DateUtil.getTodayAsLocalDate());
         return getFilteredTaskList();
     }
 }

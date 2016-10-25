@@ -74,10 +74,18 @@ public class DateUtil {
     }
     
     /**
-     * Returns today's date
+     * Returns today's date as a LocalDate
      */
-    public static LocalDate getToday() {
+    public static LocalDate getTodayAsLocalDate() {
         LocalDate today = LocalDate.now();
+        return today;
+    }
+    
+    /**
+     * Returns today's date as a LocalDateTime
+     */
+    public static LocalDateTime getTodayAsLocalDateTime() {
+        LocalDateTime today = LocalDateTime.now();
         return today;
     }
 

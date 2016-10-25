@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,13 +51,7 @@ public class ListCommandTest extends TaskBookGuiTest {
         //build simple list with some tasks due today
         TestTask test, exam, assignment;
         TestTask[] todayList = new TestTask[0];
-        LocalDate localToday = DateUtil.getToday();
-        Date today = null;
-        try {
-            today = DateUtil.parseStringToDate(DateUtil.formatLocalDateToString(localToday));
-        } catch (ParseException e1) {
-            assert false : "not possible";
-        }
+        LocalDateTime today = DateUtil.getTodayAsLocalDateTime();
         
         try {
             test = new TaskBuilder().withName("test").withEndDate(new TaskDate(today)).build();
@@ -69,9 +64,9 @@ public class ListCommandTest extends TaskBookGuiTest {
         
         //setup expectations
         commandBox.runCommand("clear /a");
-        commandBox.runCommand("add test " + DateUtil.formatDateToString(today));
-        commandBox.runCommand("add exam " + DateUtil.formatDateToString(today));
-        commandBox.runCommand("add assignment " + DateUtil.formatDateToString(today));
+        commandBox.runCommand("add test " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add exam " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add assignment " + DateUtil.formatLocalDateTimeToString(today));
         commandBox.runCommand("list /c");
         
         //list tasks due today

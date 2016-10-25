@@ -42,7 +42,7 @@ public class ListCommand extends Command {
         switch (option) {
         
         case OPTION_LIST_TODAY:
-            model.updateFilteredListByDate(DateUtil.getToday());
+            model.updateFilteredListByDate(DateUtil.getTodayAsLocalDate());
             return new CommandResult(MESSAGE_LIST_TODAY_SUCCESS);
             
         case OPTION_LIST_ALL:

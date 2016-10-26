@@ -54,10 +54,9 @@ public class EditCommand extends Command {
     /**
      * Constructor for editing specified task into a deadline
      */
-    public EditCommand(int targetIndex, Name name, TaskDate endDateTime) {
+    public EditCommand(int targetIndex, TaskDate endDateTime) {
         assert !CollectionUtil.isAnyNull(endDateTime);
         this.targetIndex = targetIndex;
-        this.newName = name;
         this.endDateTime = endDateTime;
         editCase = EDIT_CASE_DEADLINE;
     }
@@ -65,10 +64,9 @@ public class EditCommand extends Command {
     /**
      * Constructor for editing specified task into an event
      */
-    public EditCommand(int targetIndex, Name name, TaskDate startDateTime, TaskDate endDateTime) {
+    public EditCommand(int targetIndex, TaskDate startDateTime, TaskDate endDateTime) {
         assert !CollectionUtil.isAnyNull(startDateTime, endDateTime);
         this.targetIndex = targetIndex;
-        this.newName = name;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         editCase = EDIT_CASE_EVENT;
@@ -91,10 +89,10 @@ public class EditCommand extends Command {
 		
 	        switch (editCase) {
 	        case EDIT_CASE_DEADLINE:
-	            resultTask = new DeadlineTask(newName, endDateTime);
+	            resultTask = new DeadlineTask(taskToEdit.getName(), endDateTime);
 	            break;
 	        case EDIT_CASE_EVENT:
-	            resultTask = new EventTask(newName, startDateTime, endDateTime);
+	            resultTask = new EventTask(taskToEdit.getName(), startDateTime, endDateTime);
 	            break;
 	        case EDIT_CASE_FLOATING:
 	        	resultTask = new Task(newName);

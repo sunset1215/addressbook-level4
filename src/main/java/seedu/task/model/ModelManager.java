@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBookChanged();
         indicateTaskListPanelDataChanged();
     }
-	//@@author 
+	//@@author A0153723J 
 	@Override
 	public String changeStorageFilePath(String newFilePath) throws DirectoryChooserOperationCancelledException, IOException {
 		if(newFilePath.isEmpty()) {
@@ -307,7 +307,7 @@ public class ModelManager extends ComponentManager implements Model {
     
     
     //==================== Event Handling Code =================================================================
-
+    //@@author A0153723J
     @Subscribe
     private void handleDatePickedOnCalendarEvent(DatePickedOnCalendarEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

@@ -43,6 +43,7 @@
 
 > Every task is either a floating task, deadline or event. It cannot be both or all 3 or none at all.<br>
 > Refer to [Glossary](DeveloperGuide.md#appendix-d--glossary) for definitions of each type of task.
+<!-- @@author A0153723J -->
 
 #### Viewing help : `help`
 Format: `help`

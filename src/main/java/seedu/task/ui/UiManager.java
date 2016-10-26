@@ -132,7 +132,7 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().refresh();
     }
-    
+    //@@author A0153723J
     @Subscribe
     private void handleDisplayDirectoryChooserRequestEvent(DisplayDirectoryChooserRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

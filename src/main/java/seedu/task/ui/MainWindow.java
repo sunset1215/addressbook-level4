@@ -134,7 +134,7 @@ public class MainWindow extends UiPart {
     public AnchorPane getTaskListPlaceholder() {
         return taskListPanelPlaceholder;
     }
-    
+    //@@author A0153723J
     public AnchorPane getCalendarPlaceholder(){
     	return calendarPlaceHolder;
     }

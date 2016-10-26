@@ -118,7 +118,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
-
+<!-- @@author A0153723J -->
 The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
@@ -128,6 +128,7 @@ The `UI` component,
 
 <img src="images/LogicClassDiagram.PNG" width="800"><br>
 
+<!-- @@author -->
 **API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
@@ -144,7 +145,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
-
+<!-- @@author A0153723J -->
 The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
 * stores the TaskBook data.
@@ -155,6 +156,7 @@ The `Model`,
 ### Storage component
 
 <img src="images/StorageClassDiagram.PNG" width="800"><br>
+<!-- @@author -->
 
 **API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
@@ -266,7 +268,7 @@ a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
 ## Appendix A : User Stories
-
+<!-- @@author A0153723J -->
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 Priority | As a ... | I want to ... | So that I can...
@@ -464,7 +466,7 @@ Use case ends.
 > A deadline is a time constraint that can be added to a task. It defines an end time/date than a task must be completed by.
 
 ##### Mainstream OS
-
+<!-- @@author-->
 > Windows
 
 ## Appendix E : Product Survey

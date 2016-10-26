@@ -1,6 +1,7 @@
 package seedu.task.logic.commands;
 
 import java.util.EmptyStackException;
+import seedu.task.model.task.Status;
 
 /*
  * Command to undo most recent task
@@ -21,6 +22,7 @@ public class UndoCommand extends Command{
 	public CommandResult execute() {
 		try{
 			model.undo();
+			model.updateFilteredListByStatus(Status.STATUS_PENDING);
 		}
 		catch(EmptyStackException e){
 			return new CommandResult(MESSAGE_UNDO_TASK_FAIL);

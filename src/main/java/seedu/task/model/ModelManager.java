@@ -6,7 +6,9 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
+import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
+import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.DirectoryChooserOperationCancelledException;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
@@ -25,6 +27,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
 
 /**
  * Represents the in-memory model of the task book data.
@@ -299,5 +303,15 @@ public class ModelManager extends ComponentManager implements Model {
             return "endDate=" + DateUtil.formatLocalDateToString(date);
         }
     }
+    
+    
+    //==================== Event Handling Code =================================================================
+
+    @Subscribe
+    private void handleDatePickedOnCalendarEvent(DatePickedOnCalendarEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        updateFilteredListByDate(event.date);
+    }
+
 
 }

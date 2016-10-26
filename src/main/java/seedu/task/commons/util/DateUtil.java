@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.task.model.task.TaskDate;
 
@@ -15,15 +17,23 @@ import seedu.task.model.task.TaskDate;
  */
 public class DateUtil {
     
-    private static DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-    private static DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	
+    private static final DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private static final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    
 	/**
      * Parses a String into a LocalDateTime
      * @throws ParseException
      */
     public static LocalDateTime parseStringToLocalDateTime(String strDate) throws DateTimeParseException {
-        return LocalDateTime.parse(strDate, localDateTimeFormatter);
+    	return LocalDateTime.parse(strDate, localDateTimeFormatter);
+    }
+    
+    /**
+     * Parses a String into a LocalDateTime
+     * @throws ParseException
+     */
+    public static LocalDateTime parseStringToLocalDate(String strDate) throws DateTimeParseException {
+    	return parseStringToLocalDateTime(strDate + " 17:30");
     }
     
     /**

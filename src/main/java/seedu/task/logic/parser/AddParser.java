@@ -18,8 +18,8 @@ import seedu.task.logic.commands.IncorrectCommand;
  */
 public class AddParser extends Parser {
 	private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*");
-	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*");
-	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*");
+	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endTime>\\d{2}:\\d{2})?\\s*");
+	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<startTime>\\d{2}:\\d{2})?\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*");
 	
 	@Override
 	public Command parseCommand(String args) {
@@ -87,16 +87,21 @@ public class AddParser extends Parser {
 			throw new IllegalArgumentException();
 		}
 		
-		String name = matcher.group("name").trim();
-		String endDateString = matcher.group("endDate").trim();
+		String name = matcher.group("name");
+		String endDateString = matcher.group("endDate");
+		String endTimeString = matcher.group("endTime");
+		LocalDateTime endDate = null;
 		
-		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);
+		endDate = (endTimeString == null) ? 
+			DateUtil.parseStringToLocalDate(endDateString) :
+			DateUtil.parseStringToLocalDateTime(endDateString + " " + endTimeString);
+		
         return new AddCommand(name, endDate);
 	}
 	
 	/**
 	 * Creates an EditCommand for an EventTask given a string argument that has the form
-	 * "[NAME] 00-00-0000 00-00-0000"
+	 * "[NAME] 00-00-0000 [00:00] 00-00-0000" [00:00]
 	 * 
 	 * @throws ParseException
 	 * @throws IllegalArgumentException 
@@ -109,9 +114,9 @@ public class AddParser extends Parser {
 			throw new IllegalArgumentException();
 		}
 		
-		String name = matcher.group("name").trim();
-		String startDateString = matcher.group("startDate").trim();
-		String endDateString = matcher.group("endDate").trim();
+		String name = matcher.group("name");
+		String startDateString = matcher.group("startDate");
+		String endDateString = matcher.group("endDate");
 		
 		LocalDateTime startDate = DateUtil.parseStringToLocalDateTime(startDateString);
 		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);

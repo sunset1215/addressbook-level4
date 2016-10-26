@@ -169,8 +169,8 @@ Examples:
   Edit the 2nd task in the task manager into an event on 23 Oct 2016, 2pm to 4pm.
   
 <!-- @@author A0153723J -->
-#### Undoing the last command : `undo`
-Undo the last command executed.<br>
+#### Undoing previous commands : `undo`
+Undo previous commands that were executed.<br>
 Format: `undo`
 
 > Able to undo up to the last 100 commands.<br>
@@ -251,7 +251,7 @@ There is no need to save manually.
 | Clear | `clear` | Clear completed tasks |
 |  | `clear /a` | Clear all tasks |
 | Store | `store [FILE_LOCATION]` | Specify data storage location |
-|  | `store C:\Users\Jim\Desktop\Work` | Specifies data storage location at folder 'C:\Users\Jim\Desktop\Work' |
+|  | `store C:\Users\Jim\Desktop\Work` | Specifies data storage location at folder `C:\Users\Jim\Desktop\Work` |
 |  | `store` | Displays a dialog box for user to browse for the storage location |
 | Sort | `sort` | Sorts data by order end date then name |
 | Exit | `exit` | Exit program |

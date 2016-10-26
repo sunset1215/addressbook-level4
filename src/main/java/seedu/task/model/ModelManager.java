@@ -146,6 +146,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 	@Override
+    public void clearAllTasks() {
+	    taskBook.clearAllTasks();
+        indicateTaskBookChanged();
+    }
+
+	@Override
 	public int getIndex(ReadOnlyTask target) throws TaskNotFoundException {
 		return taskBook.getIndex(target);
 	}
@@ -180,6 +186,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void undo(){
     	taskBook.undoTask();
+    	indicateTaskBookChanged();
+        indicateTaskListPanelDataChanged();
     }
     
     public String getUndoInformation(){

@@ -71,6 +71,10 @@ public interface Model {
 
     /** Clears completed tasks from the task book */
     void clearCompletedTasks() throws NoCompletedTasksFoundException;
+    
+    /** Clears all tasks from the task book 
+	*/
+    void clearAllTasks();
 
     /**
      * Sorts the task book, order by end date then name.

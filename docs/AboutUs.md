@@ -18,6 +18,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A0153658W.md)][[test code](A0153658W.md)][[docs](A0153658W.md)]
 * Other major contributions:
   * 
+  
 <!-- @@author A0153723J -->
 -----
 
@@ -32,6 +33,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A0153723J.md)][[test code](A0153723J.md)][[docs](A0153723J.md)]
 * Other major contributions:
   * 
+  
 <!-- @@author A0153723J -->
 -----
 
@@ -47,6 +49,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A123456.md)][[test code](A123456.md)][[docs](A123456.md)]
 * Other major contributions:
   * 
+  
 <!-- @@author A0153723J -->
 -----
 
@@ -63,11 +66,11 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A0138704E.md)][[test code](A0138704E.md)][[docs](A0138704E.md)]
 * Other major contributions:
   * 
+  
 <!-- @@author A0153723J -->
 ## Project Mentor ##
 
 * [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy) <br>
 <img src="images/AkshayNarayan.jpg" width="150"><br>
-
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.

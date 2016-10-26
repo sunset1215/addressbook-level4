@@ -2,11 +2,12 @@ package seedu.task.commons.events.storage;
 
 import seedu.task.commons.events.BaseEvent;
 import seedu.task.model.ReadOnlyTaskBook;
+
 //@@author A0138704E
 /**
  * Represents a storage file path change event
  */
-public class StorageFilePathChangedEvent extends BaseEvent{
+public class StorageFilePathChangedEvent extends BaseEvent {
 	
 	private final String newFilePath;
 	private final ReadOnlyTaskBook currentTaskBook;

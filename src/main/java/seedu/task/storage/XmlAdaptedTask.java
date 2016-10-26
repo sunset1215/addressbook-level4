@@ -107,7 +107,7 @@ public class XmlAdaptedTask {
     
     @Override
     public String toString() {
-        return "name="+name+",startDate="+startDate+",endDate="+endDate+",status="+status;
+        return "name=" + name + ",startDate=" + startDate + ",endDate=" + endDate + ",status=" + status;
     }
     
 }

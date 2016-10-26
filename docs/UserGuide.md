@@ -210,7 +210,7 @@ Add | `add TASK_NAME [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Add a ta
 Complete | `complete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
 Delete | `delete TASK_INDEX` | Delete a task
-Find | `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]` | Find all tasks containing any keywords
+Find | `find KEYWORD [MORE_KEYWORDS]` | Find all tasks containing any keywords
 Edit | `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Edit a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks

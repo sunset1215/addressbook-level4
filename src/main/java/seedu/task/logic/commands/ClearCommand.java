@@ -1,7 +1,5 @@
 package seedu.task.logic.commands;
 
-import seedu.task.model.TaskBook;
-
 import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 
 //@@author A0138704E
@@ -13,8 +11,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String OPTION_CLEAR_ALL = "/a";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clears completed tasks from the task book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears completed tasks from the task book.\n"
             + "Parameters: [OPTION]\n"
             + "Example: " + COMMAND_WORD + " or " + COMMAND_WORD + " " + OPTION_CLEAR_ALL;
     
@@ -40,10 +37,7 @@ public class ClearCommand extends Command {
             }
             return new CommandResult(MESSAGE_CLEAR_COMPLETED_SUCCESS);
         }
-        else{
-        	model.clearAllTasks();
-        }
-        model.resetData(TaskBook.getEmptyTaskBook());
+        model.clearAllTasks();
         return new CommandResult(MESSAGE_CLEAR_ALL_SUCCESS);
     }
 }

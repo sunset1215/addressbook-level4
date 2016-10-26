@@ -52,5 +52,4 @@ public class CompleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
     }
     
-    
 }

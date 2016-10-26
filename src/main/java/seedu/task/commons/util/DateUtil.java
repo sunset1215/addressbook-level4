@@ -36,8 +36,8 @@ public class DateUtil {
     /**
      * Formats a LocalDateTime into a string
      */
-    public static String formatLocalDateTimeToString(LocalDateTime taskDate) {
-        return taskDate.format(localDateTimeFormatter);
+    public static String formatLocalDateTimeToString(LocalDateTime date) {
+        return date.format(localDateTimeFormatter);
     }
     
     /**

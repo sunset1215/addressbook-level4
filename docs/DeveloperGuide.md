@@ -290,8 +290,6 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | assign my tasks to a project or category | organize my tasks in an orderly manner
 `*` | user | use common keyboard shortcuts | able to work more efficiently
 
-{More to be added}
-
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)

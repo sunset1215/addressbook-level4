@@ -39,4 +39,12 @@ public abstract class Parser {
         }
         return Optional.of(Integer.parseInt(index));
     }
+    
+    /**
+     * Returns an implementation of this abstract class
+     */
+    public static ParserManager initialise() {
+        return new ParserManager();
+    }
 }
+

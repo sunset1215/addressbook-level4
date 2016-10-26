@@ -38,7 +38,9 @@ public class ClearCommand extends Command {
             }
             return new CommandResult(MESSAGE_CLEAR_COMPLETED_SUCCESS);
         }
-
+        else{
+        	model.clearAllTasks();
+        }
         model.resetData(TaskBook.getEmptyTaskBook());
         return new CommandResult(MESSAGE_CLEAR_ALL_SUCCESS);
     }

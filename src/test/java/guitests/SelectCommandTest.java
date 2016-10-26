@@ -12,11 +12,15 @@ public class SelectCommandTest extends TaskBookGuiTest {
     @Test
     public void selectTask_nonEmptyList() {
 
+        //list all tasks as default on launch is to list tasks due today
+        commandBox.runCommand("list /a");
+        
         assertSelectionInvalid(10); //invalid index
         assertNoTaskSelected();
 
         assertSelectionSuccess(1); //first task in the list
         int taskCount = td.getTypicalTasks().length;
+        
         assertSelectionSuccess(taskCount); //last task in the list
         int middleIndex = taskCount / 2;
         assertSelectionSuccess(middleIndex); //a task in the middle of the list

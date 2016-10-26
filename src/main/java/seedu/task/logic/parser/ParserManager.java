@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * Parses user input.
  */
-public class ParserManager {
+public class ParserManager extends Parser {
 
     /**
      * Used for initial separation of command word and args.
@@ -64,6 +64,9 @@ public class ParserManager {
 
         case StoreCommand.COMMAND_WORD:
         	return new StoreParser().parseCommand(arguments);
+        	
+        case SortCommand.COMMAND_WORD:
+            return new SortParser().parseCommand(arguments);
             
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

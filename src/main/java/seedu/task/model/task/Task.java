@@ -107,4 +107,10 @@ public class Task implements ReadOnlyTask {
         status.setComplete();
     }
     
+    /**
+     * Set the task as pending.
+     */
+    public void setPending(){
+    	status.setPending();
+    }
 }

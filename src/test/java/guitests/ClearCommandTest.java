@@ -16,6 +16,7 @@ public class ClearCommandTest extends TaskBookGuiTest {
 
         //verify a non-empty list can be cleared
         TestTask[] currentList = td.getTypicalTasks();
+        commandBox.runCommand("list /a");
         currentList = TestUtil.removeTasksFromList(currentList, td.getTypicalTasks());
         commandBox.runCommand("clear /a");
         assertClearCommandSuccess(currentList, ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS);
@@ -33,15 +34,15 @@ public class ClearCommandTest extends TaskBookGuiTest {
         //get a list with some completed tasks
         repopulateTaskBookWithInitialData();
         currentList = td.getTypicalTasks();
+        //complete the first 3 tasks in the list
         int targetIndex = 1;
+        String completeCommand = "complete 1";
+        commandBox.runCommand(completeCommand);
+        commandBox.runCommand(completeCommand);
+        commandBox.runCommand(completeCommand);
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
-        commandBox.runCommand("complete " + targetIndex);
-        targetIndex = currentList.length;
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
-        commandBox.runCommand("complete " + targetIndex);
-        targetIndex = currentList.length/2;
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
-        commandBox.runCommand("complete " + targetIndex);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+1);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+2);
         currentList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
         
         //verify clear command can clear completed tasks

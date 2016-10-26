@@ -1,11 +1,12 @@
 package seedu.task.commons.util;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.task.model.task.TaskDate;
 
@@ -16,22 +17,30 @@ import seedu.task.model.task.TaskDate;
  */
 public class DateUtil {
     
-    private static DateFormat dateFormatter = new SimpleDateFormat("dd-mm-yyyy");
-    private static DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	
+    private static final DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private static final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    
 	/**
-     * Parses a String into a Date
+     * Parses a String into a LocalDateTime
      * @throws ParseException
      */
-    public static Date parseStringToDate(String strDate) throws ParseException {
-        return dateFormatter.parse(strDate);
+    public static LocalDateTime parseStringToLocalDateTime(String strDate) throws DateTimeParseException {
+    	return LocalDateTime.parse(strDate, localDateTimeFormatter);
     }
     
     /**
-     * Formats a Date into a string
+     * Parses a String into a LocalDateTime
+     * @throws ParseException
      */
-    public static String formatDateToString(Date date) {
-        return dateFormatter.format(date);
+    public static LocalDateTime parseStringToLocalDate(String strDate) throws DateTimeParseException {
+    	return parseStringToLocalDateTime(strDate + " 17:30");
+    }
+    
+    /**
+     * Formats a LocalDateTime into a string
+     */
+    public static String formatLocalDateTimeToString(LocalDateTime taskDate) {
+        return taskDate.format(localDateTimeFormatter);
     }
     
     /**
@@ -44,7 +53,7 @@ public class DateUtil {
     /**
      * Converts a given TaskDate into a string.
      */
-    public static String convertDateToJaxbString(TaskDate taskDate) {
+    public static String convertTaskDateToJaxbString(TaskDate taskDate) {
         if (taskDate == null) {
             return "";
         }
@@ -54,24 +63,40 @@ public class DateUtil {
     /**
      * Converts a given string into a TaskDate.
      */
-    public static TaskDate convertJaxbStringToDate(String strDate) {
+    public static TaskDate convertJaxbStringToTaskDate(String strDate) {
         try {
-            Date date = DateUtil.parseStringToDate(strDate);
+            LocalDateTime date = parseStringToLocalDateTime(strDate);
             return new TaskDate(date);
-        } catch (ParseException e) {
+        } catch (DateTimeParseException e) {
             return null;
         }
     }
     
     /**
-     * Returns true if both dates fall on the same day.
+     * Returns true if a taskDate falls on the same day as the given local date
      */
     public static boolean isEqual(TaskDate taskDate, LocalDate date) {
         if (taskDate == null) {
             return false;
         }
-        String date1 = taskDate.toString();
-        String date2 = date.format(localDateFormatter);
-        return date1.equals(date2);
+        LocalDate ldOfTaskDate = taskDate.getTaskDate().toLocalDate();
+        return ldOfTaskDate.isEqual(date);
     }
+    
+    /**
+     * Returns today's date as a LocalDate
+     */
+    public static LocalDate getTodayAsLocalDate() {
+        LocalDate today = LocalDate.now();
+        return today;
+    }
+    
+    /**
+     * Returns today's date as a LocalDateTime
+     */
+    public static LocalDateTime getTodayAsLocalDateTime() {
+        LocalDateTime today = LocalDateTime.now();
+        return today;
+    }
+
 }

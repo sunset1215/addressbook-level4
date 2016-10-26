@@ -4,6 +4,7 @@ import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,6 +55,8 @@ public class EditParser extends Parser{
         	hasException = true;
         } catch (IllegalValueException e) {
             hasException = true;
+        } catch (DateTimeParseException e) {
+            hasException = true;
         }
 		
 		if (hasException) {
@@ -102,7 +105,7 @@ public class EditParser extends Parser{
 	 * @throws ParseException 
 	 * @throws IllegalArgumentException
 	 */
-	private Command createDeadlineTask(String args) throws IllegalArgumentException, ParseException {
+	private Command createDeadlineTask(String args) throws IllegalArgumentException, ParseException, DateTimeParseException {
 		Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args);
 		
 		if (!matcher.matches()) {
@@ -128,7 +131,7 @@ public class EditParser extends Parser{
 	 * @throws ParseException
 	 * @throws IllegalArgumentException 
 	 */
-	private Command createEventTask(String args) throws ParseException, IllegalArgumentException {
+	private Command createEventTask(String args) throws ParseException, IllegalArgumentException, DateTimeParseException {
 		Matcher matcher = EVENT_ARGS_FORMAT.matcher(args);
 		
 		if (!matcher.matches()) {

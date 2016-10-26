@@ -128,7 +128,7 @@ public class AddParser extends Parser {
 				DateUtil.parseStringToLocalDate(endDateString) :
 				DateUtil.parseStringToLocalDateTime(endDateString + " " + endTimeString);
 		
-		if (startDate.isBefore(endDate)) {
+		if (startDate.isAfter(endDate)) {
 			throw new IllegalArgumentException();
 		}
 				

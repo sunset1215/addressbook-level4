@@ -1,3 +1,4 @@
+//@@author A0153658W
 package seedu.task.model;
 
 import javafx.collections.transformation.FilteredList;
@@ -6,7 +7,6 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
-import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
@@ -79,12 +79,12 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBookChanged() {
         raise(new TaskBookChangedEvent(taskBook));
     }
-    
+    //@@author A0138704E
     /** Raises an event to indicate the task list panel data has changed */
     private void indicateTaskListPanelDataChanged() {
         raise(new TaskPanelDataChangedEvent());
     }
-
+    //@@author A0153658W
     @Override
     public synchronized void deleteTask(ReadOnlyTask target, String callingCommand) throws TaskNotFoundException {
         taskBook.removeTask(target, callingCommand);
@@ -104,14 +104,14 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListByStatus(Status.STATUS_PENDING);
         indicateTaskBookChanged();
     }
-    
+    //@@author A0138704E
 	@Override
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
         taskBook.completeTask(target);
         indicateTaskBookChanged();
         indicateTaskListPanelDataChanged();
     }
-	
+	//@@author A0153723J 
 	@Override
 	public String changeStorageFilePath(String newFilePath) throws DirectoryChooserOperationCancelledException, IOException {
 		if(newFilePath.isEmpty()) {
@@ -136,23 +136,34 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return newFilePath;
     }
-    
+    //@@author A0138704E
     @Override
     public void sort() {
         taskBook.sort();
         indicateTaskBookChanged();
     }
-
+    
     @Override
     public void clearCompletedTasks() throws NoCompletedTasksFoundException {
 	    taskBook.clearCompletedTasks();
         indicateTaskBookChanged();
     }
-
+    //@@author A0153658W
 	@Override
     public void clearAllTasks() {
 	    taskBook.clearAllTasks();
         indicateTaskBookChanged();
+    }
+	
+    @Override
+    public void undo(){
+        taskBook.undoTask();
+        indicateTaskBookChanged();
+        indicateTaskListPanelDataChanged();
+    }
+    
+    public String getUndoInformation(){
+        return taskBook.getUndoInformation();
     }
 
 	@Override
@@ -161,7 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
 	}
 	
     //=========== Filtered Task List Accessors ===============================================================
-
+	//@@author A0153658W-reused
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
         return new UnmodifiableObservableList<>(filteredTasks);
@@ -176,7 +187,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
+    //@@author A0138704E
     @Override
     public void updateFilteredListByStatus(boolean status) {
         updateFilteredTaskList(new PredicateExpression(new StatusQualifier(status)));
@@ -186,18 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListByDate(LocalDate date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
     }
-
-    @Override
-    public void undo(){
-    	taskBook.undoTask();
-    	indicateTaskBookChanged();
-        indicateTaskListPanelDataChanged();
-    }
-    
-    public String getUndoInformation(){
-    	return taskBook.getUndoInformation();
-    }
-    
+    //@@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -254,6 +254,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    //@@author A0138704E
     /**
      * Class used to filter tasks by status
      */
@@ -304,9 +305,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
-    
+    //@@author A0153723J
     //==================== Event Handling Code =================================================================
-
+    
     @Subscribe
     private void handleDatePickedOnCalendarEvent(DatePickedOnCalendarEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

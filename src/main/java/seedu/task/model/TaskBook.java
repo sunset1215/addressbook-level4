@@ -1,3 +1,4 @@
+//@@author A0153658W 
 package seedu.task.model;
 
 import javafx.collections.ObservableList;
@@ -44,6 +45,8 @@ public class TaskBook implements ReadOnlyTaskBook {
 	public TaskBook() {
 	}
 
+	//@@author
+	
 	/**
 	 * Tasks and Tags are copied into this task book
 	 */
@@ -102,7 +105,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 		}
 		return newList;
 	}
-
+	//@@author A0153658W-reused
 	public ObservableList<Task> getTasks() {
 		return tasks.getInternalList();
 	}
@@ -124,7 +127,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 	public void resetData(ReadOnlyTaskBook newData) {
 		resetData(newData.getTaskList(), newData.getTagList());
 	}
-
+	//@@author A0153658W
 	//// task-level operations
 
 	/**
@@ -184,7 +187,8 @@ public class TaskBook implements ReadOnlyTaskBook {
 			throw new TaskNotFoundException();
 		}
 	}
-
+	
+	//@@author A0138704E
 	/**
 	 * Completes a task in the task book.
 	 * 
@@ -205,7 +209,8 @@ public class TaskBook implements ReadOnlyTaskBook {
 		
 		undoTaskStack.pushCompleteToUndoStack(taskToComplete, UNDO_COMPLETE_COMMAND, targetIndex);
 	}
-
+	
+	//@@author A0153658W
 	public int getIndex(ReadOnlyTask key) throws UniqueTaskList.TaskNotFoundException {
 		return tasks.getIndex(key);
 	}
@@ -317,11 +322,12 @@ public class TaskBook implements ReadOnlyTaskBook {
 		return undoTaskStack.getUndoInformation();
 	}
 
+	//@@author
 	/** Sorts the task book order by end date, then name */
 	public void sort() {
 	    tasks.sort();
 	}
-
+	
 	//// tag-level operations
 
 	public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

@@ -1,9 +1,8 @@
 package seedu.task.logic.commands;
 
+//@@author A0138704E
 /**
  * Sorts the task book.
- * @author Vivian
- *
  */
 public class SortCommand extends Command {
 

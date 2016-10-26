@@ -1,3 +1,4 @@
+//@@author A0153723J
 package seedu.task.ui;
 
 import javafx.event.ActionEvent;
@@ -67,23 +68,12 @@ public class CalendarPanel extends UiPart{
 		        
 		        //raising an event in the model manager
 		        EventsCenter.getInstance().post(new DatePickedOnCalendarEvent(date));
-		        System.out.println(date);
-				
 			}
 		});
-        System.out.println(date);
 		Node popupContent = datePickerSkin.getPopupContent();
         
- 
         placeholder.getChildren().add(popupContent);
         return calendarPanel;
     }
-    
-    
-    
-    
-    
-    
-
     
 }

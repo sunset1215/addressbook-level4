@@ -9,6 +9,7 @@ import seedu.task.logic.commands.CompleteCommand;
 import seedu.task.testutil.TestTask;
 import seedu.task.testutil.TestUtil;
 
+//@@author A0138704E
 public class CompleteCommandTest extends TaskBookGuiTest {
 
     @Test

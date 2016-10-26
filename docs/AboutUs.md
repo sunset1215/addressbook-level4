@@ -1,3 +1,4 @@
+<!-- @@author A0153723J -->
 # About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
@@ -7,6 +8,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [Sean Zhang](http://github.com/puzzledsean) ####
 <img src="images/SeanZhang.jpg" width="150"><br>
 
+<!-- @@author A0138704E -->
 * Components in charge of: [Model](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#model-component)
 * Aspects/tools in charge of: 
 * Features implemented:
@@ -16,12 +18,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A0153658W.md)][[test code](A0153658W.md)][[docs](A0153658W.md)]
 * Other major contributions:
   * 
-
+<!-- @@author A0153723J -->
 -----
 
 #### [William Sean Hawken](http://github.com/torasian) ####
 <img src="images/WilliamHawken.jpg" width="150"><br>
-
+<!-- @@author A0138704E -->
 * Components in charge of: [UI](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#ui-component)
 * Aspects/tools in charge of: 
 * Features implemented:
@@ -30,12 +32,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A0153723J.md)][[test code](A0153723J.md)][[docs](A0153723J.md)]
 * Other major contributions:
   * 
-
+<!-- @@author A0153723J -->
 -----
 
 #### [Gabe Ghe](http://github.com/GabrielGhe) ####
 <img src="images/GabeGhe.jpg" width="150"><br>
-
+<!-- @@author A0138704E -->
 * Components in charge of: [Logic](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#logic-component)
 * Aspects/tools in charge of: 
 * Features implemented:
@@ -45,12 +47,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A123456.md)][[test code](A123456.md)][[docs](A123456.md)]
 * Other major contributions:
   * 
-
+<!-- @@author A0153723J -->
 -----
 
 #### [Vivian Low](http://github.com/sunset1215) ####
 <img src="images/VivianLow.jpg" width="150"><br>
-
+<!-- @@author A0138704E -->
 * Components in charge of: [Storage](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#storage-component)
 * Aspects/tools in charge of: 
 * Features implemented:
@@ -61,7 +63,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Code written: [[functional code](A0138704E.md)][[test code](A0138704E.md)][[docs](A0138704E.md)]
 * Other major contributions:
   * 
-
+<!-- @@author A0153723J -->
 ## Project Mentor ##
 
 * [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy) <br>

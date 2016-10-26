@@ -118,7 +118,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
  that are in the `src/main/resources/view` folder.<br>
  For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
-
+<!-- @@author A0153723J -->
 The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
@@ -128,6 +128,7 @@ The `UI` component,
 
 <img src="images/LogicClassDiagram.PNG" width="800"><br>
 
+<!-- @@author -->
 **API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
@@ -144,7 +145,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
-
+<!-- @@author A0153723J -->
 The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
 * stores the TaskBook data.
@@ -155,6 +156,7 @@ The `Model`,
 ### Storage component
 
 <img src="images/StorageClassDiagram.PNG" width="800"><br>
+<!-- @@author -->
 
 **API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
@@ -266,7 +268,7 @@ a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
 ## Appendix A : User Stories
-
+<!-- @@author A0153723J -->
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 Priority | As a ... | I want to ... | So that I can...
@@ -294,6 +296,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
+<!-- @@author A0138704E -->
 #### Use case: Add task
 
 **MSS**
@@ -332,6 +335,7 @@ Use case ends.
 
 > 3b1. System notifies user that the task index provided is invalid.
 
+<!-- @@author A0153723J -->
 #### Use case: Delete task
 
 **MSS**
@@ -386,6 +390,7 @@ Use case ends.
 
 > 3b1. System notifies user that the task index provided is invalid.
 
+<!-- @@author A0138704E -->
 #### Use case: List tasks
 
 **MSS**
@@ -410,6 +415,7 @@ Use case ends.
 
 > 2a1. System displays an empty list.
 
+<!-- @@author A0153723J -->
 #### Use case: Undo previous commands
 
 **MSS**
@@ -451,7 +457,7 @@ Use case ends.
 
 ## Appendix D : Glossary
 
-#####  Floating Task 
+#####  To-do
 
 > A task without any time constraints
 
@@ -469,6 +475,7 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
+<!-- @@author A0138704E -->
 ### Google Calendar
 
 **Strength**<br>
@@ -482,6 +489,7 @@ Use case ends.
 1. Only able to view one list at a time, unable to view all tasks at once
 2. Task GUI is narrow and feels a bit cluttered when there are many tasks in the list
 
+<!-- @@author A0153658W -->
 ### Any.do
 
 **Strengths**<br>
@@ -499,6 +507,7 @@ Use case ends.
 2. Basic task like having repeating tasks is a premium service to pay for $2/month
 3. Limiting location based reminders is also as a premium service to pay for $2/month
 
+<!-- @@author A0161247J -->
 ### Sunrise Calendar
 
 **Strengths**<br>
@@ -513,6 +522,7 @@ Use case ends.
 2. Bought by Microsoft so now it costs money
 3. Doesn’t have a way to attach email, pdf or images
 
+<!-- @@author A0153723J -->
 ### Wunderlist
 
 **Strengths**<br>

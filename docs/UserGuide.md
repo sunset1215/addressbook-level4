@@ -34,37 +34,46 @@
 > * Items in `[SQUARE_BRACKETS]` are optional.
 > * The order of parameters is fixed.
 
+<!-- @@author A0138704E -->
 > **Task Structure**<br>
 
 > There are 3 types of tasks.
-> * Floating Task
+> * To-do
 > * Deadline
 > * Event<br>
 
-> Every task is either a floating task, deadline or event. It cannot be both or all 3 or none at all.<br>
+> Every task is either a to-do, deadline or event. It cannot be both or all 3 or none at all.<br>
 > Refer to [Glossary](DeveloperGuide.md#appendix-d--glossary) for definitions of each type of task.
+<!-- @@author A0153723J -->
 
 #### Viewing help : `help`
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
- 
+
+<!-- @@author A0138704E -->
 #### Adding a task : `add`
 Adds a task to the task manager.<br>
-Format: `add TASK_NAME [s/START_DATETIME] [e/END_DATETIME]` 
+Format: `add TASK_NAME [START_DATE [START_TIME]] [END_DATE [END_TIME]]` 
 
-> To add a floating task, user is required to provide `TASK_NAME` only.<br>
-  To add a deadline, user is required to provide `END_DATETIME` in addition to `TASK_NAME`.<br>
-  To add an event, user is required to provide `START_DATETIME` and `END_DATETIME` in addition to `TASK_NAME`.<br>
-  Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
+> `TASK_NAME` is required for adding any type of task.<br>
+  To add a deadline, specify `END_DATE` and an optional `END_TIME`.<br>
+  To add an event, specify `START_DATE` and `END_DATE` and optional `START_TIME` or `END_TIME`.<br>
+  Dates have to be specified in the format `dd-mm-yyyy`, for e.g. `20-10-2016`.<br>
+  Times have to be specified in 24-hour format, for e.g. `17:00` means `5 pm`.<br>
+  The default time is 17:30 if time is not provided.
 
 Examples: 
 * `add follow up with Jack on sales report`<br>
   Adds a floating task named `follow up with Jack on sales report`.
-* `add assignment 3 e/12 Oct`<br>
+* `add assignment 3 12-10-2016`<br>
   Adds a deadline named `assignment 3` due on 12th October 2016.
-* `add project Highlight s/1-10-2016 e/14-11-2016`<br>
+* `add assignment 3 12-10-2016 14:00`<br>
+  Adds a deadline named `assignment 3` due on 12th October 2016, 2pm.
+* `add project Highlight 01-10-2016 14-11-2016`<br>
   Adds an event named `project Highlight` starting on 1st October 2016 to 14th November 2016.
+* `add meeting with John 01-10-2016 14:00 01-10-2016 16:00`<br>
+  Adds an event named `meeting with John` on 1st October 2016, 2pm to 4pm.
   
 #### Set task as complete : `complete`
 Sets the specified task as complete.<br>
@@ -89,6 +98,7 @@ Format: `list [OPTION]`
 > * `/c` : Shows a list of completed tasks.
 > * `/p` : Shows a list of pending tasks.
 
+<!-- @@author A0153723J -->
 #### Deleting a task : `delete`
 Deletes the specified task from the task manager.<br>
 Format: `delete TASK_INDEX`
@@ -107,50 +117,51 @@ Examples:
   
 #### Finding all tasks containing any keyword in their name : `find`
 Finds tasks whose names contain any of the given keywords.<br>
-Format: `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 > * The search is not case sensitive. e.g `complete` will match `Complete`
 > * The order of the keywords does not matter. e.g. `meeting John` will match `John meeting`
 > * Partial words will be matched e.g. `meet` will match `meeting`
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `meeting` will match `meeting with John`
-> * Specifying `s/` or `e/` will search for tasks containing either specified dates.
-> * Specifying both `s/` and `e/` will search for tasks whose dates fall between the specified range.
-> * Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
 
 Examples: 
 * `find Highlight`<br>
   Returns any tasks having names `Highlight` or `highlight`
 * `find product highlight showcase`<br>
   Returns any task having names `product`, `highlight`, or `showcase`
-* `find s/23-10-2016 e/30-10-2016`<br>
-  Returns any task whose dates fall between 23-10-2016 and 30-10-2016  
+* `find high`<br>
+  Returns any tasks having names that contains the word `high`, for e.g. `Highlight` or `higher`
   
+<!-- @@author A0138704E -->  
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
-Format: `edit TASK_INDEX [s/START_DATETIME] [e/END_DATETIME] [NEW_NAME]`
+Format: `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TIME]]`
 
 > Edits the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...<br>
   Specified parameters will overwrite previous data.<br>
-  User can specify `END_DATETIME` along with to turn the task into a deadline.<br>
-  User can specifies both `START_DATETIME` and `END_DATETIME` to turn the task into an event.<br>
-  User can specify a new task name to turn current task into a floating task.<br>
-  Date/Time parameters can be entered in a more flexible way, e.g. `16 Nov`, `6pm`.
+  To add a deadline to the specified task, specify `END_DATE` and an optional `END_TIME`.<br>
+  To add an event to the specified task, specify `START_DATE` and `END_DATE` and optional `START_TIME` or `END_TIME`.<br>
+  Dates have to be specified in the format `dd-mm-yyyy`, for e.g. `20-10-2016`.<br>
+  Times have to be specified in 24-hour format, for e.g. `17:00` means `5 pm`.<br>
+  The default time is 17:30 if time is not provided.
 
 Examples: 
 * `list`<br>
-  `edit 2 e/23-10-2016`<br>
-  Edit the 2nd task in the task manager into a deadline 23rd October 2016.
+  `edit 2 23-10-2016`<br>
+  Edit the 2nd task in the task manager into a deadline due on 23rd October 2016.
   
+<!-- @@author A0153723J -->
 #### Undoing the last command : `undo`
 Undo the last command executed.<br>
 Format: `undo`
 
 > Able to undo up to the last 100 commands.<br>
   Only commands that changes data are included (`add`, `delete`, `clear`, `edit`, `complete`).
-
+  
+<!-- @@author A0138704E -->
 #### Clearing tasks : `clear`
 Clears tasks from the task manager.<br>
 Additional options include: `/a`<br>
@@ -159,6 +170,7 @@ Format: `clear [OPTION]`
 > The default option clears completed tasks from the task manager.
 > * `/a` : clears all tasks from the task manager.
 
+<!-- @@author A0153723J -->
 #### Specifying data storage location : `store`
 Specifies data storage location.<br>
 Format: `store [FILE_LOCATION]`
@@ -173,10 +185,12 @@ Examples:
 * `store`<br>
   Displays a dialog box for user to browse for the storage location.
   
+<!-- @@author A0138704E -->
 #### Sorting tasks : `sort`
 Sorts data in the task book by order end date then name.<br>
 Format: `sort`
 
+<!-- @@author A0153723J -->
 #### Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
@@ -192,15 +206,14 @@ There is no need to save manually.
 Command | Format | Description 
 ----------- | ------------------------------- | :--------- 
 Help | `help` | View help on command usage
-Add | `add TASK_NAME [s/START_DATETIME] [e/END_DATETIME]` | Add a task
+Add | `add TASK_NAME [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Add a task
 Complete | `complete TASK_INDEX` | Set task as complete
 List | `list` | List tasks due today
 Delete | `delete TASK_INDEX` | Delete a task
 Find | `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]` | Find all tasks containing any keywords
-Edit | `edit TASK_INDEX [s/START_DATETIME] [e/END_DATETIME] [NEW_NAME]` | Edit a task
-View | `view TASK_INDEX` | View details of a task
+Edit | `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Edit a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks
-Store | `store FILE_LOCATION` | Specify storage location
+Store | `store [FILE_LOCATION]` | Specify storage location
 Sort | `sort` | Sorts data in the task book by order end date then name
 Exit | `exit` | Exit program

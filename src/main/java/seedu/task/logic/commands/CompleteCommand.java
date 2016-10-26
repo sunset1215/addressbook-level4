@@ -7,6 +7,7 @@ import seedu.task.model.task.Status;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+//@@author A0138704E
 /**
  * Completes a task identified using it's last displayed index from the task list.
  */

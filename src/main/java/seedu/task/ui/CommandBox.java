@@ -119,7 +119,7 @@ public class CommandBox extends UiPart {
     private void setStyleToIndicateIncorrectCommand() {
         commandTextField.getStyleClass().add("error");
     }
-    
+    //@@author A0153658W
     /*
      * Sets up key listeners for both the Up arrow and Down arrow
      */

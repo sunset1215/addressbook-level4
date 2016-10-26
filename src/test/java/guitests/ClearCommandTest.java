@@ -9,6 +9,7 @@ import seedu.task.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
 
+//@@author A0138704E
 public class ClearCommandTest extends TaskBookGuiTest {
 
     @Test

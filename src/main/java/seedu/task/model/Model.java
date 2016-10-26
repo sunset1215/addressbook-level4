@@ -64,21 +64,16 @@ public interface Model {
      */
     void updateFilteredListByStatus(boolean status);
     
-    /** 
-     * Updates the filter of the filtered task list to filter tasks by task end date
-     */
+    /** Updates the filter of the filtered task list to filter tasks by task end date */
     void updateFilteredListByDate(LocalDate date);
 
     /** Clears completed tasks from the task book */
     void clearCompletedTasks() throws NoCompletedTasksFoundException;
     
-    /** Clears all tasks from the task book 
-	*/
+    /** Clears all tasks from the task book */
     void clearAllTasks();
 
-    /**
-     * Sorts the task book, order by end date then name.
-     */
+    /** Sorts the task book, order by end date then name */
     void sort();
 
 }

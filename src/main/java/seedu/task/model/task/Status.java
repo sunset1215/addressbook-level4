@@ -2,6 +2,7 @@ package seedu.task.model.task;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 
+//@@author A0138704E
 /**
  * Represents a Task status in the Task List.
  */

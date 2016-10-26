@@ -1,13 +1,13 @@
 package seedu.task.ui;
 
-import javafx.event.Event;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.web.WebView;
+import seedu.task.commons.core.EventsCenter;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.util.FxViewUtil;
-import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import com.sun.javafx.scene.control.skin.DatePickerSkin;
 
 /**
- * The Browser Panel of the App.
+ * The Calendar Panel of the App.
  */
 public class CalendarPanel extends UiPart{
 
@@ -27,7 +27,7 @@ public class CalendarPanel extends UiPart{
 //    private DatePickerPopUpDemo datePicker;
 
     /**
-     * Constructor is kept private as {@link #load(AnchorPane)} is the only way to create a BrowserPanel.
+     * Constructor is kept private as {@link #load(AnchorPane)} is the only way to create a CalendarPanel.
      */
     private CalendarPanel() {
 
@@ -53,16 +53,26 @@ public class CalendarPanel extends UiPart{
         CalendarPanel calendarPanel = new CalendarPanel();
 
         calendarPanel.datePicker = new DatePicker();
-        calendarPanel.datePicker.setMaxSize(400, 400);
+        calendarPanel.datePicker.setPrefHeight(600);
       
         DatePickerSkin datePickerSkin = new DatePickerSkin(calendarPanel.datePicker);
         
-        //gets the value of the selected date
-        date = calendarPanel.datePicker.getValue();
+        //event handler for when you click a specified date on the calendar
+        calendarPanel.datePicker.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				//gets the value of the selected date
+		        date = calendarPanel.datePicker.getValue();
+		        
+		        //raising an event in the model manager
+		        EventsCenter.getInstance().post(new DatePickedOnCalendarEvent(date));
+		        System.out.println(date);
+				
+			}
+		});
         System.out.println(date);
 		Node popupContent = datePickerSkin.getPopupContent();
-		
-		
         
  
         placeholder.getChildren().add(popupContent);

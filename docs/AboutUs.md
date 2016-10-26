@@ -12,9 +12,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
    * [Edit tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#editing-a-task--edit)
    * [Undo command](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#undoing-the-last-command--undo)
-* Code written: [[functional code](A123456.md)][[test code](A123456.md)][[docs](A123456.md)]
+   * Pressing up/down keys will put up the previous/next command entered
+* Code written: [[functional code](A0153658W.md)][[test code](A0153658W.md)][[docs](A0153658W.md)]
 * Other major contributions:
-  * // to be added
+  * 
 
 -----
 
@@ -25,8 +26,8 @@ We are a team based in the [School of Computing, National University of Singapor
 * Aspects/tools in charge of: 
 * Features implemented:
    * [Change storage location](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#specifying-data-storage-location--store)
-   * Calendar view that displays tasks on selected dates
-* Code written: [[functional code](A123456.md)][[test code](A123456.md)][[docs](A123456.md)]
+   * A calendar that displays tasks of the selected date
+* Code written: [[functional code](A0153723J.md)][[test code](A0153723J.md)][[docs](A0153723J.md)]
 * Other major contributions:
   * 
 

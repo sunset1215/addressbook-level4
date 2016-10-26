@@ -21,8 +21,8 @@ import seedu.task.model.task.TaskDate;
  */
 public class EditParser extends Parser{
 	private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<name>.+)");
-	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*");
-	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<name>.+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*");
+	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*");
+	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4}\\s\\d{2}:\\d{2})\\s*");
 	
 	/**
      * Parses arguments in the context of the edit task command.
@@ -101,9 +101,8 @@ public class EditParser extends Parser{
 	 * 
 	 * @throws ParseException 
 	 * @throws IllegalArgumentException
-	 * @throws IllegalValueException 
 	 */
-	private Command createDeadlineTask(String args) throws IllegalArgumentException, ParseException, IllegalValueException {
+	private Command createDeadlineTask(String args) throws IllegalArgumentException, ParseException {
 		Matcher matcher = DEADLINE_ARGS_FORMAT.matcher(args);
 		
 		if (!matcher.matches()) {
@@ -111,13 +110,11 @@ public class EditParser extends Parser{
 		}
 		
 		String indexString = matcher.group("index").trim();
-		String name = matcher.group("name").trim(); 
 		String endDateString = matcher.group("endDate").trim();
 		
 		int index = tryParseIndex(indexString);
-
 		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);
-		return new EditCommand(index, new Name(name), new TaskDate(endDate));
+        return new EditCommand(index, new TaskDate(endDate));
 	}
 	
 	/**
@@ -126,9 +123,8 @@ public class EditParser extends Parser{
 	 * 
 	 * @throws ParseException
 	 * @throws IllegalArgumentException 
-	 * @throws IllegalValueException 
 	 */
-	private Command createEventTask(String args) throws ParseException, IllegalArgumentException, IllegalValueException {
+	private Command createEventTask(String args) throws ParseException, IllegalArgumentException {
 		Matcher matcher = EVENT_ARGS_FORMAT.matcher(args);
 		
 		if (!matcher.matches()) {
@@ -136,14 +132,13 @@ public class EditParser extends Parser{
 		}
 		
 		String indexString = matcher.group("index").trim();
-		String name = matcher.group("name").trim(); 
 		String startDateString = matcher.group("startDate").trim();
 		String endDateString = matcher.group("endDate").trim();
 		
 		int index = tryParseIndex(indexString);
 		LocalDateTime startDate = DateUtil.parseStringToLocalDateTime(startDateString);
 		LocalDateTime endDate = DateUtil.parseStringToLocalDateTime(endDateString);
-        return new EditCommand(index, new Name(name), new TaskDate(startDate), new TaskDate(endDate));
+        return new EditCommand(index, new TaskDate(startDate), new TaskDate(endDate));
 	}
 	
 	/**

@@ -1,5 +1,5 @@
 # A0153658Wreused
-###### /java/seedu/task/model/ModelManager.java
+###### \java\seedu\task\model\ModelManager.java
 ``` java
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -15,18 +15,8 @@
     public void updateFilteredTaskList(Set<String> keywords){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
-    @Override
-    public void updateFilteredListByStatus(boolean status) {
-        updateFilteredTaskList(new PredicateExpression(new StatusQualifier(status)));
-    }
-    
-    @Override
-    public void updateFilteredListByDate(LocalDate date) {
-        updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
-    }
 ```
-###### /java/seedu/task/model/task/Name.java
+###### \java\seedu\task\model\task\Name.java
 ``` java
 package seedu.task.model.task;
 
@@ -89,7 +79,7 @@ public class Name implements Comparable<Name> {
 
 }
 ```
-###### /java/seedu/task/model/task/UniqueTaskList.java
+###### \java\seedu\task\model\task\UniqueTaskList.java
 ``` java
 package seedu.task.model.task;
 
@@ -258,7 +248,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
 }
 ```
-###### /java/seedu/task/model/TaskBook.java
+###### \java\seedu\task\model\TaskBook.java
 ``` java
 	public ObservableList<Task> getTasks() {
 		return tasks.getInternalList();

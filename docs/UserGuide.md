@@ -214,6 +214,6 @@ Find | `find KEYWORD [MORE_KEYWORDS] [s/START_DATETIME] [e/END_DATETIME]` | Find
 Edit | `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Edit a task
 Undo | `undo` | Undo last command
 Clear | `clear` | Clear completed tasks
-Store | `store FILE_LOCATION` | Specify storage location
+Store | `store [FILE_LOCATION]` | Specify storage location
 Sort | `sort` | Sorts data in the task book by order end date then name
 Exit | `exit` | Exit program

@@ -32,6 +32,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     private static final String UNDO_EDIT_COMMAND = "edit";
     private static final String UNDO_COMPLETE_COMMAND = "complete";
     private static final String UNDO_CLEAR_COMMAND = "clear";
+    private static final String UNDO_CLEAR_ALL_COMMAND = "clear all";
 
 	
 	{
@@ -115,6 +116,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 	}
 
 	public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
+		System.out.println(newTasks.toString());
 		setTasks(newTasks.stream().map(Task::new).collect(Collectors.toList()));
 		setTags(newTags);
 	}
@@ -259,6 +261,52 @@ public class TaskBook implements ReadOnlyTaskBook {
 		}
 		
 		undoTaskStack.pushClearToUndoStack(clearedTasks, clearedTasksIndices, UNDO_CLEAR_COMMAND);
+	}
+	
+	/**
+	 * Clears all tasks from the task book
+	 */
+	public void clearAllTasks(){
+		UniqueTaskList copyTasks = copyUniqueTaskList(tasks);
+		List<Task> clearedTasks = new ArrayList<Task>();
+		List<Integer> clearedTasksIndices = new ArrayList<Integer>();
+		List<String> clearedStatus = new ArrayList<String>();
+		
+		//compile set of tasks and indices being cleared to prepare for undo stack
+		for (Task readTask : copyTasks) {
+			try {
+				clearedTasksIndices.add(tasks.getIndex(readTask));
+				clearedStatus.add(readTask.getStatus().toString());
+								
+				Class<? extends ReadOnlyTask> clearedTask = readTask.getClass();
+
+				if (clearedTask.equals(DeadlineTask.class)) {
+					DeadlineTask cleared = new DeadlineTask(readTask.getName(), readTask.getEnd());
+					clearedTasks.add(cleared);
+				} else if (clearedTask.equals(EventTask.class)) {
+					EventTask cleared = new EventTask(readTask.getName(), readTask.getStart(), readTask.getEnd());
+					clearedTasks.add(cleared);
+				} else {
+					// cleared task must be a floating task
+					Task cleared = new Task(readTask.getName());
+					clearedTasks.add(cleared);
+				}
+				
+			} catch (TaskNotFoundException e) {
+				assert false : "The target task cannot be missing";
+			}
+		}
+		
+		//actually remove the completed tasks
+		for (Task readTask : copyTasks) {
+			try {			
+				tasks.remove(readTask);
+			} catch (TaskNotFoundException e) {
+				assert false : "The target task cannot be missing";
+			}
+		}
+		
+		undoTaskStack.pushClearAllToUndoStack(clearedTasks, clearedTasksIndices, clearedStatus, UNDO_CLEAR_ALL_COMMAND);
 	}
 
 	public void undoTask() {

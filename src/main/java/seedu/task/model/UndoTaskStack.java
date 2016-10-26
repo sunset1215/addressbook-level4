@@ -21,6 +21,7 @@ public class UndoTaskStack {
 	
 	private Stack<List<Task>> previousClearedTasks = new Stack<>();
 	private Stack<List<Integer>> previousClearedIndices = new Stack<>();
+	private Stack<List<String>> previousClearedStatus = new Stack<>();
 	
 	private String previousActionUndoString;
 
@@ -112,6 +113,34 @@ public class UndoTaskStack {
 		}
 	}
 	
+	/**
+	 * Pushes the clear all command to the undo stack.
+	 * 
+	 * @params clearedTasks, clearedTasksIndices, callingCommand
+	 * 
+	 * clearedTasks is the set of tasks that were cleared
+	 * clearedTasksIndices is the set of indices corresponding to each tasks cleared
+	 * clearedStatus is the set of statuses for each task cleared
+	 * callingCommand is the command passed in (it'll always be "clear")
+	 * 
+	 * actionIndex will be -1; there is no index specified when clearing a set of tasks, 
+	 * 			just pushing to keep the stacks balanced
+	 **/
+	public void pushClearAllToUndoStack(List<Task> clearedTasks, List<Integer> clearedTaskIndices, 
+			List<String>clearedStatus, String callingCommand) {
+		previousActionType.push(callingCommand);
+		previousActionIndex.push(-1);
+		
+		previousClearedTasks.push(clearedTasks);
+		previousClearedIndices.push(clearedTaskIndices);
+		previousClearedStatus.push(clearedStatus);
+		try {
+			previousTask.push(new Task(new Name("filler")));
+		} catch (IllegalValueException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * Undo the previous action by popping off the stack
@@ -158,7 +187,7 @@ public class UndoTaskStack {
 				userTask = tasks.getTaskFromIndex(taskIndex);
 				userTask.setPending();
 				break;
-			//previous action was a clear; add back the tasks that were completed
+			//previous action was a clear for completed tasks; add back the tasks that were completed
 			case "clear":
 				previousActionUndoString = userAction;
 				List<Task> lastCleared = previousClearedTasks.pop();
@@ -168,6 +197,31 @@ public class UndoTaskStack {
 					int indexToUnclear = lastClearedIndices.get(i);
 					Task taskToUnclear = lastCleared.get(i);
 					taskToUnclear.setComplete();
+					try {
+						tasks.add(indexToUnclear, taskToUnclear);
+					} catch (DuplicateTaskException e) {
+						e.printStackTrace();
+					}
+				}
+				break;
+			//previous action was a clear all regardless of status; add back the tasks that were cleared
+			case "clear all":
+				previousActionUndoString = userAction;
+				List<Task> lastClearedAll = previousClearedTasks.pop();
+				List<Integer> lastClearedAllIndices = previousClearedIndices.pop();
+				List<String> lastClearedStatuses = previousClearedStatus.pop();
+				
+				for(int i = 0; i < lastClearedAll.size(); i++){
+					int indexToUnclear = lastClearedAllIndices.get(i);
+					Task taskToUnclear = lastClearedAll.get(i);
+					String taskStatus = lastClearedStatuses.get(i);
+					if(taskStatus.equals("Complete")){
+						taskToUnclear.setComplete();
+					}
+					else{
+						taskToUnclear.setPending();
+					}
+					
 					try {
 						tasks.add(indexToUnclear, taskToUnclear);
 					} catch (DuplicateTaskException e) {

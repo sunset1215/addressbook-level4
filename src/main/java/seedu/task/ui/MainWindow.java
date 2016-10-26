@@ -43,7 +43,6 @@ public class MainWindow extends UiPart {
 
     private String taskBookName;
 
-
     @FXML
     private AnchorPane commandBoxPlaceholder;
 
@@ -192,5 +191,9 @@ public class MainWindow extends UiPart {
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
+    }
+    
+    public ResultDisplay getResultDisplay() {
+        return this.resultDisplay;
     }
 }

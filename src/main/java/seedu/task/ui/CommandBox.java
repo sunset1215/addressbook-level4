@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.task.commons.core.LogsCenter;
+import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.logic.Logic;
@@ -119,8 +120,9 @@ public class CommandBox extends UiPart {
     private void setStyleToIndicateIncorrectCommand() {
         commandTextField.getStyleClass().add("error");
     }
+    
     //@@author A0153658W
-    /*
+    /**
      * Sets up key listeners for both the Up arrow and Down arrow
      */
     public void setArrowKeyListener(){

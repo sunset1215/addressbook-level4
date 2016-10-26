@@ -12,11 +12,13 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
+import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
+import seedu.task.commons.util.DateUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
 import seedu.task.model.UserPrefs;
@@ -122,16 +124,27 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         
     }
     //@@author A0138704E
     @Subscribe
-    private void handleTaskPanelDataChangedEvent(TaskPanelDataChangedEvent event){
+    private void handleTaskPanelDataChangedEvent(TaskPanelDataChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().refresh();
     }
+    
+    /**
+     * Display a message when a date on the calendar selected
+     */
+    @Subscribe
+    private void handleDatePickedOnCalendarEvent(DatePickedOnCalendarEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getResultDisplay().postMessage("Listed tasks due on " 
+                                            + DateUtil.formatLocalDateToString(event.date));
+    }
+    
     //@@author A0153723J
     @Subscribe
     private void handleDisplayDirectoryChooserRequestEvent(DisplayDirectoryChooserRequestEvent event) {

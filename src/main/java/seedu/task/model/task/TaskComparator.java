@@ -24,6 +24,8 @@ public enum TaskComparator implements Comparator<Task> {
             if (!CollectionUtil.isAnyNull(t1.getEnd(), t2.getEnd())) {
                 int endDateResult = t1.getEnd().compareTo(t2.getEnd());
                 return endDateResult;
+            } else if (t1.getEnd() == null && t2.getEnd() == null) {
+                return 0;
             } else if (t1.getEnd() == null) {
                 return 1;
             } else {
@@ -38,6 +40,8 @@ public enum TaskComparator implements Comparator<Task> {
             if (!CollectionUtil.isAnyNull(t1.getStart(), t2.getStart())) {
                 int startDateResult = t1.getStart().compareTo(t2.getStart());
                 return startDateResult;
+            } else if (t1.getStart() == null && t2.getStart() == null) {
+                return 0;
             } else if (t1.getStart() == null) {
                 return 1;
             } else {

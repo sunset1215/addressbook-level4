@@ -1,7 +1,6 @@
 package seedu.task.logic.commands;
 
-import java.time.LocalDate;
-
+import seedu.task.commons.util.DateUtil;
 import seedu.task.model.task.Status;
 
 /**
@@ -41,8 +40,7 @@ public class ListCommand extends Command {
         switch (option) {
         
         case OPTION_LIST_TODAY:
-            LocalDate today = LocalDate.now();
-            model.updateFilteredListByDate(today);
+            model.updateFilteredListByDate(DateUtil.getTodayAsLocalDate());
             return new CommandResult(MESSAGE_LIST_TODAY_SUCCESS);
             
         case OPTION_LIST_ALL:

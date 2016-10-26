@@ -3,7 +3,7 @@
 
 # Super Tasker
 
-<img src="docs/images/uiMockUp.jpg" width="600"><br>
+<img src="docs/images/uiMockUp.png" width="600"><br>
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).

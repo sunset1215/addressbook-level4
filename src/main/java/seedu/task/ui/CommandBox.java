@@ -1,10 +1,15 @@
 package seedu.task.ui;
 
 import com.google.common.eventbus.Subscribe;
+
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.task.commons.core.LogsCenter;
@@ -24,6 +29,8 @@ public class CommandBox extends UiPart {
     private ResultDisplay resultDisplay;
     String previousCommandTest;
 
+    private UserCommandLog userCommandLog = new UserCommandLog();
+    
     private Logic logic;
 
     @FXML
@@ -71,6 +78,8 @@ public class CommandBox extends UiPart {
     private void handleCommandInputChanged() {
         //Take a copy of the command text
         previousCommandTest = commandTextField.getText();
+        
+        userCommandLog.addCommandToUserLog(previousCommandTest);
 
         /* We assume the command is correct. If it is incorrect, the command box will be changed accordingly
          * in the event handling code {@link #handleIncorrectCommandAttempted}
@@ -109,6 +118,44 @@ public class CommandBox extends UiPart {
      */
     private void setStyleToIndicateIncorrectCommand() {
         commandTextField.getStyleClass().add("error");
+    }
+    
+    /*
+     * Sets up key listeners for both the Up arrow and Down arrow
+     */
+    public void setArrowKeyListener(){
+		commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>()
+	    {
+	        @Override
+	        public void handle(KeyEvent ke){
+	            if (ke.getCode().equals(KeyCode.UP)){
+	            	//get previous command
+	            	String previousCommand = userCommandLog.getPreviousCommand();
+	            	commandTextField.setText(previousCommand);
+	            	
+	            	//move cursor caret to the end of the line
+	            	Platform.runLater(new Runnable() {
+	                    @Override
+	                    public void run() {
+	                    	commandTextField.positionCaret(previousCommand.length());
+	                    }
+	               });
+	            }
+	            else if(ke.getCode().equals(KeyCode.DOWN)){
+	            	//get the next command
+	            	String nextCommand = userCommandLog.getNextCommand();
+	            	commandTextField.setText(nextCommand);
+	            	
+	            	//move cursor caret to the end of the line
+	            	Platform.runLater(new Runnable() {
+	                    @Override
+	                    public void run() {
+	                    	commandTextField.positionCaret(nextCommand.length());
+	                    }
+	               });
+	            }
+	        }
+	    });
     }
 
 }

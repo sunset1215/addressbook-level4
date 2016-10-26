@@ -90,14 +90,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskBook.addTask(task);
-        updateFilteredListToShowAll();
+        updateFilteredListByStatus(Status.STATUS_PENDING);
         indicateTaskBookChanged();
     }
 	
     @Override
     public synchronized void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
         taskBook.addTask(taskIndex, task);
-        updateFilteredListToShowAll();
+        updateFilteredListByStatus(Status.STATUS_PENDING);
         indicateTaskBookChanged();
     }
     
@@ -132,8 +132,14 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return newFilePath;
     }
-	
-	@Override
+    
+    @Override
+    public void sort() {
+        taskBook.sort();
+        indicateTaskBookChanged();
+    }
+
+    @Override
     public void clearCompletedTasks() throws NoCompletedTasksFoundException {
 	    taskBook.clearCompletedTasks();
         indicateTaskBookChanged();

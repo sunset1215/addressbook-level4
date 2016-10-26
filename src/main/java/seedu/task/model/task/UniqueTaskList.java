@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import seedu.task.commons.exceptions.DuplicateDataException;
 import seedu.task.commons.util.CollectionUtil;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -132,6 +131,14 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public int size() {
         return internalList.size();
+    }
+    
+    /**
+     * Sorts the task book order by end date then name.
+     */
+    public void sort() {
+        FXCollections.sort(internalList, TaskComparator.NAME);
+        FXCollections.sort(internalList, TaskComparator.END_DATE);
     }
     
     public ObservableList<Task> getInternalList() {

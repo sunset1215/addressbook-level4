@@ -99,6 +99,7 @@ public class StatusBarFooter extends UiPart {
         setSyncStatus("Last Updated: " + lastUpdated);
     }
     
+    //@@author A0138704E
     /**
      * Set new save location for display
      */

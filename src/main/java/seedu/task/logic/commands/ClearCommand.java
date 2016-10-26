@@ -1,8 +1,10 @@
 package seedu.task.logic.commands;
 
 import seedu.task.model.TaskBook;
+
 import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 
+//@@author A0138704E
 /**
  * Clears completed tasks from the task book.
  * If option clear all is specified, clears the task book.

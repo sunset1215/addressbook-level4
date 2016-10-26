@@ -4,9 +4,9 @@ import java.util.Comparator;
 
 import seedu.task.commons.util.CollectionUtil;
 
+//@@author A0138704E
 /**
  * An enum storing different types of comparators for task
- *
  */
 public enum TaskComparator implements Comparator<Task> {
 

@@ -188,7 +188,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 		}
 	}
 	
-	//@@author 
+	//@@author A0138704E
 	/**
 	 * Completes a task in the task book.
 	 * 
@@ -322,12 +322,12 @@ public class TaskBook implements ReadOnlyTaskBook {
 		return undoTaskStack.getUndoInformation();
 	}
 
-	//@@author 
+	//@@author
 	/** Sorts the task book order by end date, then name */
 	public void sort() {
 	    tasks.sort();
 	}
-
+	
 	//// tag-level operations
 
 	public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {

@@ -296,6 +296,7 @@ Priority | As a ... | I want to ... | So that I can...
 
 (For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
+<!-- @@author A0138704E -->
 #### Use case: Add task
 
 **MSS**
@@ -334,6 +335,7 @@ Use case ends.
 
 > 3b1. System notifies user that the task index provided is invalid.
 
+<!-- @@author A0153723J -->
 #### Use case: Delete task
 
 **MSS**
@@ -388,6 +390,7 @@ Use case ends.
 
 > 3b1. System notifies user that the task index provided is invalid.
 
+<!-- @@author A0138704E -->
 #### Use case: List tasks
 
 **MSS**
@@ -412,6 +415,7 @@ Use case ends.
 
 > 2a1. System displays an empty list.
 
+<!-- @@author A0153723J -->
 #### Use case: Undo previous commands
 
 **MSS**
@@ -453,7 +457,7 @@ Use case ends.
 
 ## Appendix D : Glossary
 
-#####  Floating Task 
+#####  To-do
 
 > A task without any time constraints
 
@@ -466,11 +470,12 @@ Use case ends.
 > A deadline is a time constraint that can be added to a task. It defines an end time/date than a task must be completed by.
 
 ##### Mainstream OS
-<!-- @@author-->
+
 > Windows
 
 ## Appendix E : Product Survey
 
+<!-- @@author A0138704E -->
 ### Google Calendar
 
 **Strength**<br>
@@ -484,6 +489,7 @@ Use case ends.
 1. Only able to view one list at a time, unable to view all tasks at once
 2. Task GUI is narrow and feels a bit cluttered when there are many tasks in the list
 
+<!-- @@author A0153658W -->
 ### Any.do
 
 **Strengths**<br>
@@ -501,6 +507,7 @@ Use case ends.
 2. Basic task like having repeating tasks is a premium service to pay for $2/month
 3. Limiting location based reminders is also as a premium service to pay for $2/month
 
+<!-- @@author A0161247J -->
 ### Sunrise Calendar
 
 **Strengths**<br>
@@ -515,6 +522,7 @@ Use case ends.
 2. Bought by Microsoft so now it costs money
 3. Doesn’t have a way to attach email, pdf or images
 
+<!-- @@author A0153723J -->
 ### Wunderlist
 
 **Strengths**<br>

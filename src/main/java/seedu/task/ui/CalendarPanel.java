@@ -68,23 +68,12 @@ public class CalendarPanel extends UiPart{
 		        
 		        //raising an event in the model manager
 		        EventsCenter.getInstance().post(new DatePickedOnCalendarEvent(date));
-		        System.out.println(date);
-				
 			}
 		});
-        System.out.println(date);
 		Node popupContent = datePickerSkin.getPopupContent();
         
- 
         placeholder.getChildren().add(popupContent);
         return calendarPanel;
     }
-    
-    
-    
-    
-    
-    
-
     
 }

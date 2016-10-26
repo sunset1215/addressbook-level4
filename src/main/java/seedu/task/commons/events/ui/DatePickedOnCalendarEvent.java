@@ -6,9 +6,7 @@ import java.time.LocalDate;
 import seedu.task.commons.events.BaseEvent;
 
 /**
- * 
- * @author WSH
- *Event raised when you click a date on the calendar
+ * Event raised when you click a date on the calendar
  */
 public class DatePickedOnCalendarEvent extends BaseEvent {
 	

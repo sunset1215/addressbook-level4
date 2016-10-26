@@ -7,7 +7,6 @@ import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.core.UnmodifiableObservableList;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
-import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
@@ -80,12 +79,12 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskBookChanged() {
         raise(new TaskBookChangedEvent(taskBook));
     }
-    
+    //@@author A0138704E
     /** Raises an event to indicate the task list panel data has changed */
     private void indicateTaskListPanelDataChanged() {
         raise(new TaskPanelDataChangedEvent());
     }
-
+    //@@author A0153658W
     @Override
     public synchronized void deleteTask(ReadOnlyTask target, String callingCommand) throws TaskNotFoundException {
         taskBook.removeTask(target, callingCommand);
@@ -105,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListByStatus(Status.STATUS_PENDING);
         indicateTaskBookChanged();
     }
-    
+    //@@author A0138704E
 	@Override
     public void completeTask(ReadOnlyTask target) throws TaskNotFoundException, TaskAlreadyCompletedException {
         taskBook.completeTask(target);
@@ -137,23 +136,34 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return newFilePath;
     }
-    
+    //@@author A0138704E
     @Override
     public void sort() {
         taskBook.sort();
         indicateTaskBookChanged();
     }
-    //@@author A0153658W
+    
     @Override
     public void clearCompletedTasks() throws NoCompletedTasksFoundException {
 	    taskBook.clearCompletedTasks();
         indicateTaskBookChanged();
     }
-
+    //@@author A0153658W
 	@Override
     public void clearAllTasks() {
 	    taskBook.clearAllTasks();
         indicateTaskBookChanged();
+    }
+	
+    @Override
+    public void undo(){
+        taskBook.undoTask();
+        indicateTaskBookChanged();
+        indicateTaskListPanelDataChanged();
+    }
+    
+    public String getUndoInformation(){
+        return taskBook.getUndoInformation();
     }
 
 	@Override
@@ -177,7 +187,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
-    
+    //@@author A0138704E
     @Override
     public void updateFilteredListByStatus(boolean status) {
         updateFilteredTaskList(new PredicateExpression(new StatusQualifier(status)));
@@ -187,22 +197,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListByDate(LocalDate date) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(date)));
     }
-    //@@author A0153658W
-    @Override
-    public void undo(){
-    	taskBook.undoTask();
-    	indicateTaskBookChanged();
-        indicateTaskListPanelDataChanged();
-    }
-    
-    public String getUndoInformation(){
-    	return taskBook.getUndoInformation();
-    }
-    
+    //@@author
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    //@@author 
+
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
@@ -255,6 +254,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    //@@author A0138704E
     /**
      * Class used to filter tasks by status
      */
@@ -305,9 +305,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
-    
-    //==================== Event Handling Code =================================================================
     //@@author A0153723J
+    //==================== Event Handling Code =================================================================
+    
     @Subscribe
     private void handleDatePickedOnCalendarEvent(DatePickedOnCalendarEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

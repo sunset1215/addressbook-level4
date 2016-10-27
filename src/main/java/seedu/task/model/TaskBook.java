@@ -110,7 +110,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 	 */
 	public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
 		tasks.add(task);
-		undoTaskStack.pushAddToUndoStack(UNDO_ADD_COMMAND, task);
+		undoTaskStack.pushAddToUndoStack(UNDO_ADD_COMMAND, task, -1);
 	}
 
 	/**
@@ -119,14 +119,37 @@ public class TaskBook implements ReadOnlyTaskBook {
 	 * @throws UniqueTaskList.DuplicateTaskException
 	 *             if an equivalent task already exists.
 	 */
-	public void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
+	public void addTask(int taskIndex, Task task, String callingCommand) throws UniqueTaskList.DuplicateTaskException {
 		tasks.add(taskIndex, task);
+		int targetIndex = -1;
+
+		//adding tasks may either be simply adding, or the add portion of an edit task
+		//this handles the proper actions for the undo stacks
+		if(callingCommand.equals("edit add")){
+			try {
+				
+				targetIndex = tasks.getIndex(task);
+				System.out.println("add task key " + task.toString());
+				System.out.println("add task target Index " + targetIndex);
+				System.out.println("add task calling command " + callingCommand);
+				undoTaskStack.pushDeleteToUndoStack(task, callingCommand, targetIndex);
+			} catch (TaskNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		else{
+			undoTaskStack.pushAddToUndoStack(callingCommand, task, targetIndex);
+		}
+		System.out.println("after adding tasks, tasks is " + tasks.getInternalList().toString());
 	}
 
 	public boolean removeTask(ReadOnlyTask key, String callingCommand) throws UniqueTaskList.TaskNotFoundException {
 		int targetIndex = tasks.getIndex(key);
 
 		if (tasks.remove(key)) {
+			System.out.println("remove task key " + key.toString());
+			System.out.println("remove task target Index " + targetIndex);
+			System.out.println("remove task calling command " + callingCommand);
 			undoTaskStack.pushDeleteToUndoStack(key, callingCommand, targetIndex);
 			return true;
 		} else {

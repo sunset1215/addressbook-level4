@@ -102,8 +102,8 @@ public class EditCommand extends Command {
 	        }
 	        
 	        try {
-				model.deleteTask(taskToEdit, "edit");
-				model.addTask(taskIndex, resultTask);
+				model.deleteTask(taskToEdit, "edit delete");
+				model.addTask(taskIndex, resultTask, "edit add");
 			} catch (DuplicateTaskException e) {
 				e.printStackTrace();
 			}

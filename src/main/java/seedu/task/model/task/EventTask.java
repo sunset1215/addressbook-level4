@@ -67,7 +67,7 @@ public class EventTask extends Task{
 	@Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeadlineTask // instanceof handles nulls
+                || (other instanceof EventTask // instanceof handles nulls
                 && this.hashCode() == other.hashCode());
     }
 

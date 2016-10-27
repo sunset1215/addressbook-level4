@@ -99,8 +99,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 	
     @Override
-    public synchronized void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
-        taskBook.addTask(taskIndex, task);
+    public synchronized void addTask(int taskIndex, Task task, String callingCommand) throws UniqueTaskList.DuplicateTaskException {
+        taskBook.addTask(taskIndex, task, callingCommand);
         updateFilteredListByStatus(Status.STATUS_PENDING);
         indicateTaskBookChanged();
     }

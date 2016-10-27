@@ -15,7 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Edit tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#editing-a-task--edit)
    * [Undo command](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#undoing-the-last-command--undo)
    * Pressing up/down keys will put up the previous/next command entered
-* Code written: [[functional code](A0153658W.md)][[test code](A0153658W.md)][[docs](A0153658W.md)]
+* Code written: [[functional code](collated/main/A0153658W.md)][[test code](collated/test/A0153658W.md)][[docs](collated/docs/A0153658W.md)]
 * Other major contributions:
   * 
   
@@ -30,7 +30,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
    * [Change storage location](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#specifying-data-storage-location--store)
    * A calendar that displays tasks of the selected date
-* Code written: [[functional code](A0153723J.md)][[test code](A0153723J.md)][[docs](A0153723J.md)]
+* Code written: [[functional code](collated/main/A0153723J.md)][[test code](collated/test/A0153723J.md)][[docs](collated/docs/A0153723J.md)]
 * Other major contributions:
   * 
   
@@ -46,7 +46,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [Find tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#finding-all-tasks-containing-any-keyword-in-their-name--find)
    * [Add tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#adding-a-task--add)
    * Parser support for multiple commands
-* Code written: [[functional code](A0161247J.md)][[test code](A0161247J.md)][[docs](A0161247J.md)]
+* Code written: [[functional code](collated/main/A0161247J.md)][[test code](collated/test/A0161247J.md)][[docs](collated/docs/A0161247J.md)]
 * Other major contributions:
   * 
   
@@ -63,7 +63,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * [List tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#listing-tasks--list)
    * [Complete tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#set-task-as-complete--complete)
    * [Sort tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#sorting-tasks--sort)
-* Code written: [[functional code](A0138704E.md)][[test code](A0138704E.md)][[docs](A0138704E.md)]
+* Code written: [[functional code](collated/main/A0138704E.md)][[test code](collated/test/A0138704E.md)][[docs](collated/docs/A0138704E.md)]
 * Other major contributions:
   * 
   

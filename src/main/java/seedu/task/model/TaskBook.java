@@ -2,9 +2,6 @@
 package seedu.task.model;
 
 import javafx.collections.ObservableList;
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.tag.UniqueTagList.DuplicateTagException;
 import seedu.task.model.task.DeadlineTask;
 import seedu.task.model.task.EventTask;
 import seedu.task.model.task.ReadOnlyTask;
@@ -25,7 +22,6 @@ import java.util.stream.Collectors;
 public class TaskBook implements ReadOnlyTaskBook {
 
 	private UniqueTaskList tasks;
-	private UniqueTagList tags;
 	
 	private UndoTaskStack undoTaskStack;
     private static final String UNDO_ADD_COMMAND = "add";
@@ -35,10 +31,8 @@ public class TaskBook implements ReadOnlyTaskBook {
     private static final String UNDO_CLEAR_COMMAND = "clear";
     private static final String UNDO_CLEAR_ALL_COMMAND = "clear all";
 
-	
 	{
 		tasks = new UniqueTaskList();
-		tags = new UniqueTagList();
 		undoTaskStack = new UndoTaskStack();
 	}
 
@@ -48,18 +42,17 @@ public class TaskBook implements ReadOnlyTaskBook {
 	//@@author
 	
 	/**
-	 * Tasks and Tags are copied into this task book
+	 * Tasks are copied into this task book
 	 */
 	public TaskBook(ReadOnlyTaskBook toBeCopied) {
-		this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
+		this(toBeCopied.getUniqueTaskList());
 	}
 
 	/**
-	 * Tasks and Tags are copied into this task book
+	 * Tasks are copied into this task book
 	 */
-	public TaskBook(UniqueTaskList tasks, UniqueTagList tags) {
+	public TaskBook(UniqueTaskList tasks) {
 		this.tasks = copyUniqueTaskList(tasks);
-		this.tags = copyUniqueTagList(tags);
 		// the line of code below is the original code
 		// I used the above method to copy the lists
 		// because the original code changes all the tasks that is read from
@@ -73,22 +66,6 @@ public class TaskBook implements ReadOnlyTaskBook {
 	}
 
 	//// list overwrite operations
-
-	/*
-	 * Returns a copy of the given unique tag list
-	 */
-	private UniqueTagList copyUniqueTagList(UniqueTagList tags) {
-		UniqueTagList newList = new UniqueTagList();
-		for (int i = 0; i < tags.size(); i++) {
-			try {
-				newList.add(tags.getTagFromIndex(i));
-			} catch (DuplicateTagException e) {
-				// this should not happen since we're just copying items over to
-				// a new list
-			}
-		}
-		return newList;
-	}
 
 	/*
 	 * Returns a copy of the given unique task list
@@ -114,26 +91,19 @@ public class TaskBook implements ReadOnlyTaskBook {
 		this.tasks.getInternalList().setAll(tasks);
 	}
 
-	public void setTags(Collection<Tag> tags) {
-		this.tags.getInternalList().setAll(tags);
-	}
-
-	public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
+	public void resetData(Collection<? extends ReadOnlyTask> newTasks) {
 		System.out.println(newTasks.toString());
 		setTasks(newTasks.stream().map(Task::new).collect(Collectors.toList()));
-		setTags(newTags);
 	}
 
 	public void resetData(ReadOnlyTaskBook newData) {
-		resetData(newData.getTaskList(), newData.getTagList());
+		resetData(newData.getTaskList());
 	}
 	//@@author A0153658W
 	//// task-level operations
 
 	/**
-	 * Adds a task to the task book. Also checks the new task's tags and updates
-	 * {@link #tags} with any new tags found, and updates the Tag objects in the
-	 * task to point to those in {@link #tags}.
+	 * Adds a task to the task book.
 	 *
 	 * @throws UniqueTaskList.DuplicateTaskException
 	 *             if an equivalent task already exists.
@@ -144,37 +114,13 @@ public class TaskBook implements ReadOnlyTaskBook {
 	}
 
 	/**
-	 * Adds a task to the task list at a given index. Also checks the new task's
-	 * tags and updates {@link #tags} with any new tags found, and updates the
-	 * Tag objects in the task to point to those in {@link #tags}.
+	 * Adds a task to the task list at a given index.
 	 *
 	 * @throws UniqueTaskList.DuplicateTaskException
 	 *             if an equivalent task already exists.
 	 */
 	public void addTask(int taskIndex, Task task) throws UniqueTaskList.DuplicateTaskException {
 		tasks.add(taskIndex, task);
-	}
-
-	/**
-	 * Ensures that every tag in this task: - exists in the master list
-	 * {@link #tags} - points to a Tag object in the master list
-	 */
-	private void syncTagsWithMasterList(Task task) {
-		final UniqueTagList taskTags = task.getTags();
-		tags.mergeFrom(taskTags);
-
-		// Create map with values = tag object references in the master list
-		final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-		for (Tag tag : tags) {
-			masterTagObjects.put(tag, tag);
-		}
-
-		// Rebuild the list of task tags using references from the master list
-		final Set<Tag> commonTagReferences = new HashSet<>();
-		for (Tag tag : taskTags) {
-			commonTagReferences.add(masterTagObjects.get(tag));
-		}
-		task.setTags(new UniqueTagList(commonTagReferences));
 	}
 
 	public boolean removeTask(ReadOnlyTask key, String callingCommand) throws UniqueTaskList.TaskNotFoundException {
@@ -327,18 +273,12 @@ public class TaskBook implements ReadOnlyTaskBook {
 	public void sort() {
 	    tasks.sort();
 	}
-	
-	//// tag-level operations
-
-	public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-		tags.add(t);
-	}
 
 	//// util methods
 
 	@Override
 	public String toString() {
-		return tasks.getInternalList().size() + " tasks, " + tags.getInternalList().size() + " tags";
+		return tasks.getInternalList().size() + " tasks";
 		// TODO: refine later
 	}
 
@@ -348,32 +288,22 @@ public class TaskBook implements ReadOnlyTaskBook {
 	}
 
 	@Override
-	public List<Tag> getTagList() {
-		return Collections.unmodifiableList(tags.getInternalList());
-	}
-
-	@Override
 	public UniqueTaskList getUniqueTaskList() {
 		return this.tasks;
-	}
-
-	@Override
-	public UniqueTagList getUniqueTagList() {
-		return this.tags;
 	}
 
 	@Override
 	public boolean equals(Object other) {
 		return other == this // short circuit if same object
 				|| (other instanceof TaskBook // instanceof handles nulls
-						&& this.tasks.equals(((TaskBook) other).tasks) && this.tags.equals(((TaskBook) other).tags));
+						&& this.tasks.equals(((TaskBook) other).tasks));
 	}
 
 	@Override
 	public int hashCode() {
 		// use this method for custom fields hashing instead of implementing
 		// your own
-		return Objects.hash(tasks, tags);
+		return Objects.hash(tasks);
 	}
 
 }

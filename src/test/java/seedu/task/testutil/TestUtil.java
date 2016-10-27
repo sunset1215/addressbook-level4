@@ -18,8 +18,6 @@ import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.FileUtil;
 import seedu.task.commons.util.XmlUtil;
 import seedu.task.model.TaskBook;
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.*;
 import seedu.task.storage.XmlSerializableTaskBook;
 
@@ -83,21 +81,6 @@ public class TestUtil {
         }
     }
 
-    public static final Tag[] sampleTagData = getSampleTagData();
-
-    private static Tag[] getSampleTagData() {
-        try {
-            return new Tag[]{
-                    new Tag("relatives"),
-                    new Tag("friends")
-            };
-        } catch (IllegalValueException e) {
-            assert false;
-            return null;
-            //not possible
-        }
-    }
-
     public static List<Task> generateSampleTaskData() {
         return Arrays.asList(sampleTaskData);
     }
@@ -136,7 +119,7 @@ public class TestUtil {
     }
 
     public static TaskBook generateEmptyTaskBook() {
-        return new TaskBook(new UniqueTaskList(), new UniqueTagList());
+        return new TaskBook(new UniqueTaskList());
     }
 
     public static XmlSerializableTaskBook generateSampleStorageTaskBook() {
@@ -353,27 +336,6 @@ public class TestUtil {
 
     public static boolean compareCardAndTask(TaskListHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
-    }
-
-    public static Tag[] getTagList(String tags) {
-
-        if (tags.equals("")) {
-            return new Tag[]{};
-        }
-
-        final String[] split = tags.split(", ");
-
-        final List<Tag> collect = Arrays.asList(split).stream().map(e -> {
-            try {
-                return new Tag(e.replaceFirst("Tag: ", ""));
-            } catch (IllegalValueException e1) {
-                //not possible
-                assert false;
-                return null;
-            }
-        }).collect(Collectors.toList());
-
-        return collect.toArray(new Tag[split.length]);
     }
 
 }

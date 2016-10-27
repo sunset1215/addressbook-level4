@@ -1,10 +1,7 @@
 package seedu.task.model;
 
-
 import java.util.List;
 
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.ReadOnlyTask;
 import seedu.task.model.task.UniqueTaskList;
 
@@ -13,8 +10,6 @@ import seedu.task.model.task.UniqueTaskList;
  */
 public interface ReadOnlyTaskBook {
 
-    UniqueTagList getUniqueTagList();
-
     UniqueTaskList getUniqueTaskList();
 
     /**
@@ -22,8 +17,4 @@ public interface ReadOnlyTaskBook {
      */
     List<ReadOnlyTask> getTaskList();
 
-    /**
-     * Returns an unmodifiable view of tags list
-     */
-    List<Tag> getTagList();
 }

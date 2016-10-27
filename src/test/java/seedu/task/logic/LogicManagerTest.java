@@ -391,7 +391,6 @@ public class LogicManagerTest {
                 expectedList);
     }
 
-
     /**
      * A utility class to generate test data.
      */
@@ -422,11 +421,6 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-
-//            UniqueTagList tags = p.getTags();
-//            for(Tag t: tags){
-//                cmd.append(" t/").append(t.tagName);
-//            }
 
             return cmd.toString();
         }

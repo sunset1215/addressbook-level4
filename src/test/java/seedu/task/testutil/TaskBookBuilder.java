@@ -1,8 +1,6 @@
 package seedu.task.testutil;
 
-import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.TaskBook;
-import seedu.task.model.tag.Tag;
 import seedu.task.model.task.Task;
 import seedu.task.model.task.UniqueTaskList.DuplicateTaskException;
 
@@ -21,11 +19,6 @@ public class TaskBookBuilder {
 
     public TaskBookBuilder withTask(Task task) throws DuplicateTaskException {
         taskBook.addTask(task);
-        return this;
-    }
-
-    public TaskBookBuilder withTag(String tagName) throws IllegalValueException {
-        taskBook.addTag(new Tag(tagName));
         return this;
     }
 

@@ -1,6 +1,5 @@
 package seedu.task.testutil;
 
-import seedu.task.model.tag.UniqueTagList;
 import seedu.task.model.task.*;
 
 /**
@@ -12,10 +11,8 @@ public class TestTask implements ReadOnlyTask {
     private TaskDate endDate;
     private TaskDate startDate;
     private Status status;
-    private UniqueTagList tags;
 
     public TestTask() {
-        tags = new UniqueTagList();
         this.status = new Status(Status.STATUS_PENDING);
     }
     
@@ -31,11 +28,6 @@ public class TestTask implements ReadOnlyTask {
     public Name getName() {
         return name;
     }
-    
-    @Override
-    public UniqueTagList getTags() {
-        return tags;
-    }
 
     @Override
     public String toString() {
@@ -45,7 +37,6 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
 

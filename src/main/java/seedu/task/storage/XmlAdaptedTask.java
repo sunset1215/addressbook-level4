@@ -2,14 +2,15 @@ package seedu.task.storage;
 
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.commons.util.DateUtil;
-import seedu.task.model.tag.Tag;
-import seedu.task.model.tag.UniqueTagList;
-import seedu.task.model.task.*;
+import seedu.task.model.task.DeadlineTask;
+import seedu.task.model.task.EventTask;
+import seedu.task.model.task.Name;
+import seedu.task.model.task.ReadOnlyTask;
+import seedu.task.model.task.Status;
+import seedu.task.model.task.Task;
+import seedu.task.model.task.TaskDate;
 
 import javax.xml.bind.annotation.XmlElement;
-
-import java.util.ArrayList;
-import java.util.List;
 
 //@@author A0138704E
 /**
@@ -25,9 +26,6 @@ public class XmlAdaptedTask {
     private String endDate;
 	@XmlElement(required = true)
     private String status;
-
-	@XmlElement
-	private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
 	/**
 	 * No-arg constructor for JAXB use.
@@ -47,10 +45,6 @@ public class XmlAdaptedTask {
 		startDate = DateUtil.convertTaskDateToJaxbString(source.getStart());
 		endDate = DateUtil.convertTaskDateToJaxbString(source.getEnd());
 		status = source.getStatus().toString();
-		tagged = new ArrayList<>();
-//		for (Tag tag : source.getTags()) {
-//		    tagged.add(new XmlAdaptedTag(tag));
-//		}
 	}
 
     /**
@@ -62,15 +56,10 @@ public class XmlAdaptedTask {
 	 *             task
 	 */
 	public Task toModelType() throws IllegalValueException {
-//		final List<Tag> taskTags = new ArrayList<>();
-//		for (XmlAdaptedTag tag : tagged) {
-//			taskTags.add(tag.toModelType());
-//		}
 		final Name name = new Name(this.name);
 		final TaskDate taskStartDate = DateUtil.convertJaxbStringToTaskDate(this.startDate);
 		final TaskDate taskEndDate = DateUtil.convertJaxbStringToTaskDate(this.endDate);
 		final Status status = new Status(this.status);
-//		final UniqueTagList tags = new UniqueTagList(taskTags);
 		return createTaskFromGivenArgs(name, taskStartDate, taskEndDate, status);
 	}
 

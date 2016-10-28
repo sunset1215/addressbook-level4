@@ -32,7 +32,10 @@ public interface Model {
     void addTask(Task taskToAdd) throws DuplicateTaskException;
     
     /** Adds the given task at a given index */
-    void addTask(int index, Task taskToAdd, String callingCommand) throws UniqueTaskList.DuplicateTaskException;
+    void addTask(int index, Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Edits the given task */
+    void editTask(int taskIndex, Task taskToEdit, Task resultTask) throws DuplicateTaskException;
     
     /** Get index of given task*/
     int getIndex(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

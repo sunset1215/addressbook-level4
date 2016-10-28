@@ -81,7 +81,7 @@ public class EditCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
+        Task taskToEdit = (Task) lastShownList.get(targetIndex - 1);
         int taskIndex;
         Task resultTask = null;
         try {
@@ -102,8 +102,7 @@ public class EditCommand extends Command {
 	        }
 	        
 	        try {
-				model.deleteTask(taskToEdit, "edit delete");
-				model.addTask(taskIndex, resultTask, "edit add");
+	        	model.editTask(taskIndex, taskToEdit, resultTask);
 			} catch (DuplicateTaskException e) {
 				e.printStackTrace();
 			}

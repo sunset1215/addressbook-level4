@@ -3,10 +3,8 @@ package seedu.task.logic.parser;
 
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +14,6 @@ import java.util.regex.Pattern;
 import com.joestelmach.natty.DateGroup;
 
 import seedu.task.commons.exceptions.IllegalValueException;
-import seedu.task.commons.util.DateUtil;
 import seedu.task.logic.commands.AddCommand;
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.IncorrectCommand;
@@ -25,11 +22,7 @@ import seedu.task.logic.commands.IncorrectCommand;
  * Parser class used to parse a add command
  */
 public class AddParser extends Parser {
-	private final Pattern NAME_FORMAT = Pattern.compile("^\\s*((\"(?<longName>.*)\")|(?<name>\\S+))\\s*.*");
-	private final Pattern FORMAT = Pattern.compile("^\\s*(?<name>\\S+)\\s*.*");
-	private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*");
-	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endTime>\\d{2}:\\d{2})?\\s*");
-	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s+(?<startDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<startTime>\\d{2}:\\d{2})?\\s+(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endTime>\\d{2}:\\d{2})?\\s*");
+	private final Pattern NAME_FORMAT = Pattern.compile("^\\s*(\"(?<name>.*)\")\\s*.*");
 	private final com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
 	
 	@Override
@@ -39,7 +32,7 @@ public class AddParser extends Parser {
 		
 		try {
 			String name = getName(args);
-			String dateString = args.replace(name, "");
+			String dateString = removeFromString(args, name);
 			List<LocalDateTime> dates = getDates(dateString);
 			
 			if (isEventCommand(dates)) {
@@ -77,14 +70,7 @@ public class AddParser extends Parser {
 			throw new IllegalArgumentException();
 		}
 		
-		String name = matcher.group("name");
-		String longName = matcher.group("longName");
-		
-		if (name == null && longName == null) {
-			throw new IllegalArgumentException();
-		}
-		
-		return (name == null) ? longName : name;
+		return matcher.group("name");
 	}
 	
 	/**
@@ -98,6 +84,14 @@ public class AddParser extends Parser {
 		
 		DateGroup group = dateGroups.get(0);
 		return extractLocalDates(group);
+	}
+	
+	private String removeFromString(String original, String toRemove) {
+		if (toRemove != null) {
+			original = original.replace(toRemove, "");
+		}
+		
+		return original;
 	}
 	
 	

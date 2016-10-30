@@ -24,6 +24,7 @@ public class StatusBarFooter extends UiPart {
     private static final Logger logger = LogsCenter.getLogger(StatusBarFooter.class);
     private StatusBar syncStatus;
     private StatusBar saveLocationStatus;
+    private StatusBar numberOfTasksStatus;
 
     private GridPane mainPane;
 
@@ -32,23 +33,28 @@ public class StatusBarFooter extends UiPart {
 
     @FXML
     private AnchorPane syncStatusBarPane;
+    
+    @FXML
+    private AnchorPane numberOfTasksStatusPane;
 
     private AnchorPane placeHolder;
 
     private static final String FXML = "StatusBarFooter.fxml";
 
-    public static StatusBarFooter load(Stage stage, AnchorPane placeHolder, String saveLocation) {
+    public static StatusBarFooter load(Stage stage, AnchorPane placeHolder, String saveLocation, int numberOfTasks) {
         StatusBarFooter statusBarFooter = UiPartLoader.loadUiPart(stage, placeHolder, new StatusBarFooter());
-        statusBarFooter.configure(saveLocation);
+        statusBarFooter.configure(saveLocation, numberOfTasks);
         return statusBarFooter;
     }
 
-    public void configure(String saveLocation) {
+    public void configure(String saveLocation, int numberOfTasks) {
         addMainPane();
         addSyncStatus();
         setSyncStatus("Not updated yet in this session");
         addSaveLocation();
         setSaveLocation(saveLocation);
+        addNumberOfTasksStatus();
+        setNumberOfTasksStatus(numberOfTasks);
         registerAsAnEventHandler(this);
     }
 
@@ -65,6 +71,16 @@ public class StatusBarFooter extends UiPart {
         this.saveLocationStatus = new StatusBar();
         FxViewUtil.applyAnchorBoundaryParameters(saveLocationStatus, 0.0, 0.0, 0.0, 0.0);
         saveLocStatusBarPane.getChildren().add(saveLocationStatus);
+    }
+    
+    private void setNumberOfTasksStatus(int numberOfTasks) {
+        this.numberOfTasksStatus.setText("Total no. of tasks = " + numberOfTasks);
+    }
+
+    private void addNumberOfTasksStatus() {
+        this.numberOfTasksStatus = new StatusBar();
+        FxViewUtil.applyAnchorBoundaryParameters(numberOfTasksStatus, 0.0, 0.0, 0.0, 0.0);
+        numberOfTasksStatusPane.getChildren().add(numberOfTasksStatus);
     }
 
     private void setSyncStatus(String status) {
@@ -97,6 +113,7 @@ public class StatusBarFooter extends UiPart {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
+        setNumberOfTasksStatus(abce.data.getTaskList().size());
     }
     
     //@@author A0138704E

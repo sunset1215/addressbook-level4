@@ -66,6 +66,11 @@ public class TaskCard extends UiPart{
         	endDate.setText("");
         }
         status.setText("Status: " + taskStatus);
+        if (task.getStatus().isComplete()) {
+            cardPane.setStyle("-fx-background-color: LightGreen;");
+        } else {
+            cardPane.setStyle(null);
+        }
     }
 
     public HBox getLayout() {

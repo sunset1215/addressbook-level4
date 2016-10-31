@@ -127,7 +127,7 @@ public class UndoTaskStack {
         try {
             previousTask.push(new Task(new Name("filler")));
         } catch (IllegalValueException e) {
-            e.printStackTrace();
+            assert false : "Task will always be pushed to task stack because it's hard coded";
         }
     }
 
@@ -156,7 +156,7 @@ public class UndoTaskStack {
         try {
             previousTask.push(new Task(new Name("filler")));
         } catch (IllegalValueException e) {
-            e.printStackTrace();
+            assert false : "Task will always be pushed to task stack because it's hard coded";
         }
     }
 

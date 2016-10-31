@@ -268,17 +268,12 @@ public class UniqueTaskList implements Iterable<Task> {
         this.tasks.getInternalList().setAll(tasks);
     }
 
-    public void setTags(Collection<Tag> tags) {
-        this.tags.getInternalList().setAll(tags);
-    }
-
-    public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
+    public void resetData(Collection<? extends ReadOnlyTask> newTasks) {
         System.out.println(newTasks.toString());
         setTasks(newTasks.stream().map(Task::new).collect(Collectors.toList()));
-        setTags(newTags);
     }
 
     public void resetData(ReadOnlyTaskBook newData) {
-        resetData(newData.getTaskList(), newData.getTagList());
+        resetData(newData.getTaskList());
     }
 ```

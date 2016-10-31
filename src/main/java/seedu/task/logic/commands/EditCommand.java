@@ -103,11 +103,10 @@ public class EditCommand extends Command {
             try {
                 model.editTask(taskIndex, taskToEdit, resultTask);
             } catch (DuplicateTaskException e) {
-                e.printStackTrace();
+                return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
             }
         } catch (TaskNotFoundException e) {
-            assert false : "The target task cannot be missing";
-            return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
+            return new CommandResult(String.format(Messages.MESSAGE_TASK_NOT_FOUND, taskToEdit.toString()));
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, resultTask));

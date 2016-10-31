@@ -23,12 +23,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[END_DATETIME] [START_DATETIME END_DATETIME] [NEW_NAME]\n"
-            + "Example: " + COMMAND_WORD + " 1" + " 12-10-2016";
+            + "[END_DATETIME] [START_DATETIME END_DATETIME] [NEW_NAME]\n" + "Example: " + COMMAND_WORD + " 1"
+            + " 12-10-2016";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited task: %1$s";
     public static final String MESSAGE_EDIT_TASK_FAIL = "This task already exists in the task list";
-    
+
     private static final int EDIT_CASE_DEADLINE = 0;
     private static final int EDIT_CASE_EVENT = 1;
     private static final int EDIT_CASE_FLOATING = 2;
@@ -43,14 +43,14 @@ public class EditCommand extends Command {
      * Constructor for editing specified task into a floating task
      */
     public EditCommand(int targetIndex, Name name) {
-    	if (name == null) {
-    		throw new IllegalArgumentException();
-    	}
+        if (name == null) {
+            throw new IllegalArgumentException();
+        }
         this.targetIndex = targetIndex;
         this.newName = name;
         editCase = EDIT_CASE_FLOATING;
     }
-    
+
     /**
      * Constructor for editing specified task into a deadline
      */
@@ -60,7 +60,7 @@ public class EditCommand extends Command {
         this.endDateTime = endDateTime;
         editCase = EDIT_CASE_DEADLINE;
     }
-    
+
     /**
      * Constructor for editing specified task into an event
      */
@@ -85,32 +85,31 @@ public class EditCommand extends Command {
         int taskIndex;
         Task resultTask = null;
         try {
-			taskIndex = model.getIndex(taskToEdit);
-		
-	        switch (editCase) {
-	        case EDIT_CASE_DEADLINE:
-	            resultTask = new DeadlineTask(taskToEdit.getName(), endDateTime);
-	            break;
-	        case EDIT_CASE_EVENT:
-	            resultTask = new EventTask(taskToEdit.getName(), startDateTime, endDateTime);
-	            break;
-	        case EDIT_CASE_FLOATING:
-	        	resultTask = new Task(newName);
-	        	break;
-	        default:
-	            assert false : "All cases should have been handled by EditParser.";
-	        }
-	        
-	        try {
-	        	model.editTask(taskIndex, taskToEdit, resultTask);
-			} catch (DuplicateTaskException e) {
-				e.printStackTrace();
-			}
+            taskIndex = model.getIndex(taskToEdit);
+
+            switch (editCase) {
+            case EDIT_CASE_DEADLINE:
+                resultTask = new DeadlineTask(taskToEdit.getName(), endDateTime);
+                break;
+            case EDIT_CASE_EVENT:
+                resultTask = new EventTask(taskToEdit.getName(), startDateTime, endDateTime);
+                break;
+            case EDIT_CASE_FLOATING:
+                resultTask = new Task(newName);
+                break;
+            default:
+                assert false : "All cases should have been handled by EditParser.";
+            }
+            try {
+                model.editTask(taskIndex, taskToEdit, resultTask);
+            } catch (DuplicateTaskException e) {
+                e.printStackTrace();
+            }
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
-        	return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
+            return new CommandResult(MESSAGE_EDIT_TASK_FAIL);
         }
-        
+
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, resultTask));
     }
 }

@@ -31,15 +31,15 @@ public class CommandBox extends UiPart {
     String previousCommandTest;
 
     private UserCommandLog userCommandLog = new UserCommandLog();
-    
+
     private Logic logic;
 
     @FXML
     private TextField commandTextField;
     private CommandResult mostRecentResult;
 
-    public static CommandBox load(Stage primaryStage, AnchorPane commandBoxPlaceholder,
-            ResultDisplay resultDisplay, Logic logic) {
+    public static CommandBox load(Stage primaryStage, AnchorPane commandBoxPlaceholder, ResultDisplay resultDisplay,
+            Logic logic) {
         CommandBox commandBox = UiPartLoader.loadUiPart(primaryStage, commandBoxPlaceholder, new CommandBox());
         commandBox.configure(resultDisplay, logic);
         commandBox.addToPlaceholder();
@@ -74,23 +74,23 @@ public class CommandBox extends UiPart {
         this.placeHolderPane = pane;
     }
 
-
     @FXML
     private void handleCommandInputChanged() {
-        //Take a copy of the command text
+        // Take a copy of the command text
         previousCommandTest = commandTextField.getText();
-        
+
         userCommandLog.addCommandToUserLog(previousCommandTest);
 
-        /* We assume the command is correct. If it is incorrect, the command box will be changed accordingly
-         * in the event handling code {@link #handleIncorrectCommandAttempted}
+        /*
+         * We assume the command is correct. If it is incorrect, the command box
+         * will be changed accordingly in the event handling code {@link
+         * #handleIncorrectCommandAttempted}
          */
         setStyleToIndicateCorrectCommand();
         mostRecentResult = logic.execute(previousCommandTest);
         resultDisplay.postMessage(mostRecentResult.feedbackToUser);
         logger.info("Result: " + mostRecentResult.feedbackToUser);
     }
-
 
     /**
      * Sets the command box style to indicate a correct command.
@@ -101,8 +101,8 @@ public class CommandBox extends UiPart {
     }
 
     @Subscribe
-    private void handleIncorrectCommandAttempted(IncorrectCommandAttemptedEvent event){
-        logger.info(LogsCenter.getEventHandlingLogMessage(event,"Invalid command: " + previousCommandTest));
+    private void handleIncorrectCommandAttempted(IncorrectCommandAttemptedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Invalid command: " + previousCommandTest));
         setStyleToIndicateIncorrectCommand();
         restoreCommandText();
     }
@@ -120,44 +120,42 @@ public class CommandBox extends UiPart {
     private void setStyleToIndicateIncorrectCommand() {
         commandTextField.getStyleClass().add("error");
     }
-    
-    //@@author A0153658W
+
+    // @@author A0153658W
     /**
      * Sets up key listeners for both the Up arrow and Down arrow
      */
-    public void setArrowKeyListener(){
-		commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>()
-	    {
-	        @Override
-	        public void handle(KeyEvent ke){
-	            if (ke.getCode().equals(KeyCode.UP)){
-	            	//get previous command
-	            	String previousCommand = userCommandLog.getPreviousCommand();
-	            	commandTextField.setText(previousCommand);
-	            	
-	            	//move cursor caret to the end of the line
-	            	Platform.runLater(new Runnable() {
-	                    @Override
-	                    public void run() {
-	                    	commandTextField.positionCaret(previousCommand.length());
-	                    }
-	               });
-	            }
-	            else if(ke.getCode().equals(KeyCode.DOWN)){
-	            	//get the next command
-	            	String nextCommand = userCommandLog.getNextCommand();
-	            	commandTextField.setText(nextCommand);
-	            	
-	            	//move cursor caret to the end of the line
-	            	Platform.runLater(new Runnable() {
-	                    @Override
-	                    public void run() {
-	                    	commandTextField.positionCaret(nextCommand.length());
-	                    }
-	               });
-	            }
-	        }
-	    });
+    public void setArrowKeyListener() {
+        commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (ke.getCode().equals(KeyCode.UP)) {
+                    // get previous command
+                    String previousCommand = userCommandLog.getPreviousCommand();
+                    commandTextField.setText(previousCommand);
+
+                    // move cursor caret to the end of the line
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            commandTextField.positionCaret(previousCommand.length());
+                        }
+                    });
+                } else if (ke.getCode().equals(KeyCode.DOWN)) {
+                    // get the next command
+                    String nextCommand = userCommandLog.getNextCommand();
+                    commandTextField.setText(nextCommand);
+
+                    // move cursor caret to the end of the line
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            commandTextField.positionCaret(nextCommand.length());
+                        }
+                    });
+                }
+            }
+        });
     }
 
 }

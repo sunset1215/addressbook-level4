@@ -14,7 +14,7 @@ public class UndoCommand extends Command{
             + ": Undo the most recent task.";
 
     public static final String MESSAGE_UNDO_TASK_SUCCESS = "Undo successful, reversed action: %s";
-    public static final String MESSAGE_UNDO_TASK_FAIL = "Nothing to undo.";
+    public static final String MESSAGE_UNDO_STACK_END = "Nothing to undo.";
 
 
     public UndoCommand() {}
@@ -26,7 +26,7 @@ public class UndoCommand extends Command{
 			model.updateFilteredListByStatus(Status.STATUS_PENDING);
 		}
 		catch(EmptyStackException e){
-			return new CommandResult(MESSAGE_UNDO_TASK_FAIL);
+			return new CommandResult(MESSAGE_UNDO_STACK_END);
 		}
 		return new CommandResult(String.format(MESSAGE_UNDO_TASK_SUCCESS, model.getUndoInformation()));
 	}

@@ -106,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public synchronized void editTask(int taskIndex, Task taskToEdit, Task resultTask) throws UniqueTaskList.DuplicateTaskException {
+    public synchronized void editTask(int taskIndex, Task taskToEdit, Task resultTask) throws UniqueTaskList.DuplicateTaskException, TaskNotFoundException {
         taskBook.editTask(taskIndex, taskToEdit, resultTask);
         indicateTaskBookChanged();
     }
@@ -151,13 +151,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     @Override
-    public void clearCompletedTasks() throws NoCompletedTasksFoundException {
+    public void clearCompletedTasks() throws NoCompletedTasksFoundException, TaskNotFoundException {
 	    taskBook.clearCompletedTasks();
         indicateTaskBookChanged();
     }
     //@@author A0153658W
 	@Override
-    public void clearAllTasks() {
+    public void clearAllTasks() throws TaskNotFoundException {
 	    taskBook.clearAllTasks();
         indicateTaskBookChanged();
     }

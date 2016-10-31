@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import seedu.task.commons.core.LogsCenter;
@@ -56,7 +57,7 @@ public class StatusBarFooter extends UiPart {
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
         placeHolder.getChildren().add(mainPane);
     }
-
+    
     private void setSaveLocation(String location) {
         this.saveLocationStatus.setText(FileUtil.getFormattedPath(location));
     }

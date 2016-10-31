@@ -62,7 +62,7 @@ public class AddParser extends Parser {
     }
     
     /**
-     * Retrieves task name from string args
+     * Retrieves task name from string args which is separated by quotes "example name"
      */
     private String getName(String args) throws IllegalArgumentException {
         final Matcher matcher = NAME_FORMAT.matcher(args);

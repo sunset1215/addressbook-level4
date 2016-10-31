@@ -80,7 +80,7 @@ public class EditParser extends Parser {
     }
     
     /**
-     * Retrieves task dates from string args
+     * Retrieves task dates from string using the Natty parser
      */
     private List<LocalDateTime> getDates(String args) {
         List<DateGroup> dateGroups = parser.parse(args);
@@ -93,7 +93,7 @@ public class EditParser extends Parser {
     }
     
     /**
-     * Extracts the local dates from a given dateGroup
+     * Extracts the local dates as a list of LocalDateTime from a given DateGroup object
      */
     private List<LocalDateTime> extractLocalDates(DateGroup dateGroup) {
         List<Date> dates = dateGroup.getDates();
@@ -107,10 +107,16 @@ public class EditParser extends Parser {
         return localDates;
     }
     
+    /**
+     * Remove an integer from a string 
+     */
     private String removeFromString(String original, int integer) {
         return removeFromString(original, "" + integer);
     }
     
+    /**
+     * Remove a string from another string
+     */
     private String removeFromString(String original, String toRemove) {
         if (toRemove != null) {
             original = original.replace(toRemove, "");
@@ -122,7 +128,7 @@ public class EditParser extends Parser {
     /**
      * Retrieves index from string args
      * 
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException Unable to retrieve an integer from string
      */
     private int getIndex(String args) throws IllegalArgumentException {
         final Matcher matcher = INDEX_FORMAT.matcher(args);
@@ -137,7 +143,8 @@ public class EditParser extends Parser {
     
     
     /**
-     * Extracts name from string args, return null if name not found
+     * Retrieves task name from string args which is separated by quotes "example name"
+     * returns null if the name doesn't match
      */
     private String getName(String args) {
         final Matcher matcher = NAME_FORMAT.matcher(args);
@@ -152,8 +159,8 @@ public class EditParser extends Parser {
     /**
      * Method used to retrieve the index from a string argument 
      * @param argIndex
-     * @throws NullPointerException
-     * @throws IllegalArgumentException
+     * @throws NullPointerException String argument is null
+     * @throws IllegalArgumentException the string cannot be parsed to an integer
      */
     private int tryParseIndex(String argIndex) throws NullPointerException, IllegalArgumentException {
         Optional<Integer> index = parseIndex(argIndex);
@@ -164,23 +171,23 @@ public class EditParser extends Parser {
         return index.get();
     }
     
-    private boolean isDeadlineCommand(List<LocalDateTime> dates) throws NullPointerException {
+    private boolean isDeadlineCommand(List<LocalDateTime> dates) {
         return dates.size() == 1;
     }
     
-    private boolean isEventCommand(List<LocalDateTime> dates) throws NullPointerException {
+    private boolean isEventCommand(List<LocalDateTime> dates) {
         return dates.size() == 2;
     }
     
-    private boolean isFloatingCommand(String name, List<LocalDateTime> dates) throws NullPointerException {
+    private boolean isFloatingCommand(String name, List<LocalDateTime> dates) {
         return dates.size() == 0 && name != null;
     }
     
     /**
      * Creates a EditCommand for a DeadlineTask given a name and a list containing a single date
      * 
-     * @throws IllegalValueException 
-     * @throws IllegalArgumentException 
+     * @throws IllegalValueException There was an error trying to create the EditCommand
+     * @throws IllegalArgumentException The number of dates inside the list of dates should be 1
      */
     private Command createDeadlineTask(int index, List<LocalDateTime> dates) throws IllegalArgumentException, IllegalValueException {
         if (dates.size() != 1) {
@@ -195,8 +202,8 @@ public class EditParser extends Parser {
     /**
      * Creates an EditCommand for an EventTask given a name and a list of dates
      * 
-     * @throws IllegalValueException 
-     * @throws IllegalArgumentException 
+     * @throws IllegalValueException There was an error creating the edit command
+     * @throws IllegalArgumentException There should be 2 dates inside the list of dates
      */
     private Command createEventTask(int index, List<LocalDateTime> dates) throws IllegalArgumentException, IllegalValueException {
         if (dates.size() != 2) {
@@ -212,8 +219,8 @@ public class EditParser extends Parser {
     /**
      * Creates an AddCommand for a Task given a name
      * 
-     * @throws IllegalValueException
-     * @throws IllegalArgumentException 
+     * @throws IllegalValueException There was an error creating the EditCommand
+     * @throws IllegalArgumentException The name argument shouldn't be null
      */
     private Command createFloatingTask(int index, String name) throws IllegalArgumentException, IllegalValueException {
         if (name == null) {

@@ -1,6 +1,8 @@
 package seedu.task.logic.commands;
 
+import seedu.task.commons.core.Messages;
 import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
+import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0138704E
 /**
@@ -34,10 +36,16 @@ public class ClearCommand extends Command {
                 model.clearCompletedTasks();
             } catch (NoCompletedTasksFoundException e) {
                 return new CommandResult(MESSAGE_CLEAR_COMPLETED_FAIL);
+            } catch (TaskNotFoundException e) {
+                return new CommandResult(Messages.MESSAGE_TASK_NOT_FOUND);
             }
             return new CommandResult(MESSAGE_CLEAR_COMPLETED_SUCCESS);
         }
-        model.clearAllTasks();
+        try {
+            model.clearAllTasks();
+        } catch (TaskNotFoundException e) {
+            return new CommandResult(Messages.MESSAGE_TASK_NOT_FOUND);
+        }
         return new CommandResult(MESSAGE_CLEAR_ALL_SUCCESS);
     }
 }

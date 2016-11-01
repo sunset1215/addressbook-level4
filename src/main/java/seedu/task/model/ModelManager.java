@@ -10,7 +10,11 @@ import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.storage.StorageFilePathChangedEvent;
 import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
+import seedu.task.commons.events.ui.ListButtonEvent;
+import seedu.task.commons.events.ui.ListCompleteButtonEvent;
+import seedu.task.commons.events.ui.ListPendingButtonEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent.DirectoryChooserOperationCancelledException;
+import seedu.task.commons.events.ui.ListAllButtonEvent;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
 import seedu.task.commons.util.ConfigUtil;
 import seedu.task.commons.util.DateUtil;
@@ -313,6 +317,31 @@ public class ModelManager extends ComponentManager implements Model {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         updateFilteredListByDate(event.date);
     }
+    
+    @Subscribe
+    private void handleListButtonEvent(ListButtonEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        updateFilteredListByDate(event.date);
+    }
+    
+    @Subscribe
+    private void handleListAllButtonEvent(ListAllButtonEvent event){
+    	logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    	updateFilteredListToShowAll();
+    }
+    
+    @Subscribe
+    private void handleListPendingButtonEvent(ListPendingButtonEvent event){
+    	logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    	updateFilteredListByStatus(Status.STATUS_PENDING);
+    }
+    
+    @Subscribe
+    private void handleListCompleteButtonEvent(ListCompleteButtonEvent event){
+    	logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    	updateFilteredListByStatus(Status.STATUS_PENDING);
+    }
+
 
 
 }

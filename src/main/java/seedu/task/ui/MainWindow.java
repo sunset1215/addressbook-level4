@@ -31,7 +31,6 @@ public class MainWindow extends UiPart {
    
     private TaskListPanel taskListPanel;
     private CalendarPanel calendarPanel;
-    private ButtonPanel buttonPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;

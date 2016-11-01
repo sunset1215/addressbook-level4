@@ -31,6 +31,7 @@ public class MainWindow extends UiPart {
    
     private TaskListPanel taskListPanel;
     private CalendarPanel calendarPanel;
+    private ButtonPanel buttonPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -60,6 +61,7 @@ public class MainWindow extends UiPart {
     
     @FXML
     private AnchorPane calendarPlaceHolder;
+    
 
 
     public MainWindow() {
@@ -115,9 +117,12 @@ public class MainWindow extends UiPart {
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskBookFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
         calendarPanel = CalendarPanel.load(getCalendarPlaceholder());
-        commandBox.setArrowKeyListener();
-    }
 
+        
+        commandBox.setArrowKeyListener();
+        
+    }
+    
     private AnchorPane getCommandBoxPlaceholder() {
         return commandBoxPlaceholder;
     }

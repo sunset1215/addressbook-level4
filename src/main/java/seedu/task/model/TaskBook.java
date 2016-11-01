@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.junit.After;
+
 /**
  * Wraps all data at the task-book level Duplicates are not allowed (by .equals
  * comparison)
@@ -35,7 +37,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     private static final String UNDO_COMPLETE_COMMAND = "complete";
     private static final String UNDO_CLEAR_COMMAND = "clear";
     private static final String UNDO_CLEAR_ALL_COMMAND = "clear all";
-    
+
     private static final int UNDO_FILLER_INDEX = -1;
 
     {
@@ -198,8 +200,9 @@ public class TaskBook implements ReadOnlyTaskBook {
         UniqueTaskList copyTasks = copyUniqueTaskList(tasks);
         List<Task> clearedTasks = new ArrayList<Task>();
         List<Integer> clearedTasksIndices = new ArrayList<Integer>();
+        List<String> clearedStatus = new ArrayList<String>();
 
-        prepareCompletedTasksForUndo(copyTasks, clearedTasks, clearedTasksIndices);
+        prepareClearedTasksForUndo(copyTasks, clearedTasks, clearedTasksIndices, clearedStatus, true);
 
         // remove the completed tasks
         for (Task readTask : copyTasks) {
@@ -218,37 +221,6 @@ public class TaskBook implements ReadOnlyTaskBook {
         undoTaskStack.pushClearCompletedToUndoStack(clearedTasks, clearedTasksIndices, UNDO_CLEAR_COMMAND);
     }
 
-    /*
-     * Helper method to compile set of tasks and indices for clearing all
-     * completed tasks to prepare for undo stack
-     */
-    private void prepareCompletedTasksForUndo(UniqueTaskList copyTasks, List<Task> clearedTasks,
-            List<Integer> clearedTasksIndices) throws TaskNotFoundException {
-        for (Task readTask : copyTasks) {
-            if (readTask.isComplete()) {
-                try {
-                    clearedTasksIndices.add(tasks.getIndex(readTask));
-
-                    Class<? extends ReadOnlyTask> clearedTask = readTask.getClass();
-
-                    if (clearedTask.equals(DeadlineTask.class)) {
-                        DeadlineTask cleared = new DeadlineTask(readTask.getName(), readTask.getEnd());
-                        clearedTasks.add(cleared);
-                    } else if (clearedTask.equals(EventTask.class)) {
-                        EventTask cleared = new EventTask(readTask.getName(), readTask.getStart(), readTask.getEnd());
-                        clearedTasks.add(cleared);
-                    } else {
-                        // cleared task must be a floating task
-                        Task cleared = new Task(readTask.getName());
-                        clearedTasks.add(cleared);
-                    }
-                } catch (TaskNotFoundException e) {
-                    throw new TaskNotFoundException();
-                }
-            }
-        }
-    }
-
     /**
      * Clears all tasks from the task book
      * 
@@ -260,7 +232,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         List<Integer> clearedTasksIndices = new ArrayList<Integer>();
         List<String> clearedStatus = new ArrayList<String>();
 
-        prepareClearedTasksForUndo(copyTasks, clearedTasks, clearedTasksIndices, clearedStatus);
+        prepareClearedTasksForUndo(copyTasks, clearedTasks, clearedTasksIndices, clearedStatus, false);
 
         // remove the completed tasks
         for (Task readTask : copyTasks) {
@@ -277,11 +249,23 @@ public class TaskBook implements ReadOnlyTaskBook {
     /**
      * Helper method to compile set of tasks and indices for clearing all tasks
      * to prepare for undo stack
+     * 
+     * @param copyTasks,
+     *            clearedTasks, clearedTaskIndices, clearedStatus,
+     *            isClearCompleteOnly
+     * 
+     *            -copyTasks is the set of tasks currently in the task book
+     *            -clearedTasks is the list that maintains the cleared tasks
+     *            -clearedTaskIndices is the list that maintains indices of
+     *            -cleared tasks clearedStatus is the list that maintains the
+     *            status of cleared tasks 
+     *            -isClearCompleteOnly is a boolean that determines whether 
+     *            this method was called for clear complete only or clear all
      */
     private void prepareClearedTasksForUndo(UniqueTaskList copyTasks, List<Task> clearedTasks,
-            List<Integer> clearedTasksIndices, List<String> clearedStatus) throws TaskNotFoundException {
+            List<Integer> clearedTasksIndices, List<String> clearedStatus, boolean isClearCompleteOnly)
+            throws TaskNotFoundException {
         // compile set of tasks and indices being cleared to prepare for undo
-        // stack
         for (Task readTask : copyTasks) {
             try {
                 clearedTasksIndices.add(tasks.getIndex(readTask));
@@ -304,6 +288,22 @@ public class TaskBook implements ReadOnlyTaskBook {
             } catch (TaskNotFoundException e) {
                 throw new TaskNotFoundException();
             }
+        }
+
+        // if this method was called to clear only completed, then remove the
+        // pending tasks
+        if (isClearCompleteOnly) {
+            for (int i = 0; i < clearedTasks.size(); i++) {
+                // if the task is pending, remove it
+                if (clearedStatus.get(i).equals("Pending")) {
+                    clearedTasks.remove(i);
+                    clearedTasksIndices.remove(i);
+                    clearedStatus.remove(i);
+                }
+            }
+        } else {
+            // keep all the pending and completed tasks in the list to push to
+            // undo stack
         }
     }
 

@@ -31,9 +31,6 @@ import seedu.task.model.task.TaskDate;
 public class EditParser extends Parser {
     private final Pattern NAME_FORMAT = Pattern.compile("^\\s*(\"(?<name>.*)\")\\s*.*");
     private final Pattern INDEX_FORMAT = Pattern.compile("^\\s*(?<index>\\d+).*");
-    private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endTime>\\d{2}:\\d{2})?\\s*");
-    private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<startDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<startTime>\\d{2}:\\d{2})?\\s+(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endTime>\\d{2}:\\d{2})?\\s*");
-    private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<name>.+)");
     private final com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
     
     /**
@@ -119,7 +116,7 @@ public class EditParser extends Parser {
      */
     private String removeFromString(String original, String toRemove) {
         if (toRemove != null) {
-            original = original.replace(toRemove, "");
+            original = original.replaceFirst(toRemove, "");
         }
         
         return original;

@@ -26,6 +26,8 @@ public class UndoTaskStack {
     private Stack<List<Integer>> previousClearedIndices = new Stack<>();
     private Stack<List<String>> previousClearedStatus = new Stack<>();
 
+    private static final int UNDO_FILLER_INDEX = -1;
+
     private String previousActionUndoString;
     
     private static final String MESSAGE_NOTHING_TO_UNDO = "Nothing to undo.";
@@ -44,7 +46,7 @@ public class UndoTaskStack {
      **/
     public void pushAddToUndoStack(String callingCommand, Task addedTask, int targetIndex) {
         previousActionType.push(callingCommand);
-        previousActionIndex.push(-1);
+        previousActionIndex.push(UNDO_FILLER_INDEX);
         previousTask.push(addedTask);
     }
 
@@ -120,7 +122,7 @@ public class UndoTaskStack {
      **/
     public void pushClearCompletedToUndoStack(List<Task> clearedTasks, List<Integer> clearedTaskIndices, String callingCommand) {
         previousActionType.push(callingCommand);
-        previousActionIndex.push(-1);
+        previousActionIndex.push(UNDO_FILLER_INDEX);
 
         previousClearedTasks.push(clearedTasks);
         previousClearedIndices.push(clearedTaskIndices);
@@ -148,7 +150,7 @@ public class UndoTaskStack {
     public void pushClearAllToUndoStack(List<Task> clearedTasks, List<Integer> clearedTaskIndices,
             List<String> clearedStatus, String callingCommand) {
         previousActionType.push(callingCommand);
-        previousActionIndex.push(-1);
+        previousActionIndex.push(UNDO_FILLER_INDEX);
 
         previousClearedTasks.push(clearedTasks);
         previousClearedIndices.push(clearedTaskIndices);

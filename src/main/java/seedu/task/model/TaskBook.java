@@ -35,6 +35,8 @@ public class TaskBook implements ReadOnlyTaskBook {
     private static final String UNDO_COMPLETE_COMMAND = "complete";
     private static final String UNDO_CLEAR_COMMAND = "clear";
     private static final String UNDO_CLEAR_ALL_COMMAND = "clear all";
+    
+    private static final int UNDO_FILLER_INDEX = -1;
 
     {
         tasks = new UniqueTaskList();
@@ -116,7 +118,7 @@ public class TaskBook implements ReadOnlyTaskBook {
      */
     public void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         tasks.add(task);
-        undoTaskStack.pushAddToUndoStack(UNDO_ADD_COMMAND, task, -1);
+        undoTaskStack.pushAddToUndoStack(UNDO_ADD_COMMAND, task, UNDO_FILLER_INDEX);
     }
 
     /**
@@ -199,7 +201,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 
         prepareCompletedTasksForUndo(copyTasks, clearedTasks, clearedTasksIndices);
 
-        // actually remove the completed tasks
+        // remove the completed tasks
         for (Task readTask : copyTasks) {
             if (readTask.isComplete()) {
                 try {
@@ -260,7 +262,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 
         prepareClearedTasksForUndo(copyTasks, clearedTasks, clearedTasksIndices, clearedStatus);
 
-        // actually remove the completed tasks
+        // remove the completed tasks
         for (Task readTask : copyTasks) {
             try {
                 tasks.remove(readTask);
@@ -272,7 +274,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         undoTaskStack.pushClearAllToUndoStack(clearedTasks, clearedTasksIndices, clearedStatus, UNDO_CLEAR_ALL_COMMAND);
     }
 
-    /*
+    /**
      * Helper method to compile set of tasks and indices for clearing all tasks
      * to prepare for undo stack
      */

@@ -2,7 +2,6 @@
 package seedu.task.model;
 
 import javafx.collections.ObservableList;
-import seedu.task.commons.core.Messages;
 import seedu.task.model.task.DeadlineTask;
 import seedu.task.model.task.EventTask;
 import seedu.task.model.task.ReadOnlyTask;
@@ -19,8 +18,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import org.junit.After;
 
 /**
  * Wraps all data at the task-book level Duplicates are not allowed (by .equals

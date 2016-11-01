@@ -45,4 +45,8 @@ public class UserCommandLog {
         }
         return nextCommand;
     }
+    
+    public boolean reachedEndOfTaskStack(){
+        return (currentCommandIndex -1 < 0);
+    }
 }

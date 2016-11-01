@@ -1,3 +1,5 @@
+<!-- @@author A0153658W -->
+
 # Contact Us
 
 * **Bug reports, Suggestions** : Post in our [issue tracker](https://github.com/CS2103AUG2016-T13-C1/main/issues)

@@ -19,6 +19,7 @@ import seedu.task.commons.util.FxViewUtil;
 import seedu.task.logic.Logic;
 import seedu.task.logic.commands.*;
 
+import java.sql.ResultSet;
 import java.util.logging.Logger;
 
 public class CommandBox extends UiPart {
@@ -133,6 +134,9 @@ public class CommandBox extends UiPart {
                     // get previous command
                     String previousCommand = userCommandLog.getPreviousCommand();
                     commandTextField.setText(previousCommand);
+                    if(userCommandLog.reachedEndOfTaskStack()){
+                        resultDisplay.postMessage("****Reached end of executed task stack");
+                    }
 
                     // move cursor caret to the end of the line
                     Platform.runLater(new Runnable() {

@@ -1,5 +1,5 @@
 # A0153658Wreused
-###### \java\seedu\task\model\ModelManager.java
+###### /java/seedu/task/model/ModelManager.java
 ``` java
     @Override
     public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
@@ -16,7 +16,7 @@
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 ```
-###### \java\seedu\task\model\task\Name.java
+###### /java/seedu/task/model/task/Name.java
 ``` java
 package seedu.task.model.task;
 
@@ -79,7 +79,7 @@ public class Name implements Comparable<Name> {
 
 }
 ```
-###### \java\seedu\task\model\task\UniqueTaskList.java
+###### /java/seedu/task/model/task/UniqueTaskList.java
 ``` java
 package seedu.task.model.task;
 
@@ -248,7 +248,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
 }
 ```
-###### \java\seedu\task\model\TaskBook.java
+###### /java/seedu/task/model/TaskBook.java
 ``` java
 	public ObservableList<Task> getTasks() {
 		return tasks.getInternalList();
@@ -258,17 +258,12 @@ public class UniqueTaskList implements Iterable<Task> {
 		this.tasks.getInternalList().setAll(tasks);
 	}
 
-	public void setTags(Collection<Tag> tags) {
-		this.tags.getInternalList().setAll(tags);
-	}
-
-	public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
+	public void resetData(Collection<? extends ReadOnlyTask> newTasks) {
 		System.out.println(newTasks.toString());
 		setTasks(newTasks.stream().map(Task::new).collect(Collectors.toList()));
-		setTags(newTags);
 	}
 
 	public void resetData(ReadOnlyTaskBook newData) {
-		resetData(newData.getTaskList(), newData.getTagList());
+		resetData(newData.getTaskList());
 	}
 ```

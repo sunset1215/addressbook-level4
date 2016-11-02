@@ -15,12 +15,12 @@ import org.junit.rules.ExpectedException;
 import seedu.task.commons.exceptions.IllegalValueException;
 import seedu.task.model.task.TaskDate;
 
+//@@author A0138704E
 public class DateUtilTest {
     
     private final String DEFAULT_TIME = "17:30";
     
     private String validDateTimeString;
-    private String invalidDateTimeString;
     private String validDateString;
     private String invalidDateString;
     private TaskDate validTaskDate;
@@ -32,7 +32,6 @@ public class DateUtilTest {
         validDateString = "23-10-2016";
         invalidDateString = "23-30-2016";
         validDateTimeString = "23-10-2016 " + DEFAULT_TIME;
-        invalidDateTimeString = "23-30-2016 " + DEFAULT_TIME;
         validTaskDate = new TaskDate(validDateTimeString);
         nullTaskDate = null;
     }

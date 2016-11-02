@@ -148,33 +148,31 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getResultDisplay().postMessage("Listed tasks due on " 
                                             + DateUtil.formatLocalDateToString(event.date));
     }
-  //@@author A0153723J
+    //@@author A0153723J
     @Subscribe
     private void handleListCompleteEvent(ListCompleteButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getResultDisplay().postMessage("Listed completed tasks");
     }
-    
+
     @Subscribe
     private void handleListPendingEvent(ListPendingButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getResultDisplay().postMessage("Listed pending tasks");
     }
-    
+
     @Subscribe
     private void handleListAllEvent(ListAllButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getResultDisplay().postMessage("Listed all tasks");
     }
-    
+
     @Subscribe
     private void handleListEvent(ListButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getResultDisplay().postMessage("Listed todays tasks");
+        mainWindow.getResultDisplay().postMessage("Listed tasks due today");
     }
-    
-    
-    //@@author A0153723J
+
     @Subscribe
     private void handleDisplayDirectoryChooserRequestEvent(DisplayDirectoryChooserRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

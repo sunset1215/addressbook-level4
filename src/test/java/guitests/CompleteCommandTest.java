@@ -12,13 +12,28 @@ import seedu.task.testutil.TestUtil;
 //@@author A0138704E
 public class CompleteCommandTest extends TaskBookGuiTest {
 
+    private TestTask[] currentList = td.getTypicalTasks();
+    
     @Test
-    public void complete() {
-
-        //complete the first in the list
-        TestTask[] currentList = td.getTypicalTasks();
-        //list all tasks as default on launch is to list tasks due today
+    public void complete_invalidIndex() {
         commandBox.runCommand("list /a");
+        commandBox.runCommand("complete " + currentList.length + 1);
+        assertResultMessage("The task index provided is invalid");
+    }
+    
+    @Test
+    public void complete_taskAlreadyCompleted() {
+        commandBox.runCommand("list /a");
+        commandBox.runCommand("complete 1");
+        commandBox.runCommand("list /a");
+        commandBox.runCommand("complete 1");
+        assertResultMessage(CompleteCommand.MESSAGE_TASK_ALREADY_COMPLETED);
+    }
+    
+    @Test
+    public void complete_nonEmptyList() {
+        commandBox.runCommand("list /a");
+        
         int targetIndex = 1;
         TestTask taskToComplete = currentList[targetIndex-1]; //-1 because array uses zero indexing
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
@@ -38,16 +53,6 @@ public class CompleteCommandTest extends TaskBookGuiTest {
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
         currentList = TestUtil.removeTaskFromList(currentList, targetIndex);
         assertCompleteSuccess(targetIndex, taskToComplete, currentList);
-
-        //invalid index
-        commandBox.runCommand("complete " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid");
-        
-        //cannot mark completed task as complete again
-        commandBox.runCommand("list /a");
-        commandBox.runCommand("complete 1");
-        assertResultMessage(CompleteCommand.MESSAGE_TASK_ALREADY_COMPLETED);
-
     }
     
     /**

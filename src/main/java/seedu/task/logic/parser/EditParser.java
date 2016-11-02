@@ -32,7 +32,7 @@ public class EditParser extends Parser {
     private final Pattern NAME_FORMAT = Pattern.compile("^\\s*(\"(?<name>.*)\")\\s*.*");
     private final Pattern INDEX_FORMAT = Pattern.compile("^\\s*(?<index>\\d+).*");
     private final com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
-    
+   
     /**
      * Parses arguments in the context of the edit task command.
      * @param args full command args string

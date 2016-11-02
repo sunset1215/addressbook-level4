@@ -213,6 +213,13 @@ Examples:
 Sorts data in the task book by order end date then name.<br>
 Format: `sort`
 
+<!-- @@author A0153658W -->
+#### Previous executed task : `[UP_ARROW_KEY]`
+Pulls up user's previous executed task, similar to bash shell functionality.<br>
+
+#### Next executed task : `[DOWN_ARROW_KEY]`
+Brings up user's next executed task, if there exists one. <br>
+
 <!-- @@author A0153723J -->
 
 #### Exiting the program : `exit`
@@ -223,7 +230,16 @@ Format: `exit`
 Task book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
+<!-- @@author A0153658W -->
 ## FAQ
+**Q**: Can I run this on my Mac? <br>
+**A**: Currently the application does function on Mac operating systems. However, because SuperTasker is intended for Windows machines, there are minor issues with the storage command. The storage file path standards for Windows differs from the file path on Mac, so you will manually need to update your storage path via the CLI instead of the GUI window explorer. 
+
+**Q**: Can I open my tasks on another computer? <br>
+**A**: To move your saved tasks to another computer, simply move the `taskbook.xml` file from your storage location to another new computer. From the new computer, run supertasker.jar and change the storage path to reference your copied `taskbook.xml`.
+
+**Q**: Can I contribute to this project? <br>
+**A**: Of course! This project is entirely open source and we welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
 <!-- @@author A0138704E -->
 

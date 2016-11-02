@@ -23,5 +23,8 @@ public interface Logic {
     
     /** Returns the filtered list of tasks due today */
     ObservableList<ReadOnlyTask> getTodayTaskList();
+    
+    /** Returns the size of task book */
+    int getSizeOfTaskBook();
 
 }

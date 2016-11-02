@@ -145,13 +145,14 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
-<!-- @@author A0153723J -->
+<!-- @@author A0153658W -->
 The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
 * stores the TaskBook data.
 * exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+* maintains an `UndoTaskStack` that keeps track of each action that the user performs
 
 ### Storage component
 
@@ -428,6 +429,32 @@ Use case ends.
 
 > 1a1. The user is notified that there is no command to undo
 
+<!-- @@author A0153658W -->
+#### Use case: Bring up previous commands
+**MSS**
+
+1. User wants to bring up previous command without having to retype command
+2. System brings up user's previous command. Use case ends.
+
+**Extensions**
+
+1a. There is no more previous command to bring up
+
+> 1a1. The user is notified that there is no more previous command to bring up
+
+#### Use case: Bring up next command, if there exists one
+**MSS**
+
+1. User wants to bring up next command, after going through `n` previous commands, where `n` is the number of previous commands the user brought up.
+2. System brings up user's next command. Use case ends.
+
+**Extensions**
+
+1a. There is no more next command to bring up
+
+> 1a1. The command box becomes blank, to indicate that there are no more next commands
+
+<!-- @@author A0153723J -->
 #### Use case: Change storage location
 
 **MSS**
@@ -535,3 +562,21 @@ Use case ends.
 1. Subtasks are limited to 25
 2. Cannot merge task lists together
 3. UI is not customizable
+
+<!-- @@author A0153658W -->
+## Our SuperTasker App
+Given the strenghths and weaknesses of these apps that we've surveyed, our app solves several of these issues:
+
+**Strengths**<br>
+
+1. Easy way to search events and tasks
+2. Intuitive natural language processor that parses CLI for identifying due date/time
+3. Not owned by a company, so it's open source and free
+4. Able to display all tasks at once
+5. Maintains a very simple process for adding and editing tasks
+
+**Weaknesses**<br>
+
+1. UI does not allow for customization, only provides minimal support
+2. Lacking support for sub tasks
+3. Lacking support for recurring tasks

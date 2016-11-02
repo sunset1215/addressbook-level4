@@ -34,6 +34,9 @@ public interface Model {
     /** Adds the given task at a given index */
     void addTask(int index, Task taskToAdd) throws UniqueTaskList.DuplicateTaskException;
     
+    /** Edits the given task */
+    void editTask(int taskIndex, Task taskToEdit, Task resultTask) throws DuplicateTaskException, TaskNotFoundException;
+    
     /** Get index of given task*/
     int getIndex(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
     
@@ -68,10 +71,10 @@ public interface Model {
     void updateFilteredListByDate(LocalDate date);
 
     /** Clears completed tasks from the task book */
-    void clearCompletedTasks() throws NoCompletedTasksFoundException;
+    void clearCompletedTasks() throws NoCompletedTasksFoundException, TaskNotFoundException;
     
     /** Clears all tasks from the task book */
-    void clearAllTasks();
+    void clearAllTasks() throws TaskNotFoundException;
 
     /** Sorts the task book, order by end date then name */
     void sort();

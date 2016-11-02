@@ -1,6 +1,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDateTime;
 
@@ -18,14 +19,39 @@ import seedu.task.testutil.TestUtil;
 //@@author A0138704E
 public class ListCommandTest extends TaskBookGuiTest {
 
+    private TestTask[] currentList = td.getTypicalTasks();
+
     @Test
-    public void list() {
-        
-        TestTask[] currentList = td.getTypicalTasks();
+    public void list_invalidOption() {
+        commandBox.runCommand("list /invalid");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+    }
+    
+    @Test
+    public void list_today() throws IllegalValueException {
+        //build simple list with some tasks due today
+        TestTask test, exam, assignment;
+        TestTask[] todayList = new TestTask[0];
+        LocalDateTime today = DateUtil.getTodayAsLocalDateTime();
 
-        //list all tasks
-        assertListSuccess(currentList, "list /a", ListCommand.MESSAGE_LIST_ALL_SUCCESS);
+        test = new TaskBuilder().withName("test").withEndDate(new TaskDate(today)).build();
+        exam = new TaskBuilder().withName("exam").withEndDate(new TaskDate(today)).build();
+        assignment = new TaskBuilder().withName("assignment").withEndDate(new TaskDate(today)).build();
+        todayList = TestUtil.addTasksToList(new TestTask[0], test, exam, assignment);
 
+        //setup expectations
+        commandBox.runCommand("clear /a");
+        commandBox.runCommand("add test " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add exam " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add assignment " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add task not due today 31-10-2016 14:00");
+
+        assertListSuccess(todayList, "list", ListCommand.MESSAGE_LIST_TODAY_SUCCESS);
+    }
+
+    @Test
+    public void list_status() {
+        commandBox.runCommand("list /a");
         //complete the first 3 tasks in the list
         int targetIndex = 1;
         String completeCommand = "complete 1";
@@ -39,50 +65,29 @@ public class ListCommandTest extends TaskBookGuiTest {
         //list completed tasks
         TestTask[] completedList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_COMPLETE);
         assertListSuccess(completedList, "list /c", ListCommand.MESSAGE_LIST_COMPLETE_SUCCESS);
-        
+
         //list pending tasks
         TestTask[] pendingList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
         assertListSuccess(pendingList, "list /p", ListCommand.MESSAGE_LIST_PENDING_SUCCESS);
-        
-        //TODO: list tasks due today
-        //build simple list with some tasks due today
-        TestTask test, exam, assignment;
-        TestTask[] todayList = new TestTask[0];
-        LocalDateTime today = DateUtil.getTodayAsLocalDateTime();
-        
-        try {
-            test = new TaskBuilder().withName("test").withEndDate(new TaskDate(today)).build();
-            exam = new TaskBuilder().withName("exam").withEndDate(new TaskDate(today)).build();
-            assignment = new TaskBuilder().withName("assignment").withEndDate(new TaskDate(today)).build();
-            todayList = TestUtil.addTasksToList(new TestTask[0], test, exam, assignment);
-        } catch (IllegalValueException e) {
-            assert false : "not possible";
-        }
-        
-        //setup expectations
-        commandBox.runCommand("clear /a");
-        commandBox.runCommand("add test " + DateUtil.formatLocalDateTimeToString(today));
-        commandBox.runCommand("add exam " + DateUtil.formatLocalDateTimeToString(today));
-        commandBox.runCommand("add assignment " + DateUtil.formatLocalDateTimeToString(today));
-        commandBox.runCommand("list /c");
-        
-        //list tasks due today
-        assertListSuccess(todayList, "list", ListCommand.MESSAGE_LIST_TODAY_SUCCESS);
-
     }
-    
+
+    @Test
+    public void list_all() {
+        assertListSuccess(currentList, "list /a", ListCommand.MESSAGE_LIST_ALL_SUCCESS);
+    }
+
     /**
      * Runs the list command to display tasks and confirms confirms the result is correct.
      * @param currentList A copy of the current list of tasks.
      */
     private void assertListSuccess(final TestTask[] currentList, String command, String expectedMessage) {
         commandBox.runCommand(command);
-        
+
         //confirm the completed task at target index is complete
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //confirm the result message is correct
         assertResultMessage(expectedMessage);
     }
-    
+
 }

@@ -313,6 +313,11 @@ public class TestUtil {
         }
         return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
     }
+    
+    public static TestTask[] sortTaskList(TestTask[] currentList, TaskComparator comp) {
+        Arrays.sort(currentList, comp);
+        return currentList;
+    }
 
     /**
      * Appends tasks to the array of tasks.
@@ -337,5 +342,7 @@ public class TestUtil {
     public static boolean compareCardAndTask(TaskListHandle card, ReadOnlyTask task) {
         return card.isSameTask(task);
     }
+
+    
 
 }

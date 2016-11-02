@@ -29,7 +29,7 @@ public class UndoTaskStack {
     private static final int UNDO_FILLER_INDEX = -1;
 
     private String previousActionUndoString;
-    
+
     private static final String MESSAGE_NOTHING_TO_UNDO = "Nothing to undo.";
 
     public UndoTaskStack() {
@@ -120,7 +120,8 @@ public class UndoTaskStack {
      *         actionIndex will be -1; there is no index specified when clearing
      *         a set of tasks, just pushing to keep the stacks balanced
      **/
-    public void pushClearCompletedToUndoStack(List<Task> clearedTasks, List<Integer> clearedTaskIndices, String callingCommand) {
+    public void pushClearCompletedToUndoStack(List<Task> clearedTasks, List<Integer> clearedTaskIndices,
+            String callingCommand) {
         previousActionType.push(callingCommand);
         previousActionIndex.push(UNDO_FILLER_INDEX);
 
@@ -176,9 +177,15 @@ public class UndoTaskStack {
             case "add":
                 try {
                     tasks.remove(userTask);
-                    previousActionUndoString = userAction + " " + userTask.getName() + " " + userTask.getUndoFormatString();
+                    if (userTask.toString().equals(userTask.getUndoFormatString())) {
+                        previousActionUndoString = userAction + " " + userTask.getUndoFormatString();
+                    } else {
+                        previousActionUndoString = userAction + " " + userTask.getName() + " "
+                                + userTask.getUndoFormatString();
+                    }
                 } catch (TaskNotFoundException e) {
-                    return new CommandResult(String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.getUndoFormatString()));
+                    return new CommandResult(
+                            String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.getUndoFormatString()));
                 }
                 break;
             // previous action was a delete; add back the deleted task
@@ -187,7 +194,8 @@ public class UndoTaskStack {
                     tasks.add(taskIndex, userTask);
                     previousActionUndoString = userAction + " " + (taskIndex + 1);
                 } catch (DuplicateTaskException e) {
-                    return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
+                    return new CommandResult(
+                            String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
                 }
                 break;
             // previous action was an edit; set back the old task
@@ -197,7 +205,8 @@ public class UndoTaskStack {
                     tasks.edit(taskIndex, userTask);
                     previousActionUndoString = "edit" + " " + (taskIndex + 1) + " " + temp.getUndoFormatString();
                 } catch (TaskNotFoundException e) {
-                    return new CommandResult(String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.getUndoFormatString()));
+                    return new CommandResult(
+                            String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.getUndoFormatString()));
                 }
                 break;
             // previous action was a complete; set the task back to pending
@@ -220,7 +229,8 @@ public class UndoTaskStack {
                     try {
                         tasks.add(indexToUnclear, taskToUnclear);
                     } catch (DuplicateTaskException e) {
-                        return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
+                        return new CommandResult(
+                                String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
                     }
                 }
                 break;
@@ -245,7 +255,8 @@ public class UndoTaskStack {
                     try {
                         tasks.add(indexToUnclear, taskToUnclear);
                     } catch (DuplicateTaskException e) {
-                        return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
+                        return new CommandResult(
+                                String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
                     }
                 }
                 break;

@@ -100,4 +100,12 @@ public class Task implements ReadOnlyTask {
     public void setPending(){
     	status.setPending();
     }
+    
+    /**
+     * Get proper formatted string to display for undo message success
+     * @return
+     */
+    public String getUndoFormatString(){
+        return getAsText();
+    }
 }

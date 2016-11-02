@@ -43,6 +43,13 @@ public class DeadlineTask extends Task{
     }
 	
 	@Override
+    public String getUndoFormatString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(endDate.toString());
+        return sb.toString();
+    }
+	
+	@Override
 	public TaskDate getEnd() {
 		return endDate;
 	}

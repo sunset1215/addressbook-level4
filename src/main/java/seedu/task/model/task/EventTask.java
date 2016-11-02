@@ -55,6 +55,15 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String getUndoFormatString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(startDate.toString());
+        sb.append(" ");
+        sb.append(endDate.toString());
+        return sb.toString();
+    }
+    
+    @Override
     public TaskDate getStart() {
         return startDate;
     }

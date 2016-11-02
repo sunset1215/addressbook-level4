@@ -176,9 +176,9 @@ public class UndoTaskStack {
             case "add":
                 try {
                     tasks.remove(userTask);
-                    previousActionUndoString = userAction + " " + userTask.toString();
+                    previousActionUndoString = userAction + " " + userTask.getName() + " " + userTask.getUndoFormatString();
                 } catch (TaskNotFoundException e) {
-                    return new CommandResult(String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.toString()));
+                    return new CommandResult(String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.getUndoFormatString()));
                 }
                 break;
             // previous action was a delete; add back the deleted task
@@ -187,16 +187,17 @@ public class UndoTaskStack {
                     tasks.add(taskIndex, userTask);
                     previousActionUndoString = userAction + " " + (taskIndex + 1);
                 } catch (DuplicateTaskException e) {
-                    return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.toString()));
+                    return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
                 }
                 break;
             // previous action was an edit; set back the old task
             case "edit":
                 try {
+                    Task temp = tasks.getTaskFromIndex(taskIndex);
                     tasks.edit(taskIndex, userTask);
-                    previousActionUndoString = "edit" + " " + (taskIndex + 1) + " " + userTask.toString();
+                    previousActionUndoString = "edit" + " " + (taskIndex + 1) + " " + temp.getUndoFormatString();
                 } catch (TaskNotFoundException e) {
-                    return new CommandResult(String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.toString()));
+                    return new CommandResult(String.format(Messages.MESSAGE_TASK_NOT_FOUND, userTask.getUndoFormatString()));
                 }
                 break;
             // previous action was a complete; set the task back to pending
@@ -219,14 +220,14 @@ public class UndoTaskStack {
                     try {
                         tasks.add(indexToUnclear, taskToUnclear);
                     } catch (DuplicateTaskException e) {
-                        return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.toString()));
+                        return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
                     }
                 }
                 break;
             // previous action was a clear all regardless of status; add back
             // the tasks that were cleared
             case "clear all":
-                previousActionUndoString = userAction;
+                previousActionUndoString = "clear /a";
                 List<Task> lastClearedAll = previousClearedTasks.pop();
                 List<Integer> lastClearedAllIndices = previousClearedIndices.pop();
                 List<String> lastClearedStatuses = previousClearedStatus.pop();
@@ -244,7 +245,7 @@ public class UndoTaskStack {
                     try {
                         tasks.add(indexToUnclear, taskToUnclear);
                     } catch (DuplicateTaskException e) {
-                        return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.toString()));
+                        return new CommandResult(String.format(Messages.MESSAGE_DUPLICATE_TASK_FOUND, userTask.getUndoFormatString()));
                     }
                 }
                 break;

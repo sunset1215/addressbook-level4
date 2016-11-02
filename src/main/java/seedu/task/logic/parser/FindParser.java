@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import seedu.task.logic.commands.Command;
 import seedu.task.logic.commands.FindCommand;
@@ -19,7 +18,6 @@ import seedu.task.logic.commands.IncorrectCommand;
  * Parser class used to parse a find command
  */
 public class FindParser extends Parser {
-	private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<index>\\d+)\\s*(?<name>.+)");
 	
 	/**
      * Parses arguments in the context of the find task command.

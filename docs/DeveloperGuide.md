@@ -268,8 +268,10 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-## Appendix A : User Stories
 <!-- @@author A0153723J -->
+
+## Appendix A : User Stories
+
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
 Priority | As a ... | I want to ... | So that I can...
@@ -296,6 +298,7 @@ Priority | As a ... | I want to ... | So that I can...
 (For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
 <!-- @@author A0138704E -->
+
 #### Use case: Add task
 
 **MSS**
@@ -335,6 +338,7 @@ Use case ends.
 > 3b1. System notifies user that the task index provided is invalid.
 
 <!-- @@author A0153723J -->
+
 #### Use case: Delete task
 
 **MSS**
@@ -390,6 +394,7 @@ Use case ends.
 > 3b1. System notifies user that the task index provided is invalid.
 
 <!-- @@author A0138704E -->
+
 #### Use case: List tasks
 
 **MSS**
@@ -415,6 +420,7 @@ Use case ends.
 > 2a1. System displays an empty list.
 
 <!-- @@author A0153723J -->
+
 #### Use case: Undo previous commands
 
 **MSS**
@@ -430,6 +436,7 @@ Use case ends.
 > 1a1. The user is notified that there is no command to undo
 
 <!-- @@author A0153658W -->
+
 #### Use case: Bring up previous commands
 **MSS**
 
@@ -455,6 +462,7 @@ Use case ends.
 > 1a1. The command box becomes blank, to indicate that there are no more next commands
 
 <!-- @@author A0153723J -->
+
 #### Use case: Change storage location
 
 **MSS**
@@ -501,6 +509,7 @@ Use case ends.
 ## Appendix E : Product Survey
 
 <!-- @@author A0138704E -->
+
 ### Google Calendar
 
 **Strength**<br>
@@ -515,6 +524,7 @@ Use case ends.
 2. Task GUI is narrow and feels a bit cluttered when there are many tasks in the list
 
 <!-- @@author A0153658W -->
+
 ### Any.do
 
 **Strengths**<br>
@@ -533,6 +543,7 @@ Use case ends.
 3. Limiting location based reminders is also as a premium service to pay for $2/month
 
 <!-- @@author A0161247J -->
+
 ### Sunrise Calendar
 
 **Strengths**<br>
@@ -548,6 +559,7 @@ Use case ends.
 3. Doesn’t have a way to attach email, pdf or images
 
 <!-- @@author A0153723J -->
+
 ### Wunderlist
 
 **Strengths**<br>
@@ -564,8 +576,9 @@ Use case ends.
 3. UI is not customizable
 
 <!-- @@author A0153658W -->
-## Our SuperTasker App
-Given the strenghths and weaknesses of these apps that we've surveyed, our app solves several of these issues:
+
+### Our SuperTasker App
+Given the strengths and weaknesses of these apps that we've surveyed, our app solves several of these issues:
 
 **Strengths**<br>
 

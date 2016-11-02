@@ -13,13 +13,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.task.commons.core.LogsCenter;
-import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.task.commons.util.FxViewUtil;
 import seedu.task.logic.Logic;
 import seedu.task.logic.commands.*;
 
-import java.sql.ResultSet;
 import java.util.logging.Logger;
 
 public class CommandBox extends UiPart {

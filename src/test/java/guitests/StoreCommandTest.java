@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import seedu.task.logic.commands.StoreCommand;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.task.logic.commands.StoreCommand.MESSAGE_SUCCESS;
 
 public class StoreCommandTest extends TaskBookGuiTest{
 	

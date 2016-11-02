@@ -27,6 +27,7 @@ import seedu.task.model.task.UniqueTaskList.NoCompletedTasksFoundException;
 import seedu.task.model.task.UniqueTaskList.TaskAlreadyCompletedException;
 import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Set;
@@ -128,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
 		if(newFilePath.isEmpty()) {
 			newFilePath = getNewFilePathFromDirectoryChooser();
 		}
-		newFilePath += "\\taskbook.xml";
+		newFilePath += File.separatorChar + "taskbook.xml";
 		raise(new StorageFilePathChangedEvent(newFilePath, taskBook));
 		ConfigUtil.saveConfig(new Config(newFilePath), Config.USER_CONFIG_FILE);
 		return newFilePath;

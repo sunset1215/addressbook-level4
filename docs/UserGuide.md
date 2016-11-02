@@ -35,6 +35,7 @@
 > * The order of parameters is fixed.
 
 <!-- @@author A0138704E -->
+
 > **Task Structure**<br>
 
 > There are 3 types of tasks.
@@ -44,6 +45,7 @@
 
 > Every task is either a to-do, deadline or event. It cannot be both or all 3 or none at all.<br>
 > Refer to [Glossary](DeveloperGuide.md#appendix-d--glossary) for definitions of each type of task.
+
 <!-- @@author A0153723J -->
 
 #### Viewing help : `help`
@@ -52,6 +54,7 @@ Format: `help`
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
 <!-- @@author A0138704E -->
+
 #### Adding a task : `add`
 Adds a task to the task manager.<br>
 Format: `add TASK_NAME [START_DATE [START_TIME]] [END_DATE [END_TIME]]` 
@@ -134,6 +137,7 @@ Examples:
   Returns any tasks having names that contains the word `high`, for e.g. `Highlight` or `higher`
   
 <!-- @@author A0138704E -->  
+
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
 Format: `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TIME]]`
@@ -169,6 +173,7 @@ Examples:
   Edit the 2nd task in the task manager into an event on 23 Oct 2016, 2pm to 4pm.
   
 <!-- @@author A0153723J -->
+
 #### Undoing previous commands : `undo`
 Undo previous commands that were executed.<br>
 Format: `undo`
@@ -177,6 +182,7 @@ Format: `undo`
   Only commands that changes data are included (`add`, `delete`, `clear`, `edit`, `complete`).
   
 <!-- @@author A0138704E -->
+
 #### Clearing tasks : `clear`
 Clears tasks from the task manager.<br>
 Additional options include: `/a`<br>
@@ -186,6 +192,7 @@ Format: `clear [OPTION]`
 > * `/a` : clears all tasks from the task manager.
 
 <!-- @@author A0153723J -->
+
 #### Specifying data storage location : `store`
 Specifies data storage location.<br>
 Format: `store [FILE_LOCATION]`
@@ -201,11 +208,13 @@ Examples:
   Displays a dialog box for user to browse for the storage location.
   
 <!-- @@author A0138704E -->
+
 #### Sorting tasks : `sort`
 Sorts data in the task book by order end date then name.<br>
 Format: `sort`
 
 <!-- @@author A0153658W -->
+
 #### Previous executed task : `[UP_ARROW_KEY]`
 Pulls up user's previous executed task, similar to bash shell functionality.<br>
 
@@ -213,6 +222,7 @@ Pulls up user's previous executed task, similar to bash shell functionality.<br>
 Brings up user's next executed task, if there exists one. <br>
 
 <!-- @@author A0153723J -->
+
 #### Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
@@ -222,6 +232,7 @@ Task book data are saved in the hard disk automatically after any command that c
 There is no need to save manually.
 
 <!-- @@author A0153658W -->
+
 ## FAQ
 **Q**: Can I run this on my Mac? <br>
 **A**: Currently the application does function on Mac operating systems. However, because SuperTasker is intended for Windows machines, there are minor issues with the storage command. The storage file path standards for Windows differs from the file path on Mac, so you will manually need to update your storage path via the CLI instead of the GUI window explorer. 
@@ -233,6 +244,7 @@ There is no need to save manually.
 **A**: Of course! This project is entirely open source and we welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
 <!-- @@author A0138704E -->
+
 ## Command Summary
 
 | Command | Format | Description |

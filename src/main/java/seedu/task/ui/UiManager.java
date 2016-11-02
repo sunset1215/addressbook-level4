@@ -15,6 +15,10 @@ import seedu.task.commons.events.storage.DataSavingExceptionEvent;
 import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
+import seedu.task.commons.events.ui.ListAllButtonEvent;
+import seedu.task.commons.events.ui.ListButtonEvent;
+import seedu.task.commons.events.ui.ListCompleteButtonEvent;
+import seedu.task.commons.events.ui.ListPendingButtonEvent;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
@@ -144,6 +148,31 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getResultDisplay().postMessage("Listed tasks due on " 
                                             + DateUtil.formatLocalDateToString(event.date));
     }
+  //@@author A0153723J
+    @Subscribe
+    private void handleListCompleteEvent(ListCompleteButtonEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getResultDisplay().postMessage("Listed completed tasks");
+    }
+    
+    @Subscribe
+    private void handleListPendingEvent(ListPendingButtonEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getResultDisplay().postMessage("Listed pending tasks");
+    }
+    
+    @Subscribe
+    private void handleListAllEvent(ListAllButtonEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getResultDisplay().postMessage("Listed all tasks");
+    }
+    
+    @Subscribe
+    private void handleListEvent(ListButtonEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getResultDisplay().postMessage("Listed todays tasks");
+    }
+    
     
     //@@author A0153723J
     @Subscribe

@@ -339,7 +339,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Subscribe
     private void handleListCompleteButtonEvent(ListCompleteButtonEvent event){
     	logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    	updateFilteredListByStatus(Status.STATUS_PENDING);
+    	updateFilteredListByStatus(Status.STATUS_COMPLETE);
     }
 
 

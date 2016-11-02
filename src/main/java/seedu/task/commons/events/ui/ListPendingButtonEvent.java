@@ -1,7 +1,6 @@
 //@@author A0153723J
 package seedu.task.commons.events.ui;
 
-import java.time.LocalDate;
 import seedu.task.model.task.Status;
 import seedu.task.commons.events.BaseEvent;
 

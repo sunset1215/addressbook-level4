@@ -418,9 +418,9 @@ public class LogicManagerTest {
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
-            cmd.append("add ");
-
+            cmd.append("add \"");
             cmd.append(p.getName().toString());
+            cmd.append("\"");
 
             return cmd.toString();
         }

@@ -12,7 +12,7 @@ import seedu.task.testutil.TestUtil;
 //@@author A0138704E
 public class CompleteCommandTest extends TaskBookGuiTest {
 
-    TestTask[] currentList = td.getTypicalTasks();
+    private TestTask[] currentList = td.getTypicalTasks();
     
     @Test
     public void complete_invalidIndex() {

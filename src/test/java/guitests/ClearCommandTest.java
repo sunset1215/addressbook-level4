@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 //@@author A0138704E
 public class ClearCommandTest extends TaskBookGuiTest {
 
-    private TestTask[] currentList = td.getTypicalTasks();;
-    private TestTask[] emptyList = new TestTask[0];;
+    private TestTask[] currentList = td.getTypicalTasks();
+    private TestTask[] emptyList = new TestTask[0];
     
     @Test
     public void clearAll_nonEmptyList() {

@@ -6,13 +6,13 @@ import seedu.task.commons.util.CollectionUtil;
 
 //@@author A0138704E
 /**
- * An enum storing different types of comparators for task
+ * An enum storing different types of comparators for ReadOnlyTask
  */
-public enum TaskComparator implements Comparator<Task> {
+public enum TaskComparator implements Comparator<ReadOnlyTask> {
 
     NAME {
         @Override
-        public int compare(Task t1, Task t2) {
+        public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
             return t1.getName().compareTo(t2.getName());
         }
 
@@ -20,7 +20,7 @@ public enum TaskComparator implements Comparator<Task> {
 
     END_DATE {
         @Override
-        public int compare(Task t1, Task t2) {
+        public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
             if (!CollectionUtil.isAnyNull(t1.getEnd(), t2.getEnd())) {
                 int endDateResult = t1.getEnd().compareTo(t2.getEnd());
                 return endDateResult;
@@ -36,7 +36,7 @@ public enum TaskComparator implements Comparator<Task> {
 
     START_DATE {
         @Override
-        public int compare(Task t1, Task t2) {
+        public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
             if (!CollectionUtil.isAnyNull(t1.getStart(), t2.getStart())) {
                 int startDateResult = t1.getStart().compareTo(t2.getStart());
                 return startDateResult;

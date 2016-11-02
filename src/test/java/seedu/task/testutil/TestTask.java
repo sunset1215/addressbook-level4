@@ -43,6 +43,9 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
+        if (endDate != null) {
+            sb.append(" " + endDate.toString());
+        }
         return sb.toString();
     }
 

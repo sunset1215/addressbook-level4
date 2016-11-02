@@ -22,6 +22,7 @@ public class AddParser extends Parser {
 	private final Pattern FLOATING_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*");
 	private final Pattern DEADLINE_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s*(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endTime>\\d{2}:\\d{2})?\\s*");
 	private final Pattern EVENT_ARGS_FORMAT = Pattern.compile("\\s*(?<name>.+)\\s+(?<startDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<startTime>\\d{2}:\\d{2})?\\s+(?<endDate>\\d{2}-\\d{2}-\\d{4})\\s*(?<endTime>\\d{2}:\\d{2})?\\s*");
+	private final String DEFAULT_TIME = "17:30";
 	
 	@Override
 	public Command parseCommand(String args) {
@@ -96,7 +97,7 @@ public class AddParser extends Parser {
 		String endTimeString = matcher.group("endTime");
 		
 		LocalDateTime endDate = (endTimeString == null) ? 
-			DateUtil.parseStringToLocalDate(endDateString) :
+			DateUtil.parseStringToLocalDateTimeWithSpecifiedTime(endDateString, DEFAULT_TIME) :
 			DateUtil.parseStringToLocalDateTime(endDateString + " " + endTimeString);
 		
         return new AddCommand(name, endDate);
@@ -125,11 +126,11 @@ public class AddParser extends Parser {
 		String endTimeString = matcher.group("endTime");
 		
 		LocalDateTime startDate = (startTimeString == null) ? 
-				DateUtil.parseStringToLocalDate(startDateString) :
+				DateUtil.parseStringToLocalDateTimeWithSpecifiedTime(startDateString, DEFAULT_TIME) :
 				DateUtil.parseStringToLocalDateTime(startDateString + " " + startTimeString);
 		
 		LocalDateTime endDate = (endTimeString == null) ? 
-				DateUtil.parseStringToLocalDate(endDateString) :
+				DateUtil.parseStringToLocalDateTimeWithSpecifiedTime(endDateString, DEFAULT_TIME) :
 				DateUtil.parseStringToLocalDateTime(endDateString + " " + endTimeString);
 		
 		if (startDate.isAfter(endDate)) {

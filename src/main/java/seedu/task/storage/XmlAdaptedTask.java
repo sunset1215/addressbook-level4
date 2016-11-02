@@ -94,9 +94,4 @@ public class XmlAdaptedTask {
         return taskStartDate != null && taskEndDate != null;
     }
     
-    @Override
-    public String toString() {
-        return "name=" + name + ",startDate=" + startDate + ",endDate=" + endDate + ",status=" + status;
-    }
-    
 }

@@ -12,11 +12,12 @@ import static org.junit.Assert.assertTrue;
 //@@author A0138704E
 public class ClearCommandTest extends TaskBookGuiTest {
 
+    private TestTask[] currentList = td.getTypicalTasks();;
+    private TestTask[] emptyList = new TestTask[0];;
+    
     @Test
-    public void clear() {
-
+    public void clearAll_nonEmptyList() {
         //verify a non-empty list can be cleared
-        TestTask[] currentList = td.getTypicalTasks();
         commandBox.runCommand("list /a");
         currentList = TestUtil.removeTasksFromList(currentList, td.getTypicalTasks());
         commandBox.runCommand("clear /a");
@@ -27,14 +28,17 @@ public class ClearCommandTest extends TaskBookGuiTest {
         assertTrue(taskListPanel.isListMatching(td.report));
         commandBox.runCommand("delete 1");
         assertListSize(0);
-
-        //verify clear command works when the list is empty
+    }
+    
+    @Test
+    public void clearAll_emptyList() {
         commandBox.runCommand("clear /a");
-        assertClearCommandSuccess(currentList, ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS);
-
-        //get a list with some completed tasks
-        repopulateTaskBookWithInitialData();
-        currentList = td.getTypicalTasks();
+        assertClearCommandSuccess(emptyList, ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS);
+    }
+    
+    @Test
+    public void clearCompleted_nonEmptyList() {
+        commandBox.runCommand("list /a");
         //complete the first 3 tasks in the list
         int targetIndex = 1;
         String completeCommand = "complete 1";
@@ -46,14 +50,14 @@ public class ClearCommandTest extends TaskBookGuiTest {
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex+2);
         currentList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
         
-        //verify clear command can clear completed tasks
         commandBox.runCommand("clear");
         assertClearCommandSuccess(currentList, ClearCommand.MESSAGE_CLEAR_COMPLETED_SUCCESS);
-
-        //verify clear command cannot clear when there are no completed tasks
+    }
+    
+    @Test
+    public void clearCompleted_emptyList() {
         commandBox.runCommand("clear");
-        assertClearCommandSuccess(currentList, ClearCommand.MESSAGE_CLEAR_COMPLETED_FAIL);
-        
+        assertClearCommandSuccess(emptyList, ClearCommand.MESSAGE_CLEAR_COMPLETED_FAIL);
     }
 
     private void assertClearCommandSuccess(TestTask[] currentList, String expectedMessage) {
@@ -61,13 +65,4 @@ public class ClearCommandTest extends TaskBookGuiTest {
         assertResultMessage(expectedMessage);
     }
     
-    private void repopulateTaskBookWithInitialData() {
-        commandBox.runCommand(td.assignment.getAddCommand());
-        commandBox.runCommand(td.meeting.getAddCommand());
-        commandBox.runCommand(td.test.getAddCommand());
-        commandBox.runCommand(td.exam.getAddCommand());
-        commandBox.runCommand(td.project.getAddCommand());
-        commandBox.runCommand(td.movie.getAddCommand());
-        commandBox.runCommand(td.discussion.getAddCommand());
-    }
 }

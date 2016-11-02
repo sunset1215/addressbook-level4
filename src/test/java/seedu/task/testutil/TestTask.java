@@ -15,15 +15,21 @@ public class TestTask implements ReadOnlyTask {
     public TestTask() {
         this.status = new Status(Status.STATUS_PENDING);
     }
-    
+
     public void setName(Name name) {
         this.name = name;
     }
-    
+
+    // @@author A0153658W
+    public void setStartDate(TaskDate date) {
+        this.startDate = date;
+    }
+
     public void setEndDate(TaskDate date) {
         this.endDate = date;
     }
-    
+    // @@author
+
     @Override
     public Name getName() {
         return name;
@@ -54,13 +60,13 @@ public class TestTask implements ReadOnlyTask {
     public Status getStatus() {
         return status;
     }
-    
+
     public void setComplete() {
         status.setComplete();
     }
-    
+
     public boolean isComplete() {
         return status.isComplete();
     }
-    
+
 }

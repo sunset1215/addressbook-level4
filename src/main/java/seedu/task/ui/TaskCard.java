@@ -37,11 +37,11 @@ public class TaskCard extends UiPart{
         TaskCard card = new TaskCard();
         card.task = task;
         card.displayedIndex = displayedIndex;
-        if(task.getStart() != null){
-        	card.taskStartDate = task.getStart().toString();
+        if (task.getStart() != null) {
+            card.taskStartDate = task.getStart().toString();
         }
-        if(task.getEnd() != null){
-        	card.taskEndDate = task.getEnd().toString();
+        if (task.getEnd() != null) {
+            card.taskEndDate = task.getEnd().toString();
         }
         card.taskStatus = task.getStatus().toString();
         return UiPartLoader.loadUiPart(card);
@@ -51,23 +51,34 @@ public class TaskCard extends UiPart{
     public void initialize() {
         name.setText(task.getName().fullName);
         id.setText(displayedIndex + ". ");
-
-        if(task.getStart() != null){
-            startDate.setText("Start date: " + taskStartDate);
-        }
-        else{
-        	startDate.setText("");
-        }
-        
-        if(task.getEnd() != null){
-            endDate.setText("End date: " + taskEndDate);
-        }
-        else{
-        	endDate.setText("");
-        }
+        startDate.setText(formatDateDisplayString("Start date:", taskStartDate));
+        endDate.setText(formatDateDisplayString("End date:", taskEndDate));
         status.setText("Status: " + taskStatus);
+        highlightCompletedTasks();
     }
 
+    /**
+     * Apply a colored background to completed tasks
+     */
+    private void highlightCompletedTasks() {
+        if (task.getStatus().isComplete()) {
+            cardPane.setStyle("-fx-background-color: LightGreen;");
+        } else {
+            cardPane.setStyle(null);
+        }
+    }
+    
+    /**
+     * Formats date strings for display as date values might be null
+     */
+    private String formatDateDisplayString(String prefix, String strDate) {
+        if (strDate == null) {
+            return "";
+        } else {
+            return prefix + " " + strDate;
+        }
+    }
+    
     public HBox getLayout() {
         return cardPane;
     }

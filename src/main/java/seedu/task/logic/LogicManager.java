@@ -52,4 +52,9 @@ public class LogicManager extends ComponentManager implements Logic {
         model.updateFilteredListByDate(DateUtil.getTodayAsLocalDate());
         return getFilteredTaskList();
     }
+
+    @Override
+    public int getSizeOfTaskBook() {
+        return model.getTaskBook().getTaskList().size();
+    }
 }

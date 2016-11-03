@@ -48,7 +48,7 @@ We are a team based in the [School of Computing, National University of Singapor
    * Parser support for multiple commands
 * Code written: [[functional code](../collated/main/A0161247J.md)][[test code](../collated/test/A0161247J.md)][[docs](../collated/docs/A0161247J.md)]
 * Other major contributions:
-  * 
+  * Setup Natty
   
 <!-- @@author A0153723J -->
 -----

@@ -14,7 +14,7 @@
 1. Download the latest `supertasker.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your Task Manager.
 3. Double-click the file to start the app. The GUI should appear in a few seconds. 
-   > <img src="images/uiMockUp.png" width="600">
+   > <img src="images/finalUI.PNG" width="800">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
@@ -35,6 +35,7 @@
 > * The order of parameters is fixed.
 
 <!-- @@author A0138704E -->
+
 > **Task Structure**<br>
 
 > There are 3 types of tasks.
@@ -44,6 +45,7 @@
 
 > Every task is either a to-do, deadline or event. It cannot be both or all 3 or none at all.<br>
 > Refer to [Glossary](DeveloperGuide.md#appendix-d--glossary) for definitions of each type of task.
+
 <!-- @@author A0153723J -->
 
 #### Viewing help : `help`
@@ -51,30 +53,32 @@ Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-<!-- @@author A0138704E -->
+<!-- @@author A0161247J -->
+
 #### Adding a task : `add`
 Adds a task to the task manager.<br>
-Format: `add TASK_NAME [START_DATE [START_TIME]] [END_DATE [END_TIME]]` 
+Format: `add "TASK_NAME" [START_DATE [START_TIME]] [END_DATE [END_TIME]]` 
 
 > `TASK_NAME` is required for adding any type of task.<br>
   To add a deadline, specify `END_DATE` and an optional `END_TIME`.<br>
   To add an event, specify `START_DATE` and `END_DATE` and optional `START_TIME` or `END_TIME`.<br>
-  Dates have to be specified in the format `dd-mm-yyyy`, for e.g. `20-10-2016`.<br>
-  Times have to be specified in 24-hour format, for e.g. `17:00` means `5 pm`.<br>
-  The default time is 17:30 if time is not provided.
+  Dates can be in a number of formats from `Dec 3rd` to `December 20, 2016`.<br>
+  Times can be in a number of formats, for e.g. `17:00` or `5pm` <br>
 
 Examples: 
-* `add follow up with Jack on sales report`<br>
+* `add "follow up with Jack on sales report"`<br>
   Adds a floating task named `follow up with Jack on sales report`.
-* `add assignment 3 12-10-2016`<br>
+* `add "assignment 3" October 12th`<br>
   Adds a deadline named `assignment 3` due on 12 Oct 2016.
-* `add assignment 3 12-10-2016 14:00`<br>
+* `add "assignment 3" Oct 12th at 2pm`<br>
   Adds a deadline named `assignment 3` due on 12 Oct 2016, 2pm.
-* `add project Highlight 01-10-2016 14-11-2016`<br>
+* `add "project Highlight" Oct 1st to Nov 14th`<br>
   Adds an event named `project Highlight` starting on 1 Oct 2016 to 14 Nov 2016.
-* `add meeting with John 01-10-2016 14:00 01-10-2016 16:00`<br>
+* `add "meeting with John" October 1st at 2pm to Oct 1st 16:00`<br>
   Adds an event named `meeting with John` on 1 Oct 2016, 2pm to 4pm.
   
+<!-- @@author A0138704E -->
+
 #### Set task as complete : `complete`
 Sets the specified task as complete.<br>
 Format: `complete TASK_INDEX`
@@ -99,6 +103,7 @@ Format: `list [OPTION]`
 > * `/p` : Shows a list of pending tasks.
 
 <!-- @@author A0153723J -->
+
 #### Deleting a task : `delete`
 Deletes the specified task from the task manager.<br>
 Format: `delete TASK_INDEX`
@@ -133,10 +138,11 @@ Examples:
 * `find high`<br>
   Returns any tasks having names that contains the word `high`, for e.g. `Highlight` or `higher`
   
-<!-- @@author A0138704E -->  
+<!-- @@author A0161247J -->
+
 #### Editing a task : `edit`
 Edits the specified task from the task manager.<br>
-Format: `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TIME]]`
+Format: `edit TASK_INDEX ["TASK_NAME"] [START_DATE [START_TIME]] [END_DATE [END_TIME]]`
 
 > Edits the task at the specified `TASK_INDEX`.<br>
   The index refers to the index number shown in the most recent listing.<br>
@@ -144,31 +150,31 @@ Format: `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TI
   Specified parameters will overwrite previous data.<br>
   To add a deadline to the specified task, specify `END_DATE` and an optional `END_TIME`.<br>
   To add an event to the specified task, specify `START_DATE` and `END_DATE` and optional `START_TIME` or `END_TIME`.<br>
-  Dates have to be specified in the format `dd-mm-yyyy`, for e.g. `20-10-2016`.<br>
-  Times have to be specified in 24-hour format, for e.g. `17:00` means `5 pm`.<br>
-  The default time is 17:30 if time is not provided.
+  Dates can be in a number of formats from `Dec 3rd` to `December 20, 2016`.<br>
+  Times can be in a number of formats, for e.g. `17:00` or `5pm` <br>
 
 Examples: 
 * `list`<br>
   `edit 2 business meeting with new client`<br>
   Edit the 2nd task in the task manager into a to-do task named `business meeting with new client`.
 * `list`<br>
-  `edit 2 23-10-2016`<br>
+  `edit 2 23 Oct`<br>
   Edit the 2nd task in the task manager into a deadline due on 23 Oct 2016.
 * `list`<br>
-  `edit 2 23-10-2016 14:00`<br>
+  `edit 2 23rd October 14:00`<br>
   Edit the 2nd task in the task manager into a deadline due on 23 Oct 2016, 2pm.
 * `list`<br>
-  `edit 2 23-10-2016 24-10-2016`<br>
+  `edit 2 23 Oct to 24th Oct`<br>
   Edit the 2nd task in the task manager into an event from 23 Oct 2016 to 24 Oct 2016.
 * `list`<br>
-  `edit 2 23-10-2016 14:00 25-10-2016 16:00`<br>
+  `edit 2 23 Oct 2pm 25th Oct 4pm`<br>
   Edit the 2nd task in the task manager into an event from 23 Oct 2016, 2pm to 25 Oct 2016, 4pm.
 * `list`<br>
-  `edit 2 23-10-2016 14:00 23-10-2016 16:00`<br>
+  `edit 2 3rd Oct 2pm to 3rd Oct 4pm`<br>
   Edit the 2nd task in the task manager into an event on 23 Oct 2016, 2pm to 4pm.
   
 <!-- @@author A0153723J -->
+
 #### Undoing previous commands : `undo`
 Undo previous commands that were executed.<br>
 Format: `undo`
@@ -177,6 +183,7 @@ Format: `undo`
   Only commands that changes data are included (`add`, `delete`, `clear`, `edit`, `complete`).
   
 <!-- @@author A0138704E -->
+
 #### Clearing tasks : `clear`
 Clears tasks from the task manager.<br>
 Additional options include: `/a`<br>
@@ -186,6 +193,7 @@ Format: `clear [OPTION]`
 > * `/a` : clears all tasks from the task manager.
 
 <!-- @@author A0153723J -->
+
 #### Specifying data storage location : `store`
 Specifies data storage location.<br>
 Format: `store [FILE_LOCATION]`
@@ -201,11 +209,13 @@ Examples:
   Displays a dialog box for user to browse for the storage location.
   
 <!-- @@author A0138704E -->
+
 #### Sorting tasks : `sort`
 Sorts data in the task book by order end date then name.<br>
 Format: `sort`
 
 <!-- @@author A0153658W -->
+
 #### Previous executed task : `[UP_ARROW_KEY]`
 Pulls up user's previous executed task, similar to bash shell functionality.<br>
 
@@ -213,6 +223,7 @@ Pulls up user's previous executed task, similar to bash shell functionality.<br>
 Brings up user's next executed task, if there exists one. <br>
 
 <!-- @@author A0153723J -->
+
 #### Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
@@ -222,6 +233,7 @@ Task book data are saved in the hard disk automatically after any command that c
 There is no need to save manually.
 
 <!-- @@author A0153658W -->
+
 ## FAQ
 **Q**: Can I run this on my Mac? <br>
 **A**: Currently the application does function on Mac operating systems. However, because SuperTasker is intended for Windows machines, there are minor issues with the storage command. The storage file path standards for Windows differs from the file path on Mac, so you will manually need to update your storage path via the CLI instead of the GUI window explorer. 
@@ -233,17 +245,18 @@ There is no need to save manually.
 **A**: Of course! This project is entirely open source and we welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
 <!-- @@author A0138704E -->
+
 ## Command Summary
 
 | Command | Format | Description |
 |----------|-------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | Help | `help` | View help on command usage |
-| Add | `add TASK_NAME [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Add a task |
-|  | `add write report` | Adds a to-do |
-|  | `add assignment 3 12-10-2016` | Adds a deadline due on 12 Oct 2016 |
-|  | `add assignment 3 12-10-2016 14:00` | Adds a deadline due on 12 Oct 2016, 2 pm |
-|  | `add consumer electronics fair 17-11-2016 20-11-2016` | Adds an event that starts from 17 Nov 2016 to 20 Nov 2016 |
-|  | `add meeting with John 01-10-2016 14:00 01-10-2016 16:00` | Adds an event on 1 Oct 2016 from 2 to 4 pm |
+| Add | `add "TASK_NAME" [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Add a task |
+|  | `add "write report"` | Adds a to-do |
+|  | `add "assignment 3" October 12th` | Adds a deadline due on 12 Oct 2016 |
+|  | `add "assignment 3" Oct 12th at 2pm` | Adds a deadline due on 12 Oct 2016, 2 pm |
+|  | `add "consumer electronics fair" Nov 17th to Nov 20th` | Adds an event that starts from 17 Nov 2016 to 20 Nov 2016 |
+|  | `add "meeting with John" Oct 1 2pm to 4pm` | Adds an event on 1 Oct 2016 from 2 to 4 pm |
 | Complete | `complete TASK_INDEX` | Set task as complete |
 |  | `list`<br>`complete 1` | Completes the 1st task in the filtered task list |
 | List | `list` | List tasks due today |
@@ -256,13 +269,13 @@ There is no need to save manually.
 |  | `find Highlight` | Returns any tasks having names `Highlight` or `highlight` |
 |  | `find product highlight showcase` | Returns any task having names `product`, `highlight`, or `showcase` |
 |  | `find high` | Returns any tasks having names that contains the word `high`, for e.g. `Highlight` or `higher` |
-| Edit | `edit TASK_INDEX [TASK_NAME] [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Edit a task |
-|  | `list`<br>`edit 2 business meeting with new client` | Edit the 2nd task in the task manager into a to-do task named `business meeting with new client` |
-|  | `list`<br>`edit 2 23-10-2016` | Edit the 2nd task in the task manager into a deadline due on 23 Oct 2016 |
-|  | `list`<br>`edit 2 23-10-2016 14:00` | Edit the 2nd task in the task manager into a deadline due on 23 Oct 2016, 2pm |
-|  | `list`<br>`edit 2 23-10-2016 24-10-2016` | Edit the 2nd task in the task manager into an event from 23 Oct 2016 to 24 Oct 2016 |
-|  | `list`<br>`edit 2 23-10-2016 14:00 25-10-2016 16:00` | Edit the 2nd task in the task manager into an event from 23 Oct 2016, 2pm to 25 Oct 2016, 4pm |
-|  | `list`<br>`edit 2 23-10-2016 14:00 23-10-2016 16:00` | Edit the 2nd task in the task manager into an event on 23 Oct 2016, 2pm to 4pm |
+| Edit | `edit TASK_INDEX ["TASK_NAME"] [START_DATE [START_TIME]] [END_DATE [END_TIME]]` | Edit a task |
+|  | `list`<br>`edit 2 "business meeting with new client"` | Edit the 2nd task in the task manager into a to-do task named `business meeting with new client` |
+|  | `list`<br>`edit 2 October 23rd` | Edit the 2nd task in the task manager into a deadline due on 23 Oct 2016 |
+|  | `list`<br>`edit 2 Oct 23rd at 2pm` | Edit the 2nd task in the task manager into a deadline due on 23 Oct 2016, 2pm |
+|  | `list`<br>`edit 2 Oct 23rd to Oct 24th` | Edit the 2nd task in the task manager into an event from 23 Oct 2016 to 24 Oct 2016 |
+|  | `list`<br>`edit 2 Oct 23 2pm to Oct 25 4pm` | Edit the 2nd task in the task manager into an event from 23 Oct 2016, 2pm to 25 Oct 2016, 4pm |
+|  | `list`<br>`edit 2 Oct 23 2pm to 4pm` | Edit the 2nd task in the task manager into an event on 23 Oct 2016, 2pm to 4pm |
 | Undo | `undo` | Undo previous commands |
 | Clear | `clear` | Clear completed tasks |
 |  | `clear /a` | Clear all tasks |

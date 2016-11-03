@@ -12,7 +12,7 @@ public class UndoCommandTest extends TaskBookGuiTest {
         commandBox.runCommand("list /a");
 
         // test undo for adding a task
-        commandBox.runCommand("add do laundry");
+        commandBox.runCommand("add \"do laundry\"");
         assertUndoCommandSuccess(String.format(UndoCommand.MESSAGE_UNDO_TASK_SUCCESS, "add do laundry"));
 
         // test undo for deleting a task
@@ -20,11 +20,11 @@ public class UndoCommandTest extends TaskBookGuiTest {
         assertUndoCommandSuccess(String.format(UndoCommand.MESSAGE_UNDO_TASK_SUCCESS, "delete 1"));
 
         // test undo for editing a floating task to deadline task
-        commandBox.runCommand("edit 1 10-10-2016");
+        commandBox.runCommand("edit 1 10 oct 5.30pm");
         assertUndoCommandSuccess(String.format(UndoCommand.MESSAGE_UNDO_TASK_SUCCESS, "edit 1 10-10-2016 17:30"));
 
         // test undo for editing a floating task to event task
-        commandBox.runCommand("edit 1 10-10-2016 20-10-2016");
+        commandBox.runCommand("edit 1 10 oct 2016 5.30pm to 20 oct 2016 5.30pm");
         assertUndoCommandSuccess(
                 String.format(UndoCommand.MESSAGE_UNDO_TASK_SUCCESS, "edit 1 10-10-2016 17:30 20-10-2016 17:30"));
 

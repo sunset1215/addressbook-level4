@@ -32,22 +32,6 @@ public enum TaskComparator implements Comparator<ReadOnlyTask> {
                 return -1;
             }
         }
-    },
-
-    START_DATE {
-        @Override
-        public int compare(ReadOnlyTask t1, ReadOnlyTask t2) {
-            if (!CollectionUtil.isAnyNull(t1.getStart(), t2.getStart())) {
-                int startDateResult = t1.getStart().compareTo(t2.getStart());
-                return startDateResult;
-            } else if (t1.getStart() == null && t2.getStart() == null) {
-                return 0;
-            } else if (t1.getStart() == null) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
     }
-    
+
 }

@@ -65,7 +65,7 @@ public class EditCommandTest extends TaskBookGuiTest {
     private void assertEditEventSuccess(TestTask[] currentList, int targetIndex, TestTask newTask) {
         TestUtil.replaceTaskFromList(currentList, newTask, targetIndex - 1);
         // run edit command
-        commandBox.runCommand("edit " + targetIndex + " " + newTask.getStart() + " " + newTask.getEnd());
+        commandBox.runCommand("edit " + targetIndex + " oct 10 3.30pm to oct 20 3.30pm");
         // confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_EDIT_TASK_SUCCESS,
                 newTask + " start from " + newTask.getStart() + " to " + newTask.getEnd()));

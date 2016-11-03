@@ -41,10 +41,10 @@ public class ListCommandTest extends TaskBookGuiTest {
 
         //setup expectations
         commandBox.runCommand("clear /a");
-        commandBox.runCommand("add test " + DateUtil.formatLocalDateTimeToString(today));
-        commandBox.runCommand("add exam " + DateUtil.formatLocalDateTimeToString(today));
-        commandBox.runCommand("add assignment " + DateUtil.formatLocalDateTimeToString(today));
-        commandBox.runCommand("add task not due today 31-10-2016 14:00");
+        commandBox.runCommand("add \"test\" " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add \"exam\" " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add \"assignment\" " + DateUtil.formatLocalDateTimeToString(today));
+        commandBox.runCommand("add \"task not due today\" 31-10-2016 14:00");
 
         assertListSuccess(todayList, "list", ListCommand.MESSAGE_LIST_TODAY_SUCCESS);
     }

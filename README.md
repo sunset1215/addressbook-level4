@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/CS2103AUG2016-T13-C1/main.svg?branch=master)](https://travis-ci.org/CS2103AUG2016-T13-C1/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103AUG2016-T13-C1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103AUG2016-T13-C1/main?branch=master)
-
+ 
 # Super Tasker
 
 <img src="docs/images/finalUI.PNG" width="600"><br>

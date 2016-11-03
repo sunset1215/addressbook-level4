@@ -3,7 +3,7 @@
 
 # Super Tasker
 
-<img src="docs/images/uiMockUp.png" width="600"><br>
+<img src="docs/images/finalUI.PNG" width="600"><br>
 
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).
@@ -33,6 +33,7 @@ Most of Jim’s todo items arrive as emails. This is how Jim processes his email
 #### Acknowledgements
 
 * The original source code is from SE-EDU initiative at https://github.com/se-edu/.
+* [Natty](https://github.com/joestelmach/natty)
 
 
 #### Licence : [MIT](LICENSE)

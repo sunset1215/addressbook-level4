@@ -3,9 +3,9 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-## Project Team ##
+## Project Team
 
-#### [Sean Zhang](http://github.com/puzzledsean) ####
+#### [Sean Zhang](http://github.com/puzzledsean) <br>
 <img src="images/SeanZhang.jpg" width="150"><br>
 
 <!-- @@author A0138704E -->
@@ -14,7 +14,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Features implemented:
    * [Edit tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#editing-a-task--edit)
    * [Undo command](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#undoing-the-last-command--undo)
-   * Pressing up/down keys will put up the previous/next command entered
+   * [Previous command](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#previous-executed-task--up_arrow_key)
 * Code written: [[functional code](../collated/main/A0153658W.md)][[test code](../collated/test/A0153658W.md)][[docs](../collated/docs/A0153658W.md)]
 * Other major contributions:
   * 
@@ -22,8 +22,9 @@ We are a team based in the [School of Computing, National University of Singapor
 <!-- @@author A0153723J -->
 -----
 
-#### [William Sean Hawken](http://github.com/torasian) ####
+#### [William Sean Hawken](http://github.com/torasian) <br>
 <img src="images/WilliamHawken.jpg" width="150"><br>
+
 <!-- @@author A0138704E -->
 * Components in charge of: [UI](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#ui-component)
 * Aspects/tools in charge of: 
@@ -37,8 +38,9 @@ We are a team based in the [School of Computing, National University of Singapor
 <!-- @@author A0153723J -->
 -----
 
-#### [Gabe Ghe](http://github.com/GabrielGhe) ####
+#### [Gabe Ghe](http://github.com/GabrielGhe) <br>
 <img src="images/GabeGhe.jpg" width="150"><br>
+
 <!-- @@author A0138704E -->
 * Components in charge of: [Logic](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#logic-component)
 * Aspects/tools in charge of: 
@@ -53,8 +55,9 @@ We are a team based in the [School of Computing, National University of Singapor
 <!-- @@author A0153723J -->
 -----
 
-#### [Vivian Low](http://github.com/sunset1215) ####
+#### [Vivian Low](http://github.com/sunset1215) <br>
 <img src="images/VivianLow.jpg" width="150"><br>
+
 <!-- @@author A0138704E -->
 * Components in charge of: [Storage](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#storage-component)
 * Aspects/tools in charge of: 
@@ -68,9 +71,9 @@ We are a team based in the [School of Computing, National University of Singapor
   * 
   
 <!-- @@author A0153723J -->
-## Project Mentor ##
+## Project Mentor
 
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy) <br>
+#### [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy) <br>
 <img src="images/AkshayNarayan.jpg" width="150"><br>
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.

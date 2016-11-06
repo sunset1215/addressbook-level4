@@ -97,13 +97,18 @@ Examples:
 
 #### Listing tasks : `list`
 Shows a list of tasks in the task manager.<br>
-Additional options include: `/a`, `/c`, `/p`<br>
+Additional options include: `/a`, `/c`, `/p`, `DATE`<br>
 Format: `list [OPTION]`
 
 > The default option shows a list of tasks due today.
 > * `/a` : Shows a list of all tasks in the task manager.
 > * `/c` : Shows a list of completed tasks.
 > * `/p` : Shows a list of pending tasks.
+> * `DATE`: Shows a list of tasks due on the given date.
+
+Example: 
+* `list 8 nov 2016`<br>
+  List tasks due on 8 Nov 2016.
 
 <!-- @@author A0153723J -->
 
@@ -260,9 +265,9 @@ Click on the list pending button positioned below the calendar, and pending task
 
 #### Status Bar Footer
 There are 3 status indicators at the bottom of the application window, namely
-* Sync status
-* Storage file location
-* Total tasks
+* Sync status (on the left)
+* Storage file location (in the middle)
+* Total tasks (on the right)
 
 Sync status shows the time of the last save done by the application.<br>
 Storage file location shows you where the data file is located.<br>
@@ -299,6 +304,7 @@ Total tasks displays the number of tasks that exists in the application currentl
 |  | `list /a` | List all tasks |
 |  | `list /c` | List completed tasks |
 |  | `list /p` | List pending tasks |
+|  | `list 8 nov 2016` | List tasks due on 8 Nov 2016 |
 | Delete | `delete TASK_INDEX` | Delete a task |
 |  | `list`<br>`delete 1` | Deletes the 1st task in the filtered task list |
 | Find | `find KEYWORD [MORE_KEYWORDS]` | Find all tasks containing any keywords |

@@ -3,157 +3,157 @@
     <tasks>
         <name>jump around</name>
         <startDate></startDate>
-        <endDate>11-04-2016 17:30</endDate>
+        <endDate>11 Apr 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>eat as many sweets as you can</name>
         <startDate></startDate>
-        <endDate>11-09-2016 12:00</endDate>
+        <endDate>11 Sep 2016 12:00</endDate>
         <status>Complete</status>
     </tasks>
     <tasks>
         <name>have lunch</name>
         <startDate></startDate>
-        <endDate>03-11-2016 13:00</endDate>
+        <endDate>3 Nov 2016 13:00</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>afternoon tea</name>
         <startDate></startDate>
-        <endDate>03-11-2016 15:00</endDate>
+        <endDate>3 Nov 2016 15:00</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>prepare for CS2103 demo</name>
         <startDate></startDate>
-        <endDate>03-11-2016 17:30</endDate>
+        <endDate>3 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>have dinner</name>
         <startDate></startDate>
-        <endDate>03-11-2016 19:00</endDate>
+        <endDate>3 Nov 2016 19:00</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>watch youtube videos</name>
         <startDate></startDate>
-        <endDate>04-11-2016 16:00</endDate>
+        <endDate>4 Nov 2016 16:00</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>bring umbrella</name>
         <startDate></startDate>
-        <endDate>04-11-2016 17:30</endDate>
+        <endDate>4 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>drink coffee</name>
         <startDate></startDate>
-        <endDate>04-11-2016 17:30</endDate>
+        <endDate>4 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>catch up on news</name>
         <startDate></startDate>
-        <endDate>05-11-2016 17:30</endDate>
+        <endDate>5 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>watch adventure time</name>
         <startDate></startDate>
-        <endDate>05-11-2016 17:30</endDate>
+        <endDate>5 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>get present for friends birthday</name>
         <startDate></startDate>
-        <endDate>07-11-2016 17:30</endDate>
+        <endDate>7 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>prepare for interview</name>
         <startDate></startDate>
-        <endDate>07-11-2016 17:30</endDate>
+        <endDate>7 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>buy more milk</name>
         <startDate></startDate>
-        <endDate>08-11-2016 17:00</endDate>
+        <endDate>8 Nov 2016 17:00</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>party time</name>
         <startDate></startDate>
-        <endDate>09-11-2016 17:30</endDate>
+        <endDate>9 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>final demo</name>
         <startDate></startDate>
-        <endDate>10-11-2016 17:30</endDate>
+        <endDate>10 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>go to the chinatown to eat</name>
         <startDate></startDate>
-        <endDate>10-11-2016 17:30</endDate>
+        <endDate>10 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>call parents</name>
         <startDate></startDate>
-        <endDate>12-11-2016 17:30</endDate>
+        <endDate>12 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>read to kill a mockingbird</name>
         <startDate></startDate>
-        <endDate>15-11-2016 17:30</endDate>
+        <endDate>15 Nov 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>go to airport</name>
         <startDate></startDate>
-        <endDate>05-12-2016 17:30</endDate>
+        <endDate>5 Dec 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>buy new laptop</name>
         <startDate></startDate>
-        <endDate>24-12-2016 15:00</endDate>
+        <endDate>24 Dec 2016 15:00</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>christmas day</name>
         <startDate></startDate>
-        <endDate>25-12-2016 17:30</endDate>
+        <endDate>25 Dec 2016 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>new years</name>
         <startDate>31-12-2016 17:30</startDate>
-        <endDate>01-01-2017 17:30</endDate>
+        <endDate>1 Jan 2017 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>birthday</name>
         <startDate></startDate>
-        <endDate>17-07-2017 17:30</endDate>
+        <endDate>17 July 2017 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>find out the meaning of life</name>
-        <startDate>10-11-2016 15:00</startDate>
-        <endDate>12-11-2017 15:00</endDate>
+        <startDate>10 Nov 2016 15:00</startDate>
+        <endDate>12 Nov 2017 15:00</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>listen to music</name>
         <startDate></startDate>
-        <endDate>15-12-2018 17:30</endDate>
+        <endDate>15 Dec 2018 17:30</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
@@ -249,31 +249,31 @@
     <tasks>
         <name>I wish we would get</name>
         <startDate></startDate>
-        <endDate>04-11-2016 12:45</endDate>
+        <endDate>4 Nov 2016 12:45</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>I wish we would get jobs at Google</name>
         <startDate></startDate>
-        <endDate>21-12-2016 12:46</endDate>
+        <endDate>21 Dec 2016 12:46</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>We got As for all our classes</name>
-        <startDate>03-11-2016 12:46</startDate>
-        <endDate>01-12-2016 12:46</endDate>
+        <startDate>3 Nov 2016 12:46</startDate>
+        <endDate>1 Dec 2016 12:46</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>Our internet company went IPO</name>
         <startDate></startDate>
-        <endDate>10-06-2017 12:47</endDate>
+        <endDate>10 Jun 2017 12:47</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
         <name>play chess with Bill Gates</name>
         <startDate></startDate>
-        <endDate>04-07-2018 12:47</endDate>
+        <endDate>4 Jul 2018 12:47</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>
@@ -291,7 +291,7 @@
     <tasks>
         <name>simple deadline</name>
         <startDate></startDate>
-        <endDate>04-11-2016 13:04</endDate>
+        <endDate>4 Nov 2016 13:04</endDate>
         <status>Pending</status>
     </tasks>
     <tasks>

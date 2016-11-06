@@ -32,9 +32,9 @@ public class EditCommandTest extends TaskBookGuiTest {
         newTask.setEndDate(new TaskDate(endDate));
         assertEditDeadlineSuccess(currentList, targetIndex, newTask);
         
-        // edit floating task to deadline task
+        // edit floating task to event task
         targetIndex = 2;
-        // create new deadline task
+        // create new event task
         newTask = new TestTask();
         LocalDateTime startDate = DateUtil.parseStringToLocalDateTime("10-10-2016 15:30");
         endDate = DateUtil.parseStringToLocalDateTime("20-10-2016 15:30");

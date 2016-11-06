@@ -40,9 +40,9 @@ public class UndoTaskStack {
      * 
      * @params callingCommand, addedTask
      * 
-     *         callingCommand will be "add" or "edit add" addedTask is the task
-     *         added targetIndex holds the index specified by the user that they
-     *         added
+     *         callingCommand will be "add"
+     *         addedTask is the task added 
+     *         targetIndex holds the index specified by the user that they added
      **/
     public void pushAddToUndoStack(String callingCommand, Task addedTask, int targetIndex) {
         previousActionType.push(callingCommand);
@@ -55,9 +55,9 @@ public class UndoTaskStack {
      * 
      * @params key, callingCommand, targetIndex
      * 
-     *         key is the task that the user deleted or edited callingCommand
-     *         will either be "delete" or "edit" targetIndex holds the index
-     *         specified by the user that they deleted or edited
+     *         key is the task that the user deleted 
+     *         callingCommand will be "delete" 
+     *         targetIndex holds the index specified by the user that they deleted or edited
      **/
     public void pushDeleteToUndoStack(ReadOnlyTask key, String callingCommand, int targetIndex) {
         previousActionType.push(callingCommand);
@@ -93,13 +93,13 @@ public class UndoTaskStack {
     }
 
     /**
-     * Pushes the delete command to the undo stack.
+     * Pushes the complete command to the undo stack.
      * 
      * @params taskToComplete, callingCommand, targetIndex
      * 
-     *         taskToComplete is the task marked for completion callingCommand
-     *         will be "complete" targetIndex holds the index specified by the
-     *         user to complete
+     *         taskToComplete is the task marked for completion 
+     *         callingCommand will be "complete" 
+     *         targetIndex holds the index specified by the user to complete
      **/
     public void pushCompleteToUndoStack(Task taskToComplete, String callingCommand, int targetIndex) {
         previousActionType.push(callingCommand);

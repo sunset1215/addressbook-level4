@@ -8,9 +8,11 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.task.commons.core.EventsCenter;
+import seedu.task.commons.core.Messages;
 import seedu.task.commons.events.model.TaskBookChangedEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
+import seedu.task.commons.util.DateUtil;
 import seedu.task.logic.Logic;
 import seedu.task.logic.LogicManager;
 import seedu.task.logic.commands.*;
@@ -136,18 +138,9 @@ public class LogicManagerTest {
         assertCommandBehavior("exit", ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
 
+    //@@author A0138704E
     @Test
-    public void execute_clear_optionAll() throws Exception {
-        TestDataHelper helper = new TestDataHelper();
-        model.addTask(helper.generateTask(1));
-        model.addTask(helper.generateTask(2));
-        model.addTask(helper.generateTask(3));
-
-        assertCommandBehavior("clear /a", ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS, new TaskBook(), Collections.emptyList());
-    }
-    
-    @Test
-    public void execute_clear_optionComplete_successful() throws Exception {
+    public void execute_clearCompleted_haveCompletedTasks() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         TaskBook expectedAB = new TaskBook();
@@ -167,33 +160,50 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_clear_optionComplete_fail() throws Exception {
-        // model only contains completed tasks from previous unit test
-        assertCommandBehavior("clear", ClearCommand.MESSAGE_CLEAR_COMPLETED_FAIL);
+    public void execute_clearCompleted_noCompletedTasks() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        TaskBook expectedAB = new TaskBook();
+        expectedAB.addTask(helper.generateTaskWithName("task 1"));
+        expectedAB.addTask(helper.generateTaskWithName("task 2"));
+        expectedAB.addTask(helper.generateTaskWithName("task 3"));
+        
+        model.addTask(helper.generateTaskWithName("task 1"));
+        model.addTask(helper.generateTaskWithName("task 2"));
+        model.addTask(helper.generateTaskWithName("task 3"));
+        
+        assertCommandBehavior("clear", ClearCommand.MESSAGE_CLEAR_COMPLETED_FAIL, expectedAB,
+                expectedAB.getTaskList());
     }
-
-
+    
+    @Test
+    public void execute_clearAll() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        model.addTask(helper.generateTaskWithName("task 1"));
+        model.addTask(helper.generateTaskWithName("task 2"));
+        model.addTask(helper.generateTaskWithName("task 3"));
+        model.addTask(helper.generateCompletedTaskWithName("task 4"));
+        model.addTask(helper.generateCompletedTaskWithName("task 5"));
+        model.addTask(helper.generateCompletedTaskWithName("task 6"));
+        
+        assertCommandBehavior("clear /a", ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS, new TaskBook(), Collections.emptyList());
+    }
+    
     @Test
     public void execute_add_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
-                "add Valid Name 13/10/2016", expectedMessage);
+                "add invalid command format", expectedMessage);
         assertCommandBehavior(
-                "add Valid Name 13-10-16", expectedMessage);
+                "add \"invalid name @#$%^&*\" today", expectedMessage);
     }
 
     @Test
-    public void execute_add_invalidTaskData() throws Exception {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        assertCommandBehavior(
-                "add []\\[;] 13-10-2016 08:00", expectedMessage);
-    }
-
-    @Test
-    public void execute_add_successful() throws Exception {
+    public void execute_addFloatingTask_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.meeting();
+        Task toBeAdded = helper.floatTask();
         TaskBook expectedAB = new TaskBook();
         expectedAB.addTask(toBeAdded);
 
@@ -204,12 +214,12 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
 
     }
-
+    //@@author 
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.meeting();
+        Task toBeAdded = helper.floatTask();
         TaskBook expectedAB = new TaskBook();
         expectedAB.addTask(toBeAdded);
 
@@ -222,11 +232,89 @@ public class LogicManagerTest {
                 AddCommand.MESSAGE_DUPLICATE_TASK,
                 expectedAB,
                 expectedAB.getTaskList());
-
     }
-
+    //@@author A0138704E
     @Test
-    public void execute_list_showsAllTasks() throws Exception {
+    public void execute_addDeadline_successful() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.deadline();
+        TaskBook expectedAB = new TaskBook();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded) + " today",
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_addEvent_successful() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.event();
+        TaskBook expectedAB = new TaskBook();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded) + " today to tomorrow",
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_editFloatingTask_successful() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeEdited = helper.floatTask();
+        Task afterEdit = helper.generateTaskWithName("I have a new name");
+        TaskBook expectedAB = new TaskBook();
+        expectedAB.addTask(afterEdit);
+        model.addTask(toBeEdited);
+
+        // execute command and verify result
+        assertCommandBehavior("edit 1 \"I have a new name\"",
+                String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, afterEdit),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_editInvalidIndex() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeEdited = helper.floatTask();
+        TaskBook expectedAB = new TaskBook();
+        expectedAB.addTask(toBeEdited);
+        model.addTask(toBeEdited);
+
+        // execute command and verify result
+        assertCommandBehavior("edit 100 \"I have a new name\"",
+                Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_editNullName() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeEdited = helper.floatTask();
+        TaskBook expectedAB = new TaskBook();
+        expectedAB.addTask(toBeEdited);
+        model.addTask(toBeEdited);
+
+        // execute command and verify result
+        assertCommandBehavior("edit 1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_listAll_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         TaskBook expectedAB = helper.generateTaskBook(2);
@@ -240,7 +328,7 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
-
+    //@@author
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
      * targeting a single task in the shown list, using visible index.
@@ -396,9 +484,22 @@ public class LogicManagerTest {
      */
     class TestDataHelper{
 
-        Task meeting() throws Exception {
-            Name name = new Name("meeting with John");
+        Task floatTask() throws Exception {
+            Name name = new Name("floating task");
             return new Task(name);
+        }
+        
+        Task deadline() throws Exception {
+            Name name = new Name("deadline");
+            TaskDate endDate = new TaskDate(DateUtil.getTodayAsLocalDateTime());
+            return new DeadlineTask(name, endDate);
+        }
+        
+        Task event() throws Exception {
+            Name name = new Name("deadline");
+            TaskDate startDate = new TaskDate(DateUtil.getTodayAsLocalDateTime());
+            TaskDate endDate = new TaskDate(DateUtil.getTodayAsLocalDateTime().plusDays(1));
+            return new EventTask(name, startDate, endDate);
         }
 
         /**
@@ -509,5 +610,6 @@ public class LogicManagerTest {
             task.setComplete();
             return task;
         }
+        
     }
 }

@@ -14,8 +14,8 @@ import seedu.task.model.task.TaskDate;
  */
 public class DateUtil {
     
-    public static final DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-    public static final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
+    public static final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
     
 	/**
      * Parses a String into a LocalDateTime

@@ -1,6 +1,8 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.task.logic.commands.CompleteCommand.MESSAGE_COMPLETE_TASK_SUCCESS;
 
 import org.junit.Test;
@@ -18,7 +20,14 @@ public class CompleteCommandTest extends TaskBookGuiTest {
     public void complete_invalidIndex() {
         commandBox.runCommand("list /a");
         commandBox.runCommand("complete " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid");
+        assertResultMessage(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+    
+    @Test
+    public void complete_invalidArgs() {
+        commandBox.runCommand("list /a");
+        commandBox.runCommand("complete");
+        assertResultMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE));
     }
     
     @Test
@@ -67,6 +76,6 @@ public class CompleteCommandTest extends TaskBookGuiTest {
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete));
+        assertResultMessage(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, taskToComplete.toString()));
     }
 }

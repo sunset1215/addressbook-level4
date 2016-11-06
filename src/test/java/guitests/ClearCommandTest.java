@@ -46,8 +46,8 @@ public class ClearCommandTest extends TaskBookGuiTest {
         commandBox.runCommand(completeCommand);
         commandBox.runCommand(completeCommand);
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+1);
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+2);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex + 1);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex + 2);
         currentList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
         
         commandBox.runCommand("clear");

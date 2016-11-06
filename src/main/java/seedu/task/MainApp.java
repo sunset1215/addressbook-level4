@@ -21,7 +21,6 @@ import seedu.task.ui.Ui;
 import seedu.task.ui.UiManager;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -61,11 +60,6 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
-    }
-
-    private String getApplicationParameter(String parameterName){
-        Map<String, String> applicationParameters = getParameters().getNamed();
-        return applicationParameters.get(parameterName);
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {

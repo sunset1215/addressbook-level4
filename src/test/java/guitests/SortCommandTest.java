@@ -36,11 +36,11 @@ public class SortCommandTest extends TaskBookGuiTest {
         TestTask test, exam, assignment, dinner, movie, meeting, movie2, meeting2;
         TestTask[] currentList = new TestTask[0];
         TaskDate today = new TaskDate(DateUtil.getTodayAsLocalDateTime());
-        TaskDate date1 = new TaskDate(DateUtil.parseStringToLocalDateTime("14-10-2016 15:00"));
-        TaskDate date2 = new TaskDate(DateUtil.parseStringToLocalDateTime("12-10-2016 16:00"));
-        TaskDate date3 = new TaskDate(DateUtil.parseStringToLocalDateTime("16-10-2016 14:00"));
-        TaskDate date4 = new TaskDate(DateUtil.parseStringToLocalDateTime("10-11-2016 12:00"));
-        TaskDate date5 = new TaskDate(DateUtil.parseStringToLocalDateTime("18-09-2016 10:00"));
+        TaskDate date1 = new TaskDate(DateUtil.parseStringToLocalDateTime("14 Oct 2016 15:00"));
+        TaskDate date2 = new TaskDate(DateUtil.parseStringToLocalDateTime("12 Oct 2016 16:00"));
+        TaskDate date3 = new TaskDate(DateUtil.parseStringToLocalDateTime("16 Oct 2016 14:00"));
+        TaskDate date4 = new TaskDate(DateUtil.parseStringToLocalDateTime("10 Nov 2016 12:00"));
+        TaskDate date5 = new TaskDate(DateUtil.parseStringToLocalDateTime("18 Sep 2016 10:00"));
 
         movie = new TaskBuilder().withName("movie").build();
         movie2 = new TaskBuilder().withName("another movie").build();

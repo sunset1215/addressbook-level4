@@ -7,6 +7,7 @@ import seedu.task.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.task.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
+import static seedu.task.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 public class DeleteCommandTest extends TaskBookGuiTest {
 
@@ -32,7 +33,7 @@ public class DeleteCommandTest extends TaskBookGuiTest {
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
-        assertResultMessage("The task index provided is invalid");
+        assertResultMessage(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
     }
 
@@ -51,7 +52,7 @@ public class DeleteCommandTest extends TaskBookGuiTest {
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        assertResultMessage(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.toString()));
     }
 
 }

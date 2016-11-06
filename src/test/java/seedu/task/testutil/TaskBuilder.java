@@ -24,6 +24,12 @@ public class TaskBuilder {
         this.task.setEndDate(date);
         return this;
     }
+    
+    public TaskBuilder withDates(TaskDate startDate, TaskDate endDate) {
+        this.task.setStartDate(startDate);
+        this.task.setEndDate(endDate);
+        return this;
+    }
 
     public TestTask build() {
         return this.task;

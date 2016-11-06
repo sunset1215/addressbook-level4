@@ -28,25 +28,35 @@ public class ListCommandTest extends TaskBookGuiTest {
     }
     
     @Test
-    public void list_today() throws IllegalValueException {
+    public void list_date() throws IllegalValueException {
         //build simple list with some tasks due today
-        TestTask test, exam, assignment;
+        TestTask test, exam, assignment, meeting, lunch;
         TestTask[] todayList = new TestTask[0];
+        TestTask[] tomorrowList = new TestTask[0];
         LocalDateTime today = DateUtil.getTodayAsLocalDateTime();
 
         test = new TaskBuilder().withName("test").withEndDate(new TaskDate(today)).build();
         exam = new TaskBuilder().withName("exam").withEndDate(new TaskDate(today)).build();
         assignment = new TaskBuilder().withName("assignment").withEndDate(new TaskDate(today)).build();
         todayList = TestUtil.addTasksToList(new TestTask[0], test, exam, assignment);
+        
+        LocalDateTime tomorrow = DateUtil.getTodayAsLocalDateTime().plusDays(1);
+        meeting = new TaskBuilder().withName("meeting").withEndDate(new TaskDate(tomorrow)).build();
+        lunch = new TaskBuilder().withName("lunch").withEndDate(new TaskDate(tomorrow)).build();
+        tomorrowList = TestUtil.addTasksToList(new TestTask[0], meeting, lunch);
 
         //setup expectations
         commandBox.runCommand("clear /a");
         commandBox.runCommand("add \"test\" today");
         commandBox.runCommand("add \"exam\" today");
         commandBox.runCommand("add \"assignment\" today");
-        commandBox.runCommand("add \"task not due today\" tomorrow");
+        commandBox.runCommand("add \"meeting\" tomorrow");
+        commandBox.runCommand("add \"lunch\" tomorrow");
 
         assertListSuccess(todayList, "list", ListCommand.MESSAGE_LIST_TODAY_SUCCESS);
+        assertListSuccess(tomorrowList, "list tomorrow", 
+                String.format(ListCommand.MESSAGE_LIST_DATE_SUCCESS, 
+                        DateUtil.formatLocalDateToString(tomorrow.toLocalDate())));
     }
 
     @Test
@@ -75,7 +85,7 @@ public class ListCommandTest extends TaskBookGuiTest {
     public void list_all() {
         assertListSuccess(currentList, "list /a", ListCommand.MESSAGE_LIST_ALL_SUCCESS);
     }
-
+    
     /**
      * Runs the list command to display tasks and confirms confirms the result is correct.
      * @param currentList A copy of the current list of tasks.

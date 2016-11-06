@@ -29,9 +29,9 @@ public class DateUtilTest {
     
     @Before
     public void setup() throws IllegalValueException {
-        validDateString = "23-10-2016";
-        invalidDateString = "23-30-2016";
-        validDateTimeString = "23-10-2016 " + DEFAULT_TIME;
+        validDateString = "23 Oct 2016";
+        invalidDateString = "46 Oct 2016";
+        validDateTimeString = "23 Oct 2016 " + DEFAULT_TIME;
         validTaskDate = new TaskDate(validDateTimeString);
         nullTaskDate = null;
     }

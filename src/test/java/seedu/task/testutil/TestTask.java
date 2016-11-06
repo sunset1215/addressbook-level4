@@ -37,17 +37,48 @@ public class TestTask implements ReadOnlyTask {
 
     @Override
     public String toString() {
-        return getAsText();
-    }
-
-    public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add \"" + this.getName().fullName + "\" ");
-        if (endDate != null) {
-            sb.append(endDate.toString() + " ");
+        sb.append(this.getName().fullName);
+        boolean hasStart = startDate != null;
+        boolean hasEnd = endDate != null;
+
+        if (hasStart && hasEnd) {
+            sb.append(" start from ");
+            sb.append(startDate.toString());
+            sb.append(" to ");
+            sb.append(endDate.toString());
+        } else if (hasEnd) {
+            sb.append(" due ");
+            sb.append(endDate.toString());
+        } else {
+            // do nothing here
         }
         return sb.toString();
     }
+
+    //@@author A0161247J
+    public String getAddCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add \"" + this.getName().fullName + "\" ");
+        boolean hasStart = startDate != null;
+        boolean hasEnd = endDate != null;
+
+        if (hasStart && hasEnd) {
+            sb.append(" on ");
+            sb.append(startDate.toString() + " ");
+            sb.append(" to ");
+            sb.append(endDate.toString());
+        } else if (hasStart || hasEnd) {
+            sb.append(" on ");
+            if (hasStart) {
+                sb.append(startDate.toString());
+            } else {
+                sb.append(endDate.toString());
+            }
+        }
+        return sb.toString();
+    }
+    //@@author
 
     @Override
     public TaskDate getStart() {

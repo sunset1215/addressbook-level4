@@ -28,8 +28,8 @@ public class XmlAdaptedTaskTest {
     @Before
     public void setup() throws IllegalValueException {
         name = new Name("test task");
-        taskStartDate = DateUtil.convertJaxbStringToTaskDate("12-10-2016 15:00");
-        taskEndDate = DateUtil.convertJaxbStringToTaskDate("14-10-2016 15:00");
+        taskStartDate = DateUtil.convertJaxbStringToTaskDate("12 Oct 2016 15:00");
+        taskEndDate = DateUtil.convertJaxbStringToTaskDate("14 Oct 2016 15:00");
         status = new Status(Status.STATUS_PENDING);
     }
     

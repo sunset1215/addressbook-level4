@@ -28,7 +28,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_LIST_ALL_SUCCESS = "Listed all tasks";
     public static final String MESSAGE_LIST_COMPLETE_SUCCESS = "Listed completed tasks";
     public static final String MESSAGE_LIST_PENDING_SUCCESS = "Listed pending tasks";
-    public static final String MESSAGE_LIST_FAIL = "Unknown option specified for list command";
+    public static final String MESSAGE_LIST_DATE_SUCCESS = "Listed tasks on %1$s";
 
     private String option;
 
@@ -61,9 +61,8 @@ public class ListCommand extends Command {
         default:
             LocalDate specifiedDate = DateUtil.parseStringToLocalDate(option);
             model.updateFilteredListByDate(specifiedDate);
-            return new CommandResult("Listed tasks on " + 
-                    DateUtil.formatLocalDateToString(specifiedDate));
-        }
-        
+            return new CommandResult(String.format(MESSAGE_LIST_DATE_SUCCESS, 
+                    DateUtil.formatLocalDateToString(specifiedDate)));
+        }   
     }
 }

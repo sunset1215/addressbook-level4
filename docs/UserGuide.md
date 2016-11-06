@@ -250,7 +250,7 @@ Click on the list all button positioned below the calendar, and all tasks will a
 Click on the list completed button positioned below the calendar, and completed tasks will appear.
  > <img src="images/ListCompletedExample.png" width="800">
  
- #### List Today's Tasks
+#### List Today's Tasks
 Click on the list pending button positioned below the calendar, and pending tasks will appear.
  > <img src="images/ListButtonExample.png" width="800">
 

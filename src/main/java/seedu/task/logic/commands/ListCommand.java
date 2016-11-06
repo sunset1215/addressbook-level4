@@ -1,5 +1,7 @@
 package seedu.task.logic.commands;
 
+import java.time.LocalDate;
+
 import seedu.task.commons.util.DateUtil;
 import seedu.task.model.task.Status;
 
@@ -57,9 +59,11 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_LIST_PENDING_SUCCESS);
             
         default:
-            assert false : "Parser should have eliminated invalid options";
+            LocalDate specifiedDate = DateUtil.parseStringToLocalDate(option);
+            model.updateFilteredListByDate(specifiedDate);
+            return new CommandResult("Listed tasks on " + 
+                    DateUtil.formatLocalDateToString(specifiedDate));
         }
         
-        return new CommandResult(MESSAGE_LIST_FAIL);
     }
 }

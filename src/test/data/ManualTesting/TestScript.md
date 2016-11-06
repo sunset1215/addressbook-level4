@@ -128,3 +128,11 @@
 |----------------------------------------------------|-----------------------------------------------------------------------|
 | sort | sorts tasks from earliest date to latest dates, sorted on End Date value |
 | srot | "Unknown command" appears in result diplay |
+
+#### Select
+
+| Command | Expected Result |
+|----------------------------------------------------|-----------------------------------------------------------------------|
+| select 50 | "Selected Task: 50" appears in result display and jumps to 50th task |
+| select 100 | "The task index provided is invalid" appears in result diplay |
+

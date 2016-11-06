@@ -2,6 +2,7 @@
 
 * [Quick Start](#quick-start)
 * [Features](#features)
+* [UI Features](#ui-features)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -232,19 +233,6 @@ Format: `exit`
 Task book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-<!-- @@author A0153658W -->
-
-## FAQ
-**Q**: Can I run this on my Mac? <br>
-**A**: Currently the application does function on Mac operating systems. However, because SuperTasker is intended for Windows machines, there are minor issues with the storage command. The storage file path standards for Windows differs from the file path on Mac, so you will manually need to update your storage path via the CLI instead of the GUI window explorer. 
-
-**Q**: Can I open my tasks on another computer? <br>
-**A**: To move your saved tasks to another computer, simply move the `taskbook.xml` file from your storage location to another new computer. From the new computer, run supertasker.jar and change the storage path to reference your copied `taskbook.xml`.
-
-**Q**: Can I contribute to this project? <br>
-**A**: Of course! This project is entirely open source and we welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
-
-<!-- @@author A0153723J -->
 ## UI Features
 #### List Tasks on a Specific Day using the calendar
 Click on a day on the calender and the respective task for that day will appear.
@@ -265,6 +253,18 @@ Click on the list completed button positioned below the calendar, and completed 
  #### List Today's Tasks
 Click on the list pending button positioned below the calendar, and pending tasks will appear.
  > <img src="images/ListButtonExample.png" width="800">
+
+<!-- @@author A0153658W -->
+
+## FAQ
+**Q**: Can I run this on my Mac? <br>
+**A**: Currently the application does function on Mac operating systems. However, because SuperTasker is intended for Windows machines, there are minor issues with the storage command. The storage file path standards for Windows differs from the file path on Mac, so you will manually need to update your storage path via the CLI instead of the GUI window explorer. 
+
+**Q**: Can I open my tasks on another computer? <br>
+**A**: To move your saved tasks to another computer, simply move the `taskbook.xml` file from your storage location to another new computer. From the new computer, run supertasker.jar and change the storage path to reference your copied `taskbook.xml`.
+
+**Q**: Can I contribute to this project? <br>
+**A**: Of course! This project is entirely open source and we welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
 <!-- @@author A0138704E -->
 

@@ -86,7 +86,9 @@ Format: `complete TASK_INDEX`
 
 > Sets the task at the specified `TASK_INDEX` as complete.<br>
   The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
+  The index **must be a positive integer** 1, 2, 3, ...<br>
+  Completed tasks are hidden immediately after the command is executed.
+  Completed tasks are highlighted in green.
   
 Examples: 
 * `list`<br>
@@ -236,23 +238,35 @@ There is no need to save manually.
 ## UI Features
 #### List Tasks on a Specific Day using the calendar
 Click on a day on the calender and the respective task for that day will appear.
- > <img src="images/CalendarExample.png" width="800">
+ > <img src="images/CalendarExample.png" width="600">
  
 #### List Today's Tasks
 Click on the list button positioned below the calendar, and all of today's tasks will appear.
- > <img src="images/ListButtonExample.png" width="800">
+ > <img src="images/ListTodayExample.PNG" width="600">
  
 #### List all the tasks
 Click on the list all button positioned below the calendar, and all tasks will appear.
- > <img src="images/ListAllExample.png" width="800"> 
+ > <img src="images/ListAllExample.png" width="600"> 
 
 #### List Completed Tasks
 Click on the list completed button positioned below the calendar, and completed tasks will appear.
- > <img src="images/ListCompletedExample.png" width="800">
+ > <img src="images/ListCompletedExample.png" width="600">
  
-#### List Today's Tasks
+#### List Pending Tasks
 Click on the list pending button positioned below the calendar, and pending tasks will appear.
- > <img src="images/ListButtonExample.png" width="800">
+ > <img src="images/ListPendingExample.png" width="600">
+
+<!-- @@author A0138704E -->
+
+#### Status Bar Footer
+There are 3 status indicators at the bottom of the application window, namely
+* Sync status
+* Storage file location
+* Total tasks
+
+Sync status shows the time of the last save done by the application.<br>
+Storage file location shows you where the data file is located.<br>
+Total tasks displays the number of tasks that exists in the application currently.
 
 <!-- @@author A0153658W -->
 

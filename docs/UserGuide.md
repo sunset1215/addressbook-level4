@@ -244,6 +244,28 @@ There is no need to save manually.
 **Q**: Can I contribute to this project? <br>
 **A**: Of course! This project is entirely open source and we welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
+<!-- @@author A0153723J -->
+## UI Features
+#### List Tasks on a Specific Day using the calendar
+Click on a day on the calender and the respective task for that day will appear.
+ > <img src="images/CalendarExample.PNG" width="800">
+ 
+#### List Today's Tasks
+Click on the list button positioned below the calendar, and all of today's tasks will appear.
+ > <img src="images/ListButtonExample.PNG" width="800">
+ 
+#### List all the tasks
+Click on the list all button positioned below the calendar, and all tasks will appear.
+ > <img src="images/ListAllExample.PNG" width="800"> 
+
+#### List Completed Tasks
+Click on the list completed button positioned below the calendar, and completed tasks will appear.
+ > <img src="images/ListCompletedExample.PNG" width="800">
+ 
+ #### List Today's Tasks
+Click on the list pending button positioned below the calendar, and pending tasks will appear.
+ > <img src="images/ListButtonExample.PNG" width="800">
+
 <!-- @@author A0138704E -->
 
 ## Command Summary

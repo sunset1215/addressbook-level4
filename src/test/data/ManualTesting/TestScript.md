@@ -49,6 +49,9 @@
 | list pending| "Invalid command format!" appears in the result diplay|
 | list completed | "Invalid command format!" appears in the result diplay|
 | list today |  "Listed tasks on [current date]" appears in the result diplay |
+| list Sept 3 |  "Listed tasks on 03-09-2016" appears in the result diplay |
+| list Nov 7 |  "Listed tasks on 07-11-2016" appears in the result diplay |
+
 
 ### Type "list /a" to show all tasks or click on the "List All" button
 #### Deleting tasks

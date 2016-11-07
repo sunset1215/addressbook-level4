@@ -9,7 +9,7 @@
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e--product-survey)
+* [Appendix E: Product Survey](#appendix-e--product-survey)
 
 
 ## Setting up
@@ -82,7 +82,7 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.PNG" width="800"><br>
 
@@ -226,7 +226,7 @@ We have two types of tests:
      (those code units are assumed to be working).<br>
       e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as 
-      how the are connected together.<br>
+      how they are connected together.<br>
       e.g. `seedu.task.logic.LogicManagerTest`
   
 **Headless GUI Testing** :
@@ -288,8 +288,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a task | get rid of tasks that I no longer care to track. 
 `* * *` | user | edit a task | update the details of that specific task
 `* * *` | user | search my tasks | find an item that I’m looking for in an easier manner
-`* *` | user | list tasks | see what tasks I have to complete or have already completed
-`* *` | user | undo the last command | go back to the previous state
+`* *` | user | list tasks | see upcoming tasks or completed tasks
+`* *` | user | undo the last command | undo my last action
 `* *` | user | specify storage location | choose where to store the data
 `* *` | user | mark tasks as complete | track tasks that have already been done
 `* *` | user | sort my tasks | organize my tasks in some way
@@ -329,7 +329,7 @@ Use case ends.
 1. User requests to list tasks or find tasks.
 2. System displays list of tasks.
 3. User requests to set a task in the list as complete.
-4. System notifies user that the task is set as complete successfully.
+4. System notifies user that the task is set as complete successfully.<br>
 Use case ends.
 
 **Extensions**
@@ -408,6 +408,8 @@ Use case ends.
 2. System displays list of tasks due today.<br>
 Use case ends.
 
+**Extensions**
+
 1a. User requests to list all tasks.
 
 > 1a1. System displays list of all tasks.
@@ -446,7 +448,8 @@ Use case ends.
 **MSS**
 
 1. User wants to bring up previous command without having to retype command
-2. System brings up user's previous command. Use case ends.
+2. System brings up user's previous command.<br>
+Use case ends.
 
 **Extensions**
 
@@ -458,7 +461,8 @@ Use case ends.
 **MSS**
 
 1. User wants to bring up next command, after going through `n` previous commands, where `n` is the number of previous commands the user brought up.
-2. System brings up user's next command. Use case ends.
+2. System brings up user's next command.<br>
+Use case ends.
 
 **Extensions**
 
@@ -480,7 +484,7 @@ Use case ends.
 
 1a. Storage location does not exist
 
-> 1a1. System notifies user that the the storage location does not exist.
+> 1a1. System notifies user that the storage location does not exist.
 
 
 ## Appendix C : Non Functional Requirements
@@ -582,7 +586,7 @@ Use case ends.
 
 <!-- @@author A0153658W -->
 
-### Our SuperTasker App
+### SuperTasker (Our application)
 Given the strengths and weaknesses of these apps that we've surveyed, our app solves several of these issues:
 
 **Strengths**<br>

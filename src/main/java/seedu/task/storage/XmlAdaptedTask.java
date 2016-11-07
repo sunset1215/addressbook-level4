@@ -68,7 +68,6 @@ public class XmlAdaptedTask {
 	 * Returns an EventTask if both start and end date are given.
 	 * Returns a DeadlineTask if only end date is given.
 	 * Returns a Task if only name is given.
-	 * @param taskStatus 
 	 */
 	private Task createTaskFromGivenArgs(Name name, TaskDate taskStartDate, TaskDate taskEndDate, Status taskStatus) {
 	    if (isEventTask(taskStartDate, taskEndDate)) {

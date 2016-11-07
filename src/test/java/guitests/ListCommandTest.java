@@ -54,7 +54,8 @@ public class ListCommandTest extends TaskBookGuiTest {
         commandBox.runCommand("add \"lunch\" tomorrow");
 
         assertListSuccess(todayList, "list", ListCommand.MESSAGE_LIST_TODAY_SUCCESS);
-        assertListSuccess(tomorrowList, "list tomorrow", 
+        assertListSuccess(tomorrowList, 
+                "list tomorrow", 
                 String.format(ListCommand.MESSAGE_LIST_DATE_SUCCESS, 
                         DateUtil.formatLocalDateToString(tomorrow.toLocalDate())));
     }
@@ -69,8 +70,8 @@ public class ListCommandTest extends TaskBookGuiTest {
         commandBox.runCommand(completeCommand);
         commandBox.runCommand(completeCommand);
         currentList = TestUtil.completeTaskFromList(currentList, targetIndex);
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+1);
-        currentList = TestUtil.completeTaskFromList(currentList, targetIndex+2);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex + 1);
+        currentList = TestUtil.completeTaskFromList(currentList, targetIndex + 2);
 
         //list completed tasks
         TestTask[] completedList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_COMPLETE);

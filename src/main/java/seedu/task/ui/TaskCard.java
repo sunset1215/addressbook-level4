@@ -47,6 +47,7 @@ public class TaskCard extends UiPart{
         return UiPartLoader.loadUiPart(card);
     }
 
+    //@@author A0138704E
     @FXML
     public void initialize() {
         name.setText(task.getName().fullName);
@@ -78,6 +79,7 @@ public class TaskCard extends UiPart{
             return prefix + " " + strDate;
         }
     }
+    //@@author
     
     public HBox getLayout() {
         return cardPane;

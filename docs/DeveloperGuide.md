@@ -154,16 +154,21 @@ The `Model`,
 * does not depend on any of the other three components.
 * maintains an `UndoTaskStack` that keeps track of each action that the user performs
 
+<!-- @@author A0138704E -->
+
 ### Storage component
 
 <img src="images/StorageClassDiagram.PNG" width="800"><br>
-<!-- @@author -->
 
 **API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the TaskBook data in xml format and read it back.
+
+`Task` objects are converted into `XmlAdaptedTask` for JAXB use and broken down into xml format for storage.
+
+<!-- @@author -->
 
 ### Common classes
 

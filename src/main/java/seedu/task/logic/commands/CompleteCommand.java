@@ -9,7 +9,7 @@ import seedu.task.model.task.UniqueTaskList.TaskNotFoundException;
 
 //@@author A0138704E
 /**
- * Completes a task identified using it's last displayed index from the task list.
+ * Completes a task identified using its last displayed index from the task list.
  */
 public class CompleteCommand extends Command {
 

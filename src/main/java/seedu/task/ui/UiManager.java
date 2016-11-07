@@ -25,6 +25,7 @@ import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
 import seedu.task.commons.util.DateUtil;
 import seedu.task.commons.util.StringUtil;
 import seedu.task.logic.Logic;
+import seedu.task.logic.commands.ListCommand;
 import seedu.task.model.UserPrefs;
 
 import java.io.File;
@@ -138,17 +139,17 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().refresh();
     }
-    
+    //@@author A0153723J
     /**
      * Display a message when a date on the calendar selected
      */
     @Subscribe
     private void handleDatePickedOnCalendarEvent(DatePickedOnCalendarEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getResultDisplay().postMessage("Listed tasks due on " 
-                                            + DateUtil.formatLocalDateToString(event.date));
+        mainWindow.getResultDisplay().postMessage(String.format(ListCommand.MESSAGE_LIST_DATE_SUCCESS, 
+                        DateUtil.formatLocalDateToString(event.date)));
     }
-    //@@author A0153723J
+    
     @Subscribe
     private void handleListCompleteEvent(ListCompleteButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

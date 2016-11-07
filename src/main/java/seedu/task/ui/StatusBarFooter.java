@@ -44,6 +44,7 @@ public class StatusBarFooter extends UiPart {
         return statusBarFooter;
     }
 
+    //@@author A0138704E
     public void configure(String saveLocation, int numberOfTasks) {
         addMainPane();
         setSyncStatus(" Not updated yet in this session");
@@ -51,20 +52,21 @@ public class StatusBarFooter extends UiPart {
         setNumberOfTasksStatus(numberOfTasks);
         registerAsAnEventHandler(this);
     }
-
+    //@@author
     private void addMainPane() {
         FxViewUtil.applyAnchorBoundaryParameters(mainPane, 0.0, 0.0, 0.0, 0.0);
         placeHolder.getChildren().add(mainPane);
     }
     
+    //@@author A0138704E
     private void setSaveLocation(String location) {
         this.saveLocationStatus.setText(FileUtil.getFormattedPath(location));
     }
-
+    
     private void setNumberOfTasksStatus(int numberOfTasks) {
         this.numberOfTasksStatus.setText("Total no. of tasks = " + numberOfTasks + " ");
     }
-
+    //@@author
     private void setSyncStatus(String status) {
         this.syncStatus.setText(status);
     }

@@ -10,11 +10,11 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <!-- @@author A0138704E -->
 * Components in charge of: [Model](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#model-component)
-* Aspects/tools in charge of: 
+* Aspects/tools in charge of: Integration
 * Features implemented:
    * [Edit tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#editing-a-task--edit)
    * [Undo command](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#undoing-the-last-command--undo)
-   * [Previous command](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#previous-executed-task--up_arrow_key)
+   * [User commmand log](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#previous-executed-task--up_arrow_key)
 * Code written: [[functional code](../collated/main/A0153658W.md)][[test code](../collated/test/A0153658W.md)][[docs](../collated/docs/A0153658W.md)]
 * Other major contributions:
   * 
@@ -27,11 +27,11 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <!-- @@author A0138704E -->
 * Components in charge of: [UI](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#ui-component)
-* Aspects/tools in charge of: 
+* Aspects/tools in charge of: Documentation
 * Features implemented:
    * [Change storage location](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#specifying-data-storage-location--store)
    * [Calendar](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#list-tasks-on-a-specific-day-using-the-calendar)
-   * [List command - UI version](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#list-todays-tasks)
+   * [List commands - UI version](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#list-todays-tasks)
 * Code written: [[functional code](../collated/main/A0153723J.md)][[test code](../collated/test/A0153723J.md)][[docs](../collated/docs/A0153723J.md)]
 * Other major contributions:
   * 
@@ -44,7 +44,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <!-- @@author A0138704E -->
 * Components in charge of: [Logic](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#logic-component)
-* Aspects/tools in charge of: 
+* Aspects/tools in charge of: Code Quality
 * Features implemented:
    * [Find tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#finding-all-tasks-containing-any-keyword-in-their-name--find)
    * [Add tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#adding-a-task--add)
@@ -61,7 +61,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <!-- @@author A0138704E -->
 * Components in charge of: [Storage](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#storage-component)
-* Aspects/tools in charge of: Testing
+* Aspects/tools in charge of: Team Lead, Testing
 * Features implemented:
    * [Clear tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#clearing-tasks--clear)
    * [List tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#listing-tasks--list)

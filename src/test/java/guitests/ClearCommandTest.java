@@ -16,7 +16,7 @@ public class ClearCommandTest extends TaskBookGuiTest {
     private TestTask[] emptyList = new TestTask[0];
     
     @Test
-    public void clearAll_nonEmptyList() {
+    public void clearAll_nonEmptyList_success() {
         //verify a non-empty list can be cleared
         commandBox.runCommand("list /a");
         currentList = TestUtil.removeTasksFromList(currentList, td.getTypicalTasks());
@@ -31,13 +31,13 @@ public class ClearCommandTest extends TaskBookGuiTest {
     }
     
     @Test
-    public void clearAll_emptyList() {
+    public void clearAll_emptyList_success() {
         commandBox.runCommand("clear /a");
         assertClearCommandSuccess(emptyList, ClearCommand.MESSAGE_CLEAR_ALL_SUCCESS);
     }
     
     @Test
-    public void clearCompleted_nonEmptyList() {
+    public void clearCompleted_nonEmptyList_success() {
         commandBox.runCommand("list /a");
         //complete the first 3 tasks in the list
         int targetIndex = 1;
@@ -55,7 +55,7 @@ public class ClearCommandTest extends TaskBookGuiTest {
     }
     
     @Test
-    public void clearCompleted_emptyList() {
+    public void clearCompleted_noCompletedTasksFound_fail() {
         commandBox.runCommand("clear");
         assertClearCommandSuccess(emptyList, ClearCommand.MESSAGE_CLEAR_COMPLETED_FAIL);
     }

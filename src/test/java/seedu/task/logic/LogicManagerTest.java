@@ -23,6 +23,7 @@ import seedu.task.model.TaskBook;
 import seedu.task.model.task.*;
 import seedu.task.storage.StorageManager;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -314,6 +315,53 @@ public class LogicManagerTest {
     }
     
     @Test
+    public void execute_listDefault_showsTasksDueToday() throws Exception {
+        // prepare expectations
+        LocalDateTime today = DateUtil.getTodayAsLocalDateTime();
+        LocalDateTime tomorrow = DateUtil.getTodayAsLocalDateTime().plusDays(1);
+        TestDataHelper helper = new TestDataHelper();
+        Task test, exam, meeting, lunch;
+        test = helper.generateDeadlineWithName("test", today);
+        exam = helper.generateDeadlineWithName("exam", today);
+        meeting = helper.generateDeadlineWithName("meeting", tomorrow);
+        lunch = helper.generateDeadlineWithName("lunch", tomorrow);
+        TaskBook expectedAB = helper.generateTaskBook(test, exam, meeting, lunch);
+        List<? extends ReadOnlyTask> expectedList = helper.generateTaskList(test, exam);
+        
+        helper.addToModel(model, test, exam, meeting, lunch);
+
+        // execute command and verify result
+        assertCommandBehavior("list",
+                ListCommand.MESSAGE_LIST_TODAY_SUCCESS,
+                expectedAB,
+                expectedList);
+    }
+    
+    @Test
+    public void execute_listDate_showsTasksOnSpecifiedDate() throws Exception {
+        // prepare expectations
+        LocalDateTime today = DateUtil.getTodayAsLocalDateTime();
+        LocalDateTime tomorrow = DateUtil.getTodayAsLocalDateTime().plusDays(1);
+        TestDataHelper helper = new TestDataHelper();
+        Task test, exam, meeting, lunch;
+        test = helper.generateDeadlineWithName("test", today);
+        exam = helper.generateDeadlineWithName("exam", today);
+        meeting = helper.generateDeadlineWithName("meeting", tomorrow);
+        lunch = helper.generateDeadlineWithName("lunch", tomorrow);
+        TaskBook expectedAB = helper.generateTaskBook(test, exam, meeting, lunch);
+        List<? extends ReadOnlyTask> expectedList = helper.generateTaskList(meeting, lunch);
+        
+        helper.addToModel(model, test, exam, meeting, lunch);
+
+        // execute command and verify result
+        assertCommandBehavior("list tomorrow",
+                String.format(ListCommand.MESSAGE_LIST_DATE_SUCCESS, 
+                        DateUtil.formatLocalDateToString(tomorrow.toLocalDate())),
+                expectedAB,
+                expectedList);
+    }
+    
+    @Test
     public void execute_listAll_showsAllTasks() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
@@ -527,7 +575,7 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an TaskBook with auto-generated tasks.
+         * Generates a TaskBook with auto-generated tasks.
          */
         TaskBook generateTaskBook(int numGenerated) throws Exception{
             TaskBook taskBook = new TaskBook();
@@ -536,11 +584,22 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates an TaskBook based on the list of Tasks given.
+         * Generates a TaskBook based on the list of Tasks given.
          */
         TaskBook generateTaskBook(List<Task> tasks) throws Exception{
             TaskBook taskBook = new TaskBook();
             addToTaskBook(taskBook, tasks);
+            return taskBook;
+        }
+        
+        /**
+         * Generates a TaskBook based on Tasks given
+         */
+        TaskBook generateTaskBook(Task... tasks) throws Exception{
+            TaskBook taskBook = new TaskBook();
+            for (Task t : tasks) {
+                taskBook.addTask(t);
+            }
             return taskBook;
         }
 
@@ -577,6 +636,15 @@ public class LogicManagerTest {
                 model.addTask(p);
             }
         }
+        
+        /**
+         * Adds the given Tasks to the given model
+         */
+        void addToModel(Model model, Task... tasksToAdd) throws Exception{
+            for(Task t: tasksToAdd){
+                model.addTask(t);
+            }
+        }
 
         /**
          * Generates a list of Tasks based on the flags.
@@ -609,6 +677,16 @@ public class LogicManagerTest {
             Task task = new Task(new Name(name));
             task.setComplete();
             return task;
+        }
+        
+        /**
+         * Generates a Task object with given name. Other fields will have some dummy values.
+         */
+        Task generateDeadlineWithName(String name, LocalDateTime date) throws Exception {
+            return new DeadlineTask(
+                    new Name(name),
+                    new TaskDate(date)
+            );
         }
         
     }

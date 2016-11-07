@@ -308,7 +308,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            return DateUtil.isEqual(task.getEnd(), date);
+            if (task.getEnd() == null) {
+                return false;
+            } else {
+                return DateUtil.isEqual(task.getEnd().getTaskDate().toLocalDate(), date);
+            }
         }
 
         @Override
@@ -349,7 +353,5 @@ public class ModelManager extends ComponentManager implements Model {
     	logger.info(LogsCenter.getEventHandlingLogMessage(event));
     	updateFilteredListByStatus(Status.STATUS_COMPLETE);
     }
-
-
 
 }

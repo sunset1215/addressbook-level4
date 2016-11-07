@@ -26,7 +26,6 @@ public class DateUtilTest {
     private TaskDate validTaskDate;
     private TaskDate nullTaskDate;
     
-    
     @Before
     public void setup() throws IllegalValueException {
         validDateString = "23 Oct 2016";
@@ -89,17 +88,14 @@ public class DateUtilTest {
     @Test
     public void isEqual_argsHaveSameDate_returnTrue() {
         LocalDate validLocalDate = LocalDate.parse(validDateString, DateUtil.localDateFormatter);
-        assertTrue("Both dates should be equal", DateUtil.isEqual(validTaskDate, validLocalDate));
+        assertTrue("Both dates should be equal", 
+                DateUtil.isEqual(validTaskDate.getTaskDate().toLocalDate(), validLocalDate));
     }
     
     @Test
     public void isEqual_argsDoNotHaveSameDate_returnFalse() {
-        assertFalse("Both dates should not be equal", DateUtil.isEqual(validTaskDate, DateUtil.getTodayAsLocalDate()));
-    }
-    
-    @Test
-    public void isEqual_taskDateIsNull_returnFalse() {
-        assertFalse("Both dates should not be equal", DateUtil.isEqual(nullTaskDate, DateUtil.getTodayAsLocalDate()));
+        assertFalse("Both dates should not be equal", 
+                DateUtil.isEqual(validTaskDate.getTaskDate().toLocalDate(), DateUtil.getTodayAsLocalDate()));
     }
     
 }

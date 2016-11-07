@@ -79,14 +79,10 @@ public class DateUtil {
     }
     
     /**
-     * Returns true if a taskDate falls on the same day as the given local date
+     * Returns true if a given dates fall on the same day, irregardless of time
      */
-    public static boolean isEqual(TaskDate taskDate, LocalDate date) {
-        if (taskDate == null) {
-            return false;
-        }
-        LocalDate ldOfTaskDate = taskDate.getTaskDate().toLocalDate();
-        return ldOfTaskDate.isEqual(date);
+    public static boolean isEqual(LocalDate date1, LocalDate date2) {
+        return date1.isEqual(date2);
     }
     
     /**

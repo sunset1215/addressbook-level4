@@ -31,21 +31,19 @@ public class ClearCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         
-        if (option.isEmpty()) {
-            try {
-                model.clearCompletedTasks();
-            } catch (NoCompletedTasksFoundException e) {
-                return new CommandResult(MESSAGE_CLEAR_COMPLETED_FAIL);
-            } catch (TaskNotFoundException e) {
-                return new CommandResult(Messages.MESSAGE_TASK_NOT_FOUND);
-            }
-            return new CommandResult(MESSAGE_CLEAR_COMPLETED_SUCCESS);
-        }
         try {
-            model.clearAllTasks();
-        } catch (TaskNotFoundException e) {
+            if (option.isEmpty()) {
+                model.clearCompletedTasks();
+                return new CommandResult(MESSAGE_CLEAR_COMPLETED_SUCCESS);
+            } else {
+                model.clearAllTasks();
+                return new CommandResult(MESSAGE_CLEAR_ALL_SUCCESS);
+            }
+        } catch (NoCompletedTasksFoundException nctfe) {
+            return new CommandResult(MESSAGE_CLEAR_COMPLETED_FAIL);
+        } catch (TaskNotFoundException tnfe) {
             return new CommandResult(Messages.MESSAGE_TASK_NOT_FOUND);
         }
-        return new CommandResult(MESSAGE_CLEAR_ALL_SUCCESS);
+        
     }
 }

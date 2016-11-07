@@ -1,52 +1,82 @@
+<!-- @@author A0153723J -->
 # About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
-**Role**: Project Advisor
+#### [Sean Zhang](http://github.com/puzzledsean) <br>
+<img src="images/SeanZhang.jpg" width="150"><br>
 
+<!-- @@author A0138704E -->
+* Components in charge of: [Model](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#model-component)
+* Aspects/tools in charge of: Integration
+* Features implemented:
+   * [Edit tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#editing-a-task--edit)
+   * [Undo command](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#undoing-the-last-command--undo)
+   * [User commmand log](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#previous-executed-task--up_arrow_key)
+* Code written: [[functional code](../collated/main/A0153658W.md)][[test code](../collated/test/A0153658W.md)][[docs](../collated/docs/A0153658W.md)]
+* Other major contributions:
+  * 
+  
+<!-- @@author A0153723J -->
 -----
 
-#### [Joshua Lee](http://github.com/lejolly)
-<img src="images/JoshuaLee.jpg" width="150"><br>
-Role: Developer <br>  
-Responsibilities: UI
+#### [William Sean Hawken](http://github.com/torasian) <br>
+<img src="images/WilliamHawken.jpg" width="150"><br>
 
+<!-- @@author A0138704E -->
+* Components in charge of: [UI](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#ui-component)
+* Aspects/tools in charge of: Documentation
+* Features implemented:
+   * [Change storage location](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#specifying-data-storage-location--store)
+   * [Calendar](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#list-tasks-on-a-specific-day-using-the-calendar)
+   * [List commands - UI version](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#list-todays-tasks)
+* Code written: [[functional code](../collated/main/A0153723J.md)][[test code](../collated/test/A0153723J.md)][[docs](../collated/docs/A0153723J.md)]
+* Other major contributions:
+  * 
+  
+<!-- @@author A0153723J -->
 -----
 
-#### [Leow Yijin](http://github.com/yijinl) 
-<img src="images/LeowYijin.jpg" width="150"><br>
-Role: Developer <br>  
-Responsibilities: Data
+#### [Gabe Ghe](http://github.com/GabrielGhe) <br>
+<img src="images/GabeGhe.jpg" width="150"><br>
 
+<!-- @@author A0138704E -->
+* Components in charge of: [Logic](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#logic-component)
+* Aspects/tools in charge of: Code Quality
+* Features implemented:
+   * [Find tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#finding-all-tasks-containing-any-keyword-in-their-name--find)
+   * [Add tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#adding-a-task--add)
+* Code written: [[functional code](../collated/main/A0161247J.md)][[test code](../collated/test/A0161247J.md)][[docs](../collated/docs/A0161247J.md)]
+* Other major contributions:
+  * Setup Natty
+  * Parser support for multiple commands
+  * Did the initial refactoring of the project
+  
+<!-- @@author A0153723J -->
 -----
 
-#### [Martin Choo](http://github.com/m133225)
-<img src="images/MartinChoo.jpg" width="150"><br>
-Role: Developer <br>  
-Responsibilities: Dev Ops
+#### [Vivian Low](http://github.com/sunset1215) <br>
+<img src="images/VivianLow.jpg" width="150"><br>
 
------
+<!-- @@author A0138704E -->
+* Components in charge of: [Storage](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/DeveloperGuide.md#storage-component)
+* Aspects/tools in charge of: Team Lead, Testing
+* Features implemented:
+   * [Clear tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#clearing-tasks--clear)
+   * [List tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#listing-tasks--list)
+   * [Complete tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#set-task-as-complete--complete)
+   * [Sort tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#sorting-tasks--sort)
+   * [Status bar footer - Total tasks](https://github.com/CS2103AUG2016-T13-C1/main/blob/master/docs/UserGuide.md#status-bar-footer)
+* Code written: [[functional code](../collated/main/A0138704E.md)][[test code](../collated/test/A0138704E.md)][[docs](../collated/docs/A0138704E.md)]
+* Other major contributions:
+  * Wrote majority of the test code
+  
+<!-- @@author A0153723J -->
+## Project Mentor
 
-#### [Thien Nguyen](https://github.com/ndt93)
- Role: Developer <br>  
- Responsibilities: Threading
- 
- -----
-
-#### [You Liang](http://github.com/yl-coder) 
-<img src="images/YouLiang.jpg" width="150"><br>
- Role: Developer <br>  
- Responsibilities: UI
- 
- -----
-
-# Contributors
+#### [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy) <br>
+<img src="images/AkshayNarayan.jpg" width="150"><br>
 
 We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
-
-* [Akshay Narayan](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Aokkhoy)
-* [Sam Yong](https://github.com/se-edu/addressbook-level4/pulls?q=is%3Apr+author%3Amauris)

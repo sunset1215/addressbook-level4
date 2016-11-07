@@ -9,7 +9,7 @@
 * [Appendix B: Use Cases](#appendix-b--use-cases)
 * [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d--glossary)
-* [Appendix E : Product Survey](#appendix-e-product-survey)
+* [Appendix E: Product Survey](#appendix-e--product-survey)
 
 
 ## Setting up
@@ -51,18 +51,18 @@
   
 **Problem: Eclipse reports some required libraries missing**
 * Reason: Required libraries may not have been downloaded during the project import. 
-* Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
+* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
  
 
 ## Design
 
 ### Architecture
 
-<img src="images/Architecture.png" width="600"><br>
+<img src="images/Architecture.PNG" width="600"><br>
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 Given below is a quick overview of each component.
 
-`Main` has only one class called [`MainApp`](../src/main/java/seedu/address/MainApp.java). It is responsible for,
+`Main` has only one class called [`MainApp`](../src/main/java/seedu/task/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connect them up with each other.
 * At shut down: Shuts down the components and invoke cleanup method where necessary.
 
@@ -82,21 +82,21 @@ Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/LogicClassDiagram.PNG" width="800"><br>
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 3`.
+command `add write report`.
 
-<img src="images\SDforDeletePerson.png" width="800">
+<img src="images\SDforAddTask.PNG" width="800">
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskBookChangedEvent` when data in TaskBook is changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800">
+<img src="images\SDforAddTaskEventHandling.PNG" width="800">
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct 
@@ -106,19 +106,19 @@ The sections below give more details of each component.
 
 ### UI component
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/UIComponent.jpg" width="800"><br>
 
-**API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](../src/main/java/seedu/task/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TaskListPanel`,
 `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
 and they can be loaded using the `UiPartLoader`.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
  that are in the `src/main/resources/view` folder.<br>
- For example, the layout of the [`MainWindow`](../src/main/java/seedu/address/ui/MainWindow.java) is specified in
+ For example, the layout of the [`MainWindow`](../src/main/java/seedu/task/ui/MainWindow.java) is specified in
  [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
-
+<!-- @@author A0153723J -->
 The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
@@ -126,45 +126,53 @@ The `UI` component,
 
 ### Logic component
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/LogicClassDiagram.PNG" width="800"><br>
 
-**API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
+<!-- @@author -->
+**API** : [`Logic.java`](../src/main/java/seedu/task/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("add write report")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/AddTaskSdForLogic.PNG" width="800"><br>
 
 ### Model component
 
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
-**API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
-
+**API** : [`Model.java`](../src/main/java/seedu/task/model/Model.java)
+<!-- @@author A0153658W -->
 The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
+* stores the TaskBook data.
+* exposes a `UnmodifiableObservableList<ReadOnlyTask>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+* maintains an `UndoTaskStack` that keeps track of each action that the user performs
+
+<!-- @@author A0138704E -->
 
 ### Storage component
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
+<img src="images/StorageClassDiagram.PNG" width="800"><br>
 
-**API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/task/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the TaskBook data in xml format and read it back.
+
+`Task` objects are converted into `XmlAdaptedTask` for JAXB use and broken down into xml format for storage.
+
+<!-- @@author -->
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.task.commons` package.
 
 ## Implementation
 
@@ -213,13 +221,13 @@ We have two types of tests:
   
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.address.commons.UrlUtilTest`
+      e.g. `seedu.task.commons.FileUtilTest`
    2. _Integration tests_ that are checking the integration of multiple code units 
      (those code units are assumed to be working).<br>
-      e.g. `seedu.address.storage.StorageManagerTest`
+      e.g. `seedu.task.storage.StorageManagerTest`
    3. Hybrids of unit and integration tests. These test are checking multiple code units as well as 
-      how the are connected together.<br>
-      e.g. `seedu.address.logic.LogicManagerTest`
+      how they are connected together.<br>
+      e.g. `seedu.task.logic.LogicManagerTest`
   
 **Headless GUI Testing** :
 Thanks to the [TestFX](https://github.com/TestFX/TestFX) library we use,
@@ -258,76 +266,339 @@ Here are the steps to create a new release.
    
 ### Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, TaskBook depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+<!-- @@author A0153723J -->
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
 
-
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
-{More to be added}
+`* * *` | user | add a task by specifying a task description only | record tasks that needs to be done ‘some day’
+`* * *` | user | add a task by specifying a task description and date | record tasks that needs to be done by the specified date
+`* * *` | user | add a task by specifying a task description, start date and end date | record tasks that spans the specified dates
+`* * *` | user | delete a task | get rid of tasks that I no longer care to track. 
+`* * *` | user | edit a task | update the details of that specific task
+`* * *` | user | search my tasks | find an item that I’m looking for in an easier manner
+`* *` | user | list tasks | see upcoming tasks or completed tasks
+`* *` | user | undo the last command | undo my last action
+`* *` | user | specify storage location | choose where to store the data
+`* *` | user | mark tasks as complete | track tasks that have already been done
+`* *` | user | sort my tasks | organize my tasks in some way
+`* *` | user | use shorter versions of a command | type a command faster
+`*` | user | tag my tasks based on priority | prioritize my goals
+`*` | user | assign my tasks to a project or category | organize my tasks in an orderly manner
+`*` | user | use common keyboard shortcuts | able to work more efficiently
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TaskManager` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Delete person
+<!-- @@author A0138704E -->
+
+#### Use case: Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add a task.
+2. System notifies user that the task is added successfully and displays the newly added task.<br>
 Use case ends.
 
 **Extensions**
 
-2a. The list is empty
+2a. Task already exists
 
-> Use case ends
+> 2a1. System displays feedback that the task already exists.
 
-3a. The given index is invalid
+2b. Invalid command format entered
 
-> 3a1. AddressBook shows an error message <br>
-  Use case resumes at step 2
+> 2b1. System notifies user that the command entered is invalid and correct usage of the command.
 
-{More to be added}
+#### Use case: Complete task
+
+**MSS**
+
+1. User requests to list tasks or find tasks.
+2. System displays list of tasks.
+3. User requests to set a task in the list as complete.
+4. System notifies user that the task is set as complete successfully.<br>
+Use case ends.
+
+**Extensions**
+
+3a. Task was already set as complete.
+
+> 3a1. System notifies user that the task was already set as complete.
+
+3b. Specified task index is invalid
+
+> 3b1. System notifies user that the task index provided is invalid.
+
+<!-- @@author A0153723J -->
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks or find tasks.
+2. System displays list of tasks.
+3. User requests to delete a task in the list.
+4. System notifies user that the task was deleted.<br>
+Use case ends.
+
+**Extensions**
+
+3a. Task does not exist
+
+> 3a1. System notifies user that the task was not found.
+
+3b. Specified task index is invalid
+
+> 3b1. System notifies user that the task index provided is invalid.
+
+#### Use case: Find tasks
+
+**MSS**
+
+1. User requests to find a task.
+2. System displays a list of tasks that match given keywords.<br>
+Use case ends.
+
+**Extensions**
+
+1a. No match found
+
+> 1a1. System displays an empty list.
+
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests to list tasks or find tasks.
+2. System displays list of tasks.
+3. User requests to edit a task in the list.
+4. System updates the displayed list.<br>
+Use case ends.
+
+**Extensions**
+
+3a. Task does not exist
+
+> 3a1. System notifies user that the task was not found.
+
+3b. Specified task index is invalid
+
+> 3b1. System notifies user that the task index provided is invalid.
+
+<!-- @@author A0138704E -->
+
+#### Use case: List tasks
+
+**MSS**
+
+1. User requests to list tasks due today.
+2. System displays list of tasks due today.<br>
+Use case ends.
+
+**Extensions**
+
+1a. User requests to list all tasks.
+
+> 1a1. System displays list of all tasks.
+
+1b. User requests to list completed tasks.
+
+> 1b1. System displays list of completed tasks.
+
+1c. User requests to list pending tasks.
+
+> 1c1. System displays list of pending tasks.
+
+2a. No tasks found
+
+> 2a1. System displays an empty list.
+
+<!-- @@author A0153723J -->
+
+#### Use case: Undo previous commands
+
+**MSS**
+
+1. User requests to undo the previous command.
+2. System notifies user that the command was undone.<br>
+Use case ends.
+
+**Extensions**
+
+1a. There is no command to undo
+
+> 1a1. The user is notified that there is no command to undo
+
+<!-- @@author A0153658W -->
+
+#### Use case: Bring up previous commands
+**MSS**
+
+1. User wants to bring up previous command without having to retype command
+2. System brings up user's previous command.<br>
+Use case ends.
+
+**Extensions**
+
+1a. There is no more previous command to bring up
+
+> 1a1. The user is notified that there is no more previous command to bring up
+
+#### Use case: Bring up next command, if there exists one
+**MSS**
+
+1. User wants to bring up next command, after going through `n` previous commands, where `n` is the number of previous commands the user brought up.
+2. System brings up user's next command.<br>
+Use case ends.
+
+**Extensions**
+
+1a. There is no more next command to bring up
+
+> 1a1. The command box becomes blank, to indicate that there are no more next commands
+
+<!-- @@author A0153723J -->
+
+#### Use case: Change storage location
+
+**MSS**
+
+1. User requests to change the storage location.
+2. System notifies user that the storage location has been changed.<br>
+Use case ends.
+
+**Extensions**
+
+1a. Storage location does not exist
+
+> 1a1. System notifies user that the storage location does not exist.
+
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons.
+2. Should be able to hold up to 1000 tasks.
 3. Should come with automated unit tests and open source code.
-4. Should favor DOS style commands over Unix-style commands.
-
-{More to be added}
+4. Should favor DOS style commands over Unix-style commands. 
+5. Should be able to retrieve a given event/deadline in 1s when searching. 
+6. Commands such as edit, update, delete should not take longer than 1s to execute. 
+7. The user interface should be simple to use and understand. 
 
 ## Appendix D : Glossary
 
+#####  To-do
+
+> A task without any time constraints
+
+#####  Event
+
+> An event is a task with a start date/time and an end date/time
+
+#####  Deadline
+
+> A deadline is a time constraint that can be added to a task. It defines an end time/date than a task must be completed by.
+
 ##### Mainstream OS
 
-> Windows, Linux, Unix, OS-X
-
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
+> Windows
 
 ## Appendix E : Product Survey
 
-{TODO: Add a summary of competing products}
+<!-- @@author A0138704E -->
 
+### Google Calendar
+
+**Strength**<br>
+
+1. Able to create subtasks for each task and write details for each task/subtask
+2. Able to create multiple lists to group related tasks together
+3. Has a calendar view that allows user to view events, deadlines and tasks by day, week or month
+
+**Weakness**<br>
+
+1. Only able to view one list at a time, unable to view all tasks at once
+2. Task GUI is narrow and feels a bit cluttered when there are many tasks in the list
+
+<!-- @@author A0153658W -->
+
+### Any.do
+
+**Strengths**<br>
+
+1. Simple UI for creating tasks -- simply swipe down to create a new task
+2. Voice dictation for adding tasks
+3. Swipe gestures for marking completed tasks
+4. Allows users to add notes/subtasks to a reminder
+5. Can share and assign tasks/reminders to different friends/emails
+6. Group tasks by different lists
+
+**Weaknesses**<br>
+
+1. Simple UI does not allow setting of due date/time when creating tasks
+2. Basic task like having repeating tasks is a premium service to pay for $2/month
+3. Limiting location based reminders is also as a premium service to pay for $2/month
+
+<!-- @@author A0161247J -->
+
+### Sunrise Calendar
+
+**Strengths**<br>
+
+1. Simple user interface
+2. Connects to multiple existing apps such as google calendar and wunderlist
+3. Easy to create a new event
+
+**Weaknesses**<br>
+
+1. Not very easy to search for events
+2. Bought by Microsoft so now it costs money
+3. Doesn’t have a way to attach email, pdf or images
+
+<!-- @@author A0153723J -->
+
+### Wunderlist
+
+**Strengths**<br>
+
+1. Allows the use of multiple sub-tasks/events for each task/event.
+2. Very easy to use
+3. Can sort tasks alphabetically, by date created, priority etc.
+4. Ability to share tasks with others
+
+**Weaknesses**<br>
+
+1. Subtasks are limited to 25
+2. Cannot merge task lists together
+3. UI is not customizable
+
+<!-- @@author A0153658W -->
+
+### SuperTasker (Our application)
+Given the strengths and weaknesses of these apps that we've surveyed, our app solves several of these issues:
+
+**Strengths**<br>
+
+1. Easy way to search events and tasks
+2. Intuitive natural language processor that parses CLI for identifying due date/time
+3. Not owned by a company, so it's open source and free
+4. Able to display all tasks at once
+5. Maintains a very simple process for adding and editing tasks
+
+**Weaknesses**<br>
+
+1. UI does not allow for customization, only provides minimal support
+2. Lacking support for sub tasks
+3. Lacking support for recurring tasks

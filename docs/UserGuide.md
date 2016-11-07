@@ -226,9 +226,11 @@ Format: `sort`
 
 #### Previous executed task : `[UP_ARROW_KEY]`
 Pulls up user's previous executed task, similar to bash shell functionality.<br>
+Format: `[UP_ARROW_KEY]`
 
 #### Next executed task : `[DOWN_ARROW_KEY]`
 Brings up user's next executed task, if there exists one. <br>
+Format: `[DOWN_ARROW_KEY]`
 
 <!-- @@author A0153723J -->
 

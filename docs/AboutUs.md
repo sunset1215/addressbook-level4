@@ -52,6 +52,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Other major contributions:
   * Setup Natty
   * Parser support for multiple commands
+  * Did the initial refactoring of the project
   
 <!-- @@author A0153723J -->
 -----

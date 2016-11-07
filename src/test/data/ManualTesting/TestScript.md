@@ -52,7 +52,7 @@
 | list Sept 3 | "Listed tasks on 3 Sep 2016" appears in the result display |
 | list Nov 7 | "Listed tasks on 7 Nov 2016" appears in the result display |
 
-**Type `list /a` to show all tasks or click on the `List All` button
+**Type `list /a` to show all tasks or click on the `List All` button**
 
 #### Delete tasks
 
@@ -81,7 +81,7 @@
 | store [Insert valid filepath here] | Specifies save location to specified filepath |
 | store C://Users\Jim/Desktop | "Invalid command format!" appears in result display |
 
-**Type `list /p` to show pending tasks or click on the `List Pending` button
+**Type `list /p` to show pending tasks or click on the `List Pending` button**
 
 #### Edit a task
 
@@ -94,7 +94,7 @@
 | edit 27 "study break" | Edits task at index 27 from event task to floating task |
 | edit 23 November 10, 2020 7pm | Edits task at index 23 from event task to a deadline task due 10 Nov 2020 at 7pm |
 
-**Type `list /c` to show completed tasks or click on the `List Complete` button
+**Type `list /c` to show completed tasks or click on the `List Complete` button**
 
 #### Clear tasks
 
@@ -105,7 +105,7 @@
 | claer | "Unknown command" appears in result display |
 | clear /a | "Task book has been cleared!" appears in result display |
 
-**Type `list /a` to show all tasks to verify all tasks are cleared 
+**Type `list /a` to show all tasks to verify all tasks are cleared**
 
 #### Undo
 
@@ -128,7 +128,7 @@
 | edit 1 Sept 10 7pm to 8pm| Edits task at index 1 from floating task to deadline task starting 10 Sept 2016 7pm to 8pm. |
 | undo | "Undo successful, reversed action: edit 1 10 Sep 2016 19:00 10 Sep 2016 20:00" appears in result display |
 
-**Type `list /p` to show pending tasks or click on the `List Pending` button
+**Type `list /p` to show pending tasks or click on the `List Pending` button**
 
 #### Sort
 

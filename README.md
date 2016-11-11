@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/CS2103AUG2016-T13-C1/main.svg?branch=master)](https://travis-ci.org/CS2103AUG2016-T13-C1/main)
-[![Coverage Status](https://coveralls.io/repos/github/CS2103AUG2016-T13-C1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103AUG2016-T13-C1/main?branch=master)
+[![Build Status](https://travis-ci.org/sunset1215/supertasker.svg?branch=master)](https://travis-ci.org/sunset1215/supertasker)
+[![Coverage Status](https://coveralls.io/repos/github/sunset1215/supertasker/badge.svg?branch=master)](https://coveralls.io/github/sunset1215/supertasker?branch=master)
  
 # Super Tasker
 
@@ -8,7 +8,6 @@
 * This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).
 * It is a Java application intended for users whose workflow is similar to [Jim's](#jims-workflow).
-
 
 #### Jim's Workflow
 
@@ -21,7 +20,6 @@ Most of Jim’s todo items arrive as emails. This is how Jim processes his email
 3. Jim periodically reviews the calendar to pick items that could not be completed and need to be rescheduled or discarded as ‘cannot do’.
 4. Todo items not arising from email are dealt similarly by entering them in the calendar.
 
-
 #### Site Map
 
 * [User Guide](docs/UserGuide.md) 
@@ -29,11 +27,10 @@ Most of Jim’s todo items arrive as emails. This is how Jim processes his email
 * [About Us](docs/AboutUs.md)
 * [Contact Us](docs/ContactUs.md)
 
-
 #### Acknowledgements
 
 * The original source code is from SE-EDU initiative at https://github.com/se-edu/.
 * [Natty](https://github.com/joestelmach/natty)
-
+* Forked from [CS2103AUG2016-T13-C1](https://github.com/CS2103AUG2016-T13-C1/main)
 
 #### Licence : [MIT](LICENSE)

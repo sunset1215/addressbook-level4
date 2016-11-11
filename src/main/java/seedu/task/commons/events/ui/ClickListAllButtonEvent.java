@@ -1,15 +1,13 @@
 //@@author A0153723J
 package seedu.task.commons.events.ui;
 
-import java.time.LocalDate;
-
 import seedu.task.commons.events.BaseEvent;
 
-public class ListButtonEvent extends BaseEvent{
-	public final LocalDate date;
+public class ClickListAllButtonEvent extends BaseEvent{
 
-	public ListButtonEvent(LocalDate date) {
-		this.date = date;
+
+	public ClickListAllButtonEvent() {
+		
 	}
 
 	@Override

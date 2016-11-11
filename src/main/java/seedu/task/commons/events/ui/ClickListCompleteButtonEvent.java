@@ -3,15 +3,11 @@ package seedu.task.commons.events.ui;
 
 import seedu.task.commons.events.BaseEvent;
 
-public class ListAllButtonEvent extends BaseEvent{
-
-
-	public ListAllButtonEvent() {
-		
-	}
+public class ClickListCompleteButtonEvent extends BaseEvent{
 
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName();
 	}
+	
 }

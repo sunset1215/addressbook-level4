@@ -109,17 +109,13 @@ public class MainWindow extends UiPart {
     }
 
     void fillInnerParts() {
-        
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getTodayTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         resultDisplay.postMessage("You have " + logic.getFilteredTaskList().size() + " tasks due today");
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskBookFilePath(), logic.getSizeOfTaskBook());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
-        calendarPanel = CalendarPanel.load(getCalendarPlaceholder());
-
-        
+        calendarPanel = CalendarPanel.load(primaryStage, getCalendarPlaceholder());
         commandBox.setArrowKeyListener();
-        
     }
     
     private AnchorPane getCommandBoxPlaceholder() {

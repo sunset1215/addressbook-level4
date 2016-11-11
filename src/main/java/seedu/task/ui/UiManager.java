@@ -12,13 +12,12 @@ import seedu.task.commons.core.ComponentManager;
 import seedu.task.commons.core.Config;
 import seedu.task.commons.core.LogsCenter;
 import seedu.task.commons.events.storage.DataSavingExceptionEvent;
-import seedu.task.commons.events.ui.DatePickedOnCalendarEvent;
+import seedu.task.commons.events.ui.SelectCalendarDateEvent;
 import seedu.task.commons.events.ui.DisplayDirectoryChooserRequestEvent;
 import seedu.task.commons.events.ui.JumpToListRequestEvent;
-import seedu.task.commons.events.ui.ListAllButtonEvent;
-import seedu.task.commons.events.ui.ListButtonEvent;
-import seedu.task.commons.events.ui.ListCompleteButtonEvent;
-import seedu.task.commons.events.ui.ListPendingButtonEvent;
+import seedu.task.commons.events.ui.ClickListAllButtonEvent;
+import seedu.task.commons.events.ui.ClickListButtonEvent;
+import seedu.task.commons.events.ui.ClickListCompleteButtonEvent;
 import seedu.task.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.task.commons.events.ui.ShowHelpRequestEvent;
 import seedu.task.commons.events.ui.TaskPanelDataChangedEvent;
@@ -144,34 +143,28 @@ public class UiManager extends ComponentManager implements Ui {
      * Display a message when a date on the calendar selected
      */
     @Subscribe
-    private void handleDatePickedOnCalendarEvent(DatePickedOnCalendarEvent event) {
+    private void handleSelectCalendarDateEvent(SelectCalendarDateEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getResultDisplay().postMessage(String.format(ListCommand.MESSAGE_LIST_DATE_SUCCESS, 
                         DateUtil.formatLocalDateToString(event.date)));
     }
     
     @Subscribe
-    private void handleListCompleteEvent(ListCompleteButtonEvent event) {
+    private void handleClickListCompleteButtonEvent(ClickListCompleteButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getResultDisplay().postMessage("Listed completed tasks");
+        mainWindow.getResultDisplay().postMessage(ListCommand.MESSAGE_LIST_COMPLETE_SUCCESS);
     }
 
     @Subscribe
-    private void handleListPendingEvent(ListPendingButtonEvent event) {
+    private void handleClickListAllButtonEvent(ClickListAllButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getResultDisplay().postMessage("Listed pending tasks");
+        mainWindow.getResultDisplay().postMessage(ListCommand.MESSAGE_LIST_ALL_SUCCESS);
     }
 
     @Subscribe
-    private void handleListAllEvent(ListAllButtonEvent event) {
+    private void handleClickListButtonEvent(ClickListButtonEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getResultDisplay().postMessage("Listed all tasks");
-    }
-
-    @Subscribe
-    private void handleListEvent(ListButtonEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getResultDisplay().postMessage("Listed tasks due today");
+        mainWindow.getResultDisplay().postMessage(ListCommand.MESSAGE_LIST_DEFAULT_SUCCESS);
     }
 
     @Subscribe

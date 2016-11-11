@@ -53,7 +53,8 @@ public class ListCommandTest extends TaskBookGuiTest {
         commandBox.runCommand("add \"meeting\" tomorrow");
         commandBox.runCommand("add \"lunch\" tomorrow");
 
-        assertListSuccess(todayList, "list", ListCommand.MESSAGE_LIST_TODAY_SUCCESS);
+        assertListSuccess(todayList, "list today", String.format(ListCommand.MESSAGE_LIST_DATE_SUCCESS, 
+                DateUtil.formatLocalDateToString(today.toLocalDate())));
         assertListSuccess(tomorrowList, 
                 "list tomorrow", 
                 String.format(ListCommand.MESSAGE_LIST_DATE_SUCCESS, 
@@ -79,7 +80,7 @@ public class ListCommandTest extends TaskBookGuiTest {
 
         //list pending tasks
         TestTask[] pendingList = TestUtil.getTasksFromListByStatus(currentList, Status.STATUS_PENDING);
-        assertListSuccess(pendingList, "list /p", ListCommand.MESSAGE_LIST_PENDING_SUCCESS);
+        assertListSuccess(pendingList, "list", ListCommand.MESSAGE_LIST_DEFAULT_SUCCESS);
     }
 
     @Test

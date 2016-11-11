@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane styleClass="grid-pane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.task.ui.CalendarPanel">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <AnchorPane fx:id="calendarPane" />
+      <Button fx:id="listButton" maxWidth="350.0" minWidth="350.0" mnemonicParsing="false" text="List" textAlignment="CENTER" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin></Button>
+      <Button fx:id="listAllButton" maxWidth="350.0" minWidth="350.0" mnemonicParsing="false" text="List all" textAlignment="CENTER" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets top="1.0" />
+         </GridPane.margin></Button>
+      <Button fx:id="listCompleteButton" maxWidth="350.0" minWidth="350.0" mnemonicParsing="false" text="List complete" textAlignment="CENTER" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets top="1.0" />
+         </GridPane.margin></Button>
+   </children>
+</GridPane>

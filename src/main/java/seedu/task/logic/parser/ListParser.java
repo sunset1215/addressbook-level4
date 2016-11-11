@@ -47,7 +47,6 @@ public class ListParser extends Parser {
         return arguments.isEmpty() 
                 || arguments.equals(ListCommand.OPTION_LIST_ALL)
                 || arguments.equals(ListCommand.OPTION_LIST_COMPLETE)
-                || arguments.equals(ListCommand.OPTION_LIST_PENDING)
                 || isLocalDateTime(arguments);
     }
 

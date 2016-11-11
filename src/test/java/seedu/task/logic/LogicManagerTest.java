@@ -315,7 +315,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_listDefault_showsTasksDueToday() throws Exception {
+    public void execute_listDefault_showsPendingTasks() throws Exception {
         // prepare expectations
         LocalDateTime today = DateUtil.getTodayAsLocalDateTime();
         LocalDateTime tomorrow = DateUtil.getTodayAsLocalDateTime().plusDays(1);
@@ -325,6 +325,8 @@ public class LogicManagerTest {
         exam = helper.generateDeadlineWithName("exam", today);
         meeting = helper.generateDeadlineWithName("meeting", tomorrow);
         lunch = helper.generateDeadlineWithName("lunch", tomorrow);
+        meeting.setComplete();
+        lunch.setComplete();
         TaskBook expectedAB = helper.generateTaskBook(test, exam, meeting, lunch);
         List<? extends ReadOnlyTask> expectedList = helper.generateTaskList(test, exam);
         
@@ -332,7 +334,7 @@ public class LogicManagerTest {
 
         // execute command and verify result
         assertCommandBehavior("list",
-                ListCommand.MESSAGE_LIST_TODAY_SUCCESS,
+                ListCommand.MESSAGE_LIST_DEFAULT_SUCCESS,
                 expectedAB,
                 expectedList);
     }

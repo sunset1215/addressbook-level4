@@ -8,11 +8,11 @@ import seedu.task.commons.events.BaseEvent;
 /**
  * Event raised when you click a date on the calendar
  */
-public class DatePickedOnCalendarEvent extends BaseEvent {
+public class SelectCalendarDateEvent extends BaseEvent {
 	
 	public final LocalDate date;
 	
-	public DatePickedOnCalendarEvent(LocalDate date) {
+	public SelectCalendarDateEvent(LocalDate date) {
 		this.date = date;
 	}
 
